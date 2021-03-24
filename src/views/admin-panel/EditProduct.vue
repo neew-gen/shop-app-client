@@ -1,27 +1,5 @@
 <template>
-  <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-      <div>
-        Панель управления
-      </div>
-      <div>
-        Добавить товар
-      </div>
-    </div>
-  </nav>
   <div>
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="id"
-        aria-label="id"
-        aria-describedby="basic-addon0"
-        v-model="data.id"
-      />
-      <span class="input-group-text" id="basic-addon0">id</span>
-    </div>
-
     <div class="input-group mb-3">
       <input
         type="text"
@@ -81,48 +59,58 @@
       />
       <span class="input-group-text" id="basic-addon5">description</span>
     </div>
-    <button
-      class="btn btn-outline-secondary"
-      type="button"
-      @click="addProduct()"
-    >
-      Добавить товар
-    </button>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-danger" type="button" @click="removeProduct()">
+        Delete product
+      </button>
+      <button class="btn btn-warning" type="button" @click="updateProduct()">
+        Edit product
+      </button>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue'
-import ProductModel from '@/models/catalog.model'
+import { defineComponent, reactive, ref, inject } from 'vue'
 import { ProductApi } from '@/api/product.api'
-// import { store } from '@/store'
+import { assignFieldsForReactive } from '@/helpers'
+import router from '@/router'
 
 export default defineComponent({
-  name: 'AdminPage',
-  setup() {
+  name: 'EditProduct',
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
+  async setup(props) {
+    const toast: any = inject('toast')
     const data = reactive({
       category: '',
       name: '',
       img: '',
-      price: undefined,
+      price: '',
       description: ''
     })
-    const addProduct = async (): Promise<void> => {
-      await ProductApi.createProduct(data)
-      // await ProductModel.insert({ data: data })
-      // console.log(await ProductModel.insert({ data: data }))
-      // console.log(ProductModel.all())
-      // const product = ProductModel.query().last()
-      // await ProductModel.insert({
-      //   data: [data]
-      // })
-      // const product = await ProductModel.query().last()
-      // console.log(product)
-      // if (product !== null) {
-      //   await product.$dispatch('persist', { id: product.$id })
-      // }
+    const fetchedData = await ProductApi.fetchProductById(props.id)
+    assignFieldsForReactive(data, fetchedData)
+
+    const updateProduct = (): void => {
+      ProductApi.updateProduct(props.id, data)
+      toast.success('Product has been updated!')
     }
-    return { data, addProduct }
+    const removeProduct = (): void => {
+      ProductApi.removeProduct(props.id)
+      toast.error('Product has been deleted!')
+      // does not allow us to return to the deleted product page
+      router.replace({ path: '/admin-panel/edit-products' })
+    }
+    return {
+      data,
+      updateProduct,
+      removeProduct
+    }
   }
 })
 </script>

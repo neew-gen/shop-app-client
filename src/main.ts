@@ -5,10 +5,17 @@ import router from './router'
 import { store } from './store'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
-// import apolloPlugin from '@/plugins/apolloPlugin'
+import Toaster from '@meforma/vue-toaster' // https://github.com/MeForma/vue-toaster
 
-createApp(App)
+const app = createApp(App)
+
+app
   .use(store)
   .use(router)
-  // .use(apolloPlugin)
+  .use(Toaster, {
+    position: 'top-right',
+    duration: 2000,
+    maxToasts: 4
+  })
+  .provide('toast', app.config.globalProperties.$toast)
   .mount('#app')

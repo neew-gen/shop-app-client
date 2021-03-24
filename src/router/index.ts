@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
+import { catalogRoutes } from '@/router/modules/catalog'
+import { adminPanelRoutes } from '@/router/modules/admin-panel'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -7,39 +9,8 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: Home
   },
-  {
-    path: '/catalog',
-    name: 'Catalog',
-    component: (): any =>
-      import(/* webpackChunkName: "catalog" */ '../views/catalog/index.vue'),
-    children: [
-      {
-        path: '',
-        component: (): any =>
-          import(
-            /* webpackChunkName: "categories-menu" */ '../views/catalog/CategoriesMenu.vue'
-          )
-      },
-      {
-        path: '/catalog/:category',
-        name: 'CatalogSection',
-        component: (): any =>
-          import(
-            /* webpackChunkName: "catalog-section" */ '../views/catalog/CatalogSection.vue'
-          ),
-        props: true
-      },
-      {
-        path: '/catalog/:category/:id',
-        name: 'CatalogItem',
-        component: (): any =>
-          import(
-            /* webpackChunkName: "catalog-item" */ '../views/catalog/CatalogItem.vue'
-          ),
-        props: true
-      }
-    ]
-  },
+  ...catalogRoutes,
+  ...adminPanelRoutes,
   {
     path: '/shopping-cart',
     name: 'ShoppingCart',
@@ -53,12 +24,6 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Profile',
     component: (): any =>
       import(/* webpackChunkName: "profile" */ '../views/Profile.vue')
-  },
-  {
-    path: '/admin-page',
-    name: 'AdminPage',
-    component: (): any =>
-      import(/* webpackChunkName: "admin-page" */ '../views/AdminPage.vue')
   }
 ]
 

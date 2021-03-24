@@ -12,7 +12,7 @@ import * as moduleCatalog from './modules/catalog'
 import * as moduleCart from './modules/cart'
 
 import VuexORM from '@vuex-orm/core'
-import ProductModel from '@/models/catalog.model'
+import ProductModel from '@/models/product.model'
 import VuexORMGraphQL from '@vuex-orm/plugin-graphql'
 
 const database = new VuexORM.Database()
