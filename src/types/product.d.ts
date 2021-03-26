@@ -1,26 +1,26 @@
-export type ProductInput = {
-  id?: string | undefined
-  name: string | undefined
-  img: string | undefined
-  price: string | undefined
-  description: string | undefined
-  category: string | undefined
-}
-
-export type EditListProduct = {
-  id: string
-  img: string
-  name: string
-  __typename: string
-}
-
-type ProductModelType = {
-  $id: string
-  $isPersisted: boolean
+export type ProductType = {
   category: string
   description: string
   id: string
-  img: string
+  imgUrl: string
   name: string
   price: string
+  __typename?: string
+}
+
+export type ProductCreateInput = {
+  id: string
+  name: string
+  imgUrl: string
+  price: string
+  description: string
+  category: string
+}
+
+export type ProductUpdateInput = {
+  name?: string
+  imgUrl?: string
+  price?: string
+  description?: string
+  category?: string
 }

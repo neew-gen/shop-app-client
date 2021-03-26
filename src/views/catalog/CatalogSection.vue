@@ -11,14 +11,8 @@
         class="card col-6"
       >
         <div class="d-flex justify-content-center">
-          <div
-            v-if="product.img"
-            class="img-container mt-1"
-          >
-            <img
-              :src="product.img"
-              :alt="product.name"
-            >
+          <div v-if="product.img" class="img-container mt-1">
+            <img :src="product.img" :alt="product.name" />
           </div>
           <div
             v-else
@@ -33,9 +27,7 @@
           <p class="card-text">
             {{ product.name }}
           </p>
-          <p class="card-text price-text">
-            {{ product.price }}&#8381;
-          </p>
+          <p class="card-text price-text">{{ product.price }}&#8381;</p>
         </div>
       </router-link>
     </div>

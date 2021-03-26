@@ -7,7 +7,7 @@
         placeholder="category"
         aria-label="category"
         aria-describedby="basic-addon1"
-        v-model="data.category"
+        v-model="state.category"
       />
       <span class="input-group-text" id="basic-addon1">category</span>
     </div>
@@ -19,7 +19,7 @@
         placeholder="name"
         aria-label="name"
         aria-describedby="basic-addon2"
-        v-model="data.name"
+        v-model="state.name"
       />
       <span class="input-group-text" id="basic-addon2">name</span>
     </div>
@@ -31,7 +31,7 @@
         placeholder="img"
         aria-label="img"
         aria-describedby="basic-addon3"
-        v-model="data.img"
+        v-model="state.imgUrl"
       />
       <span class="input-group-text" id="basic-addon3">img</span>
     </div>
@@ -43,7 +43,7 @@
         placeholder="price"
         aria-label="price"
         aria-describedby="basic-addon4"
-        v-model="data.price"
+        v-model="state.price"
       />
       <span class="input-group-text" id="basic-addon4">price</span>
     </div>
@@ -55,7 +55,7 @@
         placeholder="description"
         aria-label="description"
         aria-describedby="basic-addon5"
-        v-model="data.description"
+        v-model="state.description"
       />
       <span class="input-group-text" id="basic-addon5">description</span>
     </div>
@@ -68,27 +68,33 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
-import { ProductApi } from '@/api/product.api'
+import { defineComponent, inject, reactive } from 'vue'
+import { GraphqlApi } from '@/api/GraphqlApi'
+const INITIAL_STATE = {
+  id: '',
+  category: '',
+  name: '',
+  imgUrl: '',
+  price: '',
+  description: ''
+}
 
 export default defineComponent({
   name: 'CreateProduct',
   setup() {
-    const data = reactive({
-      id: '',
-      category: '',
-      name: '',
-      img: '',
-      price: '',
-      description: ''
-    })
+    const toast: any = inject('toast')
+
+    const state = reactive({ ...INITIAL_STATE })
+    const resetState = (): void => {
+      Object.assign(state, { ...INITIAL_STATE })
+    }
 
     const addProduct = (): void => {
-      const dataFromProxy = Object.assign({}, data)
-      console.log(dataFromProxy)
-      ProductApi.createProduct(dataFromProxy)
+      GraphqlApi.createProduct(state)
+      resetState()
+      toast.success('Product has been created!')
     }
-    return { data, addProduct }
+    return { state, addProduct }
   }
 })
 </script>

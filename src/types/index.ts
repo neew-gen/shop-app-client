@@ -1,16 +1,16 @@
-type HomeListItemType = {
+export type HomeListItemType = {
   imgPath: string
   text: string
   background?: string
 }
 
-type CategoriesItemType = {
+export type CategoriesItemType = {
   key: string
   name: string
   img: string
 }
 
-type ProductItemType = {
+export type ProductItemType = {
   id?: string
   name: string
   img: string
@@ -19,9 +19,14 @@ type ProductItemType = {
   category: string
 }
 
-type CartItemType = {
+export type CartItemType = {
   category: string
   id: string
 }
 
-export { HomeListItemType, CategoriesItemType, ProductItemType, CartItemType }
+export type EditListType = {
+  id: string
+  imgUrl: string
+  name: string
+  __typename: string
+}

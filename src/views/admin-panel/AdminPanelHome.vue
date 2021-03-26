@@ -9,6 +9,14 @@
           >Edit products</router-link
         >
       </li>
+      <li class="list-group-item">
+        <router-link :to="{ name: 'CreateCategory' }">Add category</router-link>
+      </li>
+      <li class="list-group-item">
+        <router-link :to="{ name: 'EditCategoriesList' }"
+          >Edit categories</router-link
+        >
+      </li>
     </ul>
   </div>
 </template>

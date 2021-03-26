@@ -11,26 +11,29 @@ import { initialState } from './initialState'
 import * as moduleCatalog from './modules/catalog'
 import * as moduleCart from './modules/cart'
 
-import VuexORM from '@vuex-orm/core'
-import ProductModel from '@/models/product.model'
-import VuexORMGraphQL from '@vuex-orm/plugin-graphql'
+// import VuexORM from '@vuex-orm/core'
+// import ProductModel from '@/models/product.model'
+// import CategoryModel from '@/models/category.model'
+// import VuexORMGraphQL from '@vuex-orm/plugin-graphql'
 
-const database = new VuexORM.Database()
-database.register(ProductModel)
+// const database = new VuexORM.Database()
+// database.register(ProductModel)
+// database.register(CategoryModel)
 
 // defaultOptions: {
 //   watchQuery: {
 //     fetchPolicy: 'cache-and-network'
 //   }
 // },
-const options = {
-  database: database,
-  url: 'http://localhost:3000/graphql',
-  debug: process.env.NODE_ENV !== 'production'
-}
-VuexORM.use(VuexORMGraphQL, options)
-const plugins = [VuexORM.install(database)]
+// const options = {
+//   database: database,
+//   url: 'http://localhost:3000/graphql',
+//   debug: process.env.NODE_ENV !== 'production'
+// }
+// VuexORM.use(VuexORMGraphQL, options)
+// const plugins = [VuexORM.install(database)]
 
+const plugins = []
 if (process.env.NODE_ENV === 'development') {
   plugins.push(createLogger())
 }

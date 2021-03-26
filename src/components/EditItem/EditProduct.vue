@@ -7,7 +7,7 @@
         placeholder="category"
         aria-label="category"
         aria-describedby="basic-addon1"
-        v-model="data.category"
+        v-model="state.category"
       />
       <span class="input-group-text" id="basic-addon1">category</span>
     </div>
@@ -19,7 +19,7 @@
         placeholder="name"
         aria-label="name"
         aria-describedby="basic-addon2"
-        v-model="data.name"
+        v-model="state.name"
       />
       <span class="input-group-text" id="basic-addon2">name</span>
     </div>
@@ -31,7 +31,7 @@
         placeholder="img"
         aria-label="img"
         aria-describedby="basic-addon3"
-        v-model="data.img"
+        v-model="state.imgUrl"
       />
       <span class="input-group-text" id="basic-addon3">img</span>
     </div>
@@ -43,7 +43,7 @@
         placeholder="price"
         aria-label="price"
         aria-describedby="basic-addon4"
-        v-model="data.price"
+        v-model="state.price"
       />
       <span class="input-group-text" id="basic-addon4">price</span>
     </div>
@@ -55,11 +55,11 @@
         placeholder="description"
         aria-label="description"
         aria-describedby="basic-addon5"
-        v-model="data.description"
+        v-model="state.description"
       />
       <span class="input-group-text" id="basic-addon5">description</span>
     </div>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-end">
       <button class="btn btn-danger" type="button" @click="removeProduct()">
         Delete product
       </button>
@@ -72,9 +72,11 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref, inject } from 'vue'
-import { ProductApi } from '@/api/product.api'
 import { assignFieldsForReactive } from '@/helpers'
 import router from '@/router'
+import { GraphqlApi } from '@/api/GraphqlApi'
+import { GET_PRODUCT_BY_ID } from '@/api/queries/productQueries'
+import { ProductType } from '@/types/product'
 
 export default defineComponent({
   name: 'EditProduct',
@@ -86,28 +88,31 @@ export default defineComponent({
   },
   async setup(props) {
     const toast: any = inject('toast')
-    const data = reactive({
+    const state = reactive({
       category: '',
       name: '',
-      img: '',
+      imgUrl: '',
       price: '',
       description: ''
     })
-    const fetchedData = await ProductApi.fetchProductById(props.id)
-    assignFieldsForReactive(data, fetchedData)
+    const fetchedData = await GraphqlApi.fetchById<ProductType>(
+      GET_PRODUCT_BY_ID,
+      props.id
+    )
+    assignFieldsForReactive(state, fetchedData)
 
     const updateProduct = (): void => {
-      ProductApi.updateProduct(props.id, data)
+      GraphqlApi.updateProduct(props.id, state)
       toast.success('Product has been updated!')
     }
     const removeProduct = (): void => {
-      ProductApi.removeProduct(props.id)
+      // ProductApi.removeProduct(props.id)
       toast.error('Product has been deleted!')
       // does not allow us to return to the deleted product page
       router.replace({ path: '/admin-panel/edit-products' })
     }
     return {
-      data,
+      state,
       updateProduct,
       removeProduct
     }
