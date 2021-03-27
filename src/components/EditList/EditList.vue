@@ -1,8 +1,5 @@
 <template>
   <ul class="list-group">
-    {{
-      f
-    }}
     <EditListItem
       v-for="(item, index) in fetchedItems"
       :key="index"
@@ -14,11 +11,9 @@
 
 <script lang="ts">
 import EditListItem from '@/components/EditList/EditListItem.vue'
-import { defineComponent, inject, ref, reactive, computed } from 'vue'
+import { defineComponent, computed, ComputedRef } from 'vue'
+import { useStore } from '@/store'
 import { EditListType } from '@/types'
-import { GraphqlApi } from '@/api/GraphqlApi'
-import { GET_PRODUCTS_EDITLIST } from '@/api/queries/productQueries'
-import { GET_CATEGORIES_EDITLIST } from '@/api/queries/categoryQueries'
 
 export default defineComponent({
   name: 'EditList',
@@ -29,25 +24,24 @@ export default defineComponent({
     }
   },
   components: { EditListItem },
-  async setup(props, context) {
-    const eventBus: any = inject('eventBus')
-    let fetchedItems = reactive<EditListType[]>([])
-    const f = ref(0)
-    eventBus.$on('update', async () => {
-      console.log('update')
-      f.value += 1
-    })
+  async setup(props) {
+    const store = useStore()
+
     if (props.entity === 'product') {
-      fetchedItems = await GraphqlApi.fetchAll<EditListType>(
-        GET_PRODUCTS_EDITLIST
-      )
+      await store.dispatch('fetchProductsEditList')
+      const fetchedItems: ComputedRef<EditListType[]> = computed(() => {
+        return store.getters.getProductsEditList
+      })
+      return { fetchedItems }
     }
     if (props.entity === 'category') {
-      fetchedItems = await GraphqlApi.fetchAll<EditListType>(
-        GET_CATEGORIES_EDITLIST
-      )
+      console.log('category')
+      await store.dispatch('fetchCategoryEditList')
+      const fetchedItems: ComputedRef<EditListType[]> = computed(() => {
+        return store.getters.getCategoryEditList
+      })
+      return { fetchedItems }
     }
-    return { fetchedItems, f }
   }
 })
 </script>

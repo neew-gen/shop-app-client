@@ -56,6 +56,7 @@ import router from '@/router'
 import { GraphqlApi } from '@/api/GraphqlApi'
 import { GET_CATEGORY_BY_ID } from '@/api/queries/categoryQueries'
 import { CategoryType } from '@/types/category'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'EditCategory',
@@ -66,6 +67,7 @@ export default defineComponent({
     }
   },
   async setup(props) {
+    const store = useStore()
     const toast: any = inject('toast')
     const state = reactive({
       name: '',
@@ -83,7 +85,7 @@ export default defineComponent({
     }
 
     const updateCategory = (): void => {
-      GraphqlApi.updateCategory(props.id, state)
+      store.dispatch('updateCategory', { id: props.id, updateData: state })
       toast.success('Category has been updated!')
     }
     // const removeProduct = (): void => {

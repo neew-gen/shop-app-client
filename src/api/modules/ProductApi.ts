@@ -10,25 +10,14 @@ import {
 import _ from 'lodash'
 
 export class ProductApi {
-  static async createProduct(input: ProductCreateInput): Promise<void> {
+  // Method creates a new product and returns id.
+  static async createProduct(input: ProductCreateInput): Promise<string> {
     input.id = new Date().valueOf().toString()
     await apollo.mutate({
       mutation: CREATE_PRODUCT,
-      variables: { product: input },
-      update: (cache, mutationResult) => {
-        const newProduct = mutationResult.data.createProduct
-        const data = cache.readQuery({
-          query: GET_PRODUCTS_EDITLIST
-        })
-        cache.writeQuery({
-          query: GET_PRODUCTS_EDITLIST,
-          // TODO need to fix types!
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          data: { products: [...data.products, newProduct] }
-        })
-      }
+      variables: { product: input }
     })
+    return input.id
   }
 
   static async updateProduct(
@@ -37,35 +26,7 @@ export class ProductApi {
   ): Promise<void> {
     await apollo.mutate({
       mutation: UPDATE_PRODUCT,
-      variables: { product: input, id },
-      update: cache => {
-        const data = cache.readQuery({
-          query: GET_PRODUCTS_EDITLIST
-        })
-        if (data) {
-          // TODO need to refactor and redesign it
-          // TODO need to fix types!
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          const index = data.products.findIndex(p => p.id === id)
-          // TODO need to fix types!
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          const dataForMutation = _.cloneDeep(data.products)
-          dataForMutation[index] = {
-            id,
-            name: input.name,
-            imgUrl: input.imgUrl
-          }
-          cache.writeQuery({
-            query: GET_PRODUCTS_EDITLIST,
-            // TODO need to fix types!
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            data: { products: [...dataForMutation] }
-          })
-        }
-      }
+      variables: { product: input, id }
     })
   }
 

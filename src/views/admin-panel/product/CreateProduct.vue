@@ -69,7 +69,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, reactive } from 'vue'
-import { GraphqlApi } from '@/api/GraphqlApi'
+import { useStore } from '@/store'
 const INITIAL_STATE = {
   id: '',
   category: '',
@@ -82,6 +82,7 @@ const INITIAL_STATE = {
 export default defineComponent({
   name: 'CreateProduct',
   setup() {
+    const store = useStore()
     const toast: any = inject('toast')
 
     const state = reactive({ ...INITIAL_STATE })
@@ -90,7 +91,8 @@ export default defineComponent({
     }
 
     const addProduct = (): void => {
-      GraphqlApi.createProduct(state)
+      const unboundData = Object.assign({}, state)
+      store.dispatch('createProduct', unboundData)
       resetState()
       toast.success('Product has been created!')
     }

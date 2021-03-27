@@ -30,6 +30,7 @@
 import { defineComponent, inject } from 'vue'
 import { EditListType } from '@/types'
 import { GraphqlApi } from '@/api/GraphqlApi'
+import { store, useStore } from '@/store'
 
 export default defineComponent({
   name: 'EditListItem',
@@ -43,8 +44,8 @@ export default defineComponent({
     }
   },
   setup(props) {
+    const store = useStore()
     const toast: any = inject('toast')
-    const eventBus: any = inject('eventBus')
 
     const checkImgValidate = (imgUrl: string): boolean => {
       return imgUrl.match(/(http(s?))/gim) != null
@@ -56,12 +57,13 @@ export default defineComponent({
 
     const removeItem = (): void => {
       if (props.entity === 'product') {
-        // GraphqlApi.deleteProduct(props.data!.id)
-        eventBus.$emit('update')
+        store.dispatch('deleteProduct', props.data!.id)
         toast.error('Product has been deleted!')
       }
-      // does not allow us to return to the deleted product page
-      // router.replace({ path: '/admin-panel/edit-products' })
+      if (props.entity === 'category') {
+        store.dispatch('deleteCategory', props.data!.id)
+        toast.error('Category has been deleted!')
+      }
     }
     return {
       checkImgValidate,

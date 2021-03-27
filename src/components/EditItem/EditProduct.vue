@@ -77,6 +77,7 @@ import router from '@/router'
 import { GraphqlApi } from '@/api/GraphqlApi'
 import { GET_PRODUCT_BY_ID } from '@/api/queries/productQueries'
 import { ProductType } from '@/types/product'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'EditProduct',
@@ -87,6 +88,7 @@ export default defineComponent({
     }
   },
   async setup(props) {
+    const store = useStore()
     const toast: any = inject('toast')
     const state = reactive({
       category: '',
@@ -102,7 +104,7 @@ export default defineComponent({
     assignFieldsForReactive(state, fetchedData)
 
     const updateProduct = (): void => {
-      GraphqlApi.updateProduct(props.id, state)
+      store.dispatch('updateProduct', { id: props.id, updateData: state })
       toast.success('Product has been updated!')
     }
     const removeProduct = (): void => {

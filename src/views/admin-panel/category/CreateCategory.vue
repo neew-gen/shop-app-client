@@ -7,7 +7,7 @@
         placeholder="Please enter a name"
         aria-label="name"
         aria-describedby="basic-addon1"
-        v-model="data.name"
+        v-model="state.name"
       />
       <span class="input-group-text" id="basic-addon1">Name</span>
     </div>
@@ -19,7 +19,7 @@
         placeholder="Please enter a image url"
         aria-label="img"
         aria-describedby="basic-addon2"
-        v-model="data.imgUrl"
+        v-model="state.imgUrl"
       />
       <span class="input-group-text" id="basic-addon2">Image Url</span>
     </div>
@@ -32,7 +32,7 @@
           aria-expanded="false"
         >
           Category visibility:
-          {{ data.isPublic === true ? 'Public' : 'Hidden' }}
+          {{ state.isPublic === true ? 'Public' : 'Hidden' }}
         </button>
         <ul class="dropdown-menu">
           <li class="dropdown-item" @click="changeIsPublic(false)">Hidden</li>
@@ -49,29 +49,36 @@
 
 <script lang="ts">
 import { defineComponent, inject, reactive } from 'vue'
-// import { CategoryApi } from '@/api/category.api'
+import { useStore } from '@/store'
+const INITIAL_STATE = {
+  id: '',
+  name: '',
+  imgUrl: '',
+  isPublic: false
+}
 
 export default defineComponent({
   name: 'CreateCategory',
   setup() {
+    const store = useStore()
     const toast: any = inject('toast')
-    const data = reactive({
-      id: '',
-      name: '',
-      imgUrl: '',
-      isPublic: false
-    })
+
+    const state = reactive({ ...INITIAL_STATE })
+    const resetState = (): void => {
+      Object.assign(state, { ...INITIAL_STATE })
+    }
 
     const changeIsPublic = (newValue: boolean): void => {
-      data.isPublic = newValue
+      state.isPublic = newValue
     }
 
     const addCategory = (): void => {
-      // const dataFromProxy = Object.assign({}, data)
-      // CategoryApi.createCategory(dataFromProxy)
+      const unboundData = Object.assign({}, state)
+      store.dispatch('createCategory', unboundData)
+      resetState()
       toast.success('Category has been created!')
     }
-    return { data, changeIsPublic, addCategory }
+    return { state, changeIsPublic, addCategory }
   }
 })
 </script>
