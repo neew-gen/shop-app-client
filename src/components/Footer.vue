@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar fixed-bottom navbar-light bg-light">
+  <div class="navbar fixed-bottom navbar-light bg-light">
     <div class="container-fluid">
       <ul class="nav nav-justified w-100">
         <li class="nav-item w-25 d-flex justify-content-center">
@@ -24,14 +24,14 @@
         </li>
       </ul>
     </div>
-  </nav>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Header'
+  name: 'Footer'
 })
 </script>
 

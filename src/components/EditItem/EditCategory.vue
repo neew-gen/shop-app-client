@@ -40,7 +40,11 @@
         </ul>
       </div>
       <div>
-        <button class="btn btn-warning" type="button" @click="updateCategory()">
+        <button
+          class="btn btn-warning shadow-none"
+          type="button"
+          @click="updateCategory()"
+        >
           Save changes
         </button>
       </div>

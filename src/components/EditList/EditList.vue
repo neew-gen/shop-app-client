@@ -1,4 +1,7 @@
 <template>
+  <div v-if="entity === 'product'">
+    <EditListFilter />
+  </div>
   <ul class="list-group">
     <EditListItem
       v-for="(item, index) in fetchedItems"
@@ -11,9 +14,10 @@
 
 <script lang="ts">
 import EditListItem from '@/components/EditList/EditListItem.vue'
-import { defineComponent, computed, ComputedRef } from 'vue'
+import { defineComponent, computed, ComputedRef, ref } from 'vue'
 import { useStore } from '@/store'
 import { EditListType } from '@/types'
+import EditListFilter from '@/components/EditList/EditListFilter.vue'
 
 export default defineComponent({
   name: 'EditList',
@@ -23,7 +27,7 @@ export default defineComponent({
       required: true
     }
   },
-  components: { EditListItem },
+  components: { EditListFilter, EditListItem },
   async setup(props) {
     const store = useStore()
 
@@ -35,7 +39,6 @@ export default defineComponent({
       return { fetchedItems }
     }
     if (props.entity === 'category') {
-      console.log('category')
       await store.dispatch('fetchCategoryEditList')
       const fetchedItems: ComputedRef<EditListType[]> = computed(() => {
         return store.getters.getCategoryEditList

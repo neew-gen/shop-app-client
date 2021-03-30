@@ -18,3 +18,9 @@ export type CategoryType = {
   isPublic: boolean
   __typename?: string
 }
+
+export type CategoryDropdownType = {
+  id: string
+  name: string
+  __typename?: string
+}

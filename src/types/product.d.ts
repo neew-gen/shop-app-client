@@ -1,5 +1,5 @@
 export type ProductType = {
-  category: string
+  categoryId: string
   description: string
   id: string
   imgUrl: string
@@ -14,7 +14,7 @@ export type ProductCreateInput = {
   imgUrl: string
   price: string
   description: string
-  category: string
+  categoryId: string
 }
 
 export type ProductUpdateInput = {
@@ -22,5 +22,5 @@ export type ProductUpdateInput = {
   imgUrl?: string
   price?: string
   description?: string
-  category?: string
+  categoryId?: string
 }

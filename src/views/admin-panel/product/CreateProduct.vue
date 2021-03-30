@@ -1,16 +1,8 @@
 <template>
   <div>
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="category"
-        aria-label="category"
-        aria-describedby="basic-addon1"
-        v-model="state.category"
-      />
-      <span class="input-group-text" id="basic-addon1">category</span>
-    </div>
+    <Suspense>
+      <CategoryDropdown />
+    </Suspense>
 
     <div class="input-group mb-3">
       <input
@@ -60,7 +52,11 @@
       <span class="input-group-text" id="basic-addon5">description</span>
     </div>
     <div class="d-flex justify-content-end">
-      <button class="btn btn-success" type="button" @click="addProduct()">
+      <button
+        class="btn btn-success shadow-none"
+        type="button"
+        @click="addProduct()"
+      >
         Add Product
       </button>
     </div>
@@ -68,11 +64,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, reactive } from 'vue'
+import { defineComponent, inject, onUnmounted, reactive } from 'vue'
 import { useStore } from '@/store'
+import CategoryDropdown from '@/components/CategoryDropdown.vue'
+import { CategoryIdType, EventBus, Subject } from '@/types/eventBus'
+
 const INITIAL_STATE = {
   id: '',
-  category: '',
+  categoryId: '',
   name: '',
   imgUrl: '',
   price: '',
@@ -81,14 +80,23 @@ const INITIAL_STATE = {
 
 export default defineComponent({
   name: 'CreateProduct',
+  components: {
+    CategoryDropdown
+  },
   setup() {
     const store = useStore()
     const toast: any = inject('toast')
+    const eventBus: any = inject('eventBus')
 
     const state = reactive({ ...INITIAL_STATE })
     const resetState = (): void => {
       Object.assign(state, { ...INITIAL_STATE })
+      eventBus.publish('parentUpdateCategory', state.categoryId)
     }
+
+    eventBus.subscribe('childUpdateCategory', (categoryId: CategoryIdType) => {
+      state.categoryId = categoryId
+    })
 
     const addProduct = (): void => {
       const unboundData = Object.assign({}, state)
@@ -96,6 +104,10 @@ export default defineComponent({
       resetState()
       toast.success('Product has been created!')
     }
+
+    onUnmounted(() => {
+      eventBus.unsubscribe('childUpdateCategory')
+    })
     return { state, addProduct }
   }
 })

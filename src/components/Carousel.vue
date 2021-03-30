@@ -9,7 +9,7 @@
         type="button"
         data-bs-target="#carouselExampleCaptions"
         data-bs-slide-to="0"
-        class="active"
+        class="active shadow-none"
         aria-current="true"
         aria-label="Slide 1"
       ></button>
@@ -62,7 +62,7 @@
       </div>
     </div>
     <button
-      class="carousel-control-prev"
+      class="carousel-control-prev shadow-none"
       type="button"
       data-bs-target="#carouselExampleCaptions"
       data-bs-slide="prev"
@@ -71,7 +71,7 @@
       <span class="visually-hidden">Previous</span>
     </button>
     <button
-      class="carousel-control-next"
+      class="carousel-control-next shadow-none"
       type="button"
       data-bs-target="#carouselExampleCaptions"
       data-bs-slide="next"

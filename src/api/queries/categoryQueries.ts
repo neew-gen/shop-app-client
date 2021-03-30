@@ -19,6 +19,14 @@ export const GET_CATEGORY_BY_ID = gql(`
         }
       }`)
 
+export const GET_CATEGORIES_DROPDOWN = gql(`
+      query Categories {
+        categories {
+          id
+          name
+        }
+      }`)
+
 export const CREATE_CATEGORY = gql(`
       mutation UpdateCategory($category: CategoryInput!) {
         createCategory(category: $category) {

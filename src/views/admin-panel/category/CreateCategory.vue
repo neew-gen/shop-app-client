@@ -26,7 +26,7 @@
     <div class="d-flex justify-content-between">
       <div class="btn-group">
         <button
-          class="btn btn-secondary btn-sm dropdown-toggle"
+          class="btn btn-secondary btn-sm shadow-none dropdown-toggle"
           type="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
@@ -40,7 +40,11 @@
         </ul>
       </div>
 
-      <button class="btn btn-success" type="button" @click="addCategory()">
+      <button
+        class="btn btn-success shadow-none"
+        type="button"
+        @click="addCategory()"
+      >
         Add Category
       </button>
     </div>

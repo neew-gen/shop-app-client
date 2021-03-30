@@ -1,5 +1,9 @@
 <template>
-  <button type="button" class="btn btn-outline-secondary" @click="goBack">
+  <button
+    type="button"
+    class="btn btn-outline-secondary shadow-none"
+    @click="goBack"
+  >
     <img
       class="button-back-image"
       src="../assets/back-button/back.svg"
@@ -31,6 +35,9 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.btn:focus {
+  background: transparent;
 }
 .button-back-image {
   height: 100%;

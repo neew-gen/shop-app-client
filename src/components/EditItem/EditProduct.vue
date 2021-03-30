@@ -1,29 +1,32 @@
 <template>
-  <div>
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="category"
-        aria-label="category"
-        aria-describedby="basic-addon1"
-        v-model="state.category"
-      />
-      <span class="input-group-text" id="basic-addon1">category</span>
+  <div class="d-flex flex-column">
+    <div class="align-self-end m-1">
+      <Suspense>
+        <CategoryDropdown />
+      </Suspense>
     </div>
 
-    <div class="input-group mb-3">
+    <div class="mb-3">
+      <label for="nameInput" class="form-label">Name</label>
       <input
         type="text"
         class="form-control"
-        placeholder="name"
-        aria-label="name"
-        aria-describedby="basic-addon2"
+        id="nameInput"
+        placeholder="Please enter the name"
         v-model="state.name"
       />
-      <span class="input-group-text" id="basic-addon2">name</span>
     </div>
-
+    <!--    <div class="input-group mb-3">-->
+    <!--      <input-->
+    <!--        type="text"-->
+    <!--        class="form-control"-->
+    <!--        placeholder="name"-->
+    <!--        aria-label="name"-->
+    <!--        aria-describedby="basic-addon2"-->
+    <!--        -->
+    <!--      />-->
+    <!--      <span class="input-group-text" id="basic-addon2">name</span>-->
+    <!--    </div>-->
     <div class="input-group mb-3">
       <input
         type="text"
@@ -60,10 +63,14 @@
       <span class="input-group-text" id="basic-addon5">description</span>
     </div>
     <div class="d-flex justify-content-end">
-      <button class="btn btn-danger" type="button" @click="removeProduct()">
-        Delete product
-      </button>
-      <button class="btn btn-warning" type="button" @click="updateProduct()">
+      <!--      <button class="btn btn-danger" type="button" @click="removeProduct()">-->
+      <!--        Delete product-->
+      <!--      </button>-->
+      <button
+        class="btn btn-warning shadow-none"
+        type="button"
+        @click="updateProduct()"
+      >
         Edit product
       </button>
     </div>
@@ -71,13 +78,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, inject } from 'vue'
+import { defineComponent, reactive, onUnmounted, inject, onMounted } from 'vue'
 import { assignFieldsForReactive } from '@/helpers'
-import router from '@/router'
 import { GraphqlApi } from '@/api/GraphqlApi'
 import { GET_PRODUCT_BY_ID } from '@/api/queries/productQueries'
 import { ProductType } from '@/types/product'
 import { useStore } from '@/store'
+import { CategoryIdType } from '@/types/eventBus'
+import CategoryDropdown from '@/components/CategoryDropdown.vue'
 
 export default defineComponent({
   name: 'EditProduct',
@@ -87,36 +95,55 @@ export default defineComponent({
       required: true
     }
   },
+  components: {
+    CategoryDropdown
+  },
   async setup(props) {
     const store = useStore()
     const toast: any = inject('toast')
+    const eventBus: any = inject('eventBus')
+
     const state = reactive({
-      category: '',
+      categoryId: '',
       name: '',
       imgUrl: '',
       price: '',
       description: ''
     })
-    const fetchedData = await GraphqlApi.fetchById<ProductType>(
-      GET_PRODUCT_BY_ID,
-      props.id
+    GraphqlApi.fetchById<ProductType>(GET_PRODUCT_BY_ID, props.id).then(
+      fetchedData => {
+        assignFieldsForReactive(state, fetchedData)
+        eventBus.publish('parentUpdateCategory', fetchedData.categoryId)
+        console.log('edit publ')
+      }
     )
-    assignFieldsForReactive(state, fetchedData)
+    onMounted(() => {
+      eventBus.subscribe(
+        'childUpdateCategory',
+        (categoryId: CategoryIdType) => {
+          console.log('edit subs')
+          state.categoryId = categoryId
+        }
+      )
+    })
 
     const updateProduct = (): void => {
+      console.log(state)
       store.dispatch('updateProduct', { id: props.id, updateData: state })
       toast.success('Product has been updated!')
     }
-    const removeProduct = (): void => {
-      // ProductApi.removeProduct(props.id)
-      toast.error('Product has been deleted!')
-      // does not allow us to return to the deleted product page
-      router.replace({ path: '/admin-panel/edit-products' })
-    }
+    // const removeProduct = (): void => {
+    //   // ProductApi.removeProduct(props.id)
+    //   toast.error('Product has been deleted!')
+    //   // does not allow us to return to the deleted product page
+    //   router.replace({ path: '/admin-panel/edit-products' })
+    // }
+    onUnmounted(() => {
+      eventBus.unsubscribe('childUpdateCategory')
+    })
     return {
       state,
-      updateProduct,
-      removeProduct
+      updateProduct
     }
   }
 })

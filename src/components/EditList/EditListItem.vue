@@ -11,11 +11,15 @@
         <div>ID: {{ data.id }}</div>
         <div>Name: {{ data.name }}</div>
         <div>
-          <button class="btn btn-danger" type="button" @click="removeItem()">
+          <button
+            class="btn btn-danger shadow-none"
+            type="button"
+            @click="removeItem()"
+          >
             Delete
           </button>
           <router-link
-            class="btn btn-info"
+            class="btn btn-info shadow-none"
             :to="{ name: `${choosePathTo()}`, params: { id: data.id } }"
           >
             Edit

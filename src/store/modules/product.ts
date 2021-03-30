@@ -5,7 +5,10 @@ import { Actions } from '@/types/store/actions'
 import { State } from '@/types/store/state'
 import { EditListType } from '@/types'
 import { GraphqlApi } from '@/api/GraphqlApi'
-import { GET_PRODUCTS_EDITLIST } from '@/api/queries/productQueries'
+import {
+  GET_PRODUCTS_EDITLIST_BY_CATEGORY_ID,
+  GET_PRODUCTS_EDITLIST
+} from '@/api/queries/productQueries'
 import { ProductCreateInput, ProductUpdateInput } from '@/types/product'
 import _ from 'lodash'
 
@@ -17,6 +20,7 @@ export type ActionsPayload = {
   createProduct: [ProductCreateInput, void]
   updateProduct: [{ id: string; updateData: ProductUpdateInput }, void]
   deleteProduct: [string, void]
+  fetchProductsEditListByCategory: [string, void]
 }
 
 export const actions: Actions<ActionsPayload> = {
@@ -45,6 +49,19 @@ export const actions: Actions<ActionsPayload> = {
     if (state.product.editList.length !== 0) {
       commit('deleteProduct', id)
     }
+  },
+  async fetchProductsEditListByCategory(
+    { commit, state },
+    categoryId
+  ): Promise<void> {
+    const payload = await GraphqlApi.fetchByCategoryId<EditListType>(
+      GET_PRODUCTS_EDITLIST_BY_CATEGORY_ID,
+      categoryId
+    )
+    console.log(payload)
+    // if (state.product.editList.length !== 0) {
+    //   commit('fetchProductsEditListByCategory', categoryId)
+    // }
   }
 }
 /*
@@ -55,6 +72,7 @@ export type MutationPayload = {
   createProduct: { id: string; createData: ProductCreateInput }
   updateProduct: { id: string; updateData: any }
   deleteProduct: string
+  fetchProductsEditListByCategory: EditListType[]
 }
 
 export const mutations: MutationTree<State> & Mutations<MutationPayload> = {
@@ -75,6 +93,9 @@ export const mutations: MutationTree<State> & Mutations<MutationPayload> = {
   },
   deleteProduct({ product }, id) {
     product.editList = product.editList.filter((p: EditListType) => p.id !== id)
+  },
+  fetchProductsEditListByCategory({ product }, fetchedData) {
+    console.log(fetchedData)
   }
 }
 

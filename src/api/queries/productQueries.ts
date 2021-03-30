@@ -1,26 +1,37 @@
 import { gql } from '@apollo/client'
 
-export const GET_PRODUCT_BY_ID = gql(`
-      query Product($id: String!) {
-        product(id: $id) {
-          id
-          name
-          imgUrl
-          category
-          price
-          description
-        }
-      }`)
-
 export const GET_PRODUCTS_EDITLIST = gql(`
   query Products {
     products {
       id
       name
       imgUrl
+      categoryId
     }
   }
 `)
+
+export const GET_PRODUCT_BY_ID = gql(`
+      query Product($id: String!) {
+        product(id: $id) {
+          id
+          name
+          imgUrl
+          categoryId
+          price
+          description
+        }
+      }`)
+
+export const GET_PRODUCTS_EDITLIST_BY_CATEGORY_ID = gql(`
+      query ProductsByCategoryId($categoryId: String!) {
+        productsByCategoryId(categoryId: $categoryId) {
+          id
+          name
+          imgUrl
+          categoryId
+        }
+      }`)
 
 export const CREATE_PRODUCT = gql(`
       mutation CreateProduct($product: ProductInput!) {
@@ -30,7 +41,7 @@ export const CREATE_PRODUCT = gql(`
           imgUrl
           price
           description
-          category
+          categoryId
         }
       }`)
 
@@ -39,7 +50,7 @@ export const UPDATE_PRODUCT = gql(`
         updateProduct(product: $product, id: $id) {
           name
           imgUrl
-          category
+          categoryId
           price
           description
         }
@@ -53,6 +64,6 @@ export const DELETE_PRODUCT = gql(`
           imgUrl
           price
           description
-          category
+          categoryId
         }
       }`)

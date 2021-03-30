@@ -28,5 +28,6 @@ export type EditListType = {
   id: string
   imgUrl: string
   name: string
+  categoryId?: string
   __typename: string
 }

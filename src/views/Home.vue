@@ -11,7 +11,7 @@
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search..." />
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button">
+              <button class="btn btn-default shadow-none" type="button">
                 <img
                   src="../assets/home/find.svg"
                   width="15"
