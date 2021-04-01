@@ -1,18 +1,19 @@
 <template>
   <MDBBtn outline="dark" @click="goBack"
-    ><img class="button-back-image" src="@/assets/back-button/back.svg" alt=""
+    ><MDBIcon icon="chevron-left" iconStyle="fas"
   /></MDBBtn>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { MDBBtn } from 'mdb-vue-ui-kit'
+import { MDBBtn, MDBIcon } from 'mdb-vue-ui-kit'
 import router from '@/router'
 
 export default defineComponent({
   name: 'BackButton',
   components: {
-    MDBBtn
+    MDBBtn,
+    MDBIcon
   },
   setup() {
     const goBack = (): void => {

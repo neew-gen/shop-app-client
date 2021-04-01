@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 
-export const catalogRoutes: Array<RouteRecordRaw> = [
+export const catalogChildren: Array<RouteRecordRaw> = [
   {
     path: '/catalog',
     name: 'Catalog',

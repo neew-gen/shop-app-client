@@ -8,7 +8,7 @@
     />
     <img
       class="image-container__placeholder"
-      src="@/assets/image-container/no-photo.svg"
+      src="@/assets/images/image-container/no-photo.svg"
       alt=""
       v-else
     />

@@ -4,7 +4,7 @@
       <div class="row w-100 justify-content-between">
         <div class="brand">
           <router-link class="navbar-brand" to="/">
-            <img src="../assets/home/logo.jpg" height="35" alt="Logo" />
+            <!--            <img src="../assets/home/logo.jpg" height="35" alt="Logo" />-->
           </router-link>
         </div>
         <div class="col-12 d-flex justify-content-end p-0">
@@ -12,12 +12,12 @@
             <input type="text" class="form-control" placeholder="Search..." />
             <span class="input-group-btn">
               <button class="btn btn-default shadow-none" type="button">
-                <img
-                  src="../assets/home/find.svg"
-                  width="15"
-                  height="15"
-                  alt="find"
-                />
+                <!--                <img-->
+                <!--                  src="../assets/home/find.svg"-->
+                <!--                  width="15"-->
+                <!--                  height="15"-->
+                <!--                  alt="find"-->
+                <!--                />-->
               </button>
             </span>
           </div>

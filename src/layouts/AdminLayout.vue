@@ -8,7 +8,7 @@ import { defineComponent } from 'vue'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.vue'
 
 export default defineComponent({
-  name: 'AdminPage',
+  name: 'AdminLayout',
   components: {
     Breadcrumb
   }
