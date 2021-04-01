@@ -1,73 +1,47 @@
 <template>
   <div>
-    <Suspense>
-      <CategoryDropdown />
-    </Suspense>
-
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="name"
-        aria-label="name"
-        aria-describedby="basic-addon2"
-        v-model="state.name"
-      />
-      <span class="input-group-text" id="basic-addon2">name</span>
+    <div class="d-flex justify-content-center mb-2">
+      <ImageContainer size="180px" :name="state.name" :img-url="state.imgUrl" />
     </div>
-
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="img"
-        aria-label="img"
-        aria-describedby="basic-addon3"
-        v-model="state.imgUrl"
-      />
-      <span class="input-group-text" id="basic-addon3">img</span>
+    <div class="d-flex justify-content-between align-items-center p-1 mb-1">
+      <div>Category:</div>
+      <Suspense>
+        <template #default>
+          <CategoryDropdown />
+        </template>
+        <template #fallback>
+          <CategoryDropdownFallback />
+        </template>
+      </Suspense>
     </div>
-
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="price"
-        aria-label="price"
-        aria-describedby="basic-addon4"
-        v-model="state.price"
-      />
-      <span class="input-group-text" id="basic-addon4">price</span>
-    </div>
-
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="description"
-        aria-label="description"
-        aria-describedby="basic-addon5"
-        v-model="state.description"
-      />
-      <span class="input-group-text" id="basic-addon5">description</span>
-    </div>
-    <div class="d-flex justify-content-end">
-      <button
-        class="btn btn-success shadow-none"
-        type="button"
-        @click="addProduct()"
-      >
-        Add Product
-      </button>
+    <MDBInput class="mb-2" label="Product Name" v-model="state.name" />
+    <MDBInput
+      class="mb-2"
+      label="Image Url"
+      type="url"
+      v-model="state.imgUrl"
+    />
+    <MDBInput class="mb-2" label="Price" type="number" v-model="state.price" />
+    <MDBTextarea
+      class="mb-2"
+      label="Description"
+      rows="4"
+      v-model="state.description"
+    />
+    <div class="d-flex justify-content-end m-1">
+      <MDBBtn color="light" @click="addProduct()">Add Product</MDBBtn>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, inject, onUnmounted, reactive } from 'vue'
+import { MDBInput, MDBTextarea, MDBBtn } from 'mdb-vue-ui-kit'
 import { useStore } from '@/store'
-import CategoryDropdown from '@/components/CategoryDropdown.vue'
-import { CategoryIdType, EventBus, Subject } from '@/types/eventBus'
+import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
+import { CategoryIdType } from '@/types/eventBus'
+import CategoryDropdownFallback from '@/components/CategoryDropdown/CategoryDropdownFallback.vue'
+import ImageContainer from '@/components/ImageContainer.vue'
 
 const INITIAL_STATE = {
   id: '',
@@ -81,7 +55,12 @@ const INITIAL_STATE = {
 export default defineComponent({
   name: 'CreateProduct',
   components: {
-    CategoryDropdown
+    CategoryDropdown,
+    CategoryDropdownFallback,
+    MDBInput,
+    MDBTextarea,
+    MDBBtn,
+    ImageContainer
   },
   setup() {
     const store = useStore()

@@ -1,16 +1,18 @@
 <template>
   <div class="d-flex justify-content-center align-items-center custom-spinner">
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
+    <MDBSpinner color="primary" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { MDBSpinner } from 'mdb-vue-ui-kit'
 
 export default defineComponent({
-  name: 'Spinner'
+  name: 'Spinner',
+  components: {
+    MDBSpinner
+  }
 })
 </script>
 

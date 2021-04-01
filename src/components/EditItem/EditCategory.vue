@@ -1,66 +1,55 @@
 <template>
-  <div class="d-flex flex-column">
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Please enter a name"
-        aria-label="name"
-        aria-describedby="basic-addon1"
-        v-model="state.name"
-      />
-      <span class="input-group-text" id="basic-addon1">Name</span>
+  <div v-if="showContent">
+    <div class="d-flex justify-content-center mb-2">
+      <ImageContainer size="180px" :name="state.name" :img-url="state.imgUrl" />
     </div>
-
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Please enter a image url"
-        aria-label="img"
-        aria-describedby="basic-addon2"
-        v-model="state.imgUrl"
-      />
-      <span class="input-group-text" id="basic-addon2">Image Url</span>
-    </div>
-    <div class="d-flex justify-content-between">
-      <div class="btn-group">
-        <button
-          class="btn btn-secondary btn-sm dropdown-toggle"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
+    <MDBInput class="mb-2 mt-2" label="Category Name" v-model="state.name" />
+    <MDBInput
+      class="mb-2"
+      label="Image Url"
+      type="url"
+      v-model="state.imgUrl"
+    />
+    <div class="d-flex justify-content-between m-1">
+      <MDBDropdown align="start" v-model="showDropdown">
+        <MDBDropdownToggle
+          class="category-dropdown"
+          @click="showDropdown = !showDropdown"
         >
-          Category visibility:
+          Visibility:
           {{ state.isPublic === true ? 'Public' : 'Hidden' }}
-        </button>
-        <ul class="dropdown-menu dropdown-menu-start">
-          <li class="dropdown-item" @click="changeIsPublic(false)">Hidden</li>
-          <li class="dropdown-item" @click="changeIsPublic(true)">Public</li>
-        </ul>
-      </div>
-      <div>
-        <button
-          class="btn btn-warning shadow-none"
-          type="button"
-          @click="updateCategory()"
-        >
-          Save changes
-        </button>
-      </div>
+        </MDBDropdownToggle>
+        <MDBDropdownMenu aria-labelledby="dropdownMenuButton">
+          <MDBDropdownItem class="dropdown-item" @click="changeIsPublic(false)"
+            >Hidden</MDBDropdownItem
+          >
+          <MDBDropdownItem class="dropdown-item" @click="changeIsPublic(true)"
+            >Public</MDBDropdownItem
+          >
+        </MDBDropdownMenu>
+      </MDBDropdown>
+      <MDBBtn color="light" @click="updateCategory()">Save changes</MDBBtn>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, ref, inject } from 'vue'
-// import { ProductApi } from '@/api/product.api'
+import {
+  MDBInput,
+  MDBBtn,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem
+} from 'mdb-vue-ui-kit'
 import { assignFieldsForReactive } from '@/helpers'
 import router from '@/router'
 import { GraphqlApi } from '@/api/GraphqlApi'
 import { GET_CATEGORY_BY_ID } from '@/api/queries/categoryQueries'
 import { CategoryType } from '@/types/category'
 import { useStore } from '@/store'
+import ImageContainer from '@/components/ImageContainer.vue'
 
 export default defineComponent({
   name: 'EditCategory',
@@ -70,21 +59,37 @@ export default defineComponent({
       required: true
     }
   },
+  components: {
+    MDBInput,
+    MDBDropdown,
+    MDBDropdownToggle,
+    MDBDropdownMenu,
+    MDBBtn,
+    MDBDropdownItem,
+    ImageContainer
+  },
   async setup(props) {
     const store = useStore()
     const toast: any = inject('toast')
+    const showDropdown = ref(false)
+    const showContent = ref(false)
+
     const state = reactive({
       name: '',
       imgUrl: '',
       isPublic: false
     })
-    const fetchedData = await GraphqlApi.fetchById<CategoryType>(
-      GET_CATEGORY_BY_ID,
-      props.id
-    )
-    assignFieldsForReactive(state, fetchedData)
+    await GraphqlApi.fetchById<CategoryType>(GET_CATEGORY_BY_ID, props.id)
+      .then(fetchedData => {
+        assignFieldsForReactive(state, fetchedData)
+        showContent.value = true
+      })
+      .catch(() => {
+        router.back()
+      })
 
     const changeIsPublic = (newValue: boolean): void => {
+      showDropdown.value = false
       state.isPublic = newValue
     }
 
@@ -92,17 +97,12 @@ export default defineComponent({
       store.dispatch('updateCategory', { id: props.id, updateData: state })
       toast.success('Category has been updated!')
     }
-    // const removeProduct = (): void => {
-    //   ProductApi.removeProduct(props.id)
-    //   toast.error('Product has been deleted!')
-    //   // does not allow us to return to the deleted product page
-    //   router.replace({ path: '/admin-panel/edit-products' })
-    // }
     return {
       state,
       changeIsPublic,
-      updateCategory
-      // removeProduct
+      updateCategory,
+      showDropdown,
+      showContent
     }
   }
 })

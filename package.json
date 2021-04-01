@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "vue-cli-service serve --open"
   },
   "dependencies": {
     "@apollo/client": "^3.3.13",
@@ -15,6 +16,7 @@
     "bootstrap": "^5.0.0-beta2",
     "graphql": "^15.5.0",
     "lodash": "^4.17.21",
+    "mdb-vue-ui-kit": "^1.0.0-beta1",
     "react": "^17.0.2",
     "register-service-worker": "^1.7.1",
     "ts-mixer": "^5.4.0",
@@ -42,7 +44,8 @@
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
     "tslib": "^2.1.0",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.3",
+    "vue-cli-plugin-mdb5": "~1.2.0"
   },
   "eslintConfig": {
     "root": true,

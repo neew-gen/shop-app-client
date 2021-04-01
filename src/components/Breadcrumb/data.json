@@ -1,0 +1,48 @@
+{
+  "AdminPanelHome": {
+    "items": [{ "name": "Admin Panel", "path": "AdminPanelHome" }],
+    "active": "AdminPanelHome"
+  },
+  "CreateProduct": {
+    "items": [
+      { "name": "Admin Panel", "path": "AdminPanelHome" },
+      { "name": "Add Product", "path": "CreateProduct" }
+    ],
+    "active": "CreateProduct"
+  },
+  "EditProductsList": {
+    "items": [
+      { "name": "Admin Panel", "path": "AdminPanelHome" },
+      { "name": "Edit Products", "path": "EditProductsList" }
+    ],
+    "active": "EditProductsList"
+  },
+  "EditProductSuspense": {
+    "items": [
+      { "name": "Admin Panel", "path": "AdminPanelHome" },
+      { "name": "Product Edit", "path": "EditProductSuspense" }
+    ],
+    "active": "EditProductSuspense"
+  },
+  "CreateCategory": {
+    "items": [
+      { "name": "Admin Panel", "path": "AdminPanelHome" },
+      { "name": "Add Category", "path": "CreateCategory" }
+    ],
+    "active": "CreateCategory"
+  },
+  "EditCategoriesList": {
+    "items": [
+      { "name": "Admin Panel", "path": "AdminPanelHome" },
+      { "name": "Edit Categories", "path": "EditCategoriesList" }
+    ],
+    "active": "EditCategoriesList"
+  },
+  "EditCategorySuspense": {
+    "items": [
+      { "name": "Admin Panel", "path": "AdminPanelHome" },
+      { "name": "Category Edit", "path": "EditCategorySuspense" }
+    ],
+    "active": "EditCategorySuspense"
+  }
+}

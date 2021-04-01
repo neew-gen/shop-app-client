@@ -1,59 +1,51 @@
 <template>
   <div>
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Please enter a name"
-        aria-label="name"
-        aria-describedby="basic-addon1"
-        v-model="state.name"
-      />
-      <span class="input-group-text" id="basic-addon1">Name</span>
+    <div class="d-flex justify-content-center mb-2">
+      <ImageContainer size="180px" :name="state.name" :img-url="state.imgUrl" />
     </div>
-
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Please enter a image url"
-        aria-label="img"
-        aria-describedby="basic-addon2"
-        v-model="state.imgUrl"
-      />
-      <span class="input-group-text" id="basic-addon2">Image Url</span>
-    </div>
-    <div class="d-flex justify-content-between">
-      <div class="btn-group">
-        <button
-          class="btn btn-secondary btn-sm shadow-none dropdown-toggle"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
+    <MDBInput class="mb-2 mt-2" label="Category Name" v-model="state.name" />
+    <MDBInput
+      class="mb-2"
+      label="Image Url"
+      type="url"
+      v-model="state.imgUrl"
+    />
+    <div class="d-flex justify-content-between m-1">
+      <MDBDropdown align="start" v-model="showDropdown">
+        <MDBDropdownToggle
+          class="category-dropdown"
+          @click="showDropdown = !showDropdown"
         >
-          Category visibility:
+          Visibility:
           {{ state.isPublic === true ? 'Public' : 'Hidden' }}
-        </button>
-        <ul class="dropdown-menu">
-          <li class="dropdown-item" @click="changeIsPublic(false)">Hidden</li>
-          <li class="dropdown-item" @click="changeIsPublic(true)">Public</li>
-        </ul>
-      </div>
+        </MDBDropdownToggle>
+        <MDBDropdownMenu aria-labelledby="dropdownMenuButton">
+          <MDBDropdownItem class="dropdown-item" @click="changeIsPublic(false)"
+            >Hidden</MDBDropdownItem
+          >
+          <MDBDropdownItem class="dropdown-item" @click="changeIsPublic(true)"
+            >Public</MDBDropdownItem
+          >
+        </MDBDropdownMenu>
+      </MDBDropdown>
 
-      <button
-        class="btn btn-success shadow-none"
-        type="button"
-        @click="addCategory()"
-      >
-        Add Category
-      </button>
+      <MDBBtn color="light" @click="addCategory()">Add Category</MDBBtn>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, reactive } from 'vue'
+import { defineComponent, inject, reactive, ref } from 'vue'
+import {
+  MDBInput,
+  MDBBtn,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem
+} from 'mdb-vue-ui-kit'
 import { useStore } from '@/store'
+import ImageContainer from '@/components/ImageContainer.vue'
 const INITIAL_STATE = {
   id: '',
   name: '',
@@ -63,9 +55,19 @@ const INITIAL_STATE = {
 
 export default defineComponent({
   name: 'CreateCategory',
+  components: {
+    MDBInput,
+    MDBDropdown,
+    MDBDropdownToggle,
+    MDBDropdownMenu,
+    MDBBtn,
+    MDBDropdownItem,
+    ImageContainer
+  },
   setup() {
     const store = useStore()
     const toast: any = inject('toast')
+    const showDropdown = ref(false)
 
     const state = reactive({ ...INITIAL_STATE })
     const resetState = (): void => {
@@ -74,6 +76,7 @@ export default defineComponent({
 
     const changeIsPublic = (newValue: boolean): void => {
       state.isPublic = newValue
+      showDropdown.value = false
     }
 
     const addCategory = (): void => {
@@ -82,7 +85,7 @@ export default defineComponent({
       resetState()
       toast.success('Category has been created!')
     }
-    return { state, changeIsPublic, addCategory }
+    return { showDropdown, state, changeIsPublic, addCategory }
   }
 })
 </script>

@@ -1,15 +1,15 @@
 <template>
-  <NavbarWithBackButton title="Каталог" />
+  <Breadcrumb title="Каталог" />
   <router-view />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import NavbarWithBackButton from '@/components/NavbarWithBackButton.vue'
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.vue'
 export default defineComponent({
   name: 'Catalog',
   components: {
-    NavbarWithBackButton
+    Breadcrumb
   }
 })
 </script>

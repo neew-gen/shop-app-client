@@ -1,16 +1,16 @@
 <template>
-  <NavbarWithBackButton title="Admin Panel" />
+  <Breadcrumb />
   <router-view />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import NavbarWithBackButton from '@/components/NavbarWithBackButton.vue'
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.vue'
 
 export default defineComponent({
   name: 'AdminPage',
   components: {
-    NavbarWithBackButton
+    Breadcrumb
   }
 })
 </script>

@@ -1,25 +1,17 @@
 <template>
-  <li class="list-group-item">
+  <MDBListGroupItem>
     <div class="d-flex justify-content-between">
       <div>
-        <div class="image-container">
-          <img :src="data.imgUrl" alt="" v-if="checkImgValidate(data.imgUrl)" />
-          <div v-else>No image</div>
-        </div>
+        <ImageContainer size="120px" name="data.name" :img-url="data.imgUrl" />
       </div>
-      <div class="d-flex flex-column align-items-end justify-content-between">
-        <div>ID: {{ data.id }}</div>
-        <div>Name: {{ data.name }}</div>
-        <div>
-          <button
-            class="btn btn-danger shadow-none"
-            type="button"
-            @click="removeItem()"
-          >
-            Delete
-          </button>
+      <div class="d-flex flex-column align-items-start justify-content-between">
+        <div class="item-id">ID: {{ data.id }}</div>
+        <!--        TODO need to create a slicer func-->
+        <div class="item-title">Name: {{ data.name.slice(0, 10) }}</div>
+        <div class="d-flex">
+          <MDBBtn color="dark" @click="removeItem()">Delete</MDBBtn>
           <router-link
-            class="btn btn-info shadow-none"
+            class="btn btn-light"
             :to="{ name: `${choosePathTo()}`, params: { id: data.id } }"
           >
             Edit
@@ -27,17 +19,19 @@
         </div>
       </div>
     </div>
-  </li>
+  </MDBListGroupItem>
 </template>
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue'
+import { MDBBtn, MDBListGroupItem } from 'mdb-vue-ui-kit'
 import { EditListType } from '@/types'
-import { GraphqlApi } from '@/api/GraphqlApi'
-import { store, useStore } from '@/store'
+import { useStore } from '@/store'
+import ImageContainer from '@/components/ImageContainer.vue'
 
 export default defineComponent({
   name: 'EditListItem',
+  components: { ImageContainer, MDBBtn, MDBListGroupItem },
   props: {
     data: {
       type: Object as () => EditListType
@@ -50,10 +44,6 @@ export default defineComponent({
   setup(props) {
     const store = useStore()
     const toast: any = inject('toast')
-
-    const checkImgValidate = (imgUrl: string): boolean => {
-      return imgUrl.match(/(http(s?))/gim) != null
-    }
     const choosePathTo = (): string | undefined => {
       if (props.entity === 'product') return 'EditProductSuspense'
       if (props.entity === 'category') return 'EditCategorySuspense'
@@ -70,7 +60,6 @@ export default defineComponent({
       }
     }
     return {
-      checkImgValidate,
       choosePathTo,
       removeItem
     }
@@ -79,12 +68,10 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.image-container {
-  height: 120px;
-  margin-right: 10px;
-  > img {
-    height: 100%;
-    width: auto;
-  }
+.item-id {
+  font-size: 0.8rem;
+}
+.item-title {
+  font-weight: 500;
 }
 </style>

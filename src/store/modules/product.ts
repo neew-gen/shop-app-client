@@ -20,7 +20,8 @@ export type ActionsPayload = {
   createProduct: [ProductCreateInput, void]
   updateProduct: [{ id: string; updateData: ProductUpdateInput }, void]
   deleteProduct: [string, void]
-  fetchProductsEditListByCategory: [string, void]
+  filterProductsEditList: [string, void]
+  clearProductsEditList: [void, void]
 }
 
 export const actions: Actions<ActionsPayload> = {
@@ -50,18 +51,11 @@ export const actions: Actions<ActionsPayload> = {
       commit('deleteProduct', id)
     }
   },
-  async fetchProductsEditListByCategory(
-    { commit, state },
-    categoryId
-  ): Promise<void> {
-    const payload = await GraphqlApi.fetchByCategoryId<EditListType>(
-      GET_PRODUCTS_EDITLIST_BY_CATEGORY_ID,
-      categoryId
-    )
-    console.log(payload)
-    // if (state.product.editList.length !== 0) {
-    //   commit('fetchProductsEditListByCategory', categoryId)
-    // }
+  filterProductsEditList({ commit, state }, categoryId): void {
+    commit('filterProductsEditList', categoryId)
+  },
+  clearProductsEditList({ commit }): void {
+    commit('clearProductsEditList', (null as unknown) as void)
   }
 }
 /*
@@ -72,30 +66,50 @@ export type MutationPayload = {
   createProduct: { id: string; createData: ProductCreateInput }
   updateProduct: { id: string; updateData: any }
   deleteProduct: string
-  fetchProductsEditListByCategory: EditListType[]
+  filterProductsEditList: string
+  clearProductsEditList: void
 }
 
 export const mutations: MutationTree<State> & Mutations<MutationPayload> = {
   fetchProductsEditList({ product }, fetchedData) {
     product.editList = fetchedData
+    // create initialState for filtering
+    product.initialEditList = _.cloneDeep(fetchedData)
   },
   createProduct({ product }, { id, createData }) {
     createData.id = id
     product.editList.push(createData)
+    // initialState
+    product.initialEditList.push(createData)
   },
   updateProduct({ product }, { id, updateData }) {
-    const [updatingProduct] = product.editList.filter(
-      (p: EditListType) => p.id === id
-    )
-    for (const prop in updateData) {
-      updatingProduct[prop] = updateData[prop]
+    // TODO need to type this!
+    const updateFunction = (list: any): void => {
+      const [updatingProduct] = list.filter((p: EditListType) => p.id === id)
+      for (const prop in updateData) {
+        updatingProduct[prop] = updateData[prop]
+      }
     }
+    updateFunction(product.editList)
+    // initialState
+    updateFunction(product.initialEditList)
   },
   deleteProduct({ product }, id) {
     product.editList = product.editList.filter((p: EditListType) => p.id !== id)
+    // initialState
+    product.initialEditList = product.initialEditList.filter(
+      (p: EditListType) => p.id !== id
+    )
   },
-  fetchProductsEditListByCategory({ product }, fetchedData) {
-    console.log(fetchedData)
+  filterProductsEditList({ product }, categoryId) {
+    console.log(product.initialEditList)
+    product.editList = _.cloneDeep(product.initialEditList)
+    product.editList = product.editList.filter(
+      (p: EditListType) => p.categoryId === categoryId
+    )
+  },
+  clearProductsEditList({ product }) {
+    product.editList = _.cloneDeep(product.initialEditList)
   }
 }
 

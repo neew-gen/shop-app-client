@@ -1,91 +1,59 @@
 <template>
-  <div class="d-flex flex-column">
-    <div class="align-self-end m-1">
+  <div v-if="showContent">
+    <div class="d-flex justify-content-center mb-2">
+      <ImageContainer size="180px" :name="state.name" :img-url="state.imgUrl" />
+    </div>
+    <div class="d-flex justify-content-between align-items-center p-1 mb-1">
+      <div>Category:</div>
       <Suspense>
-        <CategoryDropdown />
+        <template #default>
+          <CategoryDropdown />
+        </template>
+        <template #fallback>
+          <CategoryDropdownFallback />
+        </template>
       </Suspense>
     </div>
-
-    <div class="mb-3">
-      <label for="nameInput" class="form-label">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="nameInput"
-        placeholder="Please enter the name"
-        v-model="state.name"
-      />
-    </div>
-    <!--    <div class="input-group mb-3">-->
-    <!--      <input-->
-    <!--        type="text"-->
-    <!--        class="form-control"-->
-    <!--        placeholder="name"-->
-    <!--        aria-label="name"-->
-    <!--        aria-describedby="basic-addon2"-->
-    <!--        -->
-    <!--      />-->
-    <!--      <span class="input-group-text" id="basic-addon2">name</span>-->
-    <!--    </div>-->
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="img"
-        aria-label="img"
-        aria-describedby="basic-addon3"
-        v-model="state.imgUrl"
-      />
-      <span class="input-group-text" id="basic-addon3">img</span>
-    </div>
-
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="price"
-        aria-label="price"
-        aria-describedby="basic-addon4"
-        v-model="state.price"
-      />
-      <span class="input-group-text" id="basic-addon4">price</span>
-    </div>
-
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="description"
-        aria-label="description"
-        aria-describedby="basic-addon5"
-        v-model="state.description"
-      />
-      <span class="input-group-text" id="basic-addon5">description</span>
-    </div>
-    <div class="d-flex justify-content-end">
-      <!--      <button class="btn btn-danger" type="button" @click="removeProduct()">-->
-      <!--        Delete product-->
-      <!--      </button>-->
-      <button
-        class="btn btn-warning shadow-none"
-        type="button"
-        @click="updateProduct()"
-      >
-        Edit product
-      </button>
+    <MDBInput class="mb-2" label="Product Name" v-model="state.name" />
+    <MDBInput
+      class="mb-2"
+      label="Image Url"
+      type="url"
+      v-model="state.imgUrl"
+    />
+    <MDBInput class="mb-2" label="Price" type="number" v-model="state.price" />
+    <MDBTextarea
+      class="mb-2"
+      label="Description"
+      rows="4"
+      v-model="state.description"
+    />
+    <div class="d-flex justify-content-end m-1">
+      <MDBBtn color="light" @click="updateProduct()">Save changes</MDBBtn>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onUnmounted, inject, onMounted } from 'vue'
+import {
+  defineComponent,
+  reactive,
+  onUnmounted,
+  inject,
+  onMounted,
+  ref
+} from 'vue'
+import { MDBInput, MDBTextarea, MDBBtn } from 'mdb-vue-ui-kit'
 import { assignFieldsForReactive } from '@/helpers'
 import { GraphqlApi } from '@/api/GraphqlApi'
 import { GET_PRODUCT_BY_ID } from '@/api/queries/productQueries'
 import { ProductType } from '@/types/product'
 import { useStore } from '@/store'
 import { CategoryIdType } from '@/types/eventBus'
-import CategoryDropdown from '@/components/CategoryDropdown.vue'
+import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
+import CategoryDropdownFallback from '@/components/CategoryDropdown/CategoryDropdownFallback.vue'
+import router from '@/router'
+import ImageContainer from '@/components/ImageContainer.vue'
 
 export default defineComponent({
   name: 'EditProduct',
@@ -96,12 +64,18 @@ export default defineComponent({
     }
   },
   components: {
-    CategoryDropdown
+    CategoryDropdown,
+    CategoryDropdownFallback,
+    MDBInput,
+    MDBTextarea,
+    MDBBtn,
+    ImageContainer
   },
   async setup(props) {
     const store = useStore()
     const toast: any = inject('toast')
     const eventBus: any = inject('eventBus')
+    const showContent = ref(false)
 
     const state = reactive({
       categoryId: '',
@@ -110,25 +84,32 @@ export default defineComponent({
       price: '',
       description: ''
     })
-    GraphqlApi.fetchById<ProductType>(GET_PRODUCT_BY_ID, props.id).then(
-      fetchedData => {
-        assignFieldsForReactive(state, fetchedData)
-        eventBus.publish('parentUpdateCategory', fetchedData.categoryId)
-        console.log('edit publ')
-      }
-    )
+
     onMounted(() => {
       eventBus.subscribe(
         'childUpdateCategory',
         (categoryId: CategoryIdType) => {
-          console.log('edit subs')
+          // console.log('edit subs')
           state.categoryId = categoryId
         }
       )
+
+      eventBus.publish('parentUpdateCategory', state.categoryId)
+    })
+    onUnmounted(() => {
+      eventBus.unsubscribe('childUpdateCategory')
     })
 
+    await GraphqlApi.fetchById<ProductType>(GET_PRODUCT_BY_ID, props.id)
+      .then(fetchedData => {
+        assignFieldsForReactive(state, fetchedData)
+        showContent.value = true
+      })
+      .catch(() => {
+        router.back()
+      })
+
     const updateProduct = (): void => {
-      console.log(state)
       store.dispatch('updateProduct', { id: props.id, updateData: state })
       toast.success('Product has been updated!')
     }
@@ -138,10 +119,8 @@ export default defineComponent({
     //   // does not allow us to return to the deleted product page
     //   router.replace({ path: '/admin-panel/edit-products' })
     // }
-    onUnmounted(() => {
-      eventBus.unsubscribe('childUpdateCategory')
-    })
     return {
+      showContent,
       state,
       updateProduct
     }

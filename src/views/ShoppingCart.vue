@@ -1,5 +1,5 @@
 <template>
-  <NavbarWithBackButton title="Корзина" />
+  <Breadcrumb title="Корзина" />
   <!--  <div class="container-fluid">-->
   <!--    <div class="row">-->
   <!--      <div v-if="!cartItems.length">-->
@@ -30,12 +30,12 @@
 <script lang="ts">
 import { defineComponent, computed, ComputedRef } from 'vue'
 import { useStore } from '@/store'
-import NavbarWithBackButton from '@/components/NavbarWithBackButton.vue'
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.vue'
 import { CartItemType, ProductItemType } from '@/types'
 
 export default defineComponent({
   name: 'ShoppingCart',
-  components: { NavbarWithBackButton }
+  components: { Breadcrumb }
   // setup() {
   //   const store = useStore()
   //   const cartItems: ComputedRef<CartItemType[]> = computed(

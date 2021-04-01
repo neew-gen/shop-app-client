@@ -1,10 +1,11 @@
+import 'mdb-vue-ui-kit/css/mdb.min.css'
 import { createApp, provide } from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import { store } from './store'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap'
 import Toaster from '@meforma/vue-toaster' // https://github.com/MeForma/vue-toaster
 import { eventBus } from '@/helpers/eventBus'
 

@@ -1,4 +1,5 @@
 <template>
+  <div></div>
   <!--  <ul class="list-group">-->
   <!--    <li v-for="item in categories" :key="item.key" class="list-group-item">-->
   <!--      <router-link-->

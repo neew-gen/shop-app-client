@@ -1,27 +1,23 @@
 <template>
-  <div :class="`btn-group ${listPosition}`">
-    <button
-      class="btn btn-secondary shadow-none dropdown-toggle"
-      type="button"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
+  <MDBDropdown align="end" v-model="showDropdown">
+    <MDBDropdownToggle
+      class="category-dropdown"
+      @click="showDropdown = !showDropdown"
       :disabled="fetchedItems.length === 0"
     >
-      Category:
       <span v-if="fetchedItems.length === 0">No categories</span>
-      <span v-else>{{ categoryName }}</span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-end">
-      <li
+      <span v-else> {{ categoryName }}</span>
+    </MDBDropdownToggle>
+    <MDBDropdownMenu aria-labelledby="dropdownMenuButton">
+      <MDBDropdownItem
         class="dropdown-item"
         v-for="(item, index) in fetchedItems"
         :key="index"
         @click="setDropdown(item.id)"
+        >{{ item.name }}</MDBDropdownItem
       >
-        {{ item.name }}
-      </li>
-    </ul>
-  </div>
+    </MDBDropdownMenu>
+  </MDBDropdown>
 </template>
 
 <script lang="ts">
@@ -30,41 +26,48 @@ import {
   ComputedRef,
   defineComponent,
   inject,
-  onMounted,
   onUnmounted,
-  reactive
+  reactive,
+  ref
 } from 'vue'
+import {
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem
+} from 'mdb-vue-ui-kit'
 import { CategoryDropdownType } from '@/types/category'
 import { GraphqlApi } from '@/api/GraphqlApi'
 import { CategoryIdType } from '@/types/eventBus'
 
 export default defineComponent({
   name: 'CategoryDropdown',
-  props: {
-    listPosition: {
-      type: String
-    }
+  components: {
+    MDBDropdown,
+    MDBDropdownToggle,
+    MDBDropdownMenu,
+    MDBDropdownItem
   },
   async setup() {
+    const showDropdown = ref(false)
     const state = reactive({
       categoryId: '',
       categoryName: ''
     })
     const eventBus: any = inject('eventBus')
+    eventBus.subscribe('parentUpdateCategory', (id: CategoryIdType) => {
+      state.categoryId = id
+    })
 
     const updateCategoryId = (id: string): void => {
       state.categoryId = id
     }
 
     const setDropdown = (id: string): void => {
+      showDropdown.value = false
       updateCategoryId(id)
-      console.log('dd publ')
       eventBus.publish('childUpdateCategory', id)
     }
-    eventBus.subscribe('parentUpdateCategory', (id: CategoryIdType) => {
-      console.log('dd subs')
-      state.categoryId = id
-    })
 
     onUnmounted(() => {
       eventBus.unsubscribe('parentUpdateCategory')
@@ -87,6 +90,7 @@ export default defineComponent({
       }
     })
     return {
+      showDropdown,
       setDropdown,
       fetchedItems,
       categoryName
@@ -95,4 +99,8 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.category-dropdown {
+  width: 153px;
+}
+</style>

@@ -66,7 +66,6 @@ class EventBusConcrete implements EventBus {
     //   item => item !== receiver
     // )
     this.receivers[topic] = []
-    console.log(this.receivers[topic])
   }
 }
 
