@@ -3,8 +3,9 @@ import { DocumentNode } from '@apollo/client'
 import { apollo } from '@/api/apollo'
 import { ProductApi } from '@/api/modules/ProductApi'
 import { CategoryApi } from '@/api/modules/CategoryApi'
+import { SwipeApi } from '@/api/modules/SwipeApi'
 
-export class GraphqlApi extends Mixin(ProductApi, CategoryApi) {
+export class GraphqlApi extends Mixin(ProductApi, CategoryApi, SwipeApi) {
   static async fetchAll<T>(query: DocumentNode): Promise<T[]> {
     const res = await apollo.query({
       query: query

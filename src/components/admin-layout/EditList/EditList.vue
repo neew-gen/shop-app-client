@@ -24,8 +24,8 @@ import { defineComponent, computed, ComputedRef, ref } from 'vue'
 import { MDBListGroup } from 'mdb-vue-ui-kit'
 import { useStore } from '@/store'
 import { EditListType } from '@/types'
-import EditListItem from '@/components/EditList/EditListItem.vue'
-import EditListFilter from '@/components/EditList/EditListFilter.vue'
+import EditListItem from '@/components/admin-layout/EditList/EditListItem.vue'
+import EditListFilter from '@/components/admin-layout/EditList/EditListFilter.vue'
 
 export default defineComponent({
   name: 'EditList',

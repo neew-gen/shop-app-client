@@ -1,0 +1,20 @@
+{
+  "MENU_LIST": [
+    {
+      "icon": "home",
+      "path": "/"
+    },
+    {
+      "icon": "list",
+      "path": "/catalog"
+    },
+    {
+      "icon": "shopping-cart",
+      "path": "/shopping-cart"
+    },
+    {
+      "icon": "user-circle",
+      "path": "/profile"
+    }
+  ]
+}

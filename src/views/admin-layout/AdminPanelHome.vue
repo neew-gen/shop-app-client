@@ -30,6 +30,21 @@
         >
       </MDBListGroup>
     </fieldset>
+    <fieldset class="custom-fieldset">
+      <legend>Swipes Management</legend>
+      <MDBListGroup horizontal>
+        <router-link
+          class="list-group-item flex-fill"
+          :to="{ name: 'CreateSwipe' }"
+          >Add swipe</router-link
+        >
+        <router-link
+          class="list-group-item flex-fill"
+          :to="{ name: 'EditSwipeListSuspense' }"
+          >Edit swipes</router-link
+        >
+      </MDBListGroup>
+    </fieldset>
   </MDBContainer>
 </template>
 

@@ -31,3 +31,5 @@ export type EditListType = {
   categoryId?: string
   __typename: string
 }
+
+export type ChangeModalFunction = (newValue: boolean) => void

@@ -44,5 +44,26 @@
       { "name": "Category Edit", "path": "EditCategorySuspense" }
     ],
     "active": "EditCategorySuspense"
+  },
+  "CreateSwipe": {
+    "items": [
+      { "name": "Admin Panel", "path": "AdminPanelHome" },
+      { "name": "Add Swipe", "path": "CreateSwipe" }
+    ],
+    "active": "CreateSwipe"
+  },
+  "EditSwipeListSuspense": {
+    "items": [
+      { "name": "Admin Panel", "path": "AdminPanelHome" },
+      { "name": "Edit Swipes", "path": "EditSwipeListSuspense" }
+    ],
+    "active": "EditSwipeListSuspense"
+  },
+  "EditSwipeSuspense": {
+    "items": [
+      { "name": "Admin Panel", "path": "AdminPanelHome" },
+      { "name": "Swipe Edit", "path": "EditSwipeSuspense" }
+    ],
+    "active": "EditSwipeSuspense"
   }
 }

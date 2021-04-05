@@ -3,7 +3,6 @@ import { State } from '@/store'
 import { MutationPayload } from '@/types/store/mutations'
 import { ActionsPayload } from '@/types/store/actions'
 import { Getters } from '@/types/store/getters'
-import { EditListType } from '@/types'
 
 export type Store = Omit<
   VuexStore<State>,

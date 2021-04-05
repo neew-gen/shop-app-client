@@ -15,13 +15,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, watch } from 'vue'
+import {
+  computed,
+  ComputedRef,
+  defineComponent,
+  reactive,
+  ref,
+  watch
+} from 'vue'
 import { MDBBreadcrumb, MDBBreadcrumbItem, MDBNavbar } from 'mdb-vue-ui-kit'
 import BackButton from '@/components/Breadcrumb/BackButton.vue'
 import router from '@/router'
 import { RouteRecordName } from 'vue-router'
 import { BreadcrumbsItem, BreadcrumbsData } from '@/types/breadcumb'
 import BREADCRUMBS_DATA from './data.json'
+import { EditListType } from '@/types'
 
 export default defineComponent({
   name: 'Breadcrumb',
@@ -36,6 +44,11 @@ export default defineComponent({
       items: [],
       active: ''
     })
+
+    const routeName: ComputedRef<RouteRecordName> = computed(() => {
+      return router.currentRoute.value.name!
+    })
+
     const breadcrumbsData: BreadcrumbsData = BREADCRUMBS_DATA
     const pushRouter = (path: string): void => {
       router.push({ name: path })
@@ -49,14 +62,13 @@ export default defineComponent({
         state.active = breadcrumbsData[nameToStr].active
       }
     }
-    if (router.currentRoute.value.name)
-      setBreadcrumbs(router.currentRoute.value.name)
+    if (routeName.value) setBreadcrumbs(routeName.value)
 
     watch(
-      () => router.currentRoute.value.name,
+      () => routeName.value,
       () => {
-        if (router.currentRoute.value.name)
-          setBreadcrumbs(router.currentRoute.value.name)
+        console.log(routeName.value)
+        setBreadcrumbs(routeName.value)
       }
     )
     return { state, pushRouter }
@@ -66,7 +78,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .navbar {
-  height: 54px;
+  height: 55px;
 }
 .breadcrumb-item {
   cursor: pointer;

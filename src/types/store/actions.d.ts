@@ -2,8 +2,11 @@ import { ActionContext, CommitOptions } from 'vuex'
 import { State } from '@/types/store'
 import { MutationPayload as productMutationPayload } from '@/store/modules/product'
 import { MutationPayload as categoryMutationPayload } from '@/store/modules/category'
+import { MutationPayload as swipeMutationPayload } from '@/store/modules/swipe'
 
-type MutationPayload = productMutationPayload & categoryMutationPayload
+type MutationPayload = productMutationPayload &
+  categoryMutationPayload &
+  swipeMutationPayload
 
 export type Actions<T> = {
   [Property in keyof T]: (

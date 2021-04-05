@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import EditCategory from '@/components/EditItem/EditCategory.vue'
+import EditCategory from '@/components/admin-layout/EditItem/EditCategory.vue'
 import Spinner from '@/components/Spinner.vue'
 
 export default defineComponent({

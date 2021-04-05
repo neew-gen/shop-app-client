@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import EditListSuspense from '@/components/EditList/EditListSuspense.vue'
+import EditListSuspense from '@/components/admin-layout/EditList/EditListSuspense.vue'
 
 export default defineComponent({
   name: 'EditCategoriesList',

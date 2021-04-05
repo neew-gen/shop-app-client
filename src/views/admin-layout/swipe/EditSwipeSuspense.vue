@@ -1,7 +1,7 @@
 <template>
   <Suspense>
     <template #default>
-      <EditProduct :id="id" />
+      <EditSwipe :id="id" />
     </template>
     <template #fallback>
       <Spinner />
@@ -11,17 +11,20 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import EditProduct from '@/components/admin-layout/EditItem/EditProduct.vue'
 import Spinner from '@/components/Spinner.vue'
+import EditSwipe from '@/components/admin-layout/EditItem/EditSwipe.vue'
 
 export default defineComponent({
-  name: 'EditProductSuspense',
-  components: { Spinner, EditProduct },
+  name: 'EditSwipeSuspense',
   props: {
     id: {
       type: String,
       required: true
     }
+  },
+  components: {
+    EditSwipe,
+    Spinner
   }
 })
 </script>

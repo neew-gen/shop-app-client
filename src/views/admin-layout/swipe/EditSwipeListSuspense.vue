@@ -1,7 +1,7 @@
 <template>
   <Suspense>
     <template #default>
-      <EditList :entity="entity" />
+      <EditSwipeList />
     </template>
     <template #fallback>
       <Spinner />
@@ -11,18 +11,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import EditList from '@/components/EditList/EditList.vue'
 import Spinner from '@/components/Spinner.vue'
+import EditSwipeList from '@/components/admin-layout/EditSwipeList/index.vue'
 
 export default defineComponent({
-  name: 'EditListSuspense',
-  props: {
-    entity: {
-      type: String,
-      required: true
-    }
-  },
-  components: { Spinner, EditList }
+  name: 'EditSwipeListSuspense',
+  components: { EditSwipeList, Spinner }
 })
 </script>
 

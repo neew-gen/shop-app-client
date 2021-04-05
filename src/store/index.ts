@@ -12,6 +12,11 @@ import {
   mutations as categoryMutations,
   getters as categoryGetters
 } from '@/store/modules/category'
+import {
+  actions as swipeActions,
+  mutations as swipeMutations,
+  getters as swipeGetters
+} from '@/store/modules/swipe'
 
 const plugins = []
 if (process.env.NODE_ENV === 'development') {
@@ -24,18 +29,21 @@ export const store = createStore({
     // ...productModule.actions,
     // ...categoryModule.actions
     ...productActions,
-    ...categoryActions
+    ...categoryActions,
+    ...swipeActions
   },
   mutations: {
     // ...productModule.mutations,
     // ...categoryModule.mutations
     ...productMutations,
-    ...categoryMutations
+    ...categoryMutations,
+    ...swipeMutations
   },
   getters: {
     // ...productModule.getters
     ...productGetters,
-    ...categoryGetters
+    ...categoryGetters,
+    ...swipeGetters
   },
   plugins
 })

@@ -5,13 +5,15 @@ export const catalogChildren: Array<RouteRecordRaw> = [
     path: '/catalog',
     name: 'Catalog',
     component: (): any =>
-      import(/* webpackChunkName: "catalog" */ '@/views/catalog/index.vue'),
+      import(
+        /* webpackChunkName: "catalog" */ '@/views/public-layout/catalog/index.vue'
+      ),
     children: [
       {
         path: '',
         component: (): any =>
           import(
-            /* webpackChunkName: "categories-menu" */ '@/views/catalog/CategoriesMenu.vue'
+            /* webpackChunkName: "categories-menu" */ '@/views/public-layout/catalog/CategoriesMenu.vue'
           )
       },
       {
@@ -19,7 +21,7 @@ export const catalogChildren: Array<RouteRecordRaw> = [
         name: 'CatalogSection',
         component: (): any =>
           import(
-            /* webpackChunkName: "catalog-section" */ '@/views/catalog/CatalogSection.vue'
+            /* webpackChunkName: "catalog-section" */ '@/views/public-layout/catalog/CatalogSection.vue'
           ),
         props: true
       },
@@ -28,7 +30,7 @@ export const catalogChildren: Array<RouteRecordRaw> = [
         name: 'CatalogItem',
         component: (): any =>
           import(
-            /* webpackChunkName: "catalog-item" */ '@/views/catalog/CatalogItem.vue'
+            /* webpackChunkName: "catalog-item" */ '@/views/public-layout/catalog/CatalogItem.vue'
           ),
         props: true
       }
