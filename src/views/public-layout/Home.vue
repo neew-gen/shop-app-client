@@ -9,10 +9,10 @@
 <script lang="ts">
 import { defineComponent, inject, onUnmounted, ref } from 'vue'
 import { MDBContainer } from 'mdb-vue-ui-kit'
-import HomeNavbar from '@/components/public-layout/home/HomeHavbar/index.vue'
+import HomeNavbar from '@/components/public-layout/home/HomeHavbar/HomeNavbar.vue'
 import { eventBus } from '@/helpers/eventBus'
-import HomeContent from '@/components/public-layout/home/HomeContent/index.vue'
-import HomeSearchContent from '@/components/public-layout/home/HomeSearchContent/index.vue'
+import HomeContent from '@/components/public-layout/home/HomeContent/HomeContent.vue'
+import HomeSearchContent from '@/components/public-layout/home/HomeSearchContent/HomeSearchContent.vue'
 // import Carousel from '@/components/Carousel.vue'
 // import HomeList from '@/components/HomeList/index.vue'
 

@@ -35,7 +35,7 @@ export default defineComponent({
   },
   async setup() {
     await store.dispatch('fetchSwipeHomeSwiper')
-    const p1 = await new Promise(res => setTimeout(() => res('p1'), 4000))
+    const p1 = await new Promise(res => setTimeout(() => res('p1'), 2000))
     console.log(p1)
     const fetchedItems: ComputedRef<SwipeType[]> = computed(() => {
       return store.getters.getSwipeHomeSwiper

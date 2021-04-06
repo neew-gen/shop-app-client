@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Footer from '@/components/public-layout/Footer/index.vue'
+import Footer from '@/components/public-layout/Footer/PublicFooter.vue'
 
 export default defineComponent({
   name: 'PublicLayout',

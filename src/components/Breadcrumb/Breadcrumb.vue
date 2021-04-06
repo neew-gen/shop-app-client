@@ -67,7 +67,6 @@ export default defineComponent({
     watch(
       () => routeName.value,
       () => {
-        console.log(routeName.value)
         setBreadcrumbs(routeName.value)
       }
     )

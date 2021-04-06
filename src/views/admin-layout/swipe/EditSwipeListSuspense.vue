@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Spinner from '@/components/Spinner.vue'
-import EditSwipeList from '@/components/admin-layout/EditSwipeList/index.vue'
+import EditSwipeList from '@/components/admin-layout/EditSwipeList/EditSwipeList.vue'
 
 export default defineComponent({
   name: 'EditSwipeListSuspense',

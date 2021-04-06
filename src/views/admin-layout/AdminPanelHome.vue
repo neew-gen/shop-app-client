@@ -1,4 +1,5 @@
 <template>
+  <div></div>
   <MDBContainer fluid>
     <fieldset class="custom-fieldset">
       <legend>Products Management</legend>

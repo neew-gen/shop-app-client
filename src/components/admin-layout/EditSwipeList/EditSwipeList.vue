@@ -6,7 +6,8 @@
     No swipes yet. You can&thinsp;
     <router-link :to="{ name: 'CreateSwipe' }">create one</router-link>.
   </div>
-  <div v-else>
+  <!--  i was getting a bug when set v-else-->
+  <div v-if="fetchedItems.length !== 0">
     <div class="tips">
       <div>
         (to change the order, hold down
@@ -23,7 +24,7 @@ import { computed, ComputedRef, defineComponent, ref, watch } from 'vue'
 import { MDBIcon } from 'mdb-vue-ui-kit'
 import { store } from '@/store'
 import { SwipeType } from '@/types/swipe'
-import DraggableList from '@/components/admin-layout/EditSwipeList/DraggableList/index.vue'
+import DraggableList from '@/components/admin-layout/EditSwipeList/DraggableList.vue'
 
 export default defineComponent({
   name: 'EditSwipeList',

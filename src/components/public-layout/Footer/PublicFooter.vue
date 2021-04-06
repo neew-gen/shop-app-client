@@ -18,7 +18,7 @@ import { MENU_LIST } from './data.json'
 import FooterButton from '@/components/public-layout/Footer/FooterButton.vue'
 
 export default defineComponent({
-  name: 'Footer',
+  name: 'PublicFooter',
   components: { MDBListGroup, MDBNavbar, FooterButton },
   setup() {
     return {
