@@ -17,11 +17,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, PropType, reactive, ref, watch } from 'vue'
+import { defineComponent, inject, onUnmounted, PropType, ref, watch } from 'vue'
 import { store } from '@/store'
 import draggable from 'vuedraggable'
 import EditSwipeListItem from '@/components/admin-layout/EditSwipeList/EditSwipeListItem.vue'
 import { SwipeType } from '@/types/swipe'
+import _ from 'lodash'
 
 export default defineComponent({
   name: 'DraggableList',
@@ -38,14 +39,19 @@ export default defineComponent({
   setup(props) {
     const toast: any = inject('toast')
     const dragData = ref(props.data)
-    watch(dragData, (from, to) => {
-      if (from.length === to.length) {
+    console.log(dragData.value)
+    watch(props, () => {
+      dragData.value = props.data
+    })
+    const saveBeforeLeave = (): void => {
+      if (!_.isEqual(dragData.value, props.data)) {
         store.dispatch('updateIndex', dragData.value)
         toast.success('Swipe order has been updated!')
       }
-    })
-    watch(props, () => {
-      dragData.value = props.data
+    }
+    window.onbeforeunload = saveBeforeLeave
+    onUnmounted(() => {
+      saveBeforeLeave()
     })
     return { dragData }
   }

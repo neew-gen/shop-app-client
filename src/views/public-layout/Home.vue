@@ -1,9 +1,11 @@
 <template>
-  <HomeNavbar />
-  <MDBContainer fluid>
-    <HomeContent v-if="!fullSizeSearch" />
-    <HomeSearchContent v-else />
-  </MDBContainer>
+  <div>
+    <HomeNavbar />
+    <MDBContainer fluid>
+      <HomeContent />
+      <!--      <HomeSearchContent v-else />-->
+    </MDBContainer>
+  </div>
 </template>
 
 <script lang="ts">
@@ -18,11 +20,17 @@ import HomeSearchContent from '@/components/public-layout/home/HomeSearchContent
 
 export default defineComponent({
   name: 'Home',
-  components: { HomeSearchContent, HomeContent, HomeNavbar, MDBContainer },
+  components: {
+    // HomeSearchContent,
+    HomeContent,
+    HomeNavbar,
+    MDBContainer
+  },
   // components: { HomeList, Carousel }
   setup() {
     const eventBus: any = inject('eventBus')
     const fullSizeSearch = ref(false)
+    const loading = inject('loading')
 
     eventBus.subscribe('updateSearchSize', (newValue: any) => {
       fullSizeSearch.value = newValue
@@ -30,7 +38,7 @@ export default defineComponent({
     onUnmounted(() => {
       eventBus.unsubscribe('updateSearchSize')
     })
-    return { fullSizeSearch }
+    return { fullSizeSearch, loading }
   }
 })
 </script>

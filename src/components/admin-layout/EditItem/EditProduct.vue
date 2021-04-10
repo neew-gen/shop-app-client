@@ -1,7 +1,12 @@
 <template>
   <div v-if="showContent">
     <div class="d-flex justify-content-center mb-2">
-      <ImageContainer size="180px" :name="state.name" :img-url="state.imgUrl" />
+      <ImageContainer
+        height="180px"
+        width="180px"
+        :name="state.name"
+        :img-url="state.imgUrl"
+      />
     </div>
     <div class="d-flex justify-content-between align-items-center p-1 mb-1">
       <div>Category:</div>

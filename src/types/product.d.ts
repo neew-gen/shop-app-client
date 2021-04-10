@@ -5,7 +5,6 @@ export type ProductType = {
   imgUrl: string
   name: string
   price: string
-  __typename?: string
 }
 
 export type ProductCreateInput = {

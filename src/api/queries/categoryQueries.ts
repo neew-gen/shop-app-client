@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 
+// --------------------------------- Admin Layout --------------------------------- //
 export const GET_CATEGORIES_EDITLIST = gql(`
       query Categories {
         categories {
@@ -49,6 +50,17 @@ export const UPDATE_CATEGORY = gql(`
 export const DELETE_CATEGORY = gql(`
       mutation DeleteCategory($id: String!) {
         deleteCategory(id: $id) {
+          id
+          name
+          imgUrl
+          isPublic
+        }
+      }`)
+// --------------------------------- Public Layout -------------------------------- //
+
+export const GET_CATEGORIES_CATALOG_LIST = gql(`
+      query CategoriesPublic {
+        categoriesPublic {
           id
           name
           imgUrl

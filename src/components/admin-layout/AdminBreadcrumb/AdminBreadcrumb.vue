@@ -24,7 +24,7 @@ import {
   watch
 } from 'vue'
 import { MDBBreadcrumb, MDBBreadcrumbItem, MDBNavbar } from 'mdb-vue-ui-kit'
-import BackButton from '@/components/Breadcrumb/BackButton.vue'
+import BackButton from '@/components/BackButton.vue'
 import router from '@/router'
 import { RouteRecordName } from 'vue-router'
 import { BreadcrumbsItem, BreadcrumbsData } from '@/types/breadcumb'
@@ -32,7 +32,7 @@ import BREADCRUMBS_DATA from './data.json'
 import { EditListType } from '@/types'
 
 export default defineComponent({
-  name: 'Breadcrumb',
+  name: 'AdminBreadcrumb',
   components: {
     BackButton,
     MDBBreadcrumb,

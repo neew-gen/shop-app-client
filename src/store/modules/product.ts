@@ -6,11 +6,17 @@ import { State } from '@/types/store/state'
 import { EditListType } from '@/types'
 import { GraphqlApi } from '@/api/GraphqlApi'
 import {
-  GET_PRODUCTS_EDITLIST_BY_CATEGORY_ID,
+  GET_PRODUCT_BY_ID,
+  GET_PRODUCTS_CATALOG_LIST_BY_CATEGORY_ID,
   GET_PRODUCTS_EDITLIST
 } from '@/api/queries/productQueries'
-import { ProductCreateInput, ProductUpdateInput } from '@/types/product'
+import {
+  ProductCreateInput,
+  ProductType,
+  ProductUpdateInput
+} from '@/types/product'
 import _ from 'lodash'
+import { GET_CATEGORIES_CATALOG_LIST } from '@/api/queries/categoryQueries'
 
 /*
    ---------------------- Actions -------------------------------
@@ -22,9 +28,14 @@ export type ActionsPayload = {
   deleteProduct: [string, void]
   filterProductsEditList: [string, void]
   clearProductsEditList: [void, void]
+
+  fetchProductsByCategoryId: [string, void]
+  fetchProductById: [string, void]
 }
 
 export const actions: Actions<ActionsPayload> = {
+  // --------------------------------- Admin Layout --------------------------------- //
+
   async fetchProductsEditList({ commit, state }): Promise<void> {
     if (state.product.editList.length === 0) {
       const payload = await GraphqlApi.fetchAll<EditListType>(
@@ -56,6 +67,32 @@ export const actions: Actions<ActionsPayload> = {
   },
   clearProductsEditList({ commit }): void {
     commit('clearProductsEditList', (null as unknown) as void)
+  },
+  // --------------------------------- Public Layout -------------------------------- //
+
+  async fetchProductsByCategoryId(
+    { commit, state },
+    categoryId
+  ): Promise<void> {
+    if (
+      !state.product.catalogList[categoryId] ||
+      state.product.catalogList[categoryId].length === 0
+    ) {
+      const fetchedData = await GraphqlApi.fetchProductsByCategoryId<
+        ProductType[]
+      >(GET_PRODUCTS_CATALOG_LIST_BY_CATEGORY_ID, categoryId)
+      commit('fetchProductsByCategoryId', { categoryId, fetchedData })
+    }
+  },
+  async fetchProductById({ commit, state }, id): Promise<void> {
+    console.log(state.product.fetchedProducts)
+    if (!state.product.fetchedProducts[id]) {
+      const fetchedProduct = await GraphqlApi.fetchById<ProductType>(
+        GET_PRODUCT_BY_ID,
+        id
+      )
+      commit('fetchProductById', { id, fetchedProduct })
+    }
   }
 }
 /*
@@ -68,9 +105,14 @@ export type MutationPayload = {
   deleteProduct: string
   filterProductsEditList: string
   clearProductsEditList: void
+
+  fetchProductsByCategoryId: { categoryId: string; fetchedData: ProductType[] }
+  fetchProductById: { id: string; fetchedProduct: ProductType }
 }
 
 export const mutations: MutationTree<State> & Mutations<MutationPayload> = {
+  // --------------------------------- Admin Layout --------------------------------- //
+
   fetchProductsEditList({ product }, fetchedData) {
     product.editList = fetchedData
     // create initialState for filtering
@@ -110,6 +152,14 @@ export const mutations: MutationTree<State> & Mutations<MutationPayload> = {
   },
   clearProductsEditList({ product }) {
     product.editList = _.cloneDeep(product.initialEditList)
+  },
+  // --------------------------------- Public Layout -------------------------------- //
+
+  fetchProductsByCategoryId({ product }, { categoryId, fetchedData }) {
+    product.catalogList[categoryId] = fetchedData
+  },
+  fetchProductById({ product }, { id, fetchedProduct }) {
+    product.fetchedProducts[id] = fetchedProduct
   }
 }
 
@@ -118,10 +168,23 @@ export const mutations: MutationTree<State> & Mutations<MutationPayload> = {
  */
 export type Getters = {
   getProductsEditList(state: State): EditListType[]
+
+  getProductsByCategoryId(state: State): (categoryId: string) => ProductType[]
+  getProductsById(state: State): (id: string) => ProductType
 }
 
 export const getters: GetterTree<State, State> & Getters = {
+  // --------------------------------- Admin Layout --------------------------------- //
+
   getProductsEditList: ({ product }) => {
     return product.editList
+  },
+  // --------------------------------- Public Layout -------------------------------- //
+
+  getProductsByCategoryId: ({ product }) => (categoryId): ProductType[] => {
+    return product.catalogList[categoryId]
+  },
+  getProductsById: ({ product }) => (id): ProductType => {
+    return product.fetchedProducts[id]
   }
 }

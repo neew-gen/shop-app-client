@@ -1,11 +1,16 @@
 <template>
-  <div class="image-container" :style="`height: ${size}; width: ${size};`">
-    <img
-      class="image-container__img"
-      :src="imgUrl"
-      alt="Image"
+  <div class="image-container" :style="`height: ${height}; width: ${width};`">
+    <div
       v-if="hasHttpInUrl(imgUrl)"
+      class="background-image"
+      :style="`background-image: url(${imgUrl});`"
     />
+    <!--    <img-->
+    <!--      class="image-container__img"-->
+    <!--      :src="imgUrl"-->
+    <!--      alt="Image"-->
+    <!--      v-if="hasHttpInUrl(imgUrl)"-->
+    <!--    />-->
     <img
       class="image-container__placeholder"
       src="@/assets/images/image-container/no-photo.svg"
@@ -21,7 +26,11 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'ImageContainer',
   props: {
-    size: {
+    height: {
+      type: String,
+      required: true
+    },
+    width: {
       type: String,
       required: true
     },
@@ -47,6 +56,13 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+.background-image {
+  height: 100%;
+  width: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .image-container {
   display: flex;
   justify-content: center;

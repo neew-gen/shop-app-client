@@ -25,7 +25,7 @@ export default defineComponent({
 //  justify-content: space-between;
 //}
 .wrapper {
-  padding-bottom: 88px;
+  padding-bottom: 70px;
 }
 #app {
 }

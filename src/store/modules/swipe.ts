@@ -1,5 +1,4 @@
 import { GetterTree, MutationTree } from 'vuex'
-
 import { Mutations } from '@/types/store/mutations'
 import { Actions } from '@/types/store/actions'
 import { State } from '@/types/store/state'
@@ -9,31 +8,24 @@ import { GET_SWIPES } from '@/api/queries/swipeQueries'
 import _ from 'lodash'
 
 /*
-   ---------------------- Actions -------------------------------
+   ------------------------------- Actions -------------------------------
  */
 export type ActionsPayload = {
   fetchSwipeEditList: [void, void]
-  fetchSwipeHomeSwiper: [void, void]
   createSwipe: [SwipeData, void]
   updateIndex: [UpdateIndexInput[], void]
   updateSwipe: [{ id: string; input: SwipeData }, void]
   deleteSwipe: [string, void]
+
+  fetchSwipeHomeSwiper: [void, void]
 }
 
 export const actions: Actions<ActionsPayload> = {
+  // --------------------------------- Admin Layout --------------------------------- //
   async fetchSwipeEditList({ commit, state }): Promise<void> {
     if (state.swipe.editList.length === 0) {
-      const res = await GraphqlApi.fetchAll<SwipeType>(GET_SWIPES)
-      const payload = _.sortBy(res, 'swipeIndex')
+      const payload = await GraphqlApi.fetchAll<SwipeType>(GET_SWIPES)
       commit('fetchSwipeEditList', payload)
-    }
-  },
-  async fetchSwipeHomeSwiper({ commit, state }): Promise<void> {
-    console.log(state.swipe.homeSwiper.length)
-    if (state.swipe.homeSwiper.length === 0) {
-      const res = await GraphqlApi.fetchAll<SwipeType>(GET_SWIPES)
-      const payload = _.sortBy(res, 'swipeIndex')
-      commit('fetchSwipeHomeSwiper', payload)
     }
   },
   async createSwipe({ commit, state }, createData): Promise<void> {
@@ -64,30 +56,32 @@ export const actions: Actions<ActionsPayload> = {
     if (state.swipe.editList.length !== 0) {
       commit('deleteSwipe', id)
     }
+  },
+  // --------------------------------- Public Layout -------------------------------- //
+  async fetchSwipeHomeSwiper({ commit, state }): Promise<void> {
+    if (state.swipe.homeSwiper.length === 0) {
+      const payload = await GraphqlApi.fetchAll<SwipeType>(GET_SWIPES)
+      commit('fetchSwipeHomeSwiper', payload)
+    }
   }
 }
 /*
-   ---------------------- Mutations -----------------------------
+   ----------------------------- Mutations -----------------------------
  */
 export type MutationPayload = {
   fetchSwipeEditList: SwipeType[]
-  fetchSwipeHomeSwiper: SwipeType[]
   createSwipe: { id: string; createData: SwipeData }
   updateIndex: UpdateIndexInput[]
   updateSwipe: { id: string; updateData: SwipeData }
   deleteSwipe: string
+
+  fetchSwipeHomeSwiper: SwipeType[]
 }
 
 export const mutations: MutationTree<State> & Mutations<MutationPayload> = {
+  // --------------------------------- Admin Layout --------------------------------- //
   fetchSwipeEditList({ swipe }, fetchedData) {
     swipe.editList = fetchedData
-  },
-  fetchSwipeHomeSwiper({ swipe }, fetchedData) {
-    if (fetchedData.length !== 0) {
-      swipe.homeSwiper = fetchedData
-    } else {
-      swipe.homeSwiper = swipe.defaultSwipe
-    }
   },
   createSwipe({ swipe }, { id, createData }) {
     const newSwipe = {
@@ -97,7 +91,13 @@ export const mutations: MutationTree<State> & Mutations<MutationPayload> = {
     swipe.editList.push(newSwipe)
   },
   updateIndex({ swipe }, updateIndexInput) {
-    swipe.editList
+    for (const item of updateIndexInput) {
+      const foundById = swipe.editList.filter(
+        (s: SwipeType) => s.id === item.id
+      )[0]
+      foundById.swipeIndex = item.swipeIndex
+    }
+    swipe.editList = _.sortBy(swipe.editList, 'swipeIndex')
   },
   updateSwipe({ swipe }, { id, updateData }) {
     const [updatingSwipe] = swipe.editList.filter((s: SwipeType) => s.id === id)
@@ -105,21 +105,32 @@ export const mutations: MutationTree<State> & Mutations<MutationPayload> = {
   },
   deleteSwipe({ swipe }, id) {
     swipe.editList = swipe.editList.filter((s: SwipeType) => s.id !== id)
+  },
+  // --------------------------------- Public Layout -------------------------------- //
+  fetchSwipeHomeSwiper({ swipe }, fetchedData) {
+    if (fetchedData.length !== 0) {
+      swipe.homeSwiper = fetchedData
+    } else {
+      swipe.homeSwiper = swipe.defaultSwipe
+    }
   }
 }
 
 /*
-   ---------------------- Getters -------------------------------
+   ------------------------------- Getters -------------------------------
  */
 export type Getters = {
   getSwipeEditList(state: State): SwipeType[]
+
   getSwipeHomeSwiper(state: State): SwipeType[]
 }
 
 export const getters: GetterTree<State, State> & Getters = {
+  // --------------------------------- Admin Layout --------------------------------- //
   getSwipeEditList: ({ swipe }) => {
     return swipe.editList
   },
+  // --------------------------------- Public Layout -------------------------------- //
   getSwipeHomeSwiper: ({ swipe }) => {
     return swipe.homeSwiper
   }

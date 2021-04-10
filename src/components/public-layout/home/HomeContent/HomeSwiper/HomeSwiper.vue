@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ComputedRef, defineComponent } from 'vue'
+import { computed, ComputedRef, defineComponent, onMounted, ref } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import SwiperCore, { Pagination } from 'swiper'
 SwiperCore.use([Pagination])
@@ -35,8 +35,8 @@ export default defineComponent({
   },
   async setup() {
     await store.dispatch('fetchSwipeHomeSwiper')
-    const p1 = await new Promise(res => setTimeout(() => res('p1'), 2000))
-    console.log(p1)
+    // timer for the skeleton loader demonstration
+    // const p1 = await new Promise(res => setTimeout(() => res('p1'), 4000))
     const fetchedItems: ComputedRef<SwipeType[]> = computed(() => {
       return store.getters.getSwipeHomeSwiper
     })

@@ -1,5 +1,9 @@
 <template>
-  <Breadcrumb title="Корзина" />
+  <div>
+    1
+    <!--    <Breadcrumb title="Корзина" />-->
+  </div>
+
   <!--  <div class="container-fluid">-->
   <!--    <div class="row">-->
   <!--      <div v-if="!cartItems.length">-->
@@ -34,8 +38,8 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.vue'
 import { CartItemType, ProductItemType } from '@/types'
 
 export default defineComponent({
-  name: 'ShoppingCart',
-  components: { Breadcrumb }
+  name: 'ShoppingCart'
+  // components: { Breadcrumb }
   // setup() {
   //   const store = useStore()
   //   const cartItems: ComputedRef<CartItemType[]> = computed(

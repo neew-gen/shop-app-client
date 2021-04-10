@@ -1,7 +1,7 @@
 <template>
-  <router-link class="brand" to="/">
+  <div class="brand">
     <h1 class="brand__title">Shop App</h1>
-  </router-link>
+  </div>
 </template>
 
 <script lang="ts">
@@ -25,11 +25,10 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   min-width: 110px;
-  margin-right: 20px;
   &__title {
     margin: 0;
     font-size: 1.4rem;
-    font-weight: 400;
+    font-weight: 600;
     color: #4f4f4f;
   }
 }

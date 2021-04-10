@@ -1,14 +1,19 @@
 <template>
-  <router-link class="router-link flex-fill" :to="path" exact>
+  <!--    we check the path. If the path is "/" we set it to "exact".
+  We also replace "active-class" with custom class if the path is not "/"-->
+  <router-link
+    class="router-link flex-fill"
+    :to="path"
+    :exact="path === '/'"
+    :active-class="activeClass(path)"
+  >
     <MDBIcon :icon="icon" iconStyle="fas" size="lg" />
   </router-link>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent } from 'vue'
 import { MDBIcon } from 'mdb-vue-ui-kit'
-import router from '@/router'
-import { RouteRecordName } from 'vue-router'
 
 export default defineComponent({
   name: 'FooterButton',
@@ -25,27 +30,14 @@ export default defineComponent({
   components: {
     MDBIcon
   },
-  setup(props) {
-    // const activeClass = ref('')
-    // const setActive = (name: string): void => {
-    //   if (name === props.path) {
-    //     activeClass.value = 'active-custom-link'
-    //   } else {
-    //     activeClass.value = ''
-    //   }
-    //   console.log(activeClass.value)
-    // }
-    //
-    // watch(
-    //   () => router.currentRoute.value.path,
-    //   () => {
-    //     if (router.currentRoute.value.path)
-    //       setActive(router.currentRoute.value.path)
-    //   }
-    // )
-    // return {
-    //   activeClass
-    // }
+  setup() {
+    const activeClass = (path: string): string => {
+      if (path === '/') return 'router-link-active'
+      return 'router-link-active-custom'
+    }
+    return {
+      activeClass
+    }
   }
 })
 </script>
@@ -58,9 +50,13 @@ export default defineComponent({
   align-items: center;
 }
 .router-link-active {
+  //color: #1266f1;
   color: inherit;
 }
 .router-link-exact-active {
+  color: #1266f1;
+}
+.router-link-active-custom {
   color: #1266f1;
 }
 </style>

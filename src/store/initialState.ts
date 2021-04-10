@@ -1,10 +1,13 @@
 export const initialState = {
   product: {
     initialEditList: [],
-    editList: []
+    editList: [],
+    catalogList: {},
+    fetchedProducts: {}
   },
   category: {
-    editList: []
+    editList: [],
+    catalogList: []
   },
   swipe: {
     editList: [],

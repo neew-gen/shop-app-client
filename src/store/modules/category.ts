@@ -1,24 +1,34 @@
 import { GetterTree, MutationTree } from 'vuex'
-
 import { Mutations } from '@/types/store/mutations'
 import { Actions } from '@/types/store/actions'
 import { State } from '@/types/store/state'
 import { EditListType } from '@/types'
 import { GraphqlApi } from '@/api/GraphqlApi'
-import { GET_CATEGORIES_EDITLIST } from '@/api/queries/categoryQueries'
-import { CategoryCreateInput, CategoryUpdateInput } from '@/types/category'
+import {
+  GET_CATEGORIES_CATALOG_LIST,
+  GET_CATEGORIES_EDITLIST
+} from '@/api/queries/categoryQueries'
+import {
+  CategoryCreateInput,
+  CategoryType,
+  CategoryUpdateInput
+} from '@/types/category'
 
 /*
-   ---------------------- Actions -------------------------------
+   ------------------------------- Actions -------------------------------
  */
 export type ActionsPayload = {
   fetchCategoryEditList: [void, void]
   createCategory: [CategoryCreateInput, void]
   updateCategory: [{ id: string; updateData: CategoryUpdateInput }, void]
   deleteCategory: [string, void]
+
+  fetchCategoryCatalogList: [void, void]
 }
 
 export const actions: Actions<ActionsPayload> = {
+  // --------------------------------- Admin Layout --------------------------------- //
+
   async fetchCategoryEditList({ commit, state }): Promise<void> {
     if (state.category.editList.length === 0) {
       const payload = await GraphqlApi.fetchAll<EditListType>(
@@ -44,19 +54,33 @@ export const actions: Actions<ActionsPayload> = {
     if (state.category.editList.length !== 0) {
       commit('deleteCategory', id)
     }
+  },
+  // --------------------------------- Public Layout -------------------------------- //
+
+  async fetchCategoryCatalogList({ commit, state }): Promise<void> {
+    if (state.category.catalogList.length === 0) {
+      const payload = await GraphqlApi.fetchAll<CategoryType>(
+        GET_CATEGORIES_CATALOG_LIST
+      )
+      commit('fetchCategoryCatalogList', payload)
+    }
   }
 }
 /*
-   ---------------------- Mutations -----------------------------
+   ----------------------------- Mutations -----------------------------
  */
 export type MutationPayload = {
   fetchCategoryEditList: EditListType[]
   createCategory: { id: string; createData: CategoryCreateInput }
   updateCategory: { id: string; updateData: any }
   deleteCategory: string
+
+  fetchCategoryCatalogList: CategoryType[]
 }
 
 export const mutations: MutationTree<State> & Mutations<MutationPayload> = {
+  // --------------------------------- Admin Layout --------------------------------- //
+
   fetchCategoryEditList({ category }, fetchedData) {
     category.editList = fetchedData
   },
@@ -76,18 +100,32 @@ export const mutations: MutationTree<State> & Mutations<MutationPayload> = {
     category.editList = category.editList.filter(
       (p: EditListType) => p.id !== id
     )
+  },
+  // --------------------------------- Public Layout -------------------------------- //
+
+  fetchCategoryCatalogList({ category }, fetchedData) {
+    category.catalogList = fetchedData
   }
 }
 
 /*
-   ---------------------- Getters -------------------------------
+   ------------------------------- Getters -------------------------------
  */
 export type Getters = {
   getCategoryEditList(state: State): EditListType[]
+
+  getCategoryCatalogList(state: State): CategoryType[]
 }
 
 export const getters: GetterTree<State, State> & Getters = {
+  // --------------------------------- Admin Layout --------------------------------- //
+
   getCategoryEditList: ({ category }) => {
     return category.editList
+  },
+  // --------------------------------- Public Layout -------------------------------- //
+
+  getCategoryCatalogList: ({ category }) => {
+    return category.catalogList
   }
 }

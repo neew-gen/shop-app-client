@@ -1,7 +1,12 @@
 <template>
   <div v-if="showContent">
     <div class="d-flex justify-content-center mb-2">
-      <ImageContainer size="180px" :name="state.name" :img-url="state.imgUrl" />
+      <ImageContainer
+        height="180px"
+        width="180px"
+        :name="state.name"
+        :img-url="state.imgUrl"
+      />
     </div>
     <MDBInput class="mb-2 mt-2" label="Category Name" v-model="state.name" />
     <MDBInput

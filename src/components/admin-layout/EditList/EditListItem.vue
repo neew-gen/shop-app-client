@@ -2,7 +2,12 @@
   <MDBListGroupItem>
     <div class="d-flex justify-content-between">
       <div>
-        <ImageContainer size="120px" name="data.name" :img-url="data.imgUrl" />
+        <ImageContainer
+          height="120px"
+          width="120px"
+          name="data.name"
+          :img-url="data.imgUrl"
+        />
       </div>
       <div class="d-flex flex-column align-items-start justify-content-between">
         <div class="item-id">ID: {{ data.id }}</div>

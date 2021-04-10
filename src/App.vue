@@ -1,10 +1,29 @@
 <template>
+  <AppLoader />
+  <div v-if="loading"></div>
   <router-view />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({})
+import { defineComponent, inject } from 'vue'
+import AppLoader from '@/components/AppLoader.vue'
+export default defineComponent({
+  components: { AppLoader },
+  setup() {
+    const loading = inject('loading')
+    // TODO need to improve this height listener
+    let vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
+    return {
+      loading
+    }
+  }
+})
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>

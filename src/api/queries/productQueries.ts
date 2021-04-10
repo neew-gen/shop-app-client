@@ -1,16 +1,5 @@
 import { gql } from '@apollo/client'
 
-export const GET_PRODUCTS_EDITLIST = gql(`
-  query Products {
-    products {
-      id
-      name
-      imgUrl
-      categoryId
-    }
-  }
-`)
-
 export const GET_PRODUCT_BY_ID = gql(`
       query Product($id: String!) {
         product(id: $id) {
@@ -22,16 +11,18 @@ export const GET_PRODUCT_BY_ID = gql(`
           description
         }
       }`)
+// --------------------------------- Admin Layout --------------------------------- //
 
-export const GET_PRODUCTS_EDITLIST_BY_CATEGORY_ID = gql(`
-      query ProductsByCategoryId($categoryId: String!) {
-        productsByCategoryId(categoryId: $categoryId) {
-          id
-          name
-          imgUrl
-          categoryId
-        }
-      }`)
+export const GET_PRODUCTS_EDITLIST = gql(`
+  query Products {
+    products {
+      id
+      name
+      imgUrl
+      categoryId
+    }
+  }
+`)
 
 export const CREATE_PRODUCT = gql(`
       mutation CreateProduct($product: ProductInput!) {
@@ -65,5 +56,16 @@ export const DELETE_PRODUCT = gql(`
           price
           description
           categoryId
+        }
+      }`)
+// --------------------------------- Public Layout -------------------------------- //
+
+export const GET_PRODUCTS_CATALOG_LIST_BY_CATEGORY_ID = gql(`
+      query ProductsByCategoryId($categoryId: String!) {
+        productsByCategoryId(categoryId: $categoryId) {
+          id
+          name
+          imgUrl
+          price
         }
       }`)

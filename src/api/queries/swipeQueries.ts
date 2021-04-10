@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 
+// --------------------------------- Admin Layout --------------------------------- //
 export const GET_SWIPES = gql(`
       query Swipes {
         swipes {
@@ -66,3 +67,16 @@ export const DELETE_SWIPE = gql(`
           }
         }
       }`)
+// --------------------------------- Public Layout -------------------------------- //
+// export const GET_SWIPES_HOME_LIST = gql(`
+//       query Swipes {
+//         swipes(orderBy: swipeIndex) {
+//           id
+//           swipeIndex
+//           swipeData {
+//             imgUrl
+//             title
+//             text
+//           }
+//         }
+//       }`)

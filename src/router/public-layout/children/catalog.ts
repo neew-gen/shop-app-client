@@ -6,31 +6,32 @@ export const catalogChildren: Array<RouteRecordRaw> = [
     name: 'Catalog',
     component: (): any =>
       import(
-        /* webpackChunkName: "catalog" */ '@/views/public-layout/catalog/index.vue'
+        /* webpackChunkName: "catalog" */ '@/views/public-layout/catalog/Catalog.vue'
       ),
     children: [
       {
         path: '',
+        name: 'CategoriesSuspense',
         component: (): any =>
           import(
-            /* webpackChunkName: "categories-menu" */ '@/views/public-layout/catalog/CategoriesMenu.vue'
+            /* webpackChunkName: "categories-list" */ '@/views/public-layout/catalog/CategoriesListSuspense.vue'
           )
       },
       {
-        path: '/catalog/:category',
-        name: 'CatalogSection',
+        path: '/catalog/:categoryId',
+        name: 'ProductsByCategorySuspense',
         component: (): any =>
           import(
-            /* webpackChunkName: "catalog-section" */ '@/views/public-layout/catalog/CatalogSection.vue'
+            /* webpackChunkName: "product-by-category" */ '@/views/public-layout/catalog/ProductsByCategorySuspense.vue'
           ),
         props: true
       },
       {
-        path: '/catalog/:category/:id',
-        name: 'CatalogItem',
+        path: '/catalog/:categoryId/:id',
+        name: 'CatalogProductSuspense',
         component: (): any =>
           import(
-            /* webpackChunkName: "catalog-item" */ '@/views/public-layout/catalog/CatalogItem.vue'
+            /* webpackChunkName: "catalog-product" */ '@/views/public-layout/catalog/CatalogProductSuspense.vue'
           ),
         props: true
       }

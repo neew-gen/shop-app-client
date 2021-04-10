@@ -38,7 +38,7 @@ export class ProductApi {
     })
   }
 
-  static async fetchByCategoryId<T>(
+  static async fetchProductsByCategoryId<T>(
     query: DocumentNode,
     categoryId: string
   ): Promise<T> {
