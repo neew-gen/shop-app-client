@@ -12,7 +12,7 @@
 import { defineComponent, inject, onUnmounted, ref } from 'vue'
 import { MDBContainer } from 'mdb-vue-ui-kit'
 import HomeNavbar from '@/components/public-layout/home/HomeHavbar/HomeNavbar.vue'
-import { eventBus } from '@/helpers/eventBus'
+import { eventBus } from '@/helpers/EventBus'
 import HomeContent from '@/components/public-layout/home/HomeContent/HomeContent.vue'
 import HomeSearchContent from '@/components/public-layout/home/HomeSearchContent/HomeSearchContent.vue'
 // import Carousel from '@/components/Carousel.vue'

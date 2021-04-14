@@ -3,20 +3,29 @@ import { createApp, ref } from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
-import { store } from './store'
+// import { store } from './store'
 // import 'bootstrap/dist/css/bootstrap.min.css'
 // import 'bootstrap'
 import Toaster from '@meforma/vue-toaster' // https://github.com/MeForma/vue-toaster
-import { eventBus } from '@/helpers/eventBus'
+import { eventBus } from '@/helpers/EventBus'
 import appLoader from '@/helpers/appLoader'
-import 'skeleton-screen-css'
+import 'skeleton-screen-css' // https://www.npmjs.com/package/skeleton-screen-css
+
+// turn off when development is in progress
+// import runtime from 'serviceworker-webpack-plugin/lib/runtime'
+//
+// if (process.env.NODE_ENV === 'development') {
+//   if ('serviceWorker' in navigator) {
+//     runtime.register()
+//   }
+// }
 
 const app = createApp(App)
 app.provide('eventBus', eventBus)
 
 const loading = ref(true)
 app
-  .use(store)
+  // .use(store)
   .use(router)
   .use(Toaster, {
     position: 'top-right',

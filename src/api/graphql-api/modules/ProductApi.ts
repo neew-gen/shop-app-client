@@ -1,4 +1,4 @@
-import { apollo } from '@/api/apollo'
+import { apollo } from '@/api/graphql-api/apollo'
 import { ProductCreateInput, ProductUpdateInput } from '@/types/product'
 import {
   CREATE_PRODUCT,
@@ -6,7 +6,7 @@ import {
   GET_PRODUCT_BY_ID,
   GET_PRODUCTS_EDITLIST,
   UPDATE_PRODUCT
-} from '@/api/queries/productQueries'
+} from '@/api/graphql-api/queries/productQueries'
 import _ from 'lodash'
 import { DocumentNode } from '@apollo/client'
 

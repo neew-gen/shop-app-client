@@ -26,8 +26,8 @@ import { defineComponent, onUnmounted, ref } from 'vue'
 import { MDBBtn } from 'mdb-vue-ui-kit'
 import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
 import { CategoryIdType } from '@/types/eventBus'
-import { eventBus } from '@/helpers/eventBus'
-import { useStore } from '@/store'
+import { eventBus } from '@/helpers/EventBus'
+// import { useStore } from '@/store'
 import CategoryDropdownFallback from '@/components/CategoryDropdown/CategoryDropdownFallback.vue'
 
 export default defineComponent({
@@ -35,21 +35,21 @@ export default defineComponent({
   components: { CategoryDropdownFallback, CategoryDropdown, MDBBtn },
   setup() {
     const showClearButton = ref(false)
-    const store = useStore()
+    // const store = useStore()
     let state = {
       categoryId: ''
     }
 
     const clearFilter = (): void => {
       eventBus.publish('parentUpdateCategory', '')
-      store.dispatch('clearProductsEditList')
+      // store.dispatch('clearProductsEditList')
       showClearButton.value = false
     }
 
     eventBus.subscribe('childUpdateCategory', (categoryId: CategoryIdType) => {
       state.categoryId = categoryId
       showClearButton.value = true
-      store.dispatch('filterProductsEditList', categoryId)
+      // store.dispatch('filterProductsEditList', categoryId)
     })
     onUnmounted(() => {
       eventBus.unsubscribe('childUpdateCategory')

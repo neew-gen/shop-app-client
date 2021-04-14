@@ -1,4 +1,4 @@
-import { apollo } from '@/api/apollo'
+import { apollo } from '@/api/graphql-api/apollo'
 import {
   CategoryCreateInput,
   CategoryDropdownType,
@@ -9,7 +9,7 @@ import {
   DELETE_CATEGORY,
   GET_CATEGORIES_DROPDOWN,
   UPDATE_CATEGORY
-} from '@/api/queries/categoryQueries'
+} from '@/api/graphql-api/queries/categoryQueries'
 import { DocumentNode } from '@apollo/client'
 
 export class CategoryApi {

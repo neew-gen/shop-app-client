@@ -31,7 +31,7 @@
 import { defineComponent, inject } from 'vue'
 import { MDBBtn, MDBListGroupItem } from 'mdb-vue-ui-kit'
 import { EditListType } from '@/types'
-import { useStore } from '@/store'
+// import { useStore } from '@/store'
 import ImageContainer from '@/components/ImageContainer.vue'
 
 export default defineComponent({
@@ -47,7 +47,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const store = useStore()
+    // const store = useStore()
     const toast: any = inject('toast')
     const choosePathTo = (): string | undefined => {
       if (props.entity === 'product') return 'EditProductSuspense'
@@ -56,11 +56,11 @@ export default defineComponent({
 
     const removeItem = (): void => {
       if (props.entity === 'product') {
-        store.dispatch('deleteProduct', props.data!.id)
+        // store.dispatch('deleteProduct', props.data!.id)
         toast.error('Product has been deleted!')
       }
       if (props.entity === 'category') {
-        store.dispatch('deleteCategory', props.data!.id)
+        // store.dispatch('deleteCategory', props.data!.id)
         toast.error('Category has been deleted!')
       }
     }

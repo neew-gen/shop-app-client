@@ -42,7 +42,7 @@
 <script lang="ts">
 import { defineComponent, inject, onUnmounted, reactive } from 'vue'
 import { MDBInput, MDBTextarea, MDBBtn } from 'mdb-vue-ui-kit'
-import { useStore } from '@/store'
+// import { useStore } from '@/store'
 import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
 import { CategoryIdType } from '@/types/eventBus'
 import CategoryDropdownFallback from '@/components/CategoryDropdown/CategoryDropdownFallback.vue'
@@ -68,31 +68,31 @@ export default defineComponent({
     ImageContainer
   },
   setup() {
-    const store = useStore()
-    const toast: any = inject('toast')
-    const eventBus: any = inject('eventBus')
-
-    const state = reactive({ ...INITIAL_STATE })
-    const resetState = (): void => {
-      Object.assign(state, { ...INITIAL_STATE })
-      eventBus.publish('parentUpdateCategory', state.categoryId)
-    }
-
-    eventBus.subscribe('childUpdateCategory', (categoryId: CategoryIdType) => {
-      state.categoryId = categoryId
-    })
-
-    const addProduct = (): void => {
-      const unboundData = Object.assign({}, state)
-      store.dispatch('createProduct', unboundData)
-      resetState()
-      toast.success('Product has been created!')
-    }
-
-    onUnmounted(() => {
-      eventBus.unsubscribe('childUpdateCategory')
-    })
-    return { state, addProduct }
+    // const store = useStore()
+    // const toast: any = inject('toast')
+    // const eventBus: any = inject('eventBus')
+    //
+    // const state = reactive({ ...INITIAL_STATE })
+    // const resetState = (): void => {
+    //   Object.assign(state, { ...INITIAL_STATE })
+    //   eventBus.publish('parentUpdateCategory', state.categoryId)
+    // }
+    //
+    // eventBus.subscribe('childUpdateCategory', (categoryId: CategoryIdType) => {
+    //   state.categoryId = categoryId
+    // })
+    //
+    // const addProduct = (): void => {
+    //   const unboundData = Object.assign({}, state)
+    //   store.dispatch('createProduct', unboundData)
+    //   resetState()
+    //   toast.success('Product has been created!')
+    // }
+    //
+    // onUnmounted(() => {
+    //   eventBus.unsubscribe('childUpdateCategory')
+    // })
+    // return { state, addProduct }
   }
 })
 </script>

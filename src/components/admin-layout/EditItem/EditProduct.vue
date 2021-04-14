@@ -50,10 +50,10 @@ import {
 } from 'vue'
 import { MDBInput, MDBTextarea, MDBBtn } from 'mdb-vue-ui-kit'
 import { assignFieldsForReactive } from '@/helpers'
-import { GraphqlApi } from '@/api/GraphqlApi'
-import { GET_PRODUCT_BY_ID } from '@/api/queries/productQueries'
+import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
+import { GET_PRODUCT_BY_ID } from '@/api/graphql-api/queries/productQueries'
 import { ProductType } from '@/types/product'
-import { useStore } from '@/store'
+// import { useStore } from '@/store'
 import { CategoryIdType } from '@/types/eventBus'
 import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
 import CategoryDropdownFallback from '@/components/CategoryDropdown/CategoryDropdownFallback.vue'
@@ -77,7 +77,7 @@ export default defineComponent({
     ImageContainer
   },
   async setup(props) {
-    const store = useStore()
+    // const store = useStore()
     const toast: any = inject('toast')
     const eventBus: any = inject('eventBus')
     const showContent = ref(false)
@@ -106,7 +106,7 @@ export default defineComponent({
     })
 
     await GraphqlApi.fetchById<ProductType>(GET_PRODUCT_BY_ID, props.id)
-      .then(fetchedData => {
+      .then((fetchedData: any) => {
         assignFieldsForReactive(state, fetchedData)
         showContent.value = true
       })
@@ -115,7 +115,7 @@ export default defineComponent({
       })
 
     const updateProduct = (): void => {
-      store.dispatch('updateProduct', { id: props.id, updateData: state })
+      // store.dispatch('updateProduct', { id: props.id, updateData: state })
       toast.success('Product has been updated!')
     }
     // const removeProduct = (): void => {

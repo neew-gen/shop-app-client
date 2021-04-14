@@ -14,7 +14,7 @@ export const catalogChildren: Array<RouteRecordRaw> = [
         name: 'CategoriesSuspense',
         component: (): any =>
           import(
-            /* webpackChunkName: "categories-list" */ '@/views/public-layout/catalog/CategoriesListSuspense.vue'
+            /* webpackChunkName: "categories-list" */ '@/views/public-layout/catalog/CatalogCategories.vue'
           )
       },
       {
@@ -22,7 +22,7 @@ export const catalogChildren: Array<RouteRecordRaw> = [
         name: 'ProductsByCategorySuspense',
         component: (): any =>
           import(
-            /* webpackChunkName: "product-by-category" */ '@/views/public-layout/catalog/ProductsByCategorySuspense.vue'
+            /* webpackChunkName: "product-by-category" */ '@/views/public-layout/catalog/CatalogProducts.vue'
           ),
         props: true
       },

@@ -22,3 +22,9 @@ export type CategoryDropdownType = {
   id: string
   name: string
 }
+
+export type CategoriesCatalogList = {
+  data: {
+    categoriesPublic: CategoryType[]
+  }
+}

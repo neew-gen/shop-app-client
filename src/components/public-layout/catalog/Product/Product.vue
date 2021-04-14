@@ -35,7 +35,7 @@
 <script lang="ts">
 import { computed, ComputedRef, defineComponent } from 'vue'
 import { MDBIcon, MDBRow, MDBCol, MDBContainer, MDBBtn } from 'mdb-vue-ui-kit'
-import { store } from '@/store'
+// import { store } from '@/store'
 import { ProductType } from '@/types/product'
 import ImageContainer from '@/components/ImageContainer.vue'
 
@@ -57,16 +57,16 @@ export default defineComponent({
   },
   async setup(props) {
     // timer for the skeleton loader demonstration
-    const awaiting = await new Promise(res =>
-      setTimeout(() => res('Product awaiting!'), 1000)
-    )
-    console.log(awaiting)
-    await store.dispatch('fetchProductById', props.id)
-
-    const fetchedProduct: ComputedRef<ProductType> = computed(() => {
-      return store.getters.getProductsById(props.id)
-    })
-    return { fetchedProduct }
+    // const awaiting = await new Promise(res =>
+    //   setTimeout(() => res('Product awaiting!'), 1000)
+    // )
+    // console.log(awaiting)
+    // await store.dispatch('fetchProductById', props.id)
+    //
+    // const fetchedProduct: ComputedRef<ProductType> = computed(() => {
+    //   return store.getters.getProductsById(props.id)
+    // })
+    // return { fetchedProduct }
   }
 })
 </script>

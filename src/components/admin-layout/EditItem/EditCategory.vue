@@ -50,10 +50,9 @@ import {
 } from 'mdb-vue-ui-kit'
 import { assignFieldsForReactive } from '@/helpers'
 import router from '@/router'
-import { GraphqlApi } from '@/api/GraphqlApi'
-import { GET_CATEGORY_BY_ID } from '@/api/queries/categoryQueries'
+import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
+import { GET_CATEGORY_BY_ID } from '@/api/graphql-api/queries/categoryQueries'
 import { CategoryType } from '@/types/category'
-import { useStore } from '@/store'
 import ImageContainer from '@/components/ImageContainer.vue'
 
 export default defineComponent({
@@ -74,7 +73,7 @@ export default defineComponent({
     ImageContainer
   },
   async setup(props) {
-    const store = useStore()
+    // const store = useStore()
     const toast: any = inject('toast')
     const showDropdown = ref(false)
     const showContent = ref(false)
@@ -99,7 +98,7 @@ export default defineComponent({
     }
 
     const updateCategory = (): void => {
-      store.dispatch('updateCategory', { id: props.id, updateData: state })
+      // store.dispatch('updateCategory', { id: props.id, updateData: state })
       toast.success('Category has been updated!')
     }
     return {

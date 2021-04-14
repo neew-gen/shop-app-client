@@ -2,7 +2,7 @@
   <MDBContainer>
     <MDBRow class="ssc d-flex flex-column">
       <MDBCol>
-        <div class="image-block ssc-square" />
+        <div class="ssc-square image-block" />
       </MDBCol>
       <MDBCol class="price-block">
         <div class="ssc-line price-block__price" />

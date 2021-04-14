@@ -22,7 +22,7 @@
 <script lang="ts">
 import { defineComponent, computed, ComputedRef, ref } from 'vue'
 import { MDBListGroup } from 'mdb-vue-ui-kit'
-import { useStore } from '@/store'
+// import { useStore } from '@/store'
 import { EditListType } from '@/types'
 import EditListItem from '@/components/admin-layout/EditList/EditListItem.vue'
 import EditListFilter from '@/components/admin-layout/EditList/EditListFilter.vue'
@@ -37,7 +37,7 @@ export default defineComponent({
   },
   components: { EditListFilter, EditListItem, MDBListGroup },
   async setup(props) {
-    const store = useStore()
+    // const store = useStore()
 
     const entityPlaceholder = (): string | undefined => {
       if (props.entity === 'product') return 'products'
@@ -50,18 +50,18 @@ export default defineComponent({
     }
 
     if (props.entity === 'product') {
-      await store.dispatch('fetchProductsEditList')
-      const fetchedItems: ComputedRef<EditListType[]> = computed(() => {
-        return store.getters.getProductsEditList
-      })
-      return { fetchedItems, entityPlaceholder, choosePathTo }
+      // await store.dispatch('fetchProductsEditList')
+      // const fetchedItems: ComputedRef<EditListType[]> = computed(() => {
+      // return store.getters.getProductsEditList
+      // })
+      return { entityPlaceholder, choosePathTo }
     }
     if (props.entity === 'category') {
-      await store.dispatch('fetchCategoryEditList')
-      const fetchedItems: ComputedRef<EditListType[]> = computed(() => {
-        return store.getters.getCategoryEditList
-      })
-      return { fetchedItems, entityPlaceholder, choosePathTo }
+      // await store.dispatch('fetchCategoryEditList')
+      // const fetchedItems: ComputedRef<EditListType[]> = computed(() => {
+      // return store.getters.getCategoryEditList
+      // })
+      return { entityPlaceholder, choosePathTo }
     }
   }
 })

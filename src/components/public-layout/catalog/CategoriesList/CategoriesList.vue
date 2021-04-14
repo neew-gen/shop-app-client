@@ -2,7 +2,7 @@
   <MDBListGroup>
     <MDBListGroupItem
       class="d-flex align-items-center border-0"
-      v-for="(item, index) in fetchedItems"
+      v-for="(item, index) in data"
       :key="index"
       @click="pushToProductsByCategory(item.id)"
     >
@@ -20,35 +20,39 @@
 </template>
 
 <script lang="ts">
-import { computed, ComputedRef, defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { MDBListGroup, MDBListGroupItem } from 'mdb-vue-ui-kit'
-import { store } from '@/store'
 import { CategoryType } from '@/types/category'
 import ImageContainer from '@/components/ImageContainer.vue'
 import router from '@/router'
 
 export default defineComponent({
   name: 'CategoriesList',
-  components: { MDBListGroup, ImageContainer, MDBListGroupItem },
-  async setup() {
+  props: {
+    data: {
+      type: Array as PropType<CategoryType[]>
+    }
+  },
+  components: {
+    MDBListGroup,
+    ImageContainer,
+    MDBListGroupItem
+  },
+  setup() {
     const pushToProductsByCategory = (categoryId: string): void => {
       router.push({
         name: 'ProductsByCategorySuspense',
         params: { categoryId }
       })
     }
-    // timer for the skeleton loader demonstration
-    // const p1 = await new Promise(res => setTimeout(() => res('p1'), 3000))
-    // console.log(p1)
-
-    await store.dispatch('fetchCategoryCatalogList')
-    const fetchedItems: ComputedRef<CategoryType[]> = computed(() => {
-      return store.getters.getCategoryCatalogList
-    })
-    return {
-      pushToProductsByCategory,
-      fetchedItems
-    }
+    return { pushToProductsByCategory }
+    // const { data, loading } = useFetch<CategoryType[]>(
+    //   'SWR',
+    //   'categoriesList',
+    //   GraphqlApi.fetchAll,
+    //   GET_CATEGORIES_CATALOG_LIST
+    // )
+    // return { data, loading }
   }
 })
 </script>

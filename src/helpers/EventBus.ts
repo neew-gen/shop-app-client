@@ -1,55 +1,28 @@
-import { EventBus, Receiver, Subject } from '@/types/eventBus'
+import { EventBusInterface, Receiver, Subject } from '@/types/eventBus'
 
-class EventBusConcrete implements EventBus {
+class EventBus implements EventBusInterface {
   receivers: {
     [key: string]: Receiver[]
   } = {}
-
   public async publish(topic: string, subject: Subject): Promise<void> {
     const receivers = this.getTopicReceivers(topic)
-    // Run promises
     receivers.map(
-      receiver =>
-        new Promise(resolve =>
-          resolve(this.retryPublish(topic, subject, receiver))
-        )
+      receiver => new Promise(resolve => resolve(receiver(subject)))
     )
   }
-
   private getTopicReceivers(topic: string): Receiver[] {
-    // Here you can realise logic with regexp
-    // For example if topic notification version hither then 1.1.1
     if (!this.receivers[topic]) {
       return []
     }
     return this.receivers[topic]
   }
-
-  private retryPublish(
-    topic: string,
-    subject: Subject,
-    receiver: Receiver
-  ): void {
-    receiver(subject)
-    // try {
-    //   // Fake error generator
-    //   // const isValid = triesLeft === 1 || Math.random() >= 0.5
-    //   // if (!isValid) {
-    //   //   throw new Error('What happened?')
-    //   // }
-    //   // Fake error generator end
-    //   receiver
-    // } catch (e) {
-    //   console.log('error happened')
-    //
-    //   // Here you can log fail
-    //   triesLeft -= 1
-    //
-    //   if (triesLeft > 0) {
-    //     this.retryPublish(topic, subject, receiver, triesLeft)
-    //   }
-    // }
-  }
+  // private retryPublish(
+  //   topic: string,
+  //   subject: Subject,
+  //   receiver: Receiver
+  // ): void {
+  //   receiver(subject)
+  // }
 
   public subscribe(topic: string, receiver: Receiver): void {
     if (!this.receivers[topic]) {
@@ -87,7 +60,7 @@ class EventBusConcrete implements EventBus {
 //   }
 // }
 
-export const eventBus = new EventBusConcrete()
+export const eventBus = new EventBus()
 // export const customReceiver = new CustomReceiver()
 // const emailService = new EmailNotificationService()
 

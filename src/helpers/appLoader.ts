@@ -8,7 +8,7 @@ export default function(router: Router, loading: Ref<boolean>): void {
     next()
   })
   router.afterEach(() => {
-    setTimeout(() => (loading.value = false), 500)
+    setTimeout(() => (loading.value = false), 200)
     // loading.value = false
   })
 }

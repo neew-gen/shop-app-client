@@ -5,8 +5,16 @@
   >
     <div class="swipe">
       <div class="swipe-content">
-        <h3 class="swipe-content__title">{{ data.title }}</h3>
-        <div class="swipe-content__text">{{ data.text }}</div>
+        <div class="content-header">
+          <div class="content-header__title">
+            {{ data.title }}
+          </div>
+        </div>
+        <div class="content-body">
+          <div class="content-body__text">
+            {{ data.text }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -40,15 +48,29 @@ export default defineComponent({
 .swipe {
   height: 30%;
   display: inline;
-  line-height: 14px;
   color: #ffffff;
-  background-color: rgba(145, 145, 145, 0.58);
+  background-color: rgba(145, 145, 145, 0.9);
 }
 .swipe-content {
-  padding: 10px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.content-header {
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+.content-body {
+  height: 60%;
+  padding: 0 5px;
+  font-size: 1rem;
+  line-height: 1.1rem;
+  font-weight: 200;
   &__text {
     text-align: center;
   }

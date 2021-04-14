@@ -1,6 +1,18 @@
 <template>
-  <div class="placeholder-item">
-    <div class="placeholder-content" />
+  <div class="ssc swipe-container">
+    <div class="ssc-square image" />
+    <div class="swipe">
+      <div class="swipe-content">
+        <div class="content-header">
+          <div class="ssc-head-line content-header__title" />
+        </div>
+        <div class="content-body">
+          <div class="ssc-head-line content-body__text" />
+          <div class="ssc-head-line content-body__text" />
+          <div class="ssc-head-line content-body__text" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -13,44 +25,46 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.placeholder-item {
+.swipe-container {
   height: 300px;
-  box-shadow: 0 4px 10px 0 rgba(33, 33, 33, 0.15);
-  position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
-.placeholder-content {
+.image {
+  height: 70%;
+}
+.swipe {
   height: 30%;
-  display: inline;
-  line-height: 14px;
-  color: #ffffff;
-  background-color: rgba(145, 145, 145, 0.58);
 }
-.placeholder-item::before {
-  content: '';
-  display: block;
-  position: absolute;
-  left: -150px;
-  top: 0;
+.swipe-content {
   height: 100%;
-  width: 150px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    #e8e8e8 50%,
-    transparent 100%
-  );
-  animation: load 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-@keyframes load {
-  from {
-    left: -150px;
+.content-header {
+  height: 40%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__title {
+    height: 23px;
+    width: 70%;
   }
-  to {
-    left: 100%;
+}
+.content-body {
+  height: 60%;
+  width: 100%;
+  padding: 0 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  &__text {
+    height: 14px;
+    width: 90%;
   }
 }
 </style>

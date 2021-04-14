@@ -37,7 +37,7 @@ import {
   MDBDropdownItem
 } from 'mdb-vue-ui-kit'
 import { CategoryDropdownType } from '@/types/category'
-import { GraphqlApi } from '@/api/GraphqlApi'
+import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
 import { CategoryIdType } from '@/types/eventBus'
 
 export default defineComponent({

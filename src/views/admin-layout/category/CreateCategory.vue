@@ -83,7 +83,7 @@ import {
   MDBCol,
   MDBContainer
 } from 'mdb-vue-ui-kit'
-import { useStore } from '@/store'
+// import { useStore } from '@/store'
 import ImageContainer from '@/components/ImageContainer.vue'
 const INITIAL_STATE = {
   id: '',
@@ -107,31 +107,31 @@ export default defineComponent({
     MDBContainer
   },
   setup() {
-    const store = useStore()
-    const toast: any = inject('toast')
-    const showDropdown = ref(false)
-
-    const state = reactive({ ...INITIAL_STATE })
-    const resetState = (): void => {
-      Object.assign(state, { ...INITIAL_STATE })
-    }
-
-    const changeIsPublic = (newValue: boolean): void => {
-      state.isPublic = newValue
-      showDropdown.value = false
-    }
-
-    const addCategory = (e: any): void => {
-      e.target.classList.add('was-validated')
-      if (state.name && state.imgUrl) {
-        const unboundData = Object.assign({}, state)
-        store.dispatch('createCategory', unboundData)
-        resetState()
-        toast.success('Category has been created!')
-        e.target.classList.remove('was-validated')
-      }
-    }
-    return { showDropdown, state, changeIsPublic, addCategory }
+    // const store = useStore()
+    // const toast: any = inject('toast')
+    // const showDropdown = ref(false)
+    //
+    // const state = reactive({ ...INITIAL_STATE })
+    // const resetState = (): void => {
+    //   Object.assign(state, { ...INITIAL_STATE })
+    // }
+    //
+    // const changeIsPublic = (newValue: boolean): void => {
+    //   state.isPublic = newValue
+    //   showDropdown.value = false
+    // }
+    //
+    // const addCategory = (e: any): void => {
+    //   e.target.classList.add('was-validated')
+    //   if (state.name && state.imgUrl) {
+    //     const unboundData = Object.assign({}, state)
+    //     store.dispatch('createCategory', unboundData)
+    //     resetState()
+    //     toast.success('Category has been created!')
+    //     e.target.classList.remove('was-validated')
+    //   }
+    // }
+    // return { showDropdown, state, changeIsPublic, addCategory }
   }
 })
 </script>

@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, onUnmounted, PropType, ref, watch } from 'vue'
-import { store } from '@/store'
+// import { store } from '@/store'
 import draggable from 'vuedraggable'
 import EditSwipeListItem from '@/components/admin-layout/EditSwipeList/EditSwipeListItem.vue'
 import { SwipeType } from '@/types/swipe'
@@ -45,7 +45,7 @@ export default defineComponent({
     })
     const saveBeforeLeave = (): void => {
       if (!_.isEqual(dragData.value, props.data)) {
-        store.dispatch('updateIndex', dragData.value)
+        // store.dispatch('updateIndex', dragData.value)
         toast.success('Swipe order has been updated!')
       }
     }

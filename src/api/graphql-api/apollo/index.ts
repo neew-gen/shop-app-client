@@ -13,13 +13,14 @@ const defaultOptions: DefaultOptions = {
   },
   query: {
     fetchPolicy: 'no-cache',
-    errorPolicy: 'all'
+    errorPolicy: 'ignore'
   }
 }
+
 const httpLink = new HttpLink({
   // You should use an absolute URL here
-  // uri: 'http://localhost:3000/graphql',
-  uri: 'http://192.168.0.12:3000/graphql',
+  uri: 'http://localhost:3000/graphql',
+  // uri: 'http://192.168.0.12:3000/graphql',
   fetchOptions: {}
 })
 

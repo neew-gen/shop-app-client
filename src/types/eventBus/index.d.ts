@@ -9,9 +9,8 @@ export type Subject = any
 export type Receiver = (subject: Subject) => void
 
 // Main event bus interface
-export interface EventBus {
+export interface EventBusInterface {
   subscribe(topic: string, receiver: Receiver): void
   unsubscribe(topic: string): void
-
   publish(topic: string, subject: Subject): Promise<void>
 }

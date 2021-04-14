@@ -1,11 +1,11 @@
-import { apollo } from '@/api/apollo'
+import { apollo } from '@/api/graphql-api/apollo'
 import { SwipeData, UpdateIndexInput, UpdateSwipeInput } from '@/types/swipe'
 import {
   CREATE_SWIPE,
   DELETE_SWIPE,
   UPDATE_INDEX,
   UPDATE_SWIPE
-} from '@/api/queries/swipeQueries'
+} from '@/api/graphql-api/queries/swipeQueries'
 
 export class SwipeApi {
   // Method creates a new swipe and returns id.

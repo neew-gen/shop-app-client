@@ -54,7 +54,7 @@ import { MDBListGroupItem, MDBBtn, MDBIcon } from 'mdb-vue-ui-kit'
 import { SwipeType } from '@/types/swipe'
 import BottomModal from '@/components/BottomModal.vue'
 import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
-import { store } from '@/store'
+// import { store } from '@/store'
 
 export default defineComponent({
   name: 'EditSwipeListItem',
@@ -78,7 +78,7 @@ export default defineComponent({
     }
 
     const removeItem = (): void => {
-      store.dispatch('deleteSwipe', props.data!.id)
+      // store.dispatch('deleteSwipe', props.data!.id)
       toast.error('Swipe has been deleted!')
       changeModalMode(false)
     }

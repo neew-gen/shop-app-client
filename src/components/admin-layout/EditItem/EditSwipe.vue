@@ -20,12 +20,12 @@
 <script lang="ts">
 import { defineComponent, inject, reactive, ref } from 'vue'
 import { MDBInput, MDBBtn } from 'mdb-vue-ui-kit'
-import { useStore } from '@/store'
+// import { useStore } from '@/store'
 import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
-import { GraphqlApi } from '@/api/GraphqlApi'
+import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
 import { assignFieldsForReactive } from '@/helpers'
 import router from '@/router'
-import { GET_SWIPE_BY_ID } from '@/api/queries/swipeQueries'
+import { GET_SWIPE_BY_ID } from '@/api/graphql-api/queries/swipeQueries'
 import { SwipeType } from '@/types/swipe'
 
 export default defineComponent({
@@ -42,7 +42,7 @@ export default defineComponent({
     }
   },
   async setup(props) {
-    const store = useStore()
+    // const store = useStore()
     const toast: any = inject('toast')
     const showContent = ref(false)
 
@@ -53,7 +53,7 @@ export default defineComponent({
     })
 
     await GraphqlApi.fetchById<SwipeType>(GET_SWIPE_BY_ID, props.id)
-      .then(fetchedData => {
+      .then((fetchedData: any) => {
         assignFieldsForReactive(state, fetchedData.swipeData)
         showContent.value = true
       })
@@ -62,10 +62,10 @@ export default defineComponent({
       })
 
     const editSwipe = (): void => {
-      store.dispatch('updateSwipe', {
-        id: props.id,
-        input: state
-      })
+      // store.dispatch('updateSwipe', {
+      //   id: props.id,
+      //   input: state
+      // })
       toast.success('Swipe has been updated!')
     }
     return { showContent, state, editSwipe }

@@ -22,7 +22,7 @@
 <script lang="ts">
 import { computed, ComputedRef, defineComponent, ref, watch } from 'vue'
 import { MDBIcon } from 'mdb-vue-ui-kit'
-import { store } from '@/store'
+// import { store } from '@/store'
 import { SwipeType } from '@/types/swipe'
 import DraggableList from '@/components/admin-layout/EditSwipeList/DraggableList.vue'
 
@@ -33,13 +33,13 @@ export default defineComponent({
     MDBIcon
   },
   async setup() {
-    await store.dispatch('fetchSwipeEditList')
-    const fetchedItems: ComputedRef<SwipeType[]> = computed(() => {
-      return store.getters.getSwipeEditList
-    })
-    return {
-      fetchedItems
-    }
+    // await store.dispatch('fetchSwipeEditList')
+    // const fetchedItems: ComputedRef<SwipeType[]> = computed(() => {
+    //   return store.getters.getSwipeEditList
+    // })
+    // return {
+    //   fetchedItems
+    // }
   }
 })
 </script>

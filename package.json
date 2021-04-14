@@ -13,6 +13,7 @@
     "@meforma/vue-toaster": "^1.2.2",
     "@popperjs/core": "^2.9.1",
     "@types/lodash": "^4.14.168",
+    "@types/serviceworker-webpack-plugin": "^1.0.2",
     "bootstrap": "^5.0.0-beta2",
     "graphql": "^15.5.0",
     "lodash": "^4.17.21",
@@ -26,7 +27,12 @@
     "vue-apollo": "^3.0.0-alpha.3",
     "vue-router": "^4.0.0-0",
     "vuedraggable": "^4.0.1",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-0",
+    "workbox-cacheable-response": "^6.1.2",
+    "workbox-expiration": "^6.1.2",
+    "workbox-precaching": "^6.1.2",
+    "workbox-routing": "^6.1.2",
+    "workbox-strategies": "^6.1.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.18.0",
@@ -46,6 +52,7 @@
     "node-sass": "^4.12.0",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
+    "serviceworker-webpack-plugin": "^1.0.1",
     "tslib": "^2.1.0",
     "typescript": "^4.2.3",
     "vue-cli-plugin-mdb5": "~1.2.0"
