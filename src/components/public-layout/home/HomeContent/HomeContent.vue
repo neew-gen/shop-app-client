@@ -2,7 +2,7 @@
   <div>
     <div class="swiper-block">
       <HomeSwiper v-if="!swiperLoading" :data="swiperData" />
-      <HomeSwipeFallback v-if="swiperLoading" />
+      <HomeSwiperSkeleton v-if="swiperLoading" />
     </div>
   </div>
 </template>
@@ -14,20 +14,20 @@ import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
 import { GET_SWIPES } from '@/api/graphql-api/queries/swipeQueries'
 import { SwipeType } from '@/types/swipe'
 import HomeSwiper from '@/components/public-layout/home/HomeContent/HomeSwiper/HomeSwiper.vue'
-import HomeSwipeFallback from '@/components/public-layout/home/HomeContent/HomeSwiper/HomeSwiperFallback.vue'
+import HomeSwiperSkeleton from '@/components/public-layout/home/HomeContent/HomeSwiper/HomeSwiperSkeleton.vue'
 
 export default defineComponent({
   name: 'HomeContent',
   components: {
-    HomeSwipeFallback,
-    HomeSwiper
+    HomeSwiper,
+    HomeSwiperSkeleton
   },
   setup() {
     const { data: swiperData, loading: swiperLoading } = useFetch<SwipeType[]>(
       'SWR',
       'HomeContentSwiper',
       GraphqlApi.fetchAll,
-      GET_SWIPES
+      [GET_SWIPES]
     )
     return { swiperData, swiperLoading }
   }

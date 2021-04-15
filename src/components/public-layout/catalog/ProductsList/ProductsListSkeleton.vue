@@ -11,7 +11,6 @@
           <div class="ssc-square item-image" />
           <div class="price-row">
             <div class="ssc-line price-row__price" />
-            <!--            <div class="ssc-square price-row__icon" />-->
           </div>
           <div class="name-row">
             <div class="ssc-line name-row__line" />
@@ -30,7 +29,7 @@ import { MDBRow, MDBCol, MDBContainer } from 'mdb-vue-ui-kit'
 const SKELETON_COUNT = 8
 
 export default defineComponent({
-  name: 'ProductsByCategoryFallback',
+  name: 'ProductsListSkeleton',
   components: {
     MDBContainer,
     MDBRow,
@@ -59,10 +58,6 @@ export default defineComponent({
     width: 100%;
     margin: 0;
   }
-  //&__icon {
-  //  height: 21.34px;
-  //  width: 22px;
-  //}
 }
 .name-row {
   padding: 5px;

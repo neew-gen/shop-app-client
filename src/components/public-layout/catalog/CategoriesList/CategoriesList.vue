@@ -4,7 +4,7 @@
       class="d-flex align-items-center border-0"
       v-for="(item, index) in data"
       :key="index"
-      @click="pushToProductsByCategory(item.id)"
+      @click="routerPush(item.id)"
     >
       <div class="item-image">
         <ImageContainer
@@ -22,38 +22,31 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { MDBListGroup, MDBListGroupItem } from 'mdb-vue-ui-kit'
+import router from '@/router'
 import { CategoryType } from '@/types/category'
 import ImageContainer from '@/components/ImageContainer.vue'
-import router from '@/router'
 
 export default defineComponent({
   name: 'CategoriesList',
   props: {
     data: {
-      type: Array as PropType<CategoryType[]>
-    }
+      type: Array as PropType<CategoryType[]>,
+    },
   },
   components: {
     MDBListGroup,
     ImageContainer,
-    MDBListGroupItem
+    MDBListGroupItem,
   },
   setup() {
-    const pushToProductsByCategory = (categoryId: string): void => {
+    const routerPush = (categoryId: string): void => {
       router.push({
-        name: 'ProductsByCategorySuspense',
-        params: { categoryId }
+        name: 'CatalogProducts',
+        params: { categoryId },
       })
     }
-    return { pushToProductsByCategory }
-    // const { data, loading } = useFetch<CategoryType[]>(
-    //   'SWR',
-    //   'categoriesList',
-    //   GraphqlApi.fetchAll,
-    //   GET_CATEGORIES_CATALOG_LIST
-    // )
-    // return { data, loading }
-  }
+    return { routerPush }
+  },
 })
 </script>
 

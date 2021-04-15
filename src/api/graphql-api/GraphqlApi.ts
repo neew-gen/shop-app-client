@@ -18,13 +18,18 @@ export class GraphqlApi extends Mixin(ProductApi, CategoryApi, SwipeApi) {
   // }
 
   static fetchAll(query: DocumentNode): Promise<ApolloQueryResult<unknown>> {
-    // if (navigator.onLine) {
-    //   return apollo.query({
-    //     query
-    //   })
-    // }
     return apollo.query({
       query
+    })
+  }
+
+  static fetchBy(
+    query: DocumentNode,
+    variable?: { [key: string]: string }
+  ): Promise<ApolloQueryResult<unknown>> {
+    return apollo.query({
+      query,
+      variables: { ...variable }
     })
   }
 

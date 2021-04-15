@@ -2,8 +2,8 @@
   <MDBListGroup>
     <MDBListGroupItem
       class="d-flex align-items-center"
-      v-for="(item, index) in SKELETON_COUNT"
-      :key="index"
+      v-for="item in SKELETON_COUNT"
+      :key="item"
     >
       <div class="ssc-square item-image" />
       <div class="ssc-line item-name" />
@@ -14,10 +14,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { MDBListGroup, MDBListGroupItem } from 'mdb-vue-ui-kit'
-const SKELETON_COUNT = 2
+const SKELETON_COUNT = 8
 
 export default defineComponent({
-  name: 'CategoriesListFallback',
+  name: 'CategoriesListSkeleton',
   components: { MDBListGroup, MDBListGroupItem },
   setup() {
     return {

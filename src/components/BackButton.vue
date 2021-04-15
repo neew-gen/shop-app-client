@@ -1,5 +1,5 @@
 <template>
-  <MDBBtn outline="dark" @click="goBack"
+  <MDBBtn color="light" @click="goBack"
     ><MDBIcon icon="chevron-left" iconStyle="fas"
   /></MDBBtn>
 </template>
@@ -13,16 +13,16 @@ export default defineComponent({
   name: 'BackButton',
   components: {
     MDBBtn,
-    MDBIcon
+    MDBIcon,
   },
   setup() {
     const goBack = (): void => {
       router.back()
     }
     return {
-      goBack
+      goBack,
     }
-  }
+  },
 })
 </script>
 

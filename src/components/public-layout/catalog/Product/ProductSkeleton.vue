@@ -27,7 +27,7 @@ import { defineComponent } from 'vue'
 import { MDBRow, MDBCol, MDBContainer } from 'mdb-vue-ui-kit'
 
 export default defineComponent({
-  name: 'ProductFallback',
+  name: 'ProductSkeleton',
   components: {
     MDBContainer,
     MDBRow,

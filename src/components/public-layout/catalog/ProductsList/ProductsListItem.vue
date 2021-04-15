@@ -36,28 +36,28 @@ export default defineComponent({
   props: {
     product: {
       type: Object as PropType<ProductType>,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     ImageContainer,
     MDBCol,
-    MDBIcon
+    MDBIcon,
   },
   directives: {
-    mdbRipple
+    mdbRipple,
   },
   setup() {
     const pushToProduct = (id: string): void => {
       setTimeout(() => {
         router.push({
-          name: 'CatalogProductSuspense',
-          params: { id }
+          name: 'CatalogProduct',
+          params: { id },
         })
       }, 100)
     }
     return { pushToProduct }
-  }
+  },
 })
 </script>
 

@@ -8,11 +8,11 @@ export class SWRStrategy<Data> extends FetchApi<Data> {
   constructor(
     key: string,
     fetcher: Fetcher,
-    fetcherQuery: DocumentNode,
+    fetcherArgs: [query: DocumentNode, variable?: { [key: string]: string; }],
     private data: Ref<Data | undefined>,
     private loading: Ref<boolean>
   ) {
-    super(key, fetcher, fetcherQuery)
+    super(key, fetcher, fetcherArgs)
   }
   public async useSWR(): Promise<void> {
     const exist = await this.cacheExist()

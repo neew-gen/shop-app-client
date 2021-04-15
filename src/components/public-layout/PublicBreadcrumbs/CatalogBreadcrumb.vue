@@ -12,7 +12,7 @@ import {
   defineComponent,
   reactive,
   ref,
-  watch
+  watch,
 } from 'vue'
 import { MDBBreadcrumb, MDBBreadcrumbItem, MDBNavbar } from 'mdb-vue-ui-kit'
 import BackButton from '@/components/BackButton.vue'
@@ -21,7 +21,7 @@ export default defineComponent({
   name: 'CatalogBreadcrumb',
   components: {
     BackButton,
-    MDBNavbar
+    MDBNavbar,
   },
   setup() {
     // const state = reactive<BreadcrumbsItem>({
@@ -55,7 +55,7 @@ export default defineComponent({
     //   }
     // )
     // return { state, pushRouter }
-  }
+  },
 })
 </script>
 

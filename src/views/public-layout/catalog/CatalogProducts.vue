@@ -1,33 +1,43 @@
 <template>
   <div>
-    <Suspense>
-      <template #default>
-        <ProductsByCategory :categoryId="categoryId" />
-      </template>
-      <template #fallback>
-        <ProductsByCategoryFallback />
-      </template>
-    </Suspense>
+    <ProductsList v-if="!loading" :data="data" />
+    <ProductsListSkeleton v-if="loading" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ProductsByCategory from '@/components/public-layout/catalog/ProductsByCategory/ProductsByCategory.vue'
-import ProductsByCategoryFallback from '@/components/public-layout/catalog/ProductsByCategory/ProductsByCategoryFallback.vue'
+import { useFetch } from '@/api/fetch-api/useFetch'
+import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
+import { GET_PRODUCTS_CATALOG_LIST_BY_CATEGORY_ID } from '@/api/graphql-api/queries/productQueries'
+import { ProductType } from '@/types/product'
+import ProductsList from '@/components/public-layout/catalog/ProductsList/ProductsList.vue'
+import ProductsListSkeleton from '@/components/public-layout/catalog/ProductsList/ProductsListSkeleton.vue'
 
 export default defineComponent({
   name: 'CatalogProducts',
-  components: {
-    ProductsByCategoryFallback,
-    ProductsByCategory
-  },
   props: {
     categoryId: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
+  components: {
+    ProductsList,
+    ProductsListSkeleton,
+  },
+  setup(props) {
+    const { data, loading } = useFetch<ProductType[]>(
+      'SWR',
+      `CatalogProducts_${props.categoryId}`,
+      GraphqlApi.fetchBy,
+      [
+        GET_PRODUCTS_CATALOG_LIST_BY_CATEGORY_ID,
+        { categoryId: props.categoryId },
+      ],
+    )
+    return { data, loading }
+  },
 })
 </script>
 

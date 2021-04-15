@@ -7,7 +7,10 @@ export class FetchApi<Data> {
   constructor(
     protected key: string,
     protected fetcher: Fetcher,
-    protected fetcherQuery: DocumentNode
+    protected fetcherArgs: [
+      query: DocumentNode,
+      variable?: { [key: string]: string }
+    ]
   ) {}
 
   protected async cacheExist(): Promise<boolean> {
@@ -18,7 +21,7 @@ export class FetchApi<Data> {
     return cache?.json()
   }
   protected async fetchFromNetwork(): Promise<Data | undefined> {
-    const res = await this.fetcher(this.fetcherQuery)
+    const res = await this.fetcher(...this.fetcherArgs)
     if (res) {
       return dataExtractor<Data>(res)
     }

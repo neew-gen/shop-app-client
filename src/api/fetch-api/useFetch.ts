@@ -7,7 +7,7 @@ export function useFetch<Data>(
   strategy: string,
   key: string,
   fetcher: Fetcher,
-  fetcherQuery: DocumentNode
+  fetcherArgs: [query: DocumentNode, variable?: { [key: string]: string; }]
 ): { data: Ref<Data | undefined>; loading: Ref<boolean> } {
   const data = ref(undefined)
   const loading = ref(true)
@@ -16,7 +16,7 @@ export function useFetch<Data>(
       const swr = new SWRStrategy<Data>(
         key,
         fetcher,
-        fetcherQuery,
+        fetcherArgs,
         data,
         loading
       )
