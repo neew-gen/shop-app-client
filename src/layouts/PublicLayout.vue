@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="public-wrapper">
     <router-view />
   </div>
   <Footer />
@@ -12,20 +12,14 @@ import Footer from '@/components/public-layout/Footer/PublicFooter.vue'
 export default defineComponent({
   name: 'PublicLayout',
   components: {
-    Footer
-  }
+    Footer,
+  },
 })
 </script>
 
 <style scoped lang="scss">
-//.app-wrapper {
-//  min-height: 100vh;
-//  display: flex;
-//  flex-direction: column;
-//  justify-content: space-between;
-//}
-.wrapper {
-  padding-bottom: 70px;
+.public-wrapper {
+  min-height: 100%;
 }
 #app {
 }

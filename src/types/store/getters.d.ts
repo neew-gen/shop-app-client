@@ -1,5 +1,3 @@
-import { Getters as productGetters } from '@/store/modules/product'
-import { Getters as categoryGetters } from '@/store/modules/category'
-import { Getters as swipeGetters } from '@/store/modules/swipe'
+import { Getters as cartGetters } from '@/store/modules/product'
 
-type Getters = productGetters & categoryGetters & swipeGetters
+type Getters = cartGetters

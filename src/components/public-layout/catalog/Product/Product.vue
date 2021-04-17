@@ -15,8 +15,16 @@
           <MDBBtn color="light">
             <MDBIcon icon="heart" size="lg" iconStyle="far" />
           </MDBBtn>
-          <MDBBtn color="light">
+          <MDBBtn
+            class="d-flex justify-center align-items-center"
+            @click="addToCart"
+            :color="isInCart ? 'success' : 'light'"
+            :disabled="isInCart"
+          >
             <MDBIcon icon="shopping-cart" iconStyle="fas" size="lg" />
+            <div v-if="isInCart">
+              <MDBIcon class="mx-1" icon="check" iconStyle="fas" size="lg" />
+            </div>
           </MDBBtn>
         </div>
       </MDBCol>
@@ -31,17 +39,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import {
+  computed,
+  ComputedRef,
+  defineComponent,
+  PropType,
+  ref,
+  watch,
+} from 'vue'
 import { MDBIcon, MDBRow, MDBCol, MDBContainer, MDBBtn } from 'mdb-vue-ui-kit'
-import { ProductType } from '@/types/product'
+import { ProductCartItem, ProductType } from '@/types/product'
 import ImageContainer from '@/components/ImageContainer.vue'
+import { useFetch } from '@/api/fetch-api/useFetch'
+import { cartItemToCache } from '@/helpers/cacheFunctions'
 
 export default defineComponent({
   name: 'Product',
   props: {
     data: {
-      type: Object as PropType<ProductType>
-    }
+      type: Object as PropType<ProductType>,
+    },
   },
   components: {
     ImageContainer,
@@ -49,8 +66,31 @@ export default defineComponent({
     MDBRow,
     MDBCol,
     MDBIcon,
-    MDBBtn
-  }
+    MDBBtn,
+  },
+  setup(props) {
+    const isInCart = ref(false)
+    const { data: cartData } = useFetch<ProductCartItem[]>('CO', '/cart-cache')
+
+    watch(cartData, () => {
+      if (cartData.value)
+        isInCart.value = cartData.value.some((p) => p.id === props.data!.id)
+    })
+
+    const addToCart = async (): Promise<void> => {
+      isInCart.value = true
+      const product: ProductCartItem = {
+        id: props.data!.id,
+        name: props.data!.name,
+        imgUrl: props.data!.imgUrl,
+        price: props.data!.price,
+        value: 1,
+        checked: true,
+      }
+      await cartItemToCache<ProductCartItem>('/cart-cache', product)
+    }
+    return { addToCart, isInCart }
+  },
 })
 </script>
 
@@ -63,6 +103,9 @@ export default defineComponent({
   &__price {
     font-size: 1.3rem;
     font-weight: 600;
+  }
+  &__controls {
+    display: flex;
   }
 }
 .name-block {

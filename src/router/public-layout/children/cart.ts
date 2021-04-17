@@ -3,10 +3,10 @@ import { RouteRecordRaw } from 'vue-router'
 export const cartChildren: Array<RouteRecordRaw> = [
   {
     path: '/shopping-cart',
-    name: 'ShoppingCart',
-    component: (): any =>
+    name: 'Cart',
+    component: (): unknown =>
       import(
-        /* webpackChunkName: "cart" */ '@/views/public-layout/ShoppingCart.vue'
-      )
-  }
+        /* webpackChunkName: "shopping-cart" */ '@/views/public-layout/cart/Cart.vue'
+      ),
+  },
 ]

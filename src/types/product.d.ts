@@ -4,14 +4,14 @@ export type ProductType = {
   id: string
   imgUrl: string
   name: string
-  price: string
+  price: number
 }
 
 export type ProductCreateInput = {
   id: string
   name: string
   imgUrl: string
-  price: string
+  price: number
   description: string
   categoryId: string
 }
@@ -19,7 +19,16 @@ export type ProductCreateInput = {
 export type ProductUpdateInput = {
   name?: string
   imgUrl?: string
-  price?: string
+  price?: number
   description?: string
   categoryId?: string
+}
+
+export type ProductCartItem = {
+  id: string
+  name: string
+  imgUrl: string
+  price: number
+  value: number
+  checked: boolean
 }

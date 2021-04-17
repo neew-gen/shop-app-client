@@ -11,13 +11,13 @@ export type Store = Omit<
   commit<K extends keyof MutationPayload>(
     key: K,
     payload: MutationPayload[K],
-    options?: CommitOptions
+    options?: CommitOptions,
   ): void
 } & {
   dispatch<K extends keyof ActionsPayload>(
     key: K,
     payload?: ActionsPayload[K][0],
-    options?: DispatchOptions
+    options?: DispatchOptions,
   ): ActionsPayload[K][1]
 } & {
   getters: {

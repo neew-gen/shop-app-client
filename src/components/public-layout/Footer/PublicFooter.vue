@@ -1,4 +1,5 @@
 <template>
+  <div class="footer-navbar-fake" />
   <MDBNavbar class="footer-navbar" light bg="light" position="bottom" container>
     <MDBListGroup horizontal class="flex-fill">
       <FooterButton
@@ -22,14 +23,17 @@ export default defineComponent({
   components: { MDBListGroup, MDBNavbar, FooterButton },
   setup() {
     return {
-      MENU_LIST
+      MENU_LIST,
     }
-  }
+  },
 })
 </script>
 
 <style lang="scss" scoped>
 .footer-navbar {
   height: 50px;
+}
+.footer-navbar-fake {
+  padding-top: 50px;
 }
 </style>

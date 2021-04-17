@@ -1,9 +1,7 @@
 <template>
   <div>
     <CatalogBreadcrumb />
-    <div class="router-container">
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 
@@ -19,8 +17,4 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
-.router-container {
-  padding-top: 55px;
-}
-</style>
+<style lang="scss" scoped></style>

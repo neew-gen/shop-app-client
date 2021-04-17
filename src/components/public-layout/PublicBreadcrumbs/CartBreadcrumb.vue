@@ -1,8 +1,8 @@
 <template>
-  <div class="catalog-breadcrumb-fake" />
+  <div class="cart-breadcrumb-fake" />
   <MDBNavbar light bg="light" position="top" container>
     <BackButton />
-    catalog
+    cart
   </MDBNavbar>
 </template>
 
@@ -12,7 +12,7 @@ import { MDBBreadcrumb, MDBBreadcrumbItem, MDBNavbar } from 'mdb-vue-ui-kit'
 import BackButton from '@/components/BackButton.vue'
 
 export default defineComponent({
-  name: 'CatalogBreadcrumb',
+  name: 'CartBreadcrumb',
   components: {
     BackButton,
     MDBNavbar,
@@ -63,7 +63,7 @@ export default defineComponent({
 .breadcrumb-item.active {
   cursor: default;
 }
-.catalog-breadcrumb-fake {
+.cart-breadcrumb-fake {
   padding-bottom: 55px;
 }
 </style>

@@ -30,7 +30,7 @@ app
   .use(Toaster, {
     position: 'top-right',
     duration: 1000,
-    maxToasts: 2
+    maxToasts: 2,
   })
   .provide('toast', app.config.globalProperties.$toast)
   .provide('loading', loading)

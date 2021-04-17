@@ -6,11 +6,11 @@ import { Fetcher } from '@/types/fetch'
 export class FetchApi<Data> {
   constructor(
     protected key: string,
-    protected fetcher: Fetcher,
-    protected fetcherArgs: [
+    protected fetcher?: Fetcher,
+    protected fetcherArgs?: [
       query: DocumentNode,
-      variable?: { [key: string]: string }
-    ]
+      variable?: { [key: string]: string },
+    ],
   ) {}
 
   protected async cacheExist(): Promise<boolean> {
@@ -21,9 +21,11 @@ export class FetchApi<Data> {
     return cache?.json()
   }
   protected async fetchFromNetwork(): Promise<Data | undefined> {
-    const res = await this.fetcher(...this.fetcherArgs)
-    if (res) {
-      return dataExtractor<Data>(res)
+    if (this.fetcher && this.fetcherArgs) {
+      const res = await this.fetcher(...this.fetcherArgs)
+      if (res) {
+        return dataExtractor<Data>(res)
+      }
     }
   }
   protected cacheIsOutdate(cachedData: Data, fetchedData: Data): boolean {

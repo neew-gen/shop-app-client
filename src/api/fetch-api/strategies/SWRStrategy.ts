@@ -8,9 +8,9 @@ export class SWRStrategy<Data> extends FetchApi<Data> {
   constructor(
     key: string,
     fetcher: Fetcher,
-    fetcherArgs: [query: DocumentNode, variable?: { [key: string]: string; }],
+    fetcherArgs: [query: DocumentNode, variable?: { [key: string]: string }],
     private data: Ref<Data | undefined>,
-    private loading: Ref<boolean>
+    private loading: Ref<boolean>,
   ) {
     super(key, fetcher, fetcherArgs)
   }
@@ -30,9 +30,10 @@ export class SWRStrategy<Data> extends FetchApi<Data> {
       }
       return
     }
+    this.data.value = await this.fetchFromCache()
+    this.loading.value = false
     const fetchedData = await this.fetchFromNetwork()
     this.data.value = fetchedData
-    this.loading.value = false
     await this.updateCache(fetchedData)
   }
 }

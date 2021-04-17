@@ -1,6 +1,7 @@
 <template>
-  <AppLoader />
-  <div v-if="loading"></div>
+  <div v-if="loading">
+    <AppLoader />
+  </div>
   <router-view />
 </template>
 
@@ -15,9 +16,9 @@ export default defineComponent({
     let vh = window.innerHeight * 0.01
     document.documentElement.style.setProperty('--vh', `${vh}px`)
     return {
-      loading
+      loading,
     }
-  }
+  },
 })
 </script>
 
@@ -25,5 +26,8 @@ export default defineComponent({
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+#app {
+  min-height: 100%;
 }
 </style>
