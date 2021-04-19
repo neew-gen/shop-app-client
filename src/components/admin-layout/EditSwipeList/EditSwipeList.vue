@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ComputedRef, defineComponent, ref, watch } from 'vue'
+import { ComputedRef, computed, defineComponent, ref, watch } from 'vue'
 import { MDBIcon } from 'mdb-vue-ui-kit'
 // import { store } from '@/store'
 import { SwipeType } from '@/types/swipe'
@@ -30,7 +30,7 @@ export default defineComponent({
   name: 'EditSwipeList',
   components: {
     DraggableList,
-    MDBIcon
+    MDBIcon,
   },
   async setup() {
     // await store.dispatch('fetchSwipeEditList')
@@ -40,7 +40,7 @@ export default defineComponent({
     // return {
     //   fetchedItems
     // }
-  }
+  },
 })
 </script>
 

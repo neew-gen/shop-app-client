@@ -39,7 +39,7 @@
         class="btn btn-light btn-sm m-1"
         :to="{
           name: `EditSwipeSuspense`,
-          params: { id: data.id }
+          params: { id: data.id },
         }"
       >
         Edit
@@ -49,8 +49,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref, PropType } from 'vue'
-import { MDBListGroupItem, MDBBtn, MDBIcon } from 'mdb-vue-ui-kit'
+import { PropType, defineComponent, inject, ref } from 'vue'
+import { MDBBtn, MDBIcon, MDBListGroupItem } from 'mdb-vue-ui-kit'
 import { SwipeType } from '@/types/swipe'
 import BottomModal from '@/components/BottomModal.vue'
 import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
@@ -63,12 +63,12 @@ export default defineComponent({
     BottomModal,
     MDBListGroupItem,
     MDBBtn,
-    MDBIcon
+    MDBIcon,
   },
   props: {
     data: {
-      type: Object as PropType<SwipeType>
-    }
+      type: Object as PropType<SwipeType>,
+    },
   },
   setup(props) {
     const toast: any = inject('toast')
@@ -83,7 +83,7 @@ export default defineComponent({
       changeModalMode(false)
     }
     return { modalMode, changeModalMode, removeItem }
-  }
+  },
 })
 </script>
 

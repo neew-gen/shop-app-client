@@ -16,7 +16,7 @@ import EditSwipeList from '@/components/admin-layout/EditSwipeList/EditSwipeList
 
 export default defineComponent({
   name: 'EditSwipeListSuspense',
-  components: { EditSwipeList, Spinner }
+  components: { EditSwipeList, Spinner },
 })
 </script>
 

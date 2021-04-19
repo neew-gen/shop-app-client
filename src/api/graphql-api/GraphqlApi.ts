@@ -19,24 +19,24 @@ export class GraphqlApi extends Mixin(ProductApi, CategoryApi, SwipeApi) {
 
   static fetchAll(query: DocumentNode): Promise<ApolloQueryResult<unknown>> {
     return apollo.query({
-      query
+      query,
     })
   }
 
   static fetchBy(
     query: DocumentNode,
-    variable?: { [key: string]: string }
+    variable?: { [key: string]: string },
   ): Promise<ApolloQueryResult<unknown>> {
     return apollo.query({
       query,
-      variables: { ...variable }
+      variables: { ...variable },
     })
   }
 
   static async fetchById<T>(query: DocumentNode, id: string): Promise<T> {
     const res = await apollo.query({
       query: query,
-      variables: { id }
+      variables: { id },
     })
     // We get an object with a field that contains data. We need to extract it
     const toValues: T[] = Object.values(res.data)

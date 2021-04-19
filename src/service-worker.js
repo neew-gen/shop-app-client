@@ -3,26 +3,26 @@ import { store } from '@/store'
 console.log('sw!')
 self.__WB_DISABLE_DEV_LOGS = true
 
-import { setDefaultHandler, setCatchHandler } from 'workbox-routing'
-import { StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies'
+import { setCatchHandler, setDefaultHandler } from 'workbox-routing'
+import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies'
 
-import { precacheAndRoute, matchPrecache } from 'workbox-precaching'
+import { matchPrecache, precacheAndRoute } from 'workbox-precaching'
 import { CacheableResponsePlugin } from 'workbox-cacheable-response'
 
 const CACHE_NAME = 'cache4'
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
   const { request } = event
   if (request.method !== 'GET') return
   if (request.url.indexOf('http') !== 0) return
   if (request.url === 'https://localhost:8080/') return request
   event.respondWith(
-    (async function() {
+    (async function () {
       return await new StaleWhileRevalidate({
-        cacheName: CACHE_NAME
+        cacheName: CACHE_NAME,
       })
         .handle({
           event,
-          request
+          request,
         })
 
         .catch(() => {
@@ -39,7 +39,7 @@ self.addEventListener('fetch', event => {
       //     console.log(e)
       //   }
       // }
-    })()
+    })(),
   )
 })
 // const offlineListener = event => {

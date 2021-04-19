@@ -7,7 +7,7 @@ export const categoryChildren: Array<RouteRecordRaw> = [
     component: (): any =>
       import(
         /* webpackChunkName: "create-category" */ '@/views/admin-layout/category/CreateCategory.vue'
-      )
+      ),
   },
   {
     path: '/admin-panel/edit-categories',
@@ -15,7 +15,7 @@ export const categoryChildren: Array<RouteRecordRaw> = [
     component: (): any =>
       import(
         /* webpackChunkName: "edit-categories-list" */ '@/views/admin-layout/category/EditCategoriesList.vue'
-      )
+      ),
   },
   {
     path: '/admin-panel/edit-categories/:id',
@@ -24,6 +24,6 @@ export const categoryChildren: Array<RouteRecordRaw> = [
       import(
         /* webpackChunkName: "edit-product" */ '@/views/admin-layout/category/EditCategorySuspense.vue'
       ),
-    props: true
-  }
+    props: true,
+  },
 ]

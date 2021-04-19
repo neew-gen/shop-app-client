@@ -10,7 +10,7 @@ import AdminBreadcrumb from '@/components/admin-layout/AdminBreadcrumb/AdminBrea
 
 export default defineComponent({
   name: 'AdminLayout',
-  components: { AdminBreadcrumb }
+  components: { AdminBreadcrumb },
 })
 </script>
 

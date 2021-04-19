@@ -14,8 +14,8 @@ export default defineComponent({
   components: {
     MDBDropdown,
     MDBDropdownToggle,
-    MDBSpinner
-  }
+    MDBSpinner,
+  },
 })
 </script>
 

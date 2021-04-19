@@ -19,8 +19,8 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   components: { ProductSkeleton, Product },
   setup(props) {
@@ -28,10 +28,10 @@ export default defineComponent({
       'SWR',
       `CatalogProduct_${props.id}`,
       GraphqlApi.fetchBy,
-      [GET_PRODUCT_BY_ID, { id: props.id }]
+      [GET_PRODUCT_BY_ID, { id: props.id }],
     )
     return { data, loading }
-  }
+  },
 })
 </script>
 

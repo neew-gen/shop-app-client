@@ -29,9 +29,9 @@ export default defineComponent({
   props: {
     data: {
       Type: Object as () => SwipeData,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 })
 </script>
 

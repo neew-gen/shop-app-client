@@ -1,69 +1,76 @@
 <template>
-  <div v-if="entity === 'product'">
-    <EditListFilter />
+  <div v-if="!loading">
+    <div v-if="entity === 'product'">
+      <EditListFilter />
+    </div>
+    <div
+      v-if="!loading && data.length === 0"
+      class="d-flex justify-content-center pt-2"
+    >
+      No {{ placeholder }} yet. You can&thinsp;
+      <router-link :to="{ name: pathTo }">create one</router-link>.
+    </div>
+    <MDBListGroup v-else>
+      <EditListItem
+        v-for="(item, index) in data"
+        :key="index"
+        :data="item"
+        :entity="entity"
+      />
+    </MDBListGroup>
   </div>
-  <div
-    v-if="fetchedItems.length === 0"
-    class="d-flex justify-content-center pt-2"
-  >
-    No {{ entityPlaceholder() }} yet. You can&thinsp;
-    <router-link :to="{ name: choosePathTo() }">create one</router-link>.
-  </div>
-  <MDBListGroup v-else>
-    <EditListItem
-      v-for="(item, index) in fetchedItems"
-      :key="index"
-      :data="item"
-      :entity="entity"
-    />
-  </MDBListGroup>
+  <Spinner v-if="loading" />
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ComputedRef, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { MDBListGroup } from 'mdb-vue-ui-kit'
-// import { useStore } from '@/store'
 import { EditListType } from '@/types'
 import EditListItem from '@/components/admin-layout/EditList/EditListItem.vue'
 import EditListFilter from '@/components/admin-layout/EditList/EditListFilter.vue'
+import { useFetch } from '@/api/fetch-api/useFetch'
+import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
+import { GET_CATEGORIES_EDITLIST } from '@/api/graphql-api/queries/categoryQueries'
+import { GET_PRODUCTS_EDITLIST } from '@/api/graphql-api/queries/productQueries'
+import Spinner from '@/components/Spinner.vue'
 
 export default defineComponent({
   name: 'EditList',
   props: {
     entity: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  components: { EditListFilter, EditListItem, MDBListGroup },
-  async setup(props) {
-    // const store = useStore()
-
-    const entityPlaceholder = (): string | undefined => {
-      if (props.entity === 'product') return 'products'
-      if (props.entity === 'category') return 'categories'
-    }
-
-    const choosePathTo = (): string | undefined => {
-      if (props.entity === 'product') return 'CreateProduct'
-      if (props.entity === 'category') return 'CreateCategory'
-    }
+  components: { Spinner, EditListFilter, EditListItem, MDBListGroup },
+  setup(props) {
+    const placeholder = ref('')
+    const pathTo = ref('')
 
     if (props.entity === 'product') {
-      // await store.dispatch('fetchProductsEditList')
-      // const fetchedItems: ComputedRef<EditListType[]> = computed(() => {
-      // return store.getters.getProductsEditList
-      // })
-      return { entityPlaceholder, choosePathTo }
+      placeholder.value = 'products'
+      pathTo.value = 'CreateProduct'
+      const { data, loading } = useFetch<EditListType[]>(
+        'SWR',
+        '/products-edit-list',
+        GraphqlApi.fetchAll,
+        [GET_PRODUCTS_EDITLIST],
+      )
+      return { data, loading, placeholder, pathTo }
     }
+
     if (props.entity === 'category') {
-      // await store.dispatch('fetchCategoryEditList')
-      // const fetchedItems: ComputedRef<EditListType[]> = computed(() => {
-      // return store.getters.getCategoryEditList
-      // })
-      return { entityPlaceholder, choosePathTo }
+      placeholder.value = 'categories'
+      pathTo.value = 'CreateCategory'
+      const { data, loading } = useFetch<EditListType[]>(
+        'SWR',
+        '/categories-edit-list',
+        GraphqlApi.fetchAll,
+        [GET_CATEGORIES_EDITLIST],
+      )
+      return { data, loading, placeholder, pathTo }
     }
-  }
+  },
 })
 </script>
 

@@ -20,15 +20,15 @@ export default defineComponent({
   props: {
     icon: {
       type: String,
-      required: true
+      required: true,
     },
     path: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
-    MDBIcon
+    MDBIcon,
   },
   setup() {
     const activeClass = (path: string): string => {
@@ -36,9 +36,9 @@ export default defineComponent({
       return 'router-link-active-custom'
     }
     return {
-      activeClass
+      activeClass,
     }
-  }
+  },
 })
 </script>
 

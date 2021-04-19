@@ -17,14 +17,14 @@
     "bootstrap": "^5.0.0-beta2",
     "graphql": "^15.5.0",
     "lodash": "^4.17.21",
-    "mdb-vue-ui-kit": "^1.0.0-beta1",
+    "mdb-vue-ui-kit": "^1.0.0-beta2",
     "react": "^17.0.2",
     "register-service-worker": "^1.7.1",
     "skeleton-screen-css": "^1.0.1",
-    "swiper": "^6.5.3",
+    "swiper": "^6.5.7",
     "ts-mixer": "^5.4.0",
+    "vee-validate": "^4.3.0",
     "vue": "^3.0.11",
-    "vue-apollo": "^3.0.0-alpha.3",
     "vue-router": "^4.0.0-0",
     "vuedraggable": "^4.0.1",
     "vuex": "^4.0.0-0",
@@ -32,7 +32,8 @@
     "workbox-expiration": "^6.1.2",
     "workbox-precaching": "^6.1.2",
     "workbox-routing": "^6.1.2",
-    "workbox-strategies": "^6.1.2"
+    "workbox-strategies": "^6.1.2",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.22.0",

@@ -7,6 +7,6 @@ export const profileChildren: Array<RouteRecordRaw> = [
     component: (): any =>
       import(
         /* webpackChunkName: "profile" */ '@/views/public-layout/Profile.vue'
-      )
-  }
+      ),
+  },
 ]

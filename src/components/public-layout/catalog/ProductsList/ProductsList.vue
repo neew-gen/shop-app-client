@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { MDBRow, MDBContainer } from 'mdb-vue-ui-kit'
+import { PropType, defineComponent } from 'vue'
+import { MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 import { ProductType } from '@/types/product'
 import ProductsListItem from '@/components/public-layout/catalog/ProductsList/ProductsListItem.vue'
 

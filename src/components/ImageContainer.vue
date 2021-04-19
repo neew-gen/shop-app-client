@@ -28,20 +28,20 @@ export default defineComponent({
   props: {
     height: {
       type: String,
-      required: true
+      required: true,
     },
     width: {
       type: String,
-      required: true
+      required: true,
     },
     imgUrl: {
       type: String,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   setup() {
     const hasHttpInUrl = (imgUrl: string): boolean => {
@@ -49,9 +49,9 @@ export default defineComponent({
       return imgUrl.match(/(http(s?))/gim) != null
     }
     return {
-      hasHttpInUrl
+      hasHttpInUrl,
     }
-  }
+  },
 })
 </script>
 

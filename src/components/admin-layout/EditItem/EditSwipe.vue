@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, reactive, ref } from 'vue'
-import { MDBInput, MDBBtn } from 'mdb-vue-ui-kit'
+import { MDBBtn, MDBInput } from 'mdb-vue-ui-kit'
 // import { useStore } from '@/store'
 import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
 import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
@@ -33,13 +33,13 @@ export default defineComponent({
   components: {
     Swipe,
     MDBInput,
-    MDBBtn
+    MDBBtn,
   },
   props: {
     id: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   async setup(props) {
     // const store = useStore()
@@ -49,7 +49,7 @@ export default defineComponent({
     let state = reactive({
       title: '',
       text: '',
-      imgUrl: ''
+      imgUrl: '',
     })
 
     await GraphqlApi.fetchById<SwipeType>(GET_SWIPE_BY_ID, props.id)
@@ -69,7 +69,7 @@ export default defineComponent({
       toast.success('Swipe has been updated!')
     }
     return { showContent, state, editSwipe }
-  }
+  },
 })
 </script>
 

@@ -7,7 +7,7 @@ export const swipeChildren: Array<RouteRecordRaw> = [
     component: (): any =>
       import(
         /* webpackChunkName: "create-swipe" */ '@/views/admin-layout/swipe/CreateSwipe.vue'
-      )
+      ),
   },
   {
     path: '/admin-panel/edit-swipes',
@@ -15,7 +15,7 @@ export const swipeChildren: Array<RouteRecordRaw> = [
     component: (): any =>
       import(
         /* webpackChunkName: "edit-swipes-list" */ '@/views/admin-layout/swipe/EditSwipeListSuspense.vue'
-      )
+      ),
   },
   {
     path: '/admin-panel/edit-swipes/:id',
@@ -24,6 +24,6 @@ export const swipeChildren: Array<RouteRecordRaw> = [
       import(
         /* webpackChunkName: "edit-swipe" */ '@/views/admin-layout/swipe/EditSwipeSuspense.vue'
       ),
-    props: true
-  }
+    props: true,
+  },
 ]

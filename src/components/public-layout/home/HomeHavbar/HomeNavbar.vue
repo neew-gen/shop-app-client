@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, ref } from 'vue'
-import { MDBNavbar, MDBBtn, MDBIcon } from 'mdb-vue-ui-kit'
+import { MDBBtn, MDBIcon, MDBNavbar } from 'mdb-vue-ui-kit'
 import HomeNavbarBrand from '@/components/public-layout/home/HomeHavbar/HomeNavbarBrand.vue'
 import HomeNavbarSearch from '@/components/public-layout/home/HomeHavbar/HomeNavbarSearch.vue'
 
@@ -21,7 +21,7 @@ export default defineComponent({
     HomeNavbarBrand,
     HomeNavbarSearch,
     MDBBtn,
-    MDBIcon
+    MDBIcon,
   },
   setup() {
     const eventBus: any = inject('eventBus')
@@ -32,7 +32,7 @@ export default defineComponent({
       eventBus.publish('updateSearchSize', newValue)
     }
     return { fullSizeSearch, setSizeSearch }
-  }
+  },
 })
 </script>
 

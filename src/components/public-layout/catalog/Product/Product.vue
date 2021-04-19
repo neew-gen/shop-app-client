@@ -40,14 +40,14 @@
 
 <script lang="ts">
 import {
-  computed,
   ComputedRef,
-  defineComponent,
   PropType,
+  computed,
+  defineComponent,
   ref,
   watch,
 } from 'vue'
-import { MDBIcon, MDBRow, MDBCol, MDBContainer, MDBBtn } from 'mdb-vue-ui-kit'
+import { MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow } from 'mdb-vue-ui-kit'
 import { ProductCartItem, ProductType } from '@/types/product'
 import ImageContainer from '@/components/ImageContainer.vue'
 import { useFetch } from '@/api/fetch-api/useFetch'

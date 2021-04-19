@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, onUnmounted, reactive } from 'vue'
-import { MDBInput, MDBTextarea, MDBBtn } from 'mdb-vue-ui-kit'
+import { MDBBtn, MDBInput, MDBTextarea } from 'mdb-vue-ui-kit'
 // import { useStore } from '@/store'
 import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
 import { CategoryIdType } from '@/types/eventBus'
@@ -54,7 +54,7 @@ const INITIAL_STATE = {
   name: '',
   imgUrl: '',
   price: '',
-  description: ''
+  description: '',
 }
 
 export default defineComponent({
@@ -65,7 +65,7 @@ export default defineComponent({
     MDBInput,
     MDBTextarea,
     MDBBtn,
-    ImageContainer
+    ImageContainer,
   },
   setup() {
     // const store = useStore()
@@ -93,7 +93,7 @@ export default defineComponent({
     //   eventBus.unsubscribe('childUpdateCategory')
     // })
     // return { state, addProduct }
-  }
+  },
 })
 </script>
 

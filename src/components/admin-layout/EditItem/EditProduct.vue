@@ -42,13 +42,13 @@
 <script lang="ts">
 import {
   defineComponent,
-  reactive,
-  onUnmounted,
   inject,
   onMounted,
-  ref
+  onUnmounted,
+  reactive,
+  ref,
 } from 'vue'
-import { MDBInput, MDBTextarea, MDBBtn } from 'mdb-vue-ui-kit'
+import { MDBBtn, MDBInput, MDBTextarea } from 'mdb-vue-ui-kit'
 import { assignFieldsForReactive } from '@/helpers'
 import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
 import { GET_PRODUCT_BY_ID } from '@/api/graphql-api/queries/productQueries'
@@ -65,8 +65,8 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     CategoryDropdown,
@@ -74,7 +74,7 @@ export default defineComponent({
     MDBInput,
     MDBTextarea,
     MDBBtn,
-    ImageContainer
+    ImageContainer,
   },
   async setup(props) {
     // const store = useStore()
@@ -87,7 +87,7 @@ export default defineComponent({
       name: '',
       imgUrl: '',
       price: '',
-      description: ''
+      description: '',
     })
 
     onMounted(() => {
@@ -96,7 +96,7 @@ export default defineComponent({
         (categoryId: CategoryIdType) => {
           // console.log('edit subs')
           state.categoryId = categoryId
-        }
+        },
       )
 
       eventBus.publish('parentUpdateCategory', state.categoryId)
@@ -127,9 +127,9 @@ export default defineComponent({
     return {
       showContent,
       state,
-      updateProduct
+      updateProduct,
     }
-  }
+  },
 })
 </script>
 

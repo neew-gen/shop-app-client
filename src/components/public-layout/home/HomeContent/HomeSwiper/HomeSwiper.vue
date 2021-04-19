@@ -4,7 +4,7 @@
       :slides-per-view="1"
       :space-between="20"
       :pagination="{
-        type: 'progressbar'
+        type: 'progressbar',
       }"
       :loop="data.length !== 1"
     >
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { PropType, defineComponent } from 'vue'
 import { SwipeType } from '@/types/swipe'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import SwiperCore, { Pagination } from 'swiper'
@@ -29,14 +29,14 @@ export default defineComponent({
   name: 'HomeSwiper',
   props: {
     data: {
-      type: Array as PropType<SwipeType[]>
-    }
+      type: Array as PropType<SwipeType[]>,
+    },
   },
   components: {
     Swipe,
     Swiper,
-    SwiperSlide
-  }
+    SwiperSlide,
+  },
 })
 </script>
 

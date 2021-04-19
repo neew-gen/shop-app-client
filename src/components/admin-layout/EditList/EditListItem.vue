@@ -39,12 +39,12 @@ export default defineComponent({
   components: { ImageContainer, MDBBtn, MDBListGroupItem },
   props: {
     data: {
-      type: Object as () => EditListType
+      type: Object as () => EditListType,
     },
     entity: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props) {
     // const store = useStore()
@@ -66,9 +66,9 @@ export default defineComponent({
     }
     return {
       choosePathTo,
-      removeItem
+      removeItem,
     }
-  }
+  },
 })
 </script>
 

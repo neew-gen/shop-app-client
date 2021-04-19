@@ -10,7 +10,7 @@ import { MDBIcon } from 'mdb-vue-ui-kit'
 
 export default defineComponent({
   name: 'HomeNavbarBrand',
-  components: {}
+  components: {},
 })
 </script>
 

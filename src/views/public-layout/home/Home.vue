@@ -24,7 +24,7 @@ export default defineComponent({
     // HomeSearchContent,
     HomeContent,
     HomeNavbar,
-    MDBContainer
+    MDBContainer,
   },
   // components: { HomeList, Carousel }
   setup() {
@@ -39,7 +39,7 @@ export default defineComponent({
       eventBus.unsubscribe('updateSearchSize')
     })
     return { fullSizeSearch, loading }
-  }
+  },
 })
 </script>
 

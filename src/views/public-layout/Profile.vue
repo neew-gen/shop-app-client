@@ -1,14 +1,12 @@
 <template>
-  <div class="Profile">
-    profile
-  </div>
+  <div class="Profile">profile</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Profile'
+  name: 'Profile',
 })
 </script>
 

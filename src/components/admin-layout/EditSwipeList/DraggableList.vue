@@ -8,7 +8,7 @@
     handle=".draggable"
     ghost-class="ghost"
   >
-    <template #item="{element}">
+    <template #item="{ element }">
       <div>
         <EditSwipeListItem :data="element" />
       </div>
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onUnmounted, PropType, ref, watch } from 'vue'
+import { PropType, defineComponent, inject, onUnmounted, ref, watch } from 'vue'
 // import { store } from '@/store'
 import draggable from 'vuedraggable'
 import EditSwipeListItem from '@/components/admin-layout/EditSwipeList/EditSwipeListItem.vue'
@@ -28,13 +28,13 @@ export default defineComponent({
   name: 'DraggableList',
   components: {
     EditSwipeListItem,
-    draggable
+    draggable,
   },
   props: {
     data: {
       type: Array as PropType<SwipeType[]>,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props) {
     const toast: any = inject('toast')
@@ -54,7 +54,7 @@ export default defineComponent({
       saveBeforeLeave()
     })
     return { dragData }
-  }
+  },
 })
 </script>
 

@@ -5,14 +5,14 @@ module.exports = {
     https: true,
     disableHostCheck: true,
     port: 8080,
-    host: 'localhost'
+    host: 'localhost',
   },
   css: {
     loaderOptions: {
       sass: {
-        prependData: `@import "@/assets/styles/variables.scss";`
-      }
-    }
+        prependData: `@import "@/assets/styles/variables.scss";`,
+      },
+    },
   },
   pwa: {
     workboxPluginMode: 'InjectManifest',
@@ -20,14 +20,14 @@ module.exports = {
     workboxOptions: {
       skipWaiting: true,
       clientsClaim: true,
-      swSrc: 'src/service-worker.js'
-    }
+      swSrc: 'src/service-worker.js',
+    },
   },
   configureWebpack: {
     plugins: [
       new ServiceWorkerWebpackPlugin({
-        entry: path.join(__dirname, './src/service-worker.js')
-      })
-    ]
-  }
+        entry: path.join(__dirname, './src/service-worker.js'),
+      }),
+    ],
+  },
 }

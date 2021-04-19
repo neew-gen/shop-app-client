@@ -24,15 +24,15 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { MDBRow, MDBCol, MDBContainer } from 'mdb-vue-ui-kit'
+import { MDBCol, MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 
 export default defineComponent({
   name: 'ProductSkeleton',
   components: {
     MDBContainer,
     MDBRow,
-    MDBCol
-  }
+    MDBCol,
+  },
 })
 </script>
 

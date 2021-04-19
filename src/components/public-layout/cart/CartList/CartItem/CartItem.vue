@@ -26,8 +26,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, WritableComputedRef } from 'vue'
-import { MDBListGroupItem, MDBCheckbox } from 'mdb-vue-ui-kit'
+import { PropType, WritableComputedRef, computed, defineComponent } from 'vue'
+import { MDBCheckbox, MDBListGroupItem } from 'mdb-vue-ui-kit'
 import ImageContainer from '@/components/ImageContainer.vue'
 import { ProductCartItem } from '@/types/product'
 import { store } from '@/store'

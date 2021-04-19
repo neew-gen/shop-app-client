@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ComputedRef } from 'vue'
-import { MDBContainer, MDBRow, MDBCol } from 'mdb-vue-ui-kit'
+import { ComputedRef, computed, defineComponent } from 'vue'
+import { MDBCol, MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 import CartBreadcrumb from '@/components/public-layout/PublicBreadcrumbs/CartBreadcrumb.vue'
 import { ProductCartItem } from '@/types/product'
 import CartList from '@/components/public-layout/cart/CartList/CartList.vue'

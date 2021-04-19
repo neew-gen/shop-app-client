@@ -11,8 +11,8 @@ import { MDBSpinner } from 'mdb-vue-ui-kit'
 export default defineComponent({
   name: 'Spinner',
   components: {
-    MDBSpinner
-  }
+    MDBSpinner,
+  },
 })
 </script>
 

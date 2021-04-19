@@ -16,18 +16,18 @@
 
 <script lang="ts">
 import {
-  computed,
   ComputedRef,
+  computed,
   defineComponent,
   reactive,
   ref,
-  watch
+  watch,
 } from 'vue'
 import { MDBBreadcrumb, MDBBreadcrumbItem, MDBNavbar } from 'mdb-vue-ui-kit'
 import BackButton from '@/components/BackButton.vue'
 import router from '@/router'
 import { RouteRecordName } from 'vue-router'
-import { BreadcrumbsItem, BreadcrumbsData } from '@/types/breadcumb'
+import { BreadcrumbsData, BreadcrumbsItem } from '@/types/breadcumb'
 import BREADCRUMBS_DATA from './data.json'
 import { EditListType } from '@/types'
 
@@ -37,12 +37,12 @@ export default defineComponent({
     BackButton,
     MDBBreadcrumb,
     MDBBreadcrumbItem,
-    MDBNavbar
+    MDBNavbar,
   },
   setup() {
     const state = reactive<BreadcrumbsItem>({
       items: [],
-      active: ''
+      active: '',
     })
 
     const routeName: ComputedRef<RouteRecordName> = computed(() => {
@@ -68,10 +68,10 @@ export default defineComponent({
       () => routeName.value,
       () => {
         setBreadcrumbs(routeName.value)
-      }
+      },
     )
     return { state, pushRouter }
-  }
+  },
 })
 </script>
 

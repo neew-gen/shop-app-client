@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { PropType, defineComponent } from 'vue'
 import { MDBListGroup } from 'mdb-vue-ui-kit'
 import { ProductCartItem } from '@/types/product'
 import CartListItem from '@/components/public-layout/cart/CartList/CartItem/CartItem.vue'

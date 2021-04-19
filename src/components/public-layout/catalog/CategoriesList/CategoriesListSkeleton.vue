@@ -21,9 +21,9 @@ export default defineComponent({
   components: { MDBListGroup, MDBListGroupItem },
   setup() {
     return {
-      SKELETON_COUNT
+      SKELETON_COUNT,
     }
-  }
+  },
 })
 </script>
 

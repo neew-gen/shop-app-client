@@ -1,11 +1,11 @@
-import { createStore, createLogger } from 'vuex'
+import { createLogger, createStore } from 'vuex'
 import { initialState } from './initialState'
 import { Store } from '@/types/store'
 
 import {
   actions as cartActions,
-  mutations as cartMutations,
   getters as cartGetters,
+  mutations as cartMutations,
 } from '@/store/modules/cart'
 
 const plugins = []

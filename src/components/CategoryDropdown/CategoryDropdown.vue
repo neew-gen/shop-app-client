@@ -1,5 +1,5 @@
 <template>
-  <MDBDropdown align="end" v-model="showDropdown">
+  <MDBDropdown v-model="showDropdown" align="end">
     <MDBDropdownToggle
       class="category-dropdown"
       @click="showDropdown = !showDropdown"
@@ -21,64 +21,55 @@
 </template>
 
 <script lang="ts">
+import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
+import { CategoryDropdownType } from '@/types/category'
+import { CategoryIdType } from '@/types/eventBus'
 import {
-  computed,
+  MDBDropdown,
+  MDBDropdownItem,
+  MDBDropdownMenu,
+  MDBDropdownToggle,
+} from 'mdb-vue-ui-kit'
+import {
   ComputedRef,
+  computed,
   defineComponent,
   inject,
   onUnmounted,
   reactive,
-  ref
+  ref,
 } from 'vue'
-import {
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem
-} from 'mdb-vue-ui-kit'
-import { CategoryDropdownType } from '@/types/category'
-import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
-import { CategoryIdType } from '@/types/eventBus'
-
 export default defineComponent({
   name: 'CategoryDropdown',
   components: {
     MDBDropdown,
     MDBDropdownToggle,
     MDBDropdownMenu,
-    MDBDropdownItem
+    MDBDropdownItem,
   },
   async setup() {
     const showDropdown = ref(false)
-    const state = reactive({
-      categoryId: '',
-      categoryName: ''
-    })
+    const state = reactive({ categoryId: '', categoryName: '' })
     const eventBus: any = inject('eventBus')
     eventBus.subscribe('parentUpdateCategory', (id: CategoryIdType) => {
       state.categoryId = id
     })
-
     const updateCategoryId = (id: string): void => {
       state.categoryId = id
     }
-
     const setDropdown = (id: string): void => {
       showDropdown.value = false
       updateCategoryId(id)
       eventBus.publish('childUpdateCategory', id)
     }
-
     onUnmounted(() => {
       eventBus.unsubscribe('parentUpdateCategory')
     })
-
     const fetchedItems: CategoryDropdownType[] = await GraphqlApi.fetchCategoryDropdown()
-
     const categoryName: ComputedRef<string> = computed((): string => {
       if (state.categoryId) {
         const currentCategory = fetchedItems.filter(
-          c => c.id === state.categoryId
+          (c) => c.id === state.categoryId,
         )[0]
         if (currentCategory) {
           return currentCategory.name
@@ -93,9 +84,9 @@ export default defineComponent({
       showDropdown,
       setDropdown,
       fetchedItems,
-      categoryName
+      categoryName,
     }
-  }
+  },
 })
 </script>
 

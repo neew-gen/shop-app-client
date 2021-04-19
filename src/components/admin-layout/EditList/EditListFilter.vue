@@ -37,7 +37,7 @@ export default defineComponent({
     const showClearButton = ref(false)
     // const store = useStore()
     let state = {
-      categoryId: ''
+      categoryId: '',
     }
 
     const clearFilter = (): void => {
@@ -55,7 +55,7 @@ export default defineComponent({
       eventBus.unsubscribe('childUpdateCategory')
     })
     return { showClearButton, clearFilter }
-  }
+  },
 })
 </script>
 

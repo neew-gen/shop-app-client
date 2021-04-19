@@ -20,17 +20,17 @@ export default defineComponent({
   name: 'HomeContent',
   components: {
     HomeSwiper,
-    HomeSwiperSkeleton
+    HomeSwiperSkeleton,
   },
   setup() {
     const { data: swiperData, loading: swiperLoading } = useFetch<SwipeType[]>(
       'SWR',
       'HomeContentSwiper',
       GraphqlApi.fetchAll,
-      [GET_SWIPES]
+      [GET_SWIPES],
     )
     return { swiperData, swiperLoading }
-  }
+  },
 })
 </script>
 

@@ -25,13 +25,13 @@ export default defineComponent({
   props: {
     show: {
       type: Boolean,
-      required: true
+      required: true,
     },
     changeModal: {
       type: Function,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 })
 </script>
 

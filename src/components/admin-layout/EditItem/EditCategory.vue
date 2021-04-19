@@ -39,14 +39,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, inject } from 'vue'
+import { defineComponent, inject, reactive, ref } from 'vue'
 import {
-  MDBInput,
   MDBBtn,
   MDBDropdown,
-  MDBDropdownToggle,
+  MDBDropdownItem,
   MDBDropdownMenu,
-  MDBDropdownItem
+  MDBDropdownToggle,
+  MDBInput,
 } from 'mdb-vue-ui-kit'
 import { assignFieldsForReactive } from '@/helpers'
 import router from '@/router'
@@ -60,8 +60,8 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     MDBInput,
@@ -70,7 +70,7 @@ export default defineComponent({
     MDBDropdownMenu,
     MDBBtn,
     MDBDropdownItem,
-    ImageContainer
+    ImageContainer,
   },
   async setup(props) {
     // const store = useStore()
@@ -81,10 +81,10 @@ export default defineComponent({
     const state = reactive({
       name: '',
       imgUrl: '',
-      isPublic: false
+      isPublic: false,
     })
     await GraphqlApi.fetchById<CategoryType>(GET_CATEGORY_BY_ID, props.id)
-      .then(fetchedData => {
+      .then((fetchedData) => {
         assignFieldsForReactive(state, fetchedData)
         showContent.value = true
       })
@@ -106,9 +106,9 @@ export default defineComponent({
       changeIsPublic,
       updateCategory,
       showDropdown,
-      showContent
+      showContent,
     }
-  }
+  },
 })
 </script>
 

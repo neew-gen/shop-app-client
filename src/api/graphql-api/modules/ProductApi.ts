@@ -3,9 +3,9 @@ import { ProductCreateInput, ProductUpdateInput } from '@/types/product'
 import {
   CREATE_PRODUCT,
   DELETE_PRODUCT,
-  GET_PRODUCT_BY_ID,
   GET_PRODUCTS_EDITLIST,
-  UPDATE_PRODUCT
+  GET_PRODUCT_BY_ID,
+  UPDATE_PRODUCT,
 } from '@/api/graphql-api/queries/productQueries'
 import _ from 'lodash'
 import { DocumentNode } from '@apollo/client'
@@ -16,35 +16,35 @@ export class ProductApi {
     input.id = 'p' + new Date().valueOf().toString()
     await apollo.mutate({
       mutation: CREATE_PRODUCT,
-      variables: { product: input }
+      variables: { product: input },
     })
     return input.id
   }
 
   static async updateProduct(
     id: string,
-    input: ProductUpdateInput
+    input: ProductUpdateInput,
   ): Promise<void> {
     await apollo.mutate({
       mutation: UPDATE_PRODUCT,
-      variables: { product: input, id }
+      variables: { product: input, id },
     })
   }
 
   static async deleteProduct(id: string): Promise<void> {
     await apollo.mutate({
       mutation: DELETE_PRODUCT,
-      variables: { id }
+      variables: { id },
     })
   }
 
   static async fetchProductsByCategoryId<T>(
     query: DocumentNode,
-    categoryId: string
+    categoryId: string,
   ): Promise<T> {
     const res = await apollo.query({
       query: query,
-      variables: { categoryId: categoryId }
+      variables: { categoryId: categoryId },
     })
     // We get an object with a field that contains data. We need to extract it
     const toValues: T[] = Object.values(res.data)

@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { MDBRow, MDBCol, MDBContainer } from 'mdb-vue-ui-kit'
+import { MDBCol, MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 const SKELETON_COUNT = 8
 
 export default defineComponent({
@@ -33,13 +33,13 @@ export default defineComponent({
   components: {
     MDBContainer,
     MDBRow,
-    MDBCol
+    MDBCol,
   },
   setup() {
     return {
-      SKELETON_COUNT
+      SKELETON_COUNT,
     }
-  }
+  },
 })
 </script>
 

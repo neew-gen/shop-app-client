@@ -20,9 +20,9 @@ export default defineComponent({
     const loading = inject('loading')
 
     return {
-      loading
+      loading,
     }
-  }
+  },
 })
 </script>
 

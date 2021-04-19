@@ -7,7 +7,7 @@ export const productChildren: Array<RouteRecordRaw> = [
     component: (): any =>
       import(
         /* webpackChunkName: "create-product" */ '@/views/admin-layout/product/CreateProduct.vue'
-      )
+      ),
   },
   {
     path: '/admin-panel/edit-products',
@@ -15,7 +15,7 @@ export const productChildren: Array<RouteRecordRaw> = [
     component: (): any =>
       import(
         /* webpackChunkName: "edit-products-list" */ '@/views/admin-layout/product/EditProductsList.vue'
-      )
+      ),
   },
   {
     path: '/admin-panel/edit-products/:id',
@@ -24,6 +24,6 @@ export const productChildren: Array<RouteRecordRaw> = [
       import(
         /* webpackChunkName: "edit-product" */ '@/views/admin-layout/product/EditProductSuspense.vue'
       ),
-    props: true
-  }
+    props: true,
+  },
 ]

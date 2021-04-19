@@ -5,7 +5,7 @@ export function assignFieldsForReactive(
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   inputReactiveObject: any,
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  inputFetchData: any
+  inputFetchData: any,
 ): void {
   for (const prop in inputReactiveObject) {
     inputReactiveObject[prop] = inputFetchData[prop]

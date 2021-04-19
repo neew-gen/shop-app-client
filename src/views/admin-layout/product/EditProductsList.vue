@@ -1,14 +1,14 @@
 <template>
-  <EditListSuspense entity="product" />
+  <EditList entity="product" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import EditListSuspense from '@/components/admin-layout/EditList/EditListSuspense.vue'
+import EditList from '@/components/admin-layout/EditList/EditList.vue'
 
 export default defineComponent({
   name: 'EditProductsList',
-  components: { EditListSuspense }
+  components: { EditList },
 })
 </script>
 

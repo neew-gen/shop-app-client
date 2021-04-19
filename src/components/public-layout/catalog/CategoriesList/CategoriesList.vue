@@ -1,30 +1,36 @@
 <template>
   <MDBListGroup>
-    <MDBListGroupItem
-      class="d-flex align-items-center border-0"
+    <CategoriesListItem
       v-for="(item, index) in data"
       :key="index"
-      @click="routerPush(item.id)"
-    >
-      <div class="item-image">
-        <ImageContainer
-          height="60px"
-          width="90px"
-          :img-url="item.imgUrl"
-          :name="item.name"
-        />
-      </div>
-      <div class="item-name">{{ item.name }}</div>
-    </MDBListGroupItem>
+      :categoryId="item.id"
+      :name="item.name"
+      :img-url="item.imgUrl"
+    />
+    <!--    <MDBListGroupItem-->
+    <!--      class="d-flex align-items-center border-0"-->
+    <!--      v-for="(item, index) in data"-->
+    <!--      :key="index"-->
+    <!--      @click="routerPush(item.id)"-->
+    <!--    >-->
+    <!--      <div class="item-image">-->
+    <!--        <ImageContainer-->
+    <!--          height="60px"-->
+    <!--          width="90px"-->
+    <!--          :img-url="item.imgUrl"-->
+    <!--          :name="item.name"-->
+    <!--        />-->
+    <!--      </div>-->
+    <!--      <div class="item-name">{{ item.name }}</div>-->
+    <!--    </MDBListGroupItem>-->
   </MDBListGroup>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { MDBListGroup, MDBListGroupItem } from 'mdb-vue-ui-kit'
-import router from '@/router'
+import { PropType, defineComponent } from 'vue'
+import { MDBListGroup } from 'mdb-vue-ui-kit'
 import { CategoryType } from '@/types/category'
-import ImageContainer from '@/components/ImageContainer.vue'
+import CategoriesListItem from '@/components/public-layout/catalog/CategoriesList/CategoriesListItem.vue'
 
 export default defineComponent({
   name: 'CategoriesList',
@@ -34,18 +40,8 @@ export default defineComponent({
     },
   },
   components: {
+    CategoriesListItem,
     MDBListGroup,
-    ImageContainer,
-    MDBListGroupItem,
-  },
-  setup() {
-    const routerPush = (categoryId: string): void => {
-      router.push({
-        name: 'CatalogProducts',
-        params: { categoryId },
-      })
-    }
-    return { routerPush }
   },
 })
 </script>

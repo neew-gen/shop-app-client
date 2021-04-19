@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { computed, ComputedRef, defineComponent } from 'vue'
+import { ComputedRef, computed, defineComponent } from 'vue'
 import { MDBBtn } from 'mdb-vue-ui-kit'
 import { store } from '@/store'
 

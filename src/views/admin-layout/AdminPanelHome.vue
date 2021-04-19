@@ -57,8 +57,8 @@ export default defineComponent({
   name: 'AdminPanelHome',
   components: {
     MDBContainer,
-    MDBListGroup
-  }
+    MDBListGroup,
+  },
 })
 </script>
 

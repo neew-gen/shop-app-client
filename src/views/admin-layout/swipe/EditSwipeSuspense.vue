@@ -19,13 +19,13 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     EditSwipe,
-    Spinner
-  }
+    Spinner,
+  },
 })
 </script>
 

@@ -4,19 +4,19 @@ var routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/catalog',
     name: 'Catalog',
-    component: function() {
+    component: function () {
       return import(/* webpackChunkName: "about" */ '../views/Catalog.vue')
-    }
-  }
+    },
+  },
 ]
 var router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes: routes
+  routes: routes,
 })
 export default router
 //# sourceMappingURL=index.js.map

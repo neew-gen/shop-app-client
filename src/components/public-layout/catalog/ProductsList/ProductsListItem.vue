@@ -25,8 +25,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { MDBIcon, MDBCol, mdbRipple } from 'mdb-vue-ui-kit'
+import { PropType, defineComponent } from 'vue'
+import { MDBCol, MDBIcon, mdbRipple } from 'mdb-vue-ui-kit'
 import { ProductType } from '@/types/product'
 import ImageContainer from '@/components/ImageContainer.vue'
 import router from '@/router'

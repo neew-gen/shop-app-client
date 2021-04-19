@@ -16,11 +16,11 @@ export const adminLayoutRoutes: Array<RouteRecordRaw> = [
         component: (): any =>
           import(
             /* webpackChunkName: "admin-panel-home" */ '@/views/admin-layout/AdminPanelHome.vue'
-          )
+          ),
       },
       ...productChildren,
       ...categoryChildren,
-      ...swipeChildren
-    ]
-  }
+      ...swipeChildren,
+    ],
+  },
 ]

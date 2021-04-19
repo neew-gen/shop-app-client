@@ -13,12 +13,12 @@ export default defineComponent({
   props: {
     fullSize: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
-    MDBInput
-  }
+    MDBInput,
+  },
 })
 </script>
 

@@ -19,14 +19,14 @@
 
 <script lang="ts">
 import { defineComponent, inject, reactive, ref } from 'vue'
-import { MDBInput, MDBBtn } from 'mdb-vue-ui-kit'
+import { MDBBtn, MDBInput } from 'mdb-vue-ui-kit'
 // import { useStore } from '@/store'
 import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
 import _ from 'lodash'
 const INITIAL_STATE = {
   imgUrl: '',
   title: '',
-  text: ''
+  text: '',
 }
 
 export default defineComponent({
@@ -53,7 +53,7 @@ export default defineComponent({
     //   toast.success('Swipe has been created!')
     // }
     // return { showDropdown, state, addSwipe }
-  }
+  },
 })
 </script>
 

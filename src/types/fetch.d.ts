@@ -3,5 +3,5 @@ import { Ref } from 'vue'
 
 export type Fetcher = (
   query: DocumentNode,
-  variable?: { [key: string]: string }
+  variable?: { [key: string]: string },
 ) => Promise<ApolloQueryResult<unknown>>

@@ -7,7 +7,7 @@ class EventBus implements EventBusInterface {
   public async publish(topic: string, subject: Subject): Promise<void> {
     const receivers = this.getTopicReceivers(topic)
     receivers.map(
-      receiver => new Promise(resolve => resolve(receiver(subject)))
+      (receiver) => new Promise((resolve) => resolve(receiver(subject))),
     )
   }
   private getTopicReceivers(topic: string): Receiver[] {
