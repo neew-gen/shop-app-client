@@ -9,12 +9,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import { useFetch } from '@/api/fetch-api/useFetch'
 import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
 import { GET_SWIPES } from '@/api/graphql-api/queries/swipeQueries'
-import { SwipeType } from '@/types/swipe'
 import HomeSwiper from '@/components/public-layout/home/HomeContent/HomeSwiper/HomeSwiper.vue'
 import HomeSwiperSkeleton from '@/components/public-layout/home/HomeContent/HomeSwiper/HomeSwiperSkeleton.vue'
+import { SwipeType } from '@/types/swipe'
 
 export default defineComponent({
   name: 'HomeContent',
@@ -25,9 +26,8 @@ export default defineComponent({
   setup() {
     const { data: swiperData, loading: swiperLoading } = useFetch<SwipeType[]>(
       'SWR',
-      'HomeContentSwiper',
-      GraphqlApi.fetchAll,
-      [GET_SWIPES],
+      '/home-content-swiper',
+      () => GraphqlApi.fetchAll(GET_SWIPES),
     )
     return { swiperData, swiperLoading }
   },

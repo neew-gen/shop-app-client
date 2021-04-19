@@ -1,30 +1,24 @@
 import { DocumentNode } from '@apollo/client'
 import { Ref, ref } from 'vue'
-import { Fetcher } from '@/types/fetch'
-import { SWRStrategy } from '@/api/fetch-api/strategies/SWRStrategy'
+
 import { COStrategy } from '@/api/fetch-api/strategies/COStrategy'
+import { SWRStrategy } from '@/api/fetch-api/strategies/SWRStrategy'
+import { Fetcher } from '@/types/fetch'
 
 export function useFetch<Data>(
   strategy: string,
   key: string,
   fetcher?: Fetcher,
-  fetcherArgs?: [query: DocumentNode, variable?: { [key: string]: string }],
 ): { data: Ref<Data | undefined>; loading: Ref<boolean> } {
   const data = ref(undefined)
   const loading = ref(true)
   switch (strategy) {
     case 'SWR': {
-      if (fetcher && fetcherArgs) {
-        const swr = new SWRStrategy<Data>(
-          key,
-          fetcher,
-          fetcherArgs,
-          data,
-          loading,
-        )
+      if (fetcher) {
+        const swr = new SWRStrategy<Data>(key, fetcher, data, loading)
         swr.useSWR()
+        break
       }
-      break
     }
     case 'CO': {
       const co = new COStrategy<Data>(key, data, loading)

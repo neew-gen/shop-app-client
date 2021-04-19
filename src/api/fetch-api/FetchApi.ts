@@ -1,17 +1,11 @@
 import { DocumentNode } from '@apollo/client'
-import { dataExtractor } from '@/api/fetch-api/dataExtractor'
 import _ from 'lodash'
+
+import { dataExtractor } from '@/api/fetch-api/dataExtractor'
 import { Fetcher } from '@/types/fetch'
 
 export class FetchApi<Data> {
-  constructor(
-    protected key: string,
-    protected fetcher?: Fetcher,
-    protected fetcherArgs?: [
-      query: DocumentNode,
-      variable?: { [key: string]: string },
-    ],
-  ) {}
+  constructor(protected key: string, protected fetcher?: Fetcher) {}
 
   protected async cacheExist(): Promise<boolean> {
     return await caches.has(this.key)
@@ -21,8 +15,8 @@ export class FetchApi<Data> {
     return cache?.json()
   }
   protected async fetchFromNetwork(): Promise<Data | undefined> {
-    if (this.fetcher && this.fetcherArgs) {
-      const res = await this.fetcher(...this.fetcherArgs)
+    if (this.fetcher) {
+      const res = await this.fetcher()
       if (res) {
         return dataExtractor<Data>(res)
       }

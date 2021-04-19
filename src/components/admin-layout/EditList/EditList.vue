@@ -53,8 +53,7 @@ export default defineComponent({
       const { data, loading } = useFetch<EditListType[]>(
         'SWR',
         '/products-edit-list',
-        GraphqlApi.fetchAll,
-        [GET_PRODUCTS_EDITLIST],
+        () => GraphqlApi.fetchAll(GET_PRODUCTS_EDITLIST),
       )
       return { data, loading, placeholder, pathTo }
     }
@@ -65,8 +64,7 @@ export default defineComponent({
       const { data, loading } = useFetch<EditListType[]>(
         'SWR',
         '/categories-edit-list',
-        GraphqlApi.fetchAll,
-        [GET_CATEGORIES_EDITLIST],
+        () => GraphqlApi.fetchAll(GET_CATEGORIES_EDITLIST),
       )
       return { data, loading, placeholder, pathTo }
     }

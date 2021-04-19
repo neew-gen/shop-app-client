@@ -25,12 +25,12 @@
           {{ state.isPublic === true ? 'Public' : 'Hidden' }}
         </MDBDropdownToggle>
         <MDBDropdownMenu aria-labelledby="dropdownMenuButton">
-          <MDBDropdownItem class="dropdown-item" @click="changeIsPublic(false)"
-            >Hidden</MDBDropdownItem
-          >
-          <MDBDropdownItem class="dropdown-item" @click="changeIsPublic(true)"
-            >Public</MDBDropdownItem
-          >
+          <MDBDropdownItem class="dropdown-item" @click="changeIsPublic(false)">
+            Hidden
+          </MDBDropdownItem>
+          <MDBDropdownItem class="dropdown-item" @click="changeIsPublic(true)">
+            Public
+          </MDBDropdownItem>
         </MDBDropdownMenu>
       </MDBDropdown>
       <MDBBtn color="light" @click="updateCategory()">Save changes</MDBBtn>
@@ -39,7 +39,6 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, reactive, ref } from 'vue'
 import {
   MDBBtn,
   MDBDropdown,
@@ -48,12 +47,14 @@ import {
   MDBDropdownToggle,
   MDBInput,
 } from 'mdb-vue-ui-kit'
-import { assignFieldsForReactive } from '@/helpers'
-import router from '@/router'
+import { defineComponent, inject, reactive, ref } from 'vue'
+
 import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
 import { GET_CATEGORY_BY_ID } from '@/api/graphql-api/queries/categoryQueries'
-import { CategoryType } from '@/types/category'
 import ImageContainer from '@/components/ImageContainer.vue'
+import { assignFieldsForReactive } from '@/helpers'
+import router from '@/router'
+import { CategoryType } from '@/types/category'
 
 export default defineComponent({
   name: 'EditCategory',

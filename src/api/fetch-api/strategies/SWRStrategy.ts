@@ -1,18 +1,18 @@
 // A realizing of "Stale-While-Revalidate" strategy
-import { FetchApi } from '@/api/fetch-api/FetchApi'
-import { Ref } from 'vue'
-import { Fetcher } from '@/types/fetch'
 import { DocumentNode } from '@apollo/client'
+import { Ref } from 'vue'
+
+import { FetchApi } from '@/api/fetch-api/FetchApi'
+import { Fetcher } from '@/types/fetch'
 
 export class SWRStrategy<Data> extends FetchApi<Data> {
   constructor(
     key: string,
     fetcher: Fetcher,
-    fetcherArgs: [query: DocumentNode, variable?: { [key: string]: string }],
     private data: Ref<Data | undefined>,
     private loading: Ref<boolean>,
   ) {
-    super(key, fetcher, fetcherArgs)
+    super(key, fetcher)
   }
   public async useSWR(): Promise<void> {
     const exist = await this.cacheExist()

@@ -3,11 +3,10 @@ import { store } from '@/store'
 console.log('sw!')
 self.__WB_DISABLE_DEV_LOGS = true
 
+import { CacheableResponsePlugin } from 'workbox-cacheable-response'
+import { matchPrecache, precacheAndRoute } from 'workbox-precaching'
 import { setCatchHandler, setDefaultHandler } from 'workbox-routing'
 import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies'
-
-import { matchPrecache, precacheAndRoute } from 'workbox-precaching'
-import { CacheableResponsePlugin } from 'workbox-cacheable-response'
 
 const CACHE_NAME = 'cache4'
 self.addEventListener('fetch', (event) => {
