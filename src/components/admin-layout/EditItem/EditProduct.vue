@@ -105,14 +105,14 @@ export default defineComponent({
       eventBus.unsubscribe('childUpdateCategory')
     })
 
-    await GraphqlApi.fetchById<ProductType>(GET_PRODUCT_BY_ID, props.id)
-      .then((fetchedData: any) => {
-        assignFieldsForReactive(state, fetchedData)
-        showContent.value = true
-      })
-      .catch(() => {
-        router.back()
-      })
+    // await GraphqlApi.fetchById<ProductType>(GET_PRODUCT_BY_ID, props.id)
+    //   .then((fetchedData: any) => {
+    //     assignFieldsForReactive(state, fetchedData)
+    //     showContent.value = true
+    //   })
+    //   .catch(() => {
+    //     router.back()
+    //   })
 
     const updateProduct = (): void => {
       // store.dispatch('updateProduct', { id: props.id, updateData: state })

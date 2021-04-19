@@ -11,7 +11,7 @@
 import { defineComponent } from 'vue'
 
 import { useFetch } from '@/api/fetch-api/useFetch'
-import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
+import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
 import { GET_SWIPES } from '@/api/graphql-api/queries/swipeQueries'
 import HomeSwiper from '@/components/public-layout/home/HomeContent/HomeSwiper/HomeSwiper.vue'
 import HomeSwiperSkeleton from '@/components/public-layout/home/HomeContent/HomeSwiper/HomeSwiperSkeleton.vue'
@@ -27,7 +27,7 @@ export default defineComponent({
     const { data: swiperData, loading: swiperLoading } = useFetch<SwipeType[]>(
       'SWR',
       '/home-content-swiper',
-      () => GraphqlApi.fetchAll(GET_SWIPES),
+      () => graphqlFetch(GET_SWIPES),
     )
     return { swiperData, swiperLoading }
   },

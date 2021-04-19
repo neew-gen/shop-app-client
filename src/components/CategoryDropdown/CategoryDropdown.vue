@@ -1,44 +1,56 @@
 <template>
-  <MDBDropdown v-model="showDropdown" align="end">
+  <MDBDropdown v-model="showDropdown" :align="'end'" v-if="!loading && data">
     <MDBDropdownToggle
       class="category-dropdown"
       @click="showDropdown = !showDropdown"
-      :disabled="fetchedItems.length === 0"
+      :disabled="data.length === 0"
     >
-      <span v-if="fetchedItems.length === 0">No categories</span>
+      <span v-if="data.length === 0">No categories</span>
       <span v-else> {{ categoryName }}</span>
     </MDBDropdownToggle>
     <MDBDropdownMenu aria-labelledby="dropdownMenuButton">
       <MDBDropdownItem
         class="dropdown-item"
-        v-for="(item, index) in fetchedItems"
+        v-for="(item, index) in data"
         :key="index"
         @click="setDropdown(item.id)"
-        >{{ item.name }}</MDBDropdownItem
       >
+        {{ item.name }}
+      </MDBDropdownItem>
     </MDBDropdownMenu>
+  </MDBDropdown>
+
+  <MDBDropdown v-if="loading">
+    <MDBDropdownToggle class="category-dropdown" color="primary" disabled>
+      <MDBSpinner tag="span" size="sm" />
+    </MDBDropdownToggle>
   </MDBDropdown>
 </template>
 
 <script lang="ts">
-import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
-import { CategoryDropdownType } from '@/types/category'
-import { CategoryIdType } from '@/types/eventBus'
 import {
   MDBDropdown,
   MDBDropdownItem,
   MDBDropdownMenu,
   MDBDropdownToggle,
+  MDBSpinner,
 } from 'mdb-vue-ui-kit'
 import {
-  ComputedRef,
   computed,
+  ComputedRef,
   defineComponent,
-  inject,
   onUnmounted,
   reactive,
   ref,
 } from 'vue'
+
+import { useFetch } from '@/api/fetch-api/useFetch'
+import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
+import { GET_CATEGORIES_DROPDOWN } from '@/api/graphql-api/queries/categoryQueries'
+import { eventBus } from '@/helpers/EventBus'
+import { CategoryDropdownType } from '@/types/category'
+import { CategoryIdType } from '@/types/eventBus'
+
 export default defineComponent({
   name: 'CategoryDropdown',
   components: {
@@ -46,44 +58,49 @@ export default defineComponent({
     MDBDropdownToggle,
     MDBDropdownMenu,
     MDBDropdownItem,
+    MDBSpinner,
   },
-  async setup() {
+  setup() {
     const showDropdown = ref(false)
     const state = reactive({ categoryId: '', categoryName: '' })
-    const eventBus: any = inject('eventBus')
+
     eventBus.subscribe('parentUpdateCategory', (id: CategoryIdType) => {
       state.categoryId = id
     })
+
     const updateCategoryId = (id: string): void => {
       state.categoryId = id
     }
     const setDropdown = (id: string): void => {
-      showDropdown.value = false
       updateCategoryId(id)
       eventBus.publish('childUpdateCategory', id)
+      showDropdown.value = false
     }
+
+    const { data, loading } = useFetch<CategoryDropdownType[]>(
+      'SWR',
+      '/category-dropdown',
+      () => graphqlFetch(GET_CATEGORIES_DROPDOWN),
+    )
+
+    const categoryName: ComputedRef<string> = computed((): string => {
+      if (!data.value) return 'No category'
+      if (!state.categoryId) return 'No category'
+      const currentCategory = data.value.filter(
+        (c: CategoryDropdownType) => c.id === state.categoryId,
+      )[0]
+      if (!currentCategory) return 'No category'
+      return currentCategory.name
+    })
+
     onUnmounted(() => {
       eventBus.unsubscribe('parentUpdateCategory')
-    })
-    const fetchedItems: CategoryDropdownType[] = await GraphqlApi.fetchCategoryDropdown()
-    const categoryName: ComputedRef<string> = computed((): string => {
-      if (state.categoryId) {
-        const currentCategory = fetchedItems.filter(
-          (c) => c.id === state.categoryId,
-        )[0]
-        if (currentCategory) {
-          return currentCategory.name
-        } else {
-          return 'No category'
-        }
-      } else {
-        return 'No category'
-      }
     })
     return {
       showDropdown,
       setDropdown,
-      fetchedItems,
+      data,
+      loading,
       categoryName,
     }
   },

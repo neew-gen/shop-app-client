@@ -39,19 +39,20 @@
 </template>
 
 <script lang="ts">
+import { MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow } from 'mdb-vue-ui-kit'
 import {
-  ComputedRef,
-  PropType,
   computed,
+  ComputedRef,
   defineComponent,
+  PropType,
   ref,
   watch,
 } from 'vue'
-import { MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow } from 'mdb-vue-ui-kit'
-import { ProductCartItem, ProductType } from '@/types/product'
-import ImageContainer from '@/components/ImageContainer.vue'
+
 import { useFetch } from '@/api/fetch-api/useFetch'
+import ImageContainer from '@/components/ImageContainer.vue'
 import { cartItemToCache } from '@/helpers/cacheFunctions'
+import { ProductCartItem, ProductType } from '@/types/product'
 
 export default defineComponent({
   name: 'Product',
@@ -77,17 +78,21 @@ export default defineComponent({
         isInCart.value = cartData.value.some((p) => p.id === props.data!.id)
     })
 
-    const addToCart = async (): Promise<void> => {
+    const addToCart = (): void => {
       isInCart.value = true
+      if (!props.data) return
+      const { id, name, imgUrl, price } = props.data
+      if (!(id && name && imgUrl && price)) return
+
       const product: ProductCartItem = {
-        id: props.data!.id,
-        name: props.data!.name,
-        imgUrl: props.data!.imgUrl,
-        price: props.data!.price,
+        id,
+        name,
+        imgUrl,
+        price,
         value: 1,
         checked: true,
       }
-      await cartItemToCache<ProductCartItem>('/cart-cache', product)
+      cartItemToCache<ProductCartItem>('/cart-cache', product)
     }
     return { addToCart, isInCart }
   },

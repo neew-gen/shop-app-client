@@ -9,7 +9,7 @@
 import { defineComponent } from 'vue'
 
 import { useFetch } from '@/api/fetch-api/useFetch'
-import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
+import { graphqlFetchBy } from '@/api/graphql-api/GraphqlApi'
 import { GET_PRODUCT_BY_ID } from '@/api/graphql-api/queries/productQueries'
 import Product from '@/components/public-layout/catalog/Product/Product.vue'
 import ProductSkeleton from '@/components/public-layout/catalog/Product/ProductSkeleton.vue'
@@ -28,7 +28,7 @@ export default defineComponent({
     const { data, loading } = useFetch<ProductType>(
       'SWR',
       `/catalog-product-${props.id}`,
-      () => GraphqlApi.fetchBy(GET_PRODUCT_BY_ID, { id: props.id }),
+      () => graphqlFetchBy(GET_PRODUCT_BY_ID, { id: props.id }),
     )
     return { data, loading }
   },

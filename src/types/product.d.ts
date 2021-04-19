@@ -8,12 +8,11 @@ export type ProductType = {
 }
 
 export type ProductCreateInput = {
-  id: string
   name: string
   imgUrl: string
   price: number
   description: string
-  categoryId: string
+  categoryId?: string
 }
 
 export type ProductUpdateInput = {

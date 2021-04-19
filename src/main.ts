@@ -1,12 +1,16 @@
 import 'mdb-vue-ui-kit/css/mdb.min.css'
-import { createApp, ref } from 'vue'
-import App from './App.vue'
 import './registerServiceWorker'
-import router from './router'
-import Toaster from '@meforma/vue-toaster' // https://github.com/MeForma/vue-toaster
-import { eventBus } from '@/helpers/EventBus'
-import appLoader from '@/helpers/appLoader'
 import 'skeleton-screen-css' // https://www.npmjs.com/package/skeleton-screen-css
+import 'vue-toastification/dist/index.css'
+
+import { createApp, ref } from 'vue'
+import Toast, { PluginOptions } from 'vue-toastification' // https://github.com/Maronato/vue-toastification/tree/next
+
+import appLoader from '@/helpers/appLoader'
+
+import App from './App.vue'
+import router from './router'
+import { store } from '@/store'
 
 // turn off when development is in progress
 // import runtime from 'serviceworker-webpack-plugin/lib/runtime'
@@ -16,20 +20,18 @@ import 'skeleton-screen-css' // https://www.npmjs.com/package/skeleton-screen-cs
 //     runtime.register()
 //   }
 // }
+const toastOptions: PluginOptions = {
+  maxToasts: 4,
+  timeout: 3000,
+}
 
 const app = createApp(App)
-app.provide('eventBus', eventBus)
 
 const loading = ref(true)
 app
-  // .use(store)
+  .use(store)
   .use(router)
-  .use(Toaster, {
-    position: 'top-right',
-    duration: 1000,
-    maxToasts: 2,
-  })
-  .provide('toast', app.config.globalProperties.$toast)
+  .use(Toast, toastOptions)
   .provide('loading', loading)
   .mount('#app')
 

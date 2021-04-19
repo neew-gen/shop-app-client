@@ -9,7 +9,7 @@
 import { defineComponent } from 'vue'
 
 import { useFetch } from '@/api/fetch-api/useFetch'
-import { GraphqlApi } from '@/api/graphql-api/GraphqlApi'
+import { graphqlFetchBy } from '@/api/graphql-api/GraphqlApi'
 import { GET_PRODUCTS_CATALOG_LIST_BY_CATEGORY_ID } from '@/api/graphql-api/queries/productQueries'
 import ProductsList from '@/components/public-layout/catalog/ProductsList/ProductsList.vue'
 import ProductsListSkeleton from '@/components/public-layout/catalog/ProductsList/ProductsListSkeleton.vue'
@@ -32,7 +32,7 @@ export default defineComponent({
       'SWR',
       `/catalog-products-${props.categoryId}`,
       () =>
-        GraphqlApi.fetchBy(GET_PRODUCTS_CATALOG_LIST_BY_CATEGORY_ID, {
+        graphqlFetchBy(GET_PRODUCTS_CATALOG_LIST_BY_CATEGORY_ID, {
           categoryId: props.categoryId,
         }),
     )

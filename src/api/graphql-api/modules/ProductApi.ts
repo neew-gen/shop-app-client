@@ -1,24 +1,26 @@
+import { DocumentNode } from '@apollo/client'
+import _ from 'lodash'
+
 import { apollo } from '@/api/graphql-api/apollo'
-import { ProductCreateInput, ProductUpdateInput } from '@/types/product'
 import {
   CREATE_PRODUCT,
   DELETE_PRODUCT,
-  GET_PRODUCTS_EDITLIST,
   GET_PRODUCT_BY_ID,
+  GET_PRODUCTS_EDITLIST,
   UPDATE_PRODUCT,
 } from '@/api/graphql-api/queries/productQueries'
-import _ from 'lodash'
-import { DocumentNode } from '@apollo/client'
+import { ProductCreateInput, ProductUpdateInput } from '@/types/product'
 
 export class ProductApi {
   // Method creates a new product and returns id.
-  static async createProduct(input: ProductCreateInput): Promise<string> {
-    input.id = 'p' + new Date().valueOf().toString()
+  static async createProduct(input: ProductCreateInput): Promise<void> {
+    // input.id = 'p' + new Date().valueOf().toString()
+    console.log(input)
     await apollo.mutate({
       mutation: CREATE_PRODUCT,
       variables: { product: input },
     })
-    return input.id
+    // return input.id
   }
 
   static async updateProduct(

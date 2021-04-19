@@ -9,18 +9,18 @@ import {
 
 export class SwipeApi {
   // Method creates a new swipe and returns id.
-  static async createSwipe(input: SwipeData): Promise<string> {
-    const id = 's' + new Date().valueOf().toString()
-    const createSwipeInput = {
-      id,
-      swipeData: input,
-    }
-    await apollo.mutate({
-      mutation: CREATE_SWIPE,
-      variables: { createSwipeInput },
-    })
-    return id
-  }
+  // static async createSwipe(input: SwipeData): Promise<string> {
+  //   const id = 's' + new Date().valueOf().toString()
+  //   const createSwipeInput = {
+  //     id,
+  //     swipeData: input,
+  //   }
+  //   await apollo.mutate({
+  //     mutation: CREATE_SWIPE,
+  //     variables: { createSwipeInput },
+  //   })
+  //   return id
+  // }
 
   static async updateIndex(
     updateIndexInput: UpdateIndexInput[],

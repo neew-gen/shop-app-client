@@ -14,14 +14,14 @@ import { DocumentNode } from '@apollo/client'
 
 export class CategoryApi {
   // Method creates a new category and returns id.
-  static async createCategory(input: CategoryCreateInput): Promise<string> {
-    input.id = 'c' + new Date().valueOf().toString()
-    await apollo.mutate({
-      mutation: CREATE_CATEGORY,
-      variables: { category: input },
-    })
-    return input.id
-  }
+  // static async createCategory(input: CategoryCreateInput): Promise<string> {
+  //   input.id = 'c' + new Date().valueOf().toString()
+  //   await apollo.mutate({
+  //     mutation: CREATE_CATEGORY,
+  //     variables: { category: input },
+  //   })
+  //   return input.id
+  // }
 
   static async updateCategory(
     id: string,

@@ -52,14 +52,14 @@ export default defineComponent({
       imgUrl: '',
     })
 
-    await GraphqlApi.fetchById<SwipeType>(GET_SWIPE_BY_ID, props.id)
-      .then((fetchedData: any) => {
-        assignFieldsForReactive(state, fetchedData.swipeData)
-        showContent.value = true
-      })
-      .catch(() => {
-        router.back()
-      })
+    // await GraphqlApi.fetchById<SwipeType>(GET_SWIPE_BY_ID, props.id)
+    //   .then((fetchedData: any) => {
+    //     assignFieldsForReactive(state, fetchedData.swipeData)
+    //     showContent.value = true
+    //   })
+    //   .catch(() => {
+    //     router.back()
+    //   })
 
     const editSwipe = (): void => {
       // store.dispatch('updateSwipe', {

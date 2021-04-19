@@ -25,16 +25,17 @@ export const GET_PRODUCTS_EDITLIST = gql(`
 `)
 
 export const CREATE_PRODUCT = gql(`
-      mutation CreateProduct($product: ProductInput!) {
-        createProduct(product: $product) {
-          id
-          name
-          imgUrl
-          price
-          description
-          categoryId
-        }
-      }`)
+ mutation CreateProduct($product: ProductInput!) {
+   createProduct(product: $product) {
+     id
+     name
+     imgUrl
+     price
+     description
+     categoryId
+   }
+ }
+ `)
 
 export const UPDATE_PRODUCT = gql(`
       mutation UpdateProduct($product: UpdateProductInput!, $id: String!) {

@@ -17,8 +17,8 @@ export function useFetch<Data>(
       if (fetcher) {
         const swr = new SWRStrategy<Data>(key, fetcher, data, loading)
         swr.useSWR()
-        break
       }
+      break
     }
     case 'CO': {
       const co = new COStrategy<Data>(key, data, loading)

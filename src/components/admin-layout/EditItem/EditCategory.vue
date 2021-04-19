@@ -84,14 +84,14 @@ export default defineComponent({
       imgUrl: '',
       isPublic: false,
     })
-    await GraphqlApi.fetchById<CategoryType>(GET_CATEGORY_BY_ID, props.id)
-      .then((fetchedData) => {
-        assignFieldsForReactive(state, fetchedData)
-        showContent.value = true
-      })
-      .catch(() => {
-        router.back()
-      })
+    // await GraphqlApi.fetchById<CategoryType>(GET_CATEGORY_BY_ID, props.id)
+    //   .then((fetchedData) => {
+    //     assignFieldsForReactive(state, fetchedData)
+    //     showContent.value = true
+    //   })
+    //   .catch(() => {
+    //     router.back()
+    //   })
 
     const changeIsPublic = (newValue: boolean): void => {
       showDropdown.value = false

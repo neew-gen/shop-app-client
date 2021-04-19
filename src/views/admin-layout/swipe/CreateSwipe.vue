@@ -1,58 +1,97 @@
 <template>
-  <div>
-    <!--    <div class="mb-2">-->
-    <!--      <Swipe :data="state" />-->
-    <!--    </div>-->
-    <!--    <MDBInput-->
-    <!--      class="mb-2"-->
-    <!--      label="Image Url"-->
-    <!--      type="url"-->
-    <!--      v-model="state.imgUrl"-->
-    <!--    />-->
-    <!--    <MDBInput class="mb-2 mt-2" label="Swipe title" v-model="state.title" />-->
-    <!--    <MDBInput class="mb-2 mt-2" label="Swipe text" v-model="state.text" />-->
-    <!--    <div class="d-flex justify-content-end m-1">-->
-    <!--      <MDBBtn color="light" @click="addSwipe()">Add Swipe</MDBBtn>-->
-    <!--    </div>-->
-  </div>
+  <MDBContainer>
+    <MDBRow tag="form" class="g-3" @submit.prevent="onSubmit">
+      <MDBCol col="12">
+        <Swipe :data="values" />
+      </MDBCol>
+
+      <MDBCol col="12">
+        <MDBInput label="Image Url" v-model="values.imgUrl" />
+        <ErrorField>{{ errors.imgUrl }}</ErrorField>
+      </MDBCol>
+
+      <MDBCol col="12">
+        <MDBInput label="Swipe title" v-model="values.title" />
+        <ErrorField>{{ errors.title }}</ErrorField>
+      </MDBCol>
+
+      <MDBCol col="12">
+        <MDBTextarea label="Swipe text" rows="4" v-model="values.text" />
+        <ErrorField>{{ errors.text }}</ErrorField>
+      </MDBCol>
+
+      <MDBCol col="12" class="d-flex justify-content-end">
+        <MDBBtn color="light" type="submit" :disabled="!meta.valid">
+          Add Swipe
+        </MDBBtn>
+      </MDBCol>
+    </MDBRow>
+  </MDBContainer>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, reactive, ref } from 'vue'
-import { MDBBtn, MDBInput } from 'mdb-vue-ui-kit'
-// import { useStore } from '@/store'
+import {
+  MDBBtn,
+  MDBCol,
+  MDBContainer,
+  MDBInput,
+  MDBRow,
+  MDBTextarea,
+} from 'mdb-vue-ui-kit'
+import { useField, useForm } from 'vee-validate'
+import { defineComponent } from 'vue'
+import { useToast } from 'vue-toastification'
+import { object, string } from 'yup'
+
+import { graphqlCreate } from '@/api/graphql-api/GraphqlApi'
 import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
-import _ from 'lodash'
-const INITIAL_STATE = {
-  imgUrl: '',
-  title: '',
-  text: '',
-}
+import { SwipeData } from '@/types/swipe'
+import ErrorField from '@/views/admin-layout/ErrorField.vue'
 
 export default defineComponent({
   name: 'CreateSwipe',
   components: {
-    // Swipe,
-    // MDBInput,
-    // MDBBtn
+    ErrorField,
+    MDBContainer,
+    MDBRow,
+    MDBCol,
+    Swipe,
+    MDBInput,
+    MDBTextarea,
+    MDBBtn,
   },
   setup() {
-    // const store = useStore()
-    // const toast: any = inject('toast')
-    // const showDropdown = ref(false)
-    //
-    // let state = reactive({ ...INITIAL_STATE })
-    // const resetState = (): void => {
-    //   Object.assign(state, { ...INITIAL_STATE })
-    // }
-    //
-    // const addSwipe = (): void => {
-    //   const unboundData = Object.assign({}, state)
-    //   store.dispatch('createSwipe', unboundData)
-    //   resetState()
-    //   toast.success('Swipe has been created!')
-    // }
-    // return { showDropdown, state, addSwipe }
+    const toast = useToast()
+
+    const schema = object({
+      title: string().required().min(4).label('Swipe title'),
+      imgUrl: string().required().url().label('Image URL'),
+      text: string().required().min(10).label('Swipe text'),
+    })
+    const { values, errors, meta, resetForm } = useForm({
+      validationSchema: schema,
+      initialValues: { title: '', imgUrl: '', text: '' },
+    })
+    useField<string>('title')
+    useField<string>('imgUrl')
+    useField<string>('text')
+
+    const reset = (): void => {
+      resetForm()
+      meta.value.valid = false
+    }
+
+    const onSubmit = (): void => {
+      const { title, imgUrl, text } = values
+      if (!(title && imgUrl && text)) return
+
+      graphqlCreate<SwipeData>('swipe', { title, imgUrl, text })
+
+      reset()
+      toast.success('Swipe has been created!')
+    }
+
+    return { values, errors, meta, onSubmit }
   },
 })
 </script>
