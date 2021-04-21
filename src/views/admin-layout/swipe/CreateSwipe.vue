@@ -46,7 +46,7 @@ import { object, string } from 'yup'
 import { graphqlCreate } from '@/api/graphql-api/GraphqlApi'
 import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
 import { SwipeData } from '@/types/swipe'
-import ErrorField from '@/views/admin-layout/ErrorField.vue'
+import ErrorField from '@/components/ErrorField.vue'
 
 export default defineComponent({
   name: 'CreateSwipe',

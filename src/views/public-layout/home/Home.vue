@@ -2,43 +2,37 @@
   <div>
     <HomeNavbar />
     <MDBContainer fluid>
-      <HomeContent />
-      <!--      <HomeSearchContent v-else />-->
+      <HomeContent v-if="!fullSizeSearch" />
+      <HomeSearchContent v-if="fullSizeSearch" />
     </MDBContainer>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onUnmounted, ref } from 'vue'
 import { MDBContainer } from 'mdb-vue-ui-kit'
-import HomeNavbar from '@/components/public-layout/home/HomeHavbar/HomeNavbar.vue'
-import { eventBus } from '@/helpers/EventBus'
+import { computed, ComputedRef, defineComponent } from 'vue'
+
 import HomeContent from '@/components/public-layout/home/HomeContent/HomeContent.vue'
+import HomeNavbar from '@/components/public-layout/home/HomeHavbar/HomeNavbar.vue'
 import HomeSearchContent from '@/components/public-layout/home/HomeSearchContent/HomeSearchContent.vue'
-// import Carousel from '@/components/Carousel.vue'
-// import HomeList from '@/components/HomeList/index.vue'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'Home',
   components: {
-    // HomeSearchContent,
+    HomeSearchContent,
     HomeContent,
     HomeNavbar,
     MDBContainer,
   },
-  // components: { HomeList, Carousel }
   setup() {
-    const eventBus: any = inject('eventBus')
-    const fullSizeSearch = ref(false)
-    const loading = inject('loading')
+    const store = useStore()
 
-    eventBus.subscribe('updateSearchSize', (newValue: any) => {
-      fullSizeSearch.value = newValue
+    const fullSizeSearch: ComputedRef<boolean> = computed(() => {
+      return store.getters.getFullSizeSearch
     })
-    onUnmounted(() => {
-      eventBus.unsubscribe('updateSearchSize')
-    })
-    return { fullSizeSearch, loading }
+
+    return { fullSizeSearch }
   },
 })
 </script>

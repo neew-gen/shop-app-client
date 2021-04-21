@@ -1,6 +1,11 @@
 import { createLogger, createStore } from 'vuex'
 import { initialState } from './initialState'
 import { Store } from '@/types/store'
+import {
+  actions as variablesActions,
+  getters as variablesGetters,
+  mutations as variablesMutations,
+} from '@/store/modules/variables'
 
 import {
   actions as cartActions,
@@ -16,12 +21,15 @@ if (process.env.NODE_ENV === 'development') {
 export const store = createStore({
   state: initialState,
   actions: {
+    ...variablesActions,
     ...cartActions,
   },
   mutations: {
+    ...variablesMutations,
     ...cartMutations,
   },
   getters: {
+    ...variablesGetters,
     ...cartGetters,
   },
   plugins,

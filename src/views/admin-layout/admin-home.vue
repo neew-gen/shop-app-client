@@ -6,12 +6,12 @@
       <MDBListGroup horizontal>
         <router-link
           class="list-group-item flex-fill"
-          :to="{ name: 'CreateProduct' }"
+          :to="{ name: 'create-product' }"
           >Add product</router-link
         >
         <router-link
           class="list-group-item flex-fill"
-          :to="{ name: 'EditProductsList' }"
+          :to="{ name: 'edit-products' }"
           >Edit products</router-link
         >
       </MDBListGroup>
@@ -21,12 +21,12 @@
       <MDBListGroup horizontal>
         <router-link
           class="list-group-item flex-fill"
-          :to="{ name: 'CreateCategory' }"
+          :to="{ name: 'create-category' }"
           >Add category</router-link
         >
         <router-link
           class="list-group-item flex-fill"
-          :to="{ name: 'EditCategoriesList' }"
+          :to="{ name: 'edit-categories' }"
           >Edit categories</router-link
         >
       </MDBListGroup>
@@ -54,7 +54,7 @@ import { defineComponent } from 'vue'
 import { MDBContainer, MDBListGroup } from 'mdb-vue-ui-kit'
 
 export default defineComponent({
-  name: 'AdminPanelHome',
+  name: 'admin-home',
   components: {
     MDBContainer,
     MDBListGroup,

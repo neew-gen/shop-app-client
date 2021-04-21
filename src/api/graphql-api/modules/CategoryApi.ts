@@ -23,15 +23,15 @@ export class CategoryApi {
   //   return input.id
   // }
 
-  static async updateCategory(
-    id: string,
-    input: CategoryUpdateInput,
-  ): Promise<void> {
-    const res = await apollo.mutate({
-      mutation: UPDATE_CATEGORY,
-      variables: { category: input, id },
-    })
-  }
+  // static async updateCategory(
+  //   id: string,
+  //   input: CategoryUpdateInput,
+  // ): Promise<void> {
+  //   const res = await apollo.mutate({
+  //     mutation: UPDATE_CATEGORY,
+  //     variables: { category: input, id },
+  //   })
+  // }
 
   static async deleteCategory(id: string): Promise<void> {
     await apollo.mutate({

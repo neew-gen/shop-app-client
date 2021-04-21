@@ -23,6 +23,15 @@ export const GET_PRODUCTS_EDITLIST = gql(`
     }
   }
 `)
+export const GET_PRODUCTS_EDITLIST_BY_CATEGORY_ID = gql(`
+      query ProductsByCategoryId($categoryId: String!) {
+        productsByCategoryId(categoryId: $categoryId) {
+          id
+          name
+          imgUrl
+          categoryId
+        }
+      }`)
 
 export const CREATE_PRODUCT = gql(`
  mutation CreateProduct($product: ProductInput!) {

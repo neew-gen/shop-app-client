@@ -1,42 +1,42 @@
 {
-  "AdminPanelHome": {
-    "items": [{ "name": "Admin Panel", "path": "AdminPanelHome" }],
-    "active": "AdminPanelHome"
+  "admin-home": {
+    "items": [{ "name": "Admin Panel", "path": "admin-home" }],
+    "active": "admin-home"
   },
-  "CreateProduct": {
+  "create-product": {
     "items": [
-      { "name": "Admin Panel", "path": "AdminPanelHome" },
-      { "name": "Add Product", "path": "CreateProduct" }
+      { "name": "Admin Panel", "path": "admin-home" },
+      { "name": "Add Product", "path": "create-product" }
     ],
-    "active": "CreateProduct"
+    "active": "create-product"
   },
-  "EditProductsList": {
+  "edit-products": {
     "items": [
-      { "name": "Admin Panel", "path": "AdminPanelHome" },
-      { "name": "Edit Products", "path": "EditProductsList" }
+      { "name": "Admin Panel", "path": "admin-home" },
+      { "name": "Edit Products", "path": "edit-products" }
     ],
-    "active": "EditProductsList"
+    "active": "edit-products"
   },
-  "EditProductSuspense": {
+  "edit-product": {
     "items": [
-      { "name": "Admin Panel", "path": "AdminPanelHome" },
-      { "name": "Product Edit", "path": "EditProductSuspense" }
+      { "name": "Admin Panel", "path": "admin-home" },
+      { "name": "Product Edit", "path": "edit-product" }
     ],
-    "active": "EditProductSuspense"
+    "active": "edit-product"
   },
-  "CreateCategory": {
+  "create-category": {
     "items": [
-      { "name": "Admin Panel", "path": "AdminPanelHome" },
-      { "name": "Add Category", "path": "CreateCategory" }
+      { "name": "Admin Panel", "path": "admin-home" },
+      { "name": "Add Category", "path": "create-category" }
     ],
-    "active": "CreateCategory"
+    "active": "create-category"
   },
-  "EditCategoriesList": {
+  "edit-categories": {
     "items": [
-      { "name": "Admin Panel", "path": "AdminPanelHome" },
-      { "name": "Edit Categories", "path": "EditCategoriesList" }
+      { "name": "Admin Panel", "path": "admin-home" },
+      { "name": "Edit Categories", "path": "edit-categories" }
     ],
-    "active": "EditCategoriesList"
+    "active": "edit-categories"
   },
   "EditCategorySuspense": {
     "items": [

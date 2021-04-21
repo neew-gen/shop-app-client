@@ -3,26 +3,26 @@ import { RouteRecordRaw } from 'vue-router'
 export const categoryChildren: Array<RouteRecordRaw> = [
   {
     path: '/admin-panel/create-category',
-    name: 'CreateCategory',
+    name: 'create-category',
     component: (): any =>
       import(
-        /* webpackChunkName: "create-category" */ '@/views/admin-layout/category/CreateCategory.vue'
+        /* webpackChunkName: "create-category" */ '@/views/admin-layout/category/create-category.vue'
       ),
   },
   {
     path: '/admin-panel/edit-categories',
-    name: 'EditCategoriesList',
+    name: 'edit-categories',
     component: (): any =>
       import(
-        /* webpackChunkName: "edit-categories-list" */ '@/views/admin-layout/category/EditCategoriesList.vue'
+        /* webpackChunkName: "edit-categories-list" */ '@/views/admin-layout/category/edit-categories.vue'
       ),
   },
   {
     path: '/admin-panel/edit-categories/:id',
-    name: 'EditCategorySuspense',
+    name: 'edit-category',
     component: (): any =>
       import(
-        /* webpackChunkName: "edit-product" */ '@/views/admin-layout/category/EditCategorySuspense.vue'
+        /* webpackChunkName: "edit-category" */ '@/views/admin-layout/category/edit-category.vue'
       ),
     props: true,
   },

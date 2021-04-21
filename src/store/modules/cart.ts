@@ -1,16 +1,16 @@
+import { watch } from 'vue'
 import { GetterTree, MutationTree } from 'vuex'
 
-import { Mutations } from '@/types/store/mutations'
-import { Actions } from '@/types/store/actions'
-import { State } from '@/types/store/state'
-import { useFetch } from '@/api/fetch-api/useFetch'
-import { ProductCartItem } from '@/types/product'
-import { watch } from 'vue'
+import { awaitUseFetch, useFetch } from '@/api/fetch-api/useFetch'
 import {
   deleteCacheSelected,
   updateCacheAllChecked,
   updateCartItemCache,
 } from '@/helpers/cacheFunctions'
+import { ProductCartItem } from '@/types/product'
+import { Actions } from '@/types/store/actions'
+import { Mutations } from '@/types/store/mutations'
+import { State } from '@/types/store/state'
 
 /*
    ---------------------- Actions -------------------------------
@@ -19,31 +19,28 @@ export type ActionsPayload = {
   fetchCartList: [void, Promise<void>]
   updateCartItem: [
     { id: string; propName: string; propValue: string | number },
-    Promise<void>,
+    void,
   ]
-  updateAllChecked: [boolean, Promise<void>]
-  deleteSelected: [void, Promise<void>]
+  updateAllChecked: [boolean, void]
+  deleteSelected: [void, void]
 }
 
 export const actions: Actions<ActionsPayload> = {
   async fetchCartList({ commit }) {
-    const { data, loading } = useFetch<ProductCartItem[]>('CO', '/cart-cache')
-    const unwatch = watch(loading, () => {
-      if (data.value) commit('fetchCartList', data.value)
-      unwatch()
-    })
+    const res = await awaitUseFetch<ProductCartItem[]>('CO', '/cart-cache')
+    if (res) commit('fetchCartList', res)
   },
-  async updateCartItem({ commit }, { id, propName, propValue }) {
-    await updateCartItemCache(id, propName, propValue)
+  updateCartItem({ commit }, { id, propName, propValue }) {
     commit('updateCartItem', { id, propName, propValue })
+    updateCartItemCache(id, propName, propValue)
   },
-  async updateAllChecked({ commit }, value) {
-    await updateCacheAllChecked(value)
+  updateAllChecked({ commit }, value) {
     commit('updateAllChecked', value)
+    updateCacheAllChecked(value)
   },
-  async deleteSelected({ commit }) {
-    await deleteCacheSelected()
+  deleteSelected({ commit }) {
     commit('deleteSelected', (null as unknown) as void)
+    deleteCacheSelected()
   },
 }
 /*

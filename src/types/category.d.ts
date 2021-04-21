@@ -22,8 +22,8 @@ export type CategoryDropdownType = {
   name: string
 }
 
-export type CategoriesCatalogList = {
-  data: {
-    categoriesPublic: CategoryType[]
-  }
+export type CategoryEditItem = {
+  id: string
+  imgUrl: string
+  name: string
 }

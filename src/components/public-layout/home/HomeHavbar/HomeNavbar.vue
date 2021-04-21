@@ -9,10 +9,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref } from 'vue'
 import { MDBBtn, MDBIcon, MDBNavbar } from 'mdb-vue-ui-kit'
+import { computed, ComputedRef, defineComponent } from 'vue'
+
 import HomeNavbarBrand from '@/components/public-layout/home/HomeHavbar/HomeNavbarBrand.vue'
 import HomeNavbarSearch from '@/components/public-layout/home/HomeHavbar/HomeNavbarSearch.vue'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'HomeNavbar',
@@ -24,12 +26,14 @@ export default defineComponent({
     MDBIcon,
   },
   setup() {
-    const eventBus: any = inject('eventBus')
-    const fullSizeSearch = ref(false)
+    const store = useStore()
+
+    const fullSizeSearch: ComputedRef<boolean> = computed(() => {
+      return store.getters.getFullSizeSearch
+    })
 
     const setSizeSearch = (newValue: boolean): void => {
-      fullSizeSearch.value = newValue
-      eventBus.publish('updateSearchSize', newValue)
+      store.dispatch('updateFullSizeSearch', newValue)
     }
     return { fullSizeSearch, setSizeSearch }
   },

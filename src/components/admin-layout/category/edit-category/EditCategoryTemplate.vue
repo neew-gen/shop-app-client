@@ -4,10 +4,12 @@
       <MDBCol col="12">
         <CategoriesListItem :name="values.name" :img-url="values.imgUrl" />
       </MDBCol>
+
       <MDBCol col="12">
         <MDBInput label="Category Name" name="name" v-model="values.name" />
         <ErrorField> {{ errors.name }} </ErrorField>
       </MDBCol>
+
       <MDBCol col="12">
         <MDBInput
           label="Image Url"
@@ -17,6 +19,7 @@
         />
         <ErrorField> {{ errors.imgUrl }} </ErrorField>
       </MDBCol>
+
       <MDBCol col="12" class="d-flex justify-content-between">
         <!--suppress HtmlDeprecatedAttribute -->
         <MDBDropdown align="start" v-model="showDropdown">
@@ -43,9 +46,13 @@
           </MDBDropdownMenu>
         </MDBDropdown>
 
-        <MDBBtn color="light" type="submit" :disabled="!meta.valid"
-          >Add Category</MDBBtn
+        <MDBBtn
+          color="light"
+          type="submit"
+          :disabled="!meta.dirty || !meta.valid"
         >
+          Save changes
+        </MDBBtn>
       </MDBCol>
     </MDBRow>
   </MDBContainer>
@@ -68,13 +75,15 @@ import { defineComponent, ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import { boolean, object, string } from 'yup'
 
-import { graphqlCreate } from '@/api/graphql-api/GraphqlApi'
+import { awaitUseFetch } from '@/api/fetch-api/useFetch'
+import { graphqlFetchBy, graphqlUpdate } from '@/api/graphql-api/GraphqlApi'
+import { GET_CATEGORY_BY_ID } from '@/api/graphql-api/queries/categoryQueries'
+import ErrorField from '@/components/ErrorField.vue'
 import CategoriesListItem from '@/components/public-layout/catalog/CategoriesList/CategoriesListItem.vue'
-import { CategoryCreateInput } from '@/types/category'
-import ErrorField from '@/views/admin-layout/ErrorField.vue'
+import { CategoryType, CategoryUpdateInput } from '@/types/category'
 
 export default defineComponent({
-  name: 'CreateCategory',
+  name: 'EditCategoryTemplate',
   components: {
     ErrorField,
     CategoriesListItem,
@@ -88,7 +97,13 @@ export default defineComponent({
     MDBCol,
     MDBContainer,
   },
-  setup() {
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+  },
+  async setup(props) {
     const toast = useToast()
 
     const showDropdown = ref(false)
@@ -98,7 +113,7 @@ export default defineComponent({
       imgUrl: string().required().url().label('Image URL'),
       isPublic: boolean().required().oneOf([false, true]),
     })
-    const { values, errors, meta, resetForm } = useForm({
+    const { values, errors, meta } = useForm({
       validationSchema: schema,
       initialValues: { name: '', imgUrl: '', isPublic: true },
     })
@@ -111,23 +126,25 @@ export default defineComponent({
       showDropdown.value = false
     }
     const reset = (): void => {
-      resetForm()
       meta.value.valid = false
     }
 
     const onSubmit = (): void => {
-      const { name, imgUrl, isPublic } = values
-      if (!(name && imgUrl && isPublic)) return
-
-      graphqlCreate<CategoryCreateInput>('category', {
-        name,
-        imgUrl,
-        isPublic,
-      })
-
+      graphqlUpdate<CategoryUpdateInput>('category', props.id, values)
       reset()
-      toast.success('Category has been created!')
+      toast.success('Category has been edited!')
     }
+    const res = await awaitUseFetch<CategoryType>(
+      'SWR',
+      `/edit-product-${props.id}`,
+      () => graphqlFetchBy(GET_CATEGORY_BY_ID, { id: props.id! }),
+    )
+    // TODO need to improve this
+    const { name, imgUrl, isPublic } = res!
+    values.name = meta.value.initialValues.name = name
+    values.imgUrl = meta.value.initialValues.imgUrl = imgUrl
+    values.isPublic = meta.value.initialValues.isPublic = isPublic
+
     return {
       showDropdown,
       values,

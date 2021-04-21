@@ -3,26 +3,26 @@ import { RouteRecordRaw } from 'vue-router'
 export const productChildren: Array<RouteRecordRaw> = [
   {
     path: '/admin-panel/create-product',
-    name: 'CreateProduct',
+    name: 'create-product',
     component: (): any =>
       import(
-        /* webpackChunkName: "create-product" */ '@/views/admin-layout/product/CreateProduct.vue'
+        /* webpackChunkName: "create-product" */ '@/views/admin-layout/product/create-product.vue'
       ),
   },
   {
     path: '/admin-panel/edit-products',
-    name: 'EditProductsList',
+    name: 'edit-products',
     component: (): any =>
       import(
-        /* webpackChunkName: "edit-products-list" */ '@/views/admin-layout/product/EditProductsList.vue'
+        /* webpackChunkName: "edit-products" */ '@/views/admin-layout/product/edit-products.vue'
       ),
   },
   {
     path: '/admin-panel/edit-products/:id',
-    name: 'EditProductSuspense',
+    name: 'edit-product',
     component: (): any =>
       import(
-        /* webpackChunkName: "edit-product" */ '@/views/admin-layout/product/EditProductSuspense.vue'
+        /* webpackChunkName: "edit-product" */ '@/views/admin-layout/product/edit-product.vue'
       ),
     props: true,
   },

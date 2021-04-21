@@ -31,3 +31,10 @@ export type ProductCartItem = {
   value: number
   checked: boolean
 }
+
+export type ProductEditItem = {
+  id: string
+  imgUrl: string
+  name: string
+  categoryId: string
+}

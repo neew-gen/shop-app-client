@@ -1,17 +1,20 @@
 <template>
-  <div class="d-flex justify-content-center align-items-center custom-spinner">
+  <MDBCol
+    class="d-flex justify-content-center align-items-center custom-spinner"
+  >
     <MDBSpinner color="primary" />
-  </div>
+  </MDBCol>
 </template>
 
 <script lang="ts">
+import { MDBCol, MDBSpinner } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
-import { MDBSpinner } from 'mdb-vue-ui-kit'
 
 export default defineComponent({
   name: 'Spinner',
   components: {
     MDBSpinner,
+    MDBCol,
   },
 })
 </script>

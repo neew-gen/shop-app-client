@@ -12,10 +12,10 @@ export const adminLayoutRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        name: 'AdminPanelHome',
+        name: 'admin-home',
         component: (): any =>
           import(
-            /* webpackChunkName: "admin-panel-home" */ '@/views/admin-layout/AdminPanelHome.vue'
+            /* webpackChunkName: "admin-panel-home" */ '@/views/admin-layout/admin-home.vue'
           ),
       },
       ...productChildren,

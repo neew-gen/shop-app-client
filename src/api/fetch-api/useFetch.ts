@@ -26,32 +26,31 @@ export function useFetch<Data>(
       break
     }
   }
-  // ;(async (): Promise<void> => {
-  //   const exist = await cacheExist(key)
-  //   if (exist) {
-  //     const cachedData = await fetchFromCache(key)
-  //     data.value = cachedData
-  //     loading.value = false
-  //     const fetchedData = await fetchFromNetwork<Data>(
-  //       key,
-  //       fetcher,
-  //       fetcherQuery
-  //     )
-  //     if (fetchedData) {
-  //       if (cacheIsOutdate(cachedData, fetchedData)) {
-  //         data.value = fetchedData
-  //         loading.value = false
-  //         await updateCache<Data>(key, fetchedData)
-  //       }
-  //     }
-  //     return
-  //   }
-  //   const fetchedData = await fetchFromNetwork<Data>(key, fetcher, fetcherQuery)
-  //   data.value = fetchedData
-  //   loading.value = false
-  //   await updateCache<Data>(key, fetchedData)
-  // })()
   return { data, loading }
+}
+
+export async function awaitUseFetch<Data>(
+  strategy: string,
+  key: string,
+  fetcher?: Fetcher,
+): Promise<Data | undefined> {
+  const data = ref(undefined)
+  const loading = ref(true)
+  switch (strategy) {
+    case 'SWR': {
+      if (fetcher) {
+        const swr = new SWRStrategy<Data>(key, fetcher, data, loading)
+        await swr.useSWR()
+      }
+      break
+    }
+    case 'CO': {
+      const co = new COStrategy<Data>(key, data, loading)
+      await co.useCO()
+      break
+    }
+  }
+  return data.value
 }
 
 // function dataExtractor(key: string, data: any): any {

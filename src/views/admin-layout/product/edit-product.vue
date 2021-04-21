@@ -1,7 +1,7 @@
 <template>
   <Suspense>
     <template #default>
-      <EditCategory :id="id" />
+      <EditProductTemplate :id="id" />
     </template>
     <template #fallback>
       <Spinner />
@@ -11,12 +11,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import EditCategory from '@/components/admin-layout/EditItem/EditCategory.vue'
+
+import EditProductTemplate from '@/components/admin-layout/product/edit-product/EditProductTemplate.vue'
 import Spinner from '@/components/Spinner.vue'
 
 export default defineComponent({
-  name: 'EditCategorySuspense',
-  components: { EditCategory, Spinner },
+  name: 'edit-product',
+  components: {
+    Spinner,
+    EditProductTemplate,
+  },
   props: {
     id: {
       type: String,

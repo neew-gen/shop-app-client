@@ -42,8 +42,12 @@
         <ErrorField>{{ errors.description }}</ErrorField>
       </MDBCol>
       <MDBCol col="12" class="d-flex justify-content-end mb-2">
-        <MDBBtn color="light" type="submit" :disabled="!meta.valid">
-          Add Product
+        <MDBBtn
+          color="light"
+          type="submit"
+          :disabled="!meta.dirty || !meta.valid"
+        >
+          Save changes
         </MDBBtn>
       </MDBCol>
     </MDBRow>
@@ -62,18 +66,25 @@ import {
 import { useField, useForm } from 'vee-validate'
 import { defineComponent, onUnmounted } from 'vue'
 import { useToast } from 'vue-toastification'
-import { object, string, number } from 'yup'
+import { number, object, string } from 'yup'
 
-import { graphqlCreate } from '@/api/graphql-api/GraphqlApi'
+import { awaitUseFetch } from '@/api/fetch-api/useFetch'
+import { graphqlFetchBy, graphqlUpdate } from '@/api/graphql-api/GraphqlApi'
+import { GET_PRODUCT_BY_ID } from '@/api/graphql-api/queries/productQueries'
 import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
+import ErrorField from '@/components/ErrorField.vue'
 import ImageContainer from '@/components/ImageContainer.vue'
-import { eventBus } from '@/helpers/EventBus'
-import { CategoryIdType } from '@/types/eventBus'
-import { ProductCreateInput } from '@/types/product'
-import ErrorField from '@/views/admin-layout/ErrorField.vue'
+import { useStore } from '@/store'
+import { ProductType, ProductUpdateInput } from '@/types/product'
 
 export default defineComponent({
-  name: 'CreateProduct',
+  name: 'EditProductTemplate',
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+  },
   components: {
     ErrorField,
     CategoryDropdown,
@@ -82,11 +93,12 @@ export default defineComponent({
     MDBBtn,
     ImageContainer,
     MDBRow,
-    MDBContainer,
     MDBCol,
+    MDBContainer,
   },
-  setup() {
+  async setup(props) {
     const toast = useToast()
+    const store = useStore()
 
     const schema = object({
       name: string().required().min(4).label('Product name'),
@@ -95,7 +107,20 @@ export default defineComponent({
       description: string().notRequired(),
       categoryId: string().notRequired(),
     })
-    const { values, errors, meta, resetForm } = useForm({
+
+    const unwatch = store.watch(
+      () => store.getters.getCategoryDropdown,
+      (value) => {
+        values.categoryId = value
+      },
+    )
+
+    const reset = (): void => {
+      // resetForm()
+      meta.value.valid = false
+    }
+
+    const { values, errors, meta } = useForm({
       validationSchema: schema,
       initialValues: {
         name: '',
@@ -111,33 +136,31 @@ export default defineComponent({
     useField<string>('description')
     useField<string>('categoryId')
 
-    eventBus.subscribe('childUpdateCategory', (categoryId: CategoryIdType) => {
-      values.categoryId = categoryId
-    })
-
-    const reset = (): void => {
-      resetForm()
-      meta.value.valid = false
-    }
-
     const onSubmit = (): void => {
-      const { name, imgUrl, price, description, categoryId } = values
-      if (!(name && imgUrl && price && description)) return
-      graphqlCreate<ProductCreateInput>('product', {
-        name,
-        imgUrl,
-        price,
-        description,
-        categoryId,
-      })
+      values.price = Number(values.price)
+      graphqlUpdate<ProductUpdateInput>('product', props.id, values)
       reset()
-      eventBus.publish('parentUpdateCategory', values.categoryId)
-      toast.success('Product has been created!')
+      toast.success('Product has been updated!')
     }
-
     onUnmounted(() => {
-      eventBus.unsubscribe('childUpdateCategory')
+      unwatch()
+      store.dispatch('updateCategoryDropdown', undefined)
     })
+
+    const res = await awaitUseFetch<ProductType>(
+      'SWR',
+      `/edit-product-${props.id}`,
+      () => graphqlFetchBy(GET_PRODUCT_BY_ID, { id: props.id! }),
+    )
+    // TODO need to improve this
+    const { name, imgUrl, price, description, categoryId } = res!
+    values.name = meta.value.initialValues.name = name
+    values.imgUrl = meta.value.initialValues.imgUrl = imgUrl
+    // TODO price's meta dirty does not work
+    values.price = meta.value.initialValues.price = price
+    values.description = meta.value.initialValues.description = description
+    values.categoryId = meta.value.initialValues.categoryId = categoryId
+    store.dispatch('updateCategoryDropdown', categoryId)
 
     return {
       values,
