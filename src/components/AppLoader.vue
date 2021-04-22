@@ -10,7 +10,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref, watch } from 'vue'
+import { defineComponent, inject } from 'vue'
+
 import HomeNavbarBrand from '@/components/public-layout/home/HomeHavbar/HomeNavbarBrand.vue'
 
 export default defineComponent({

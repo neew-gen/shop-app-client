@@ -9,8 +9,11 @@
           :img-url="data.imgUrl"
         />
       </div>
+
       <div class="edit-item__id">ID: {{ data.id }}</div>
+
       <div class="edit-item__name">Name: {{ textSlicer(data.name, 20) }}</div>
+
       <div class="edit-item__controls">
         <MDBBtn color="dark" @click="removeItem">Delete</MDBBtn>
         <router-link
@@ -33,7 +36,6 @@ import { graphqlDelete } from '@/api/graphql-api/GraphqlApi'
 import ImageContainer from '@/components/ImageContainer.vue'
 import { eventBus } from '@/helpers/EventBus'
 import { textSlicer } from '@/helpers/slicer'
-import { ProductEditItem } from '@/types/product'
 import { CategoryEditItem } from '@/types/category'
 
 export default defineComponent({

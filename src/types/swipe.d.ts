@@ -6,7 +6,7 @@ export type SwipeData = {
 
 export type SwipeType = {
   id: string
-  swipeIndex?: number
+  swipeIndex: number
   swipeData: SwipeData
 }
 

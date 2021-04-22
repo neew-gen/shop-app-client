@@ -7,6 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import CatalogBreadcrumb from '@/components/public-layout/PublicBreadcrumbs/CatalogBreadcrumb.vue'
 
 export default defineComponent({

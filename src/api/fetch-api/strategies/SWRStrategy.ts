@@ -1,5 +1,4 @@
 // A realizing of "Stale-While-Revalidate" strategy
-import { DocumentNode } from '@apollo/client'
 import { Ref } from 'vue'
 
 import { FetchApi } from '@/api/fetch-api/FetchApi'

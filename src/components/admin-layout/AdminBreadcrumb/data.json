@@ -38,32 +38,32 @@
     ],
     "active": "edit-categories"
   },
-  "EditCategorySuspense": {
+  "edit-category": {
     "items": [
-      { "name": "Admin Panel", "path": "AdminPanelHome" },
-      { "name": "Category Edit", "path": "EditCategorySuspense" }
+      { "name": "Admin Panel", "path": "admin-home" },
+      { "name": "Category Edit", "path": "edit-category" }
     ],
-    "active": "EditCategorySuspense"
+    "active": "edit-category"
   },
-  "CreateSwipe": {
+  "create-swipe": {
     "items": [
-      { "name": "Admin Panel", "path": "AdminPanelHome" },
-      { "name": "Add Swipe", "path": "CreateSwipe" }
+      { "name": "Admin Panel", "path": "admin-home" },
+      { "name": "Add Swipe", "path": "create-swipe" }
     ],
-    "active": "CreateSwipe"
+    "active": "create-swipe"
   },
-  "EditSwipeListSuspense": {
+  "edit-swipes": {
     "items": [
-      { "name": "Admin Panel", "path": "AdminPanelHome" },
-      { "name": "Edit Swipes", "path": "EditSwipeListSuspense" }
+      { "name": "Admin Panel", "path": "admin-home" },
+      { "name": "Edit Swipes", "path": "edit-swipes" }
     ],
-    "active": "EditSwipeListSuspense"
+    "active": "edit-swipes"
   },
-  "EditSwipeSuspense": {
+  "edit-swipe": {
     "items": [
-      { "name": "Admin Panel", "path": "AdminPanelHome" },
-      { "name": "Swipe Edit", "path": "EditSwipeSuspense" }
+      { "name": "Admin Panel", "path": "admin-home" },
+      { "name": "Swipe Edit", "path": "edit-swipe" }
     ],
-    "active": "EditSwipeSuspense"
+    "active": "edit-swipe"
   }
 }

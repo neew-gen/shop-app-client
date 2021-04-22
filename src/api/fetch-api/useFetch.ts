@@ -2,6 +2,7 @@ import { DocumentNode } from '@apollo/client'
 import { Ref, ref } from 'vue'
 
 import { COStrategy } from '@/api/fetch-api/strategies/COStrategy'
+import { NFStrategy } from '@/api/fetch-api/strategies/NFStrategy'
 import { SWRStrategy } from '@/api/fetch-api/strategies/SWRStrategy'
 import { Fetcher } from '@/types/fetch'
 
@@ -23,6 +24,13 @@ export function useFetch<Data>(
     case 'CO': {
       const co = new COStrategy<Data>(key, data, loading)
       co.useCO()
+      break
+    }
+    case 'NF': {
+      if (fetcher) {
+        const nf = new NFStrategy<Data>(key, fetcher, data, loading)
+        nf.useNF()
+      }
       break
     }
   }
@@ -47,6 +55,13 @@ export async function awaitUseFetch<Data>(
     case 'CO': {
       const co = new COStrategy<Data>(key, data, loading)
       await co.useCO()
+      break
+    }
+    case 'NF': {
+      if (fetcher) {
+        const nf = new NFStrategy<Data>(key, fetcher, data, loading)
+        await nf.useNF()
+      }
       break
     }
   }

@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { MDBCol, MDBContainer, MDBListGroup, MDBRow } from 'mdb-vue-ui-kit'
-import { defineComponent } from 'vue'
+import { defineComponent, onUnmounted } from 'vue'
 
 import { awaitUseFetch, useFetch } from '@/api/fetch-api/useFetch'
 import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
@@ -56,7 +56,7 @@ export default defineComponent({
       loading.value = true
       data.value = await awaitUseFetch<ProductEditItem[]>(
         'SWR',
-        '/products-edit-list',
+        '/categories-edit-list',
         () => graphqlFetch(GET_CATEGORIES_EDITLIST),
       )
       loading.value = false
@@ -64,6 +64,10 @@ export default defineComponent({
 
     eventBus.subscribe('edit-categories-update', async () => {
       await dataLoader()
+    })
+
+    onUnmounted(() => {
+      eventBus.unsubscribe('edit-categories-update')
     })
 
     return { data, loading }

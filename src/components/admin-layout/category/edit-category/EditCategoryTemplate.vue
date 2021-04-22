@@ -136,7 +136,7 @@ export default defineComponent({
     }
     const res = await awaitUseFetch<CategoryType>(
       'SWR',
-      `/edit-product-${props.id}`,
+      `/edit-category-${props.id}`,
       () => graphqlFetchBy(GET_CATEGORY_BY_ID, { id: props.id! }),
     )
     // TODO need to improve this

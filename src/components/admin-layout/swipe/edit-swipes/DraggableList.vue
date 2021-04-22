@@ -8,26 +8,28 @@
     handle=".draggable"
     ghost-class="ghost"
   >
-    <template #item="{ element }">
+    <template #item="{ element, index }">
       <div>
-        <EditSwipeListItem :data="element" />
+        <EditSwipesItem :data="element" :dragIndex="index" />
       </div>
     </template>
   </draggable>
 </template>
 
 <script lang="ts">
-import { PropType, defineComponent, inject, onUnmounted, ref, watch } from 'vue'
-// import { store } from '@/store'
+import { isEqual } from 'lodash'
+import { defineComponent, onUnmounted, PropType, ref, watch } from 'vue'
+import { useToast } from 'vue-toastification'
 import draggable from 'vuedraggable'
-import EditSwipeListItem from '@/components/admin-layout/EditSwipeList/EditSwipeListItem.vue'
-import { SwipeType } from '@/types/swipe'
-import _ from 'lodash'
+
+import { graphqlUpdate } from '@/api/graphql-api/GraphqlApi'
+import EditSwipesItem from '@/components/admin-layout/swipe/edit-swipes/EditSwipesItem.vue'
+import { SwipeType, UpdateIndexInput } from '@/types/swipe'
 
 export default defineComponent({
   name: 'DraggableList',
   components: {
-    EditSwipeListItem,
+    EditSwipesItem,
     draggable,
   },
   props: {
@@ -37,22 +39,32 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const toast: any = inject('toast')
+    const toast = useToast()
+
     const dragData = ref(props.data)
-    console.log(dragData.value)
-    watch(props, () => {
+
+    const unwatch = watch(props, () => {
       dragData.value = props.data
     })
+
     const saveBeforeLeave = (): void => {
-      if (!_.isEqual(dragData.value, props.data)) {
-        // store.dispatch('updateIndex', dragData.value)
+      if (!isEqual(dragData.value, props.data)) {
+        const indexInput = dragData.value.map((d: SwipeType, index) => {
+          return { id: d.id, swipeIndex: index }
+        })
+        graphqlUpdate<UpdateIndexInput[]>('swipeIndex', 'none', indexInput)
         toast.success('Swipe order has been updated!')
       }
     }
+
     window.onbeforeunload = saveBeforeLeave
+
     onUnmounted(() => {
       saveBeforeLeave()
+      unwatch()
+      window.onbeforeunload = null
     })
+
     return { dragData }
   },
 })

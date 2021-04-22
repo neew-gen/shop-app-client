@@ -42,6 +42,7 @@ export default defineComponent({
   background-color: black;
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
+  left: 0;
   top: 0;
   z-index: 1100;
 }
@@ -49,6 +50,7 @@ export default defineComponent({
   width: 100%;
   background-color: white;
   position: absolute;
+  left: 0;
   bottom: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.125);
   z-index: 1110;

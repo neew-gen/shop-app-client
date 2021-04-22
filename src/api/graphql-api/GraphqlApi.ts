@@ -11,7 +11,12 @@ import {
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
 } from '@/api/graphql-api/queries/productQueries'
-import { CREATE_SWIPE } from '@/api/graphql-api/queries/swipeQueries'
+import {
+  CREATE_SWIPE,
+  DELETE_SWIPE,
+  UPDATE_INDEX,
+  UPDATE_SWIPE,
+} from '@/api/graphql-api/queries/swipeQueries'
 
 export function graphqlFetch(
   query: DocumentNode,
@@ -80,6 +85,20 @@ export async function graphqlUpdate<Input>(
       })
       break
     }
+    case 'swipeIndex': {
+      await apollo.mutate({
+        mutation: UPDATE_INDEX,
+        variables: { updateIndexInput: input },
+      })
+      break
+    }
+    case 'swipe': {
+      await apollo.mutate({
+        mutation: UPDATE_SWIPE,
+        variables: { id, updateSwipeInput: input },
+      })
+      break
+    }
   }
 }
 
@@ -95,6 +114,13 @@ export async function graphqlDelete(key: string, id: string): Promise<void> {
     case 'category': {
       await apollo.mutate({
         mutation: DELETE_CATEGORY,
+        variables: { id },
+      })
+      break
+    }
+    case 'swipe': {
+      await apollo.mutate({
+        mutation: DELETE_SWIPE,
         variables: { id },
       })
       break

@@ -19,14 +19,15 @@
 </template>
 
 <script lang="ts">
-import { ComputedRef, computed, defineComponent } from 'vue'
 import { MDBCol, MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
-import CartBreadcrumb from '@/components/public-layout/PublicBreadcrumbs/CartBreadcrumb.vue'
-import { ProductCartItem } from '@/types/product'
-import CartList from '@/components/public-layout/cart/CartList/CartList.vue'
-import { store } from '@/store'
-import CartTotal from '@/components/public-layout/cart/CartTotal/CartTotal.vue'
+import { computed, ComputedRef, defineComponent } from 'vue'
+
 import CartCheckAll from '@/components/public-layout/cart/CartCheckAll/CartCheckAll.vue'
+import CartList from '@/components/public-layout/cart/CartList/CartList.vue'
+import CartTotal from '@/components/public-layout/cart/CartTotal/CartTotal.vue'
+import CartBreadcrumb from '@/components/public-layout/PublicBreadcrumbs/CartBreadcrumb.vue'
+import { store } from '@/store'
+import { ProductCartItem } from '@/types/product'
 
 export default defineComponent({
   name: 'Cart',

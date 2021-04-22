@@ -3,26 +3,26 @@ import { RouteRecordRaw } from 'vue-router'
 export const swipeChildren: Array<RouteRecordRaw> = [
   {
     path: '/admin-panel/create-swipe',
-    name: 'CreateSwipe',
+    name: 'create-swipe',
     component: (): any =>
       import(
-        /* webpackChunkName: "create-swipe" */ '@/views/admin-layout/swipe/CreateSwipe.vue'
+        /* webpackChunkName: "create-swipe" */ '@/views/admin-layout/swipe/create-swipe.vue'
       ),
   },
   {
     path: '/admin-panel/edit-swipes',
-    name: 'EditSwipeListSuspense',
+    name: 'edit-swipes',
     component: (): any =>
       import(
-        /* webpackChunkName: "edit-swipes-list" */ '@/views/admin-layout/swipe/EditSwipeListSuspense.vue'
+        /* webpackChunkName: "edit-swipes" */ '@/views/admin-layout/swipe/edit-swipes.vue'
       ),
   },
   {
     path: '/admin-panel/edit-swipes/:id',
-    name: 'EditSwipeSuspense',
+    name: 'edit-swipe',
     component: (): any =>
       import(
-        /* webpackChunkName: "edit-swipe" */ '@/views/admin-layout/swipe/EditSwipeSuspense.vue'
+        /* webpackChunkName: "edit-swipe" */ '@/views/admin-layout/swipe/edit-swipe.vue'
       ),
     props: true,
   },

@@ -36,12 +36,12 @@
       <MDBListGroup horizontal>
         <router-link
           class="list-group-item flex-fill"
-          :to="{ name: 'CreateSwipe' }"
+          :to="{ name: 'create-swipe' }"
           >Add swipe</router-link
         >
         <router-link
           class="list-group-item flex-fill"
-          :to="{ name: 'EditSwipeListSuspense' }"
+          :to="{ name: 'edit-swipes' }"
           >Edit swipes</router-link
         >
       </MDBListGroup>

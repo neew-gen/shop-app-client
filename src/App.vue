@@ -30,4 +30,8 @@ export default defineComponent({
 #app {
   min-height: 100%;
 }
+.Vue-Toastification__container.top-right.toast-container {
+  left: 20%;
+  width: 80%;
+}
 </style>

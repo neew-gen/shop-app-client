@@ -21,8 +21,12 @@
       </MDBCol>
 
       <MDBCol col="12" class="d-flex justify-content-end">
-        <MDBBtn color="light" type="submit" :disabled="!meta.valid">
-          Add Swipe
+        <MDBBtn
+          color="light"
+          type="submit"
+          :disabled="!meta.dirty || !meta.valid"
+        >
+          Save changes
         </MDBBtn>
       </MDBCol>
     </MDBRow>
@@ -43,13 +47,15 @@ import { defineComponent } from 'vue'
 import { useToast } from 'vue-toastification'
 import { object, string } from 'yup'
 
-import { graphqlCreate } from '@/api/graphql-api/GraphqlApi'
-import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
-import { SwipeData } from '@/types/swipe'
+import { awaitUseFetch } from '@/api/fetch-api/useFetch'
+import { graphqlFetchBy, graphqlUpdate } from '@/api/graphql-api/GraphqlApi'
+import { GET_SWIPE_BY_ID } from '@/api/graphql-api/queries/swipeQueries'
 import ErrorField from '@/components/ErrorField.vue'
+import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
+import { SwipeType, UpdateSwipeInput } from '@/types/swipe'
 
 export default defineComponent({
-  name: 'CreateSwipe',
+  name: 'EditSwipe',
   components: {
     ErrorField,
     MDBContainer,
@@ -60,7 +66,13 @@ export default defineComponent({
     MDBTextarea,
     MDBBtn,
   },
-  setup() {
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+  },
+  async setup(props) {
     const toast = useToast()
 
     const schema = object({
@@ -68,7 +80,8 @@ export default defineComponent({
       imgUrl: string().required().url().label('Image URL'),
       text: string().required().min(10).label('Swipe text'),
     })
-    const { values, errors, meta, resetForm } = useForm({
+
+    const { values, errors, meta } = useForm({
       validationSchema: schema,
       initialValues: { title: '', imgUrl: '', text: '' },
     })
@@ -77,7 +90,6 @@ export default defineComponent({
     useField<string>('text')
 
     const reset = (): void => {
-      resetForm()
       meta.value.valid = false
     }
 
@@ -85,11 +97,24 @@ export default defineComponent({
       const { title, imgUrl, text } = values
       if (!(title && imgUrl && text)) return
 
-      graphqlCreate<SwipeData>('swipe', { title, imgUrl, text })
-
+      graphqlUpdate<UpdateSwipeInput>('swipe', props.id, {
+        swipeData: { title, imgUrl, text },
+      })
       reset()
-      toast.success('Swipe has been created!')
+      toast.success('Swipe has been edited!')
     }
+
+    const res = await awaitUseFetch<SwipeType>(
+      'SWR',
+      `/edit-swipe-${props.id}`,
+      () => graphqlFetchBy(GET_SWIPE_BY_ID, { id: props.id! }),
+    )
+
+    // TODO need to improve this
+    const { title, imgUrl, text } = res!.swipeData
+    values.title = meta.value.initialValues.title = title
+    values.imgUrl = meta.value.initialValues.imgUrl = imgUrl
+    values.text = meta.value.initialValues.text = text
 
     return { values, errors, meta, onSubmit }
   },

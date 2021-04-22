@@ -1,5 +1,5 @@
 import { DocumentNode } from '@apollo/client'
-import _ from 'lodash'
+import { isEqual } from 'lodash'
 
 import { dataExtractor } from '@/api/fetch-api/dataExtractor'
 import { Fetcher } from '@/types/fetch'
@@ -23,7 +23,7 @@ export class FetchApi<Data> {
     }
   }
   protected cacheIsOutdate(cachedData: Data, fetchedData: Data): boolean {
-    return !_.isEqual(cachedData, fetchedData)
+    return !isEqual(cachedData, fetchedData)
   }
   protected async updateCache(fetchedData?: Data): Promise<void> {
     const cache = await caches.open(this.key)
