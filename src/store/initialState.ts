@@ -14,4 +14,7 @@ export const initialState = {
   cart: {
     cartList: [],
   },
+  user: {
+    userData: {},
+  },
 }

@@ -2,12 +2,12 @@
 import { Ref } from 'vue'
 
 import { FetchApi } from '@/api/fetch-api/FetchApi'
-import { Fetcher } from '@/types/fetch'
+import { ApolloFetcher, AxiosFetcher } from '@/types/fetch'
 
 export class NFStrategy<Data> extends FetchApi<Data> {
   constructor(
     key: string,
-    fetcher: Fetcher,
+    fetcher: ApolloFetcher | AxiosFetcher,
     private data: Ref<Data | undefined>,
     private loading: Ref<boolean>,
   ) {

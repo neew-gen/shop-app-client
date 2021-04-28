@@ -30,7 +30,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .app-loader {
   position: absolute;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100vh;
   width: 100vw;
   z-index: 9999;
   background: white;

@@ -6,6 +6,3 @@ export interface BreadcrumbsItem {
 export interface BreadcrumbsData {
   [key: string]: BreadcrumbsItem
 }
-// interface IObjectKeys {
-//   [key: string]: Array<{ name: string; path: string }> | string
-// }

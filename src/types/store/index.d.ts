@@ -1,8 +1,8 @@
 import { CommitOptions, DispatchOptions, Store as VuexStore } from 'vuex'
+
 import { State } from '@/store'
-import { MutationPayload } from '@/types/store/mutations'
+import { Getters, MutationPayload } from '@/store'
 import { ActionsPayload } from '@/types/store/actions'
-import { Getters } from '@/types/store/getters'
 
 export type Store = Omit<
   VuexStore<State>,

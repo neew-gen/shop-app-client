@@ -2,14 +2,15 @@
 import { Ref } from 'vue'
 
 import { FetchApi } from '@/api/fetch-api/FetchApi'
-import { Fetcher } from '@/types/fetch'
+import { ApolloFetcher, AxiosFetcher } from '@/types/fetch'
 
 export class SWRStrategy<Data> extends FetchApi<Data> {
   constructor(
     key: string,
-    fetcher: Fetcher,
+    fetcher: ApolloFetcher | AxiosFetcher,
     private data: Ref<Data | undefined>,
     private loading: Ref<boolean>,
+    private extractor?: string,
   ) {
     super(key, fetcher)
   }
@@ -19,7 +20,7 @@ export class SWRStrategy<Data> extends FetchApi<Data> {
       const cachedData = await this.fetchFromCache()
       this.data.value = cachedData
       this.loading.value = false
-      const fetchedData = await this.fetchFromNetwork()
+      const fetchedData = await this.fetchFromNetwork(this.extractor)
       if (fetchedData) {
         if (this.cacheIsOutdate(cachedData, fetchedData)) {
           this.data.value = fetchedData
@@ -31,7 +32,7 @@ export class SWRStrategy<Data> extends FetchApi<Data> {
     }
     this.data.value = await this.fetchFromCache()
     this.loading.value = false
-    const fetchedData = await this.fetchFromNetwork()
+    const fetchedData = await this.fetchFromNetwork(this.extractor)
     this.data.value = fetchedData
     await this.updateCache(fetchedData)
   }

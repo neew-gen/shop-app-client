@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 // TODO need to type
-export function dataExtractor<Data>(data: any): Data {
+export function defaultExtractor<Data>(data: any): Data {
   // if (data) {
   //   switch (key) {
   //     case 'categoriesList': {

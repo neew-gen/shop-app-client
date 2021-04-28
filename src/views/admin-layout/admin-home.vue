@@ -7,13 +7,13 @@
         <router-link
           class="list-group-item flex-fill"
           :to="{ name: 'create-product' }"
-          >Add product</router-link
-        >
+          >Add product
+        </router-link>
         <router-link
           class="list-group-item flex-fill"
           :to="{ name: 'edit-products' }"
-          >Edit products</router-link
-        >
+          >Edit products
+        </router-link>
       </MDBListGroup>
     </fieldset>
     <fieldset class="custom-fieldset">
@@ -22,13 +22,13 @@
         <router-link
           class="list-group-item flex-fill"
           :to="{ name: 'create-category' }"
-          >Add category</router-link
-        >
+          >Add category
+        </router-link>
         <router-link
           class="list-group-item flex-fill"
           :to="{ name: 'edit-categories' }"
-          >Edit categories</router-link
-        >
+          >Edit categories
+        </router-link>
       </MDBListGroup>
     </fieldset>
     <fieldset class="custom-fieldset">
@@ -37,21 +37,21 @@
         <router-link
           class="list-group-item flex-fill"
           :to="{ name: 'create-swipe' }"
-          >Add swipe</router-link
-        >
+          >Add swipe
+        </router-link>
         <router-link
           class="list-group-item flex-fill"
           :to="{ name: 'edit-swipes' }"
-          >Edit swipes</router-link
-        >
+          >Edit swipes
+        </router-link>
       </MDBListGroup>
     </fieldset>
   </MDBContainer>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { MDBContainer, MDBListGroup } from 'mdb-vue-ui-kit'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'admin-home',

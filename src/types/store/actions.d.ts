@@ -1,10 +1,13 @@
 import { ActionContext, CommitOptions } from 'vuex'
-
-import { MutationPayload as cartMutationPayload } from '@/store/modules/cart'
-import { MutationPayload as variablesMutationPayload } from '@/store/modules/variables'
+import { MutationPayload } from '@/store'
+// import { MutationPayload as cartMutationPayload } from '@/store/modules/cart'
+// import { MutationPayload as userMutationPayload } from '@/store/modules/user'
+// import { MutationPayload as variablesMutationPayload } from '@/store/modules/variables'
 import { State } from '@/types/store'
 
-type MutationPayload = variablesMutationPayload & cartMutationPayload
+// type MutationPayload = variablesMutationPayload &
+//   cartMutationPayload &
+//   userMutationPayload
 
 export type Actions<T> = {
   [Property in keyof T]: (

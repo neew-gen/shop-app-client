@@ -15,8 +15,10 @@
 <script lang="ts">
 import { MDBListGroup, MDBNavbar } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
-import { MENU_LIST } from './data.json'
+
 import FooterButton from '@/components/public-layout/Footer/FooterButton.vue'
+
+import { MENU_LIST } from './data.json'
 
 export default defineComponent({
   name: 'PublicFooter',

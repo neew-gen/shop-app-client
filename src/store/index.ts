@@ -1,17 +1,11 @@
 import { createLogger, createStore } from 'vuex'
-import { initialState } from './initialState'
-import { Store } from '@/types/store'
-import {
-  actions as variablesActions,
-  getters as variablesGetters,
-  mutations as variablesMutations,
-} from '@/store/modules/variables'
 
-import {
-  actions as cartActions,
-  getters as cartGetters,
-  mutations as cartMutations,
-} from '@/store/modules/cart'
+import * as cartModule from '@/store/modules/cart'
+import * as userModule from '@/store/modules/user'
+import * as variableModule from '@/store/modules/variables'
+import { Store } from '@/types/store'
+
+import { initialState } from './initialState'
 
 const plugins = []
 if (process.env.NODE_ENV === 'development') {
@@ -21,16 +15,19 @@ if (process.env.NODE_ENV === 'development') {
 export const store = createStore({
   state: initialState,
   actions: {
-    ...variablesActions,
-    ...cartActions,
+    ...variableModule.actions,
+    ...cartModule.actions,
+    ...userModule.actions,
   },
   mutations: {
-    ...variablesMutations,
-    ...cartMutations,
+    ...variableModule.mutations,
+    ...cartModule.mutations,
+    ...userModule.mutations,
   },
   getters: {
-    ...variablesGetters,
-    ...cartGetters,
+    ...variableModule.getters,
+    ...cartModule.getters,
+    ...userModule.getters,
   },
   plugins,
 })
@@ -38,3 +35,11 @@ export const store = createStore({
 export function useStore(): Store {
   return store as Store
 }
+
+export type MutationPayload = variableModule.MutationPayload &
+  cartModule.MutationPayload &
+  userModule.MutationPayload
+
+export type Getters = variableModule.Getters &
+  cartModule.Getters &
+  userModule.Getters

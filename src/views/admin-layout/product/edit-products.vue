@@ -86,12 +86,14 @@ export default defineComponent({
     }
 
     eventBus.subscribe('edit-products-update', async () => {
+      if (!store.getters.getCategoryDropdown) return
       await dataLoader(store.getters.getCategoryDropdown)
     })
 
     const unwatch = store.watch(
       () => store.getters.getCategoryDropdown,
       async (value) => {
+        if (!value) return
         await dataLoader(value)
       },
     )

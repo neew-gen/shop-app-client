@@ -4,7 +4,7 @@ import 'skeleton-screen-css' // https://www.npmjs.com/package/skeleton-screen-cs
 import 'vue-toastification/dist/index.css'
 
 import { createApp, ref } from 'vue'
-import Toast, { PluginOptions, POSITION } from 'vue-toastification' // https://github.com/Maronato/vue-toastification/tree/next
+import Toast, { PluginOptions } from 'vue-toastification' // https://github.com/Maronato/vue-toastification/tree/next
 
 import appLoader from '@/helpers/appLoader'
 import { store } from '@/store'
@@ -22,8 +22,8 @@ import router from './router'
 // }
 const toastOptions: PluginOptions = {
   maxToasts: 4,
-  timeout: 2000,
-  containerClassName: 'toast-container',
+  timeout: 1000,
+  // containerClassName: 'toast-container',
   closeButton: false,
 }
 

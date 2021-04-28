@@ -1,10 +1,10 @@
 const path = require('path')
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+//   .BundleAnalyzerPlugin
 module.exports = {
   devServer: {
-    https: true,
+    // https: true,
     disableHostCheck: true,
     port: 8080,
     host: 'localhost',
@@ -30,7 +30,7 @@ module.exports = {
       new ServiceWorkerWebpackPlugin({
         entry: path.join(__dirname, './src/service-worker.js'),
       }),
-      new BundleAnalyzerPlugin(),
+      // new BundleAnalyzerPlugin(),
     ],
   },
 }

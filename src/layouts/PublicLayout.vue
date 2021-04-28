@@ -7,6 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import Footer from '@/components/public-layout/Footer/PublicFooter.vue'
 
 export default defineComponent({
@@ -20,7 +21,5 @@ export default defineComponent({
 <style scoped lang="scss">
 .public-wrapper {
   min-height: 100%;
-}
-#app {
 }
 </style>

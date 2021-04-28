@@ -1,12 +1,13 @@
 <template>
-  <MDBBtn color="light" @click="goBack"
-    ><MDBIcon icon="chevron-left" iconStyle="fas"
-  /></MDBBtn>
+  <MDBBtn color="light" @click="goBack">
+    <MDBIcon icon="chevron-left" iconStyle="fas" />
+  </MDBBtn>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { MDBBtn, MDBIcon } from 'mdb-vue-ui-kit'
+import { defineComponent } from 'vue'
+
 import router from '@/router'
 
 export default defineComponent({

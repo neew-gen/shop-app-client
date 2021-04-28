@@ -1,23 +1,43 @@
-import { DocumentNode } from '@apollo/client'
 import { Ref, ref } from 'vue'
 
 import { COStrategy } from '@/api/fetch-api/strategies/COStrategy'
 import { NFStrategy } from '@/api/fetch-api/strategies/NFStrategy'
 import { SWRStrategy } from '@/api/fetch-api/strategies/SWRStrategy'
-import { Fetcher } from '@/types/fetch'
+import { ApolloFetcher, AxiosFetcher } from '@/types/fetch'
 
 export function useFetch<Data>(
   strategy: string,
   key: string,
-  fetcher?: Fetcher,
+  fetcher?: ApolloFetcher | AxiosFetcher,
+  extractor?: string,
 ): { data: Ref<Data | undefined>; loading: Ref<boolean> } {
   const data = ref(undefined)
   const loading = ref(true)
   switch (strategy) {
     case 'SWR': {
       if (fetcher) {
-        const swr = new SWRStrategy<Data>(key, fetcher, data, loading)
+        const swr = new SWRStrategy<Data>(
+          key,
+          fetcher,
+          data,
+          loading,
+          extractor,
+        )
         swr.useSWR()
+        break
+        // if (extractor) {
+        //   const swr = new SWRStrategy<Data>(
+        //     key,
+        //     fetcher,
+        //     data,
+        //     loading,
+        //     extractor,
+        //   )
+        //   swr.useSWR()
+        //   break
+        // }
+        // const swr = new SWRStrategy<Data>(key, fetcher, data, loading)
+        // swr.useSWR()
       }
       break
     }
@@ -40,14 +60,21 @@ export function useFetch<Data>(
 export async function awaitUseFetch<Data>(
   strategy: string,
   key: string,
-  fetcher?: Fetcher,
+  fetcher?: ApolloFetcher | AxiosFetcher,
+  extractor?: string | 'axios',
 ): Promise<Data | undefined> {
   const data = ref(undefined)
   const loading = ref(true)
   switch (strategy) {
     case 'SWR': {
       if (fetcher) {
-        const swr = new SWRStrategy<Data>(key, fetcher, data, loading)
+        const swr = new SWRStrategy<Data>(
+          key,
+          fetcher,
+          data,
+          loading,
+          extractor,
+        )
         await swr.useSWR()
       }
       break

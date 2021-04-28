@@ -3,10 +3,10 @@ import { RouteRecordRaw } from 'vue-router'
 export const profileChildren: Array<RouteRecordRaw> = [
   {
     path: '/profile',
-    name: 'Profile',
+    name: 'profile',
     component: (): any =>
       import(
-        /* webpackChunkName: "profile" */ '@/views/public-layout/Profile.vue'
+        /* webpackChunkName: "profile" */ '@/views/public-layout/profile/profile.vue'
       ),
   },
 ]
