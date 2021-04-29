@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build":"yarn build:client && yarn clean:client && yarn copy:dist",
+    "build:client": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "vue-cli-service serve --open"
+    "start": "vue-cli-service serve --open",
+    "clean:client": "rimraf \"../server/client/dist\"",
+    "copy:dist": "xcopy \"./dist\" \"../server/client/dist\\\" /E /Y"
   },
   "dependencies": {
     "@apollo/client": "^3.3.13",

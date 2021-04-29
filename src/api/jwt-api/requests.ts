@@ -5,25 +5,18 @@ import {
   // isLoggedIn,
   setAuthTokens,
 } from 'axios-jwt'
-import { useRouter } from 'vue-router'
-import { bool } from 'yup'
 
 import { jwtAxiosInstance } from '@/api/jwt-api/api'
 import { LoginInput } from '@/types/jwt-api/login-input'
 import { RegisterInput } from '@/types/jwt-api/register-input'
 
 export const getUser = (): Promise<any> => {
-  return jwtAxiosInstance.get('/api/auth/user')
+  return jwtAxiosInstance.get('/auth/user')
 }
 
 export const login = async (loginInput: LoginInput): Promise<void | string> => {
   try {
-    const response = await jwtAxiosInstance.post('/api/auth/login', loginInput)
-    // if (!response) {
-    //   const router = useRouter()
-    //   await router.push('auth')
-    //   return
-    // }
+    const response = await jwtAxiosInstance.post('/auth/login', loginInput)
     if (response) {
       setAuthTokens({
         accessToken: response.data.access_token,
@@ -41,7 +34,7 @@ export const register = async (
 ): Promise<void | string> => {
   try {
     const response = await jwtAxiosInstance.post(
-      '/api/auth/register',
+      '/auth/register',
       registerInput,
     )
     if (!response) return
@@ -57,7 +50,7 @@ export const register = async (
 
 export const logout = async (): Promise<boolean> => {
   try {
-    const response = await jwtAxiosInstance.post('api/auth/logout', {
+    const response = await jwtAxiosInstance.post('/auth/logout', {
       refresh_token: getRefreshToken(),
     })
     if (response.status !== 201) return false

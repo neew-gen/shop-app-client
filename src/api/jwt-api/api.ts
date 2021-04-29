@@ -5,14 +5,20 @@ import {
   TokenRefreshRequest,
 } from 'axios-jwt'
 
-const BASE_URL = 'http://localhost:3000/'
+let uri = ''
+if (process.env.NODE_ENV === 'development') {
+  uri = 'http://localhost:3000/api'
+}
+if (process.env.NODE_ENV === 'production') {
+  uri = '/api'
+}
 
-export const jwtAxiosInstance = axios.create({ baseURL: BASE_URL })
+export const jwtAxiosInstance = axios.create({ baseURL: uri })
 
 const requestRefresh: TokenRefreshRequest = async (
   refreshToken: string,
 ): Promise<IAuthTokens | string> => {
-  const response = await axios.post(`${BASE_URL}api/auth/refresh`, {
+  const response = await axios.post(`${uri}/auth/refresh`, {
     refresh_token: refreshToken,
   })
 
@@ -23,7 +29,5 @@ const requestRefresh: TokenRefreshRequest = async (
   //}
   return response.data.access_token
 }
-
-
 
 applyAuthTokenInterceptor(jwtAxiosInstance, { requestRefresh })

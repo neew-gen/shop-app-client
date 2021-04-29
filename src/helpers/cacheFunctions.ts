@@ -4,8 +4,8 @@ export async function cartItemToCache<Input>(
   key: string,
   input: Input,
 ): Promise<void> {
-  const cacheOpened = await caches.open(key)
-  const cacheMatched = await caches.match(key)
+  const cacheOpened = await window.caches.open(key)
+  const cacheMatched = await window.caches.match(key)
   if (cacheMatched) {
     const fromJson = await cacheMatched.json()
     fromJson.push(input)
@@ -22,8 +22,8 @@ export async function updateCartItemCache(
   propName: string,
   propValue: string | number,
 ): Promise<void> {
-  const cacheOpened = await caches.open('/cart-cache')
-  const cacheMatched = await caches.match('/cart-cache')
+  const cacheOpened = await window.caches.open('/cart-cache')
+  const cacheMatched = await window.caches.match('/cart-cache')
   if (cacheMatched) {
     const fromJson = await cacheMatched.json()
     const itemForUpdate = fromJson.filter(
@@ -35,8 +35,8 @@ export async function updateCartItemCache(
   }
 }
 export async function updateCacheAllChecked(value: boolean): Promise<void> {
-  const cacheOpened = await caches.open('/cart-cache')
-  const cacheMatched = await caches.match('/cart-cache')
+  const cacheOpened = await window.caches.open('/cart-cache')
+  const cacheMatched = await window.caches.match('/cart-cache')
   if (cacheMatched) {
     const fromJson = await cacheMatched.json()
     for (const item of fromJson) {
@@ -48,8 +48,8 @@ export async function updateCacheAllChecked(value: boolean): Promise<void> {
 }
 
 export async function deleteCacheSelected(): Promise<void> {
-  const cacheOpened = await caches.open('/cart-cache')
-  const cacheMatched = await caches.match('/cart-cache')
+  const cacheOpened = await window.caches.open('/cart-cache')
+  const cacheMatched = await window.caches.match('/cart-cache')
   if (cacheMatched) {
     const fromJson = await cacheMatched.json()
     const updatedCache = fromJson.filter((i: ProductCartItem) => !i.checked)
