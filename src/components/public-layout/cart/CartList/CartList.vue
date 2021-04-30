@@ -5,10 +5,11 @@
 </template>
 
 <script lang="ts">
-import { PropType, defineComponent } from 'vue'
 import { MDBListGroup } from 'mdb-vue-ui-kit'
-import { ProductCartItem } from '@/types/product'
+import { defineComponent, PropType } from 'vue'
+
 import CartListItem from '@/components/public-layout/cart/CartList/CartItem/CartItem.vue'
+import { ProductCartItem } from '@/types/product'
 
 export default defineComponent({
   name: 'CartList',

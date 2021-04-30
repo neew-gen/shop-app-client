@@ -4,8 +4,8 @@
       <MDBCol
         class="d-flex flex-column"
         col="6"
-        v-for="(item, index) in SKELETON_COUNT"
-        :key="index"
+        v-for="item in SKELETON_COUNT"
+        :key="item"
       >
         <div class="item-wrapper ssc">
           <div class="ssc-square item-image" />
@@ -24,8 +24,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { MDBCol, MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
+import { defineComponent } from 'vue'
 const SKELETON_COUNT = 8
 
 export default defineComponent({
