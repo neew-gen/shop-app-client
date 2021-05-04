@@ -54,7 +54,7 @@ import {
   MDBRow,
 } from 'mdb-vue-ui-kit'
 import { useField, useForm } from 'vee-validate'
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import { object, string } from 'yup'
 

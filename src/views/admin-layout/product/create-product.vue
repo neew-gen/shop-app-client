@@ -1,15 +1,6 @@
 <template>
-  <MDBContainer>
+  <MDBContainer :style="{ position: modal ? 'fixed' : 'relative' }">
     <MDBRow tag="form" class="g-3" @submit.prevent="onSubmit">
-      <MDBCol col="12">
-        <ImageContainer
-          height="40vh"
-          width="100%"
-          :name="values.name"
-          :img-url="values.imgUrl"
-        />
-      </MDBCol>
-
       <MDBCol
         col="12"
         class="d-flex justify-content-between align-items-center"
@@ -24,8 +15,24 @@
       </MDBCol>
 
       <MDBCol col="12">
-        <MDBInput label="Image Url" v-model="values.imgUrl" />
-        <ErrorField>{{ errors.imgUrl }}</ErrorField>
+        <div class="d-flex justify-content-between py-1">
+          <div>Images:</div>
+          <div
+            class="update-btn btn btn-default btn-sm"
+            :class="imagesMenu ? 'btn-dark' : 'btn-default'"
+            @click="updateImagesMenu(!imagesMenu)"
+          >
+            {{ imagesMenu ? 'Hide' : 'Show' }}&nbsp;the Images Menu
+          </div>
+        </div>
+        <ImageUploader
+          v-if="imagesMenu"
+          @modal="updateModal"
+          @files="updateImages"
+          :images="images"
+        />
+        <!--        <MDBInput label="Image Url" v-model="values.imgUrl" />-->
+        <!--        <ErrorField>{{ errors.imgUrl }}</ErrorField>-->
       </MDBCol>
 
       <MDBCol col="12">
@@ -47,7 +54,6 @@
         </MDBBtn>
       </MDBCol>
     </MDBRow>
-    {{ values.categoryId }}
   </MDBContainer>
 </template>
 
@@ -61,26 +67,27 @@ import {
   MDBTextarea,
 } from 'mdb-vue-ui-kit'
 import { useField, useForm } from 'vee-validate'
-import { defineComponent, onUnmounted } from 'vue'
+import { defineComponent, onUnmounted, ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import { number, object, string } from 'yup'
 
 import { graphqlCreate } from '@/api/graphql-api/GraphqlApi'
 import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
+import ErrorField from '@/components/ErrorField.vue'
 import ImageContainer from '@/components/ImageContainer.vue'
+import ImageUploader from '@/components/ImageUploader/ImageUploader.vue'
 import { useStore } from '@/store'
 import { ProductCreateInput } from '@/types/product'
-import ErrorField from '@/components/ErrorField.vue'
 
 export default defineComponent({
   name: 'create-product',
   components: {
+    ImageUploader,
     ErrorField,
     CategoryDropdown,
     MDBInput,
     MDBTextarea,
     MDBBtn,
-    ImageContainer,
     MDBRow,
     MDBContainer,
     MDBCol,
@@ -88,6 +95,21 @@ export default defineComponent({
   setup() {
     const toast = useToast()
     const store = useStore()
+
+    const images = ref([])
+    const updateImages = (e: any): void => {
+      images.value = e
+    }
+
+    const modal = ref(false)
+    const updateModal = (newValue: boolean): void => {
+      modal.value = newValue
+    }
+
+    const imagesMenu = ref(false)
+    const updateImagesMenu = (newValue: boolean): void => {
+      imagesMenu.value = newValue
+    }
 
     const schema = object({
       name: string().required().min(4).label('Product name'),
@@ -145,13 +167,23 @@ export default defineComponent({
     })
 
     return {
+      modal,
+      updateModal,
+      updateImagesMenu,
+      imagesMenu,
       values,
       errors,
       meta,
       onSubmit,
+      images,
+      updateImages,
     }
   },
 })
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.update-btn {
+  width: 176px;
+}
+</style>

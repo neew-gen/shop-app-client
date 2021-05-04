@@ -54,7 +54,7 @@ export default defineComponent({
   align-items: center;
 }
 .block {
-  width: 0%;
+  width: 0;
   height: inherit;
   background: #4f4f4f;
   position: absolute;

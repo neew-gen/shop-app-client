@@ -7,8 +7,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { MDBBreadcrumb, MDBBreadcrumbItem, MDBNavbar } from 'mdb-vue-ui-kit'
+import { defineComponent } from 'vue'
+
 import BackButton from '@/components/BackButton.vue'
 
 export default defineComponent({

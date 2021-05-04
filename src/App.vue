@@ -7,6 +7,7 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue'
+
 import AppLoader from '@/components/AppLoader.vue'
 export default defineComponent({
   components: { AppLoader },

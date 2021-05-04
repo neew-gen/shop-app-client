@@ -11,10 +11,11 @@
 </template>
 
 <script lang="ts">
-import { PropType, defineComponent } from 'vue'
 import { MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
-import { ProductType } from '@/types/product'
+import { defineComponent, PropType } from 'vue'
+
 import ProductsListItem from '@/components/public-layout/catalog/ProductsList/ProductsListItem.vue'
+import { ProductType } from '@/types/product'
 
 export default defineComponent({
   name: 'ProductsList',

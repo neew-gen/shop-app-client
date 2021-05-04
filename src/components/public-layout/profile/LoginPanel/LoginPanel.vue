@@ -17,10 +17,10 @@
 import { isLoggedIn } from 'axios-jwt'
 import { MDBBtn, MDBCol } from 'mdb-vue-ui-kit'
 import { computed, ComputedRef, defineComponent, ref } from 'vue'
+import { useToast } from 'vue-toastification'
 
 import { logout } from '@/api/jwt-api/requests'
 import { useStore } from '@/store'
-import { useToast } from "vue-toastification";
 
 export default defineComponent({
   name: 'LoginPanel',

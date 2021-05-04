@@ -9,8 +9,9 @@
 </template>
 
 <script lang="ts">
-import { ComputedRef, computed, defineComponent } from 'vue'
 import { MDBBtn } from 'mdb-vue-ui-kit'
+import { computed, ComputedRef, defineComponent } from 'vue'
+
 import { store } from '@/store'
 
 export default defineComponent({

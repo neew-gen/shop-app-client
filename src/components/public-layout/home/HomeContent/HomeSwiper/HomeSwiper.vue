@@ -16,13 +16,15 @@
 </template>
 
 <script lang="ts">
-import { PropType, defineComponent } from 'vue'
-import { SwipeType } from '@/types/swipe'
-import { Swiper, SwiperSlide } from 'swiper/vue'
 import SwiperCore, { Pagination } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { defineComponent, PropType } from 'vue'
+
+import { SwipeType } from '@/types/swipe'
 SwiperCore.use([Pagination])
 import 'swiper/swiper.scss'
 import 'swiper/components/pagination/pagination.scss'
+
 import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
 
 export default defineComponent({

@@ -1,7 +1,7 @@
 <template>
   <div class="image-container" :style="`height: ${height}; width: ${width};`">
+    <!--    v-if="hasHttpInUrl(imgUrl)"-->
     <div
-      v-if="hasHttpInUrl(imgUrl)"
       class="background-image"
       :style="`background-image: url(${imgUrl});`"
     />
@@ -11,12 +11,11 @@
     <!--      alt="Image"-->
     <!--      v-if="hasHttpInUrl(imgUrl)"-->
     <!--    />-->
-    <img
-      class="image-container__placeholder"
-      src="@/assets/images/image-container/no-photo.svg"
-      alt=""
-      v-else
-    />
+<!--    <img-->
+<!--      class="image-container__placeholder"-->
+<!--      src="@/assets/images/image-container/no-photo.svg"-->
+<!--      alt=""-->
+<!--    />-->
   </div>
 </template>
 
@@ -44,13 +43,13 @@ export default defineComponent({
     },
   },
   setup() {
-    const hasHttpInUrl = (imgUrl: string): boolean => {
-      // it is emulate of checking image exist
-      return imgUrl.match(/(http(s?))/gim) != null
-    }
-    return {
-      hasHttpInUrl,
-    }
+    // const hasHttpInUrl = (imgUrl: string): boolean => {
+    //   // it is emulate of checking image exist
+    //   return imgUrl.match(/(http(s?))/gim) != null
+    // }
+    // return {
+    //   hasHttpInUrl,
+    // }
   },
 })
 </script>

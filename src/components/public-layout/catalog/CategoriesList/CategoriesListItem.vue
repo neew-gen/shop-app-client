@@ -16,10 +16,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import router from '@/router'
 import { MDBListGroupItem } from 'mdb-vue-ui-kit'
+import { defineComponent } from 'vue'
+
 import ImageContainer from '@/components/ImageContainer.vue'
+import router from '@/router'
 
 export default defineComponent({
   name: 'CategoriesListItem',

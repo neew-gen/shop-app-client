@@ -1,6 +1,10 @@
 <template>
   <transition name="fade">
-    <div class="modal-background" v-if="show" @click="changeModal(false)" />
+    <div
+      class="modal-background"
+      v-if="show"
+      @click="changeModal(false)"
+    />
   </transition>
   <transition name="enter-bottom">
     <div class="modal-window" v-if="show">
@@ -39,21 +43,22 @@ export default defineComponent({
 .modal-background {
   height: 100vh;
   width: 100vw;
-  background-color: black;
   background-color: rgba(0, 0, 0, 0.4);
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   z-index: 1100;
+  overflow: hidden;
 }
 .modal-window {
   width: 100%;
   background-color: white;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.125);
   z-index: 1110;
+  overflow: hidden;
 }
 .modal-window-header {
   display: flex;
@@ -79,18 +84,18 @@ export default defineComponent({
 //
 
 .enter-bottom-enter-active {
-  animation: enter-bottom 0.3s;
+  animation: enter-bottom 0.5s;
 }
 .enter-bottom-leave-active {
-  animation: enter-bottom 0.3s reverse;
+  animation: enter-bottom 0.5s reverse;
 }
 @keyframes enter-bottom {
   0% {
-    bottom: 0;
+    //bottom: 0;
     transform: translateY(100%);
   }
   100% {
-    bottom: 0;
+    //bottom: 0;
     transform: translateY(0);
   }
 }

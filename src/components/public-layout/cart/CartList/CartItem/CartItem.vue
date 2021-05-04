@@ -26,12 +26,13 @@
 </template>
 
 <script lang="ts">
-import { PropType, WritableComputedRef, computed, defineComponent } from 'vue'
 import { MDBCheckbox, MDBListGroupItem } from 'mdb-vue-ui-kit'
+import { computed, defineComponent, PropType, WritableComputedRef } from 'vue'
+
 import ImageContainer from '@/components/ImageContainer.vue'
-import { ProductCartItem } from '@/types/product'
-import { store } from '@/store'
 import CartItemValue from '@/components/public-layout/cart/CartList/CartItem/CartItemValue.vue'
+import { store } from '@/store'
+import { ProductCartItem } from '@/types/product'
 
 export default defineComponent({
   name: 'CartItem',

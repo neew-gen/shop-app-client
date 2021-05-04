@@ -1,24 +1,11 @@
-# store-app
+# vue 3 emits
+``` 
+in parent:
+    <ImageUploader @modal="updateModal" />
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+in child: 
+    emits: ['modal'],
+    setup(props, { emit }) {
+    emit('modal', newValue)
+}
+``` 

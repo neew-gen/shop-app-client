@@ -27,10 +27,11 @@
 </template>
 
 <script lang="ts">
-import { PropType, defineComponent } from 'vue'
 import { MDBListGroup } from 'mdb-vue-ui-kit'
-import { CategoryType } from '@/types/category'
+import { defineComponent, PropType } from 'vue'
+
 import CategoriesListItem from '@/components/public-layout/catalog/CategoriesList/CategoriesListItem.vue'
+import { CategoryType } from '@/types/category'
 
 export default defineComponent({
   name: 'CategoriesList',

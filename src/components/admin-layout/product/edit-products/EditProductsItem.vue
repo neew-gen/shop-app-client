@@ -31,9 +31,9 @@ import { useToast } from 'vue-toastification'
 
 import { graphqlDelete } from '@/api/graphql-api/GraphqlApi'
 import ImageContainer from '@/components/ImageContainer.vue'
+import { eventBus } from '@/helpers/EventBus'
 import { textSlicer } from '@/helpers/slicer'
 import { ProductEditItem } from '@/types/product'
-import { eventBus } from '@/helpers/EventBus'
 
 export default defineComponent({
   name: 'EditProductsItem',

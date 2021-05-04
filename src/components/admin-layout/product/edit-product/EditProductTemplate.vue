@@ -1,15 +1,6 @@
 <template>
   <MDBContainer>
     <MDBRow tag="form" class="g-3" @submit.prevent="onSubmit">
-      <MDBCol col="12">
-        <ImageContainer
-          height="40vh"
-          width="100%"
-          :name="values.name"
-          :img-url="values.imgUrl"
-        />
-      </MDBCol>
-
       <MDBCol
         col="12"
         class="d-flex justify-content-between align-items-center"
@@ -24,8 +15,9 @@
       </MDBCol>
 
       <MDBCol col="12">
-        <MDBInput label="Image Url" v-model="values.imgUrl" />
-        <ErrorField>{{ errors.imgUrl }}</ErrorField>
+        <ImageUploader />
+        <!--        <MDBInput label="Image Url" v-model="values.imgUrl" />-->
+        <!--        <ErrorField>{{ errors.imgUrl }}</ErrorField>-->
       </MDBCol>
 
       <MDBCol col="12">
@@ -74,6 +66,7 @@ import { GET_PRODUCT_BY_ID } from '@/api/graphql-api/queries/productQueries'
 import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
 import ErrorField from '@/components/ErrorField.vue'
 import ImageContainer from '@/components/ImageContainer.vue'
+import ImageUploader from '@/components/ImageUploader/ImageUploader.vue'
 import { useStore } from '@/store'
 import { ProductType, ProductUpdateInput } from '@/types/product'
 
@@ -86,12 +79,12 @@ export default defineComponent({
     },
   },
   components: {
+    ImageUploader,
     ErrorField,
     CategoryDropdown,
     MDBInput,
     MDBTextarea,
     MDBBtn,
-    ImageContainer,
     MDBRow,
     MDBCol,
     MDBContainer,

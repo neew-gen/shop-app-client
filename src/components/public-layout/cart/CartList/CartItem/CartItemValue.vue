@@ -17,8 +17,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { MDBBtn, MDBIcon } from 'mdb-vue-ui-kit'
+import { defineComponent } from 'vue'
+
 import { store } from '@/store'
 
 export default defineComponent({

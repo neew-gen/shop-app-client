@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { MDBListGroup, MDBListGroupItem } from 'mdb-vue-ui-kit'
+import { defineComponent } from 'vue'
 const SKELETON_COUNT = 8
 
 export default defineComponent({

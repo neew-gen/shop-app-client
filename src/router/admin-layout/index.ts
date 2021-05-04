@@ -1,6 +1,7 @@
 import { RouteRecordRaw } from 'vue-router'
-import { productChildren } from '@/router/admin-layout/children/product'
+
 import { categoryChildren } from '@/router/admin-layout/children/category'
+import { productChildren } from '@/router/admin-layout/children/product'
 import { swipeChildren } from '@/router/admin-layout/children/swipe'
 
 export const adminLayoutRoutes: Array<RouteRecordRaw> = [

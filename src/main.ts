@@ -2,6 +2,7 @@ import 'mdb-vue-ui-kit/css/mdb.min.css'
 import './registerServiceWorker'
 import 'skeleton-screen-css' // https://www.npmjs.com/package/skeleton-screen-css
 import 'vue-toastification/dist/index.css'
+import 'vue-advanced-cropper/dist/style.css'
 
 import { createApp, ref } from 'vue'
 import Toast, { PluginOptions } from 'vue-toastification' // https://github.com/Maronato/vue-toastification/tree/next

@@ -1,6 +1,7 @@
 // A realizing of "Cache-Only" strategy
-import { FetchApi } from '@/api/fetch-api/FetchApi'
 import { Ref } from 'vue'
+
+import { FetchApi } from '@/api/fetch-api/FetchApi'
 
 export class COStrategy<Data> extends FetchApi<Data> {
   constructor(

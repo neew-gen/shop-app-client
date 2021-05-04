@@ -15,6 +15,7 @@
 <script lang="ts">
 import { MDBCol, MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
+
 import LoginPanel from '@/components/public-layout/profile/LoginPanel/LoginPanel.vue'
 
 export default defineComponent({

@@ -1,16 +1,17 @@
+import { DocumentNode } from '@apollo/client'
+
 import { apollo } from '@/api/graphql-api/apollo'
-import {
-  CategoryCreateInput,
-  CategoryDropdownType,
-  CategoryUpdateInput,
-} from '@/types/category'
 import {
   CREATE_CATEGORY,
   DELETE_CATEGORY,
   GET_CATEGORIES_DROPDOWN,
   UPDATE_CATEGORY,
 } from '@/api/graphql-api/queries/categoryQueries'
-import { DocumentNode } from '@apollo/client'
+import {
+  CategoryCreateInput,
+  CategoryDropdownType,
+  CategoryUpdateInput,
+} from '@/types/category'
 
 export class CategoryApi {
   // Method creates a new category and returns id.

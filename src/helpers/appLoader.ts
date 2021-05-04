@@ -1,5 +1,5 @@
-import { Router } from 'vue-router'
 import { Ref } from 'vue'
+import { Router } from 'vue-router'
 
 export default function (router: Router, loading: Ref<boolean>): void {
   router.beforeEach((to, from, next) => {

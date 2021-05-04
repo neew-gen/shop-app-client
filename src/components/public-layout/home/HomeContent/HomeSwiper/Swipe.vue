@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import { SwipeData } from '@/types/swipe'
 
 export default defineComponent({

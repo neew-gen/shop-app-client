@@ -9,8 +9,9 @@
 </template>
 
 <script lang="ts">
-import { PropType, WritableComputedRef, computed, defineComponent } from 'vue'
 import { MDBBtn, MDBCheckbox } from 'mdb-vue-ui-kit'
+import { computed, defineComponent, PropType, WritableComputedRef } from 'vue'
+
 import { store } from '@/store'
 import { ProductCartItem } from '@/types/product'
 
