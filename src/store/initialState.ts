@@ -3,18 +3,28 @@ export const initialState = {
     fullSizeSearch: false,
     categoryDropdown: undefined,
   },
-  // product: {
-  //   initialEditList: [],
-  //   editList: [],
-  // },
-  // category: {
-  //   editList: [],
-  //   catalogList: [],
-  // },
   cart: {
     cartList: [],
   },
   user: {
     userData: {},
+  },
+  inputs: {
+    productInput: {
+      categoryId: '',
+      count: 0,
+      show: true,
+      productData: {
+        name: '',
+        price: 0,
+        images: [],
+        description: '',
+        discount: {
+          status: false,
+          procentage: 0,
+          endsAt: false,
+        },
+      },
+    },
   },
 }

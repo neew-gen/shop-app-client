@@ -6,7 +6,7 @@
         class="d-flex justify-content-between align-items-center"
       >
         <div>Category:</div>
-        <CategoryDropdown />
+<!--        <CategoryDropdown />-->
       </MDBCol>
 
       <MDBCol col="12">
@@ -63,7 +63,7 @@ import { number, object, string } from 'yup'
 import { awaitUseFetch } from '@/api/fetch-api/useFetch'
 import { graphqlFetchBy, graphqlUpdate } from '@/api/graphql-api/GraphqlApi'
 import { GET_PRODUCT_BY_ID } from '@/api/graphql-api/queries/productQueries'
-import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
+// import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
 import ErrorField from '@/components/ErrorField.vue'
 import ImageContainer from '@/components/ImageContainer.vue'
 import ImageUploader from '@/components/ImageUploader/ImageUploader.vue'
@@ -81,7 +81,7 @@ export default defineComponent({
   components: {
     ImageUploader,
     ErrorField,
-    CategoryDropdown,
+    // CategoryDropdown,
     MDBInput,
     MDBTextarea,
     MDBBtn,
@@ -137,7 +137,7 @@ export default defineComponent({
     }
     onUnmounted(() => {
       unwatch()
-      store.dispatch('updateCategoryDropdown', undefined)
+      // store.dispatch('updateCategoryDropdown', undefined)
     })
 
     const res = await awaitUseFetch<ProductType>(
@@ -153,7 +153,7 @@ export default defineComponent({
     values.price = meta.value.initialValues.price = price
     values.description = meta.value.initialValues.description = description
     values.categoryId = meta.value.initialValues.categoryId = categoryId
-    store.dispatch('updateCategoryDropdown', categoryId)
+    // store.dispatch('updateCategoryDropdown', categoryId)
 
     return {
       values,

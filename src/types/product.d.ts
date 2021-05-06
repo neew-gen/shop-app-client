@@ -7,13 +7,37 @@ export type ProductType = {
   price: number
 }
 
-export type ProductCreateInput = {
+export type ProductData = {
   name: string
-  imgUrl: string
   price: number
+  images: ProductImagesItem[]
   description: string
-  categoryId?: string
+  discount: ProductDiscount
 }
+
+export type ProductImagesItem = {
+  id: string
+  imgUrl: string
+}
+
+export type ProductDiscount = {
+  status: boolean
+  procentage: number
+  endsAt: false | Date
+}
+
+export type ProductCreateInput = {
+  categoryId?: string
+  count: number
+  show: boolean
+  productData: ProductData
+}
+export type ProductDiscountInput = {
+  status?: boolean
+  procentage?: number
+  endsAt?: false | Date
+}
+
 
 export type ProductUpdateInput = {
   name?: string

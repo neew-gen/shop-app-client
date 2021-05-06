@@ -37,7 +37,7 @@ export default defineComponent({
     isLogged.value = isLoggedIn()
 
     if (isLogged.value) {
-      store.dispatch('fetchUserData')
+      store.dispatch('fetchUserData', undefined)
     }
     const name: ComputedRef<string> = computed(() => {
       return store.getters.getUserName

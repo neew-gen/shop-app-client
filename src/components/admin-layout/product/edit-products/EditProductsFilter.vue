@@ -3,7 +3,7 @@
     <div class="d-flex flex-column filter-title">
       <span>Sort by</span><span>category</span>
     </div>
-    <CategoryDropdown />
+    <!--    <CategoryDropdown />-->
   </MDBNavbar>
   <div class="filter-fake" />
 </template>
@@ -12,12 +12,12 @@
 import { MDBNavbar } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
 
-import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
+// import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
 
 export default defineComponent({
   name: 'EditProductsFilter',
   components: {
-    CategoryDropdown,
+    // CategoryDropdown,
     MDBNavbar,
   },
 })

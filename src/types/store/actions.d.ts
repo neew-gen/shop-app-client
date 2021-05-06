@@ -1,14 +1,7 @@
 import { ActionContext, CommitOptions } from 'vuex'
 
-import { MutationPayload } from '@/store'
-// import { MutationPayload as cartMutationPayload } from '@/store/modules/cart'
-// import { MutationPayload as userMutationPayload } from '@/store/modules/user'
-// import { MutationPayload as variablesMutationPayload } from '@/store/modules/variables'
+import { MutationsPayload } from '@/store'
 import { State } from '@/types/store'
-
-// type MutationPayload = variablesMutationPayload &
-//   cartMutationPayload &
-//   userMutationPayload
 
 export type Actions<T> = {
   [Property in keyof T]: (
@@ -18,9 +11,9 @@ export type Actions<T> = {
 }
 
 export type AugmentedActionContext = {
-  commit<K extends keyof MutationPayload>(
+  commit<K extends keyof MutationsPayload>(
     key: K,
-    payload: MutationPayload[K],
+    payload: MutationsPayload[K],
     options?: CommitOptions,
   ): void
 } & Omit<ActionContext<State, State>, 'commit'>
