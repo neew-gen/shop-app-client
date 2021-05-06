@@ -10,10 +10,7 @@
         {{ categoryName }}
       </MDBDropdownToggle>
       <MDBDropdownMenu aria-labelledby="dropdownMenuButton">
-        <MDBDropdownItem
-          class="dropdown-item"
-          @mouseup="setDropdown(undefined)"
-        >
+        <MDBDropdownItem class="dropdown-item" @mouseup="setDropdown('')">
           No Category
         </MDBDropdownItem>
         <MDBDropdownItem

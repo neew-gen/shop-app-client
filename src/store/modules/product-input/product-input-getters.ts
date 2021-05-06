@@ -1,6 +1,10 @@
 import { GetterTree } from 'vuex'
 
-import { ProductCreateInput, ProductDiscount, ProductImagesItem } from '@/types/product'
+import {
+  ProductCreateInput,
+  ProductDiscount,
+  ProductImagesItem,
+} from '@/types/product'
 import { State } from '@/types/store/state'
 
 export type ProductInputGetters = {

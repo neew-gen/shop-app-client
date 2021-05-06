@@ -1,6 +1,6 @@
 import { MutationTree } from 'vuex'
 
-import { ProductDiscount, ProductDiscountInput, ProductImagesItem } from '@/types/product'
+import { ProductDiscountInput, ProductImagesItem } from '@/types/product'
 import { Mutations } from '@/types/store/mutations'
 import { State } from '@/types/store/state'
 
@@ -14,7 +14,7 @@ export type ProductInputMutationsPayload = {
   updateProductImage: ProductImagesItem
   deleteProductImage: string
   updateProductDescription: string
-  updateProductDiscount: ProductDiscountInput
+  updateProductDiscount: false | ProductDiscountInput
 }
 
 export const productInputMutations: MutationTree<State> &
@@ -52,6 +52,13 @@ export const productInputMutations: MutationTree<State> &
     inputs.productInput.productData.description = newDescription
   },
   updateProductDiscount({ inputs }, discount) {
+    if (!discount) {
+      inputs.productInput.productData.discount = false
+      return
+    }
+    if (!inputs.productInput.productData.discount) {
+      inputs.productInput.productData.discount = {}
+    }
     let prop: keyof ProductDiscountInput
     for (prop in discount) {
       inputs.productInput.productData.discount[prop] = discount[prop]

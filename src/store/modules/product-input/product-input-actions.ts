@@ -13,7 +13,7 @@ export type ProductInputActions = {
   updateProductImage: [ProductImagesItem, void]
   deleteProductImage: [string, void]
   updateProductDescription: [string, void]
-  updateProductDiscount: [ProductDiscountInput, void]
+  updateProductDiscount: [false | ProductDiscountInput, void]
 }
 
 export const productInputActions: Actions<ProductInputActions> = {

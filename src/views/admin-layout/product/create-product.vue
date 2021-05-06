@@ -77,14 +77,14 @@ export default defineComponent({
     //   values.images = value.productData.images
     //   values.price = value.productData.price
     //   values.count = value.count
-    //   values.discountProcentage = value.productData.discount.procentage
+    //   values.discountpercentage = value.productData.discount.percentage
     // })
     // const schema = object({
     //   name: string().required().min(4).label('Product name'),
     //   images: array().required().min(1).label('Product images'),
     //   price: number().required().min(0).label('Product price'),
     //   count: number().required().min(0).label('Product count'),
-    //   discountProcentage: number().required().min(0).label('Discount %'),
+    //   discountpercentage: number().required().min(0).label('Discount %'),
     // })
     // const { values, errors, meta } = useForm({
     //   validationSchema: schema,
@@ -93,14 +93,14 @@ export default defineComponent({
     //     images: [],
     //     price: 0,
     //     count: 0,
-    //     discountProcentage: 0,
+    //     discountpercentage: 0,
     //   },
     // })
     // useField<string>('name')
     // useField<[]>('images')
     // useField<number>('price')
     // useField<number>('count')
-    // useField<number>('discountProcentage')
+    // useField<number>('discountpercentage')
     //
     // const unwatch = store.watch(
     //   () => store.getters.getCategoryDropdown,

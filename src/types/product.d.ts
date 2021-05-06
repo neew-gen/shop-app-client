@@ -12,7 +12,7 @@ export type ProductData = {
   price: number
   images: ProductImagesItem[]
   description: string
-  discount: ProductDiscount
+  discount: false | ProductDiscount
 }
 
 export type ProductImagesItem = {
@@ -21,8 +21,7 @@ export type ProductImagesItem = {
 }
 
 export type ProductDiscount = {
-  status: boolean
-  procentage: number
+  percentage: number
   endsAt: false | Date
 }
 
@@ -33,11 +32,9 @@ export type ProductCreateInput = {
   productData: ProductData
 }
 export type ProductDiscountInput = {
-  status?: boolean
-  procentage?: number
+  percentage?: number
   endsAt?: false | Date
 }
-
 
 export type ProductUpdateInput = {
   name?: string

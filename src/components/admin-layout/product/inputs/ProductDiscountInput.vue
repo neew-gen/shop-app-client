@@ -2,19 +2,19 @@
   <MDBCol col="12" class="d-flex flex-column">
     <div class="d-flex justify-content-between align-items-center">
       <div>Enable the discount:</div>
-      <MDBSwitch v-model="productDiscountStatus" />
+      <MDBSwitch v-model="productDiscountExist" />
     </div>
-    <div v-if="productDiscountStatus" class="d-flex flex-column my-2">
+    <div v-if="productDiscountExist" class="d-flex flex-column my-2">
       <MDBInput
         label="Discount, %"
         type="number"
-        v-model="productDiscountProcentage"
+        v-model="productDiscountpercentage"
       />
       <div class="my-2">
         <MDBCheckbox
           label="Discount end date"
           :modelValue="Boolean(productDiscountEndsAt)"
-          @change="enableDisableEndsAt"
+          @change="changeEndsAtExist"
         />
       </div>
       <DatePicker
@@ -37,7 +37,12 @@
 <script lang="ts">
 import { MDBCheckbox, MDBCol, MDBInput, MDBSwitch } from 'mdb-vue-ui-kit'
 import { DatePicker } from 'v-calendar'
-import { computed, defineComponent, ref, WritableComputedRef } from 'vue'
+import {
+  computed,
+  ComputedRef,
+  defineComponent,
+  WritableComputedRef,
+} from 'vue'
 
 import { useStore } from '@/store'
 
@@ -53,26 +58,34 @@ export default defineComponent({
   setup() {
     const store = useStore()
 
-    const productDiscountStatus: WritableComputedRef<boolean> = computed({
-      get(): boolean {
-        return store.getters.getProductDiscount.status
+    const productDiscountExist: WritableComputedRef<boolean> = computed({
+      get() {
+        return Boolean(store.getters.getProductDiscount)
       },
-      set(newValue: boolean): void {
-        store.dispatch('updateProductDiscount', { status: newValue })
+      set(newValue): void {
+        if (newValue) {
+          store.dispatch('updateProductDiscount', {
+            percentage: 0,
+            endsAt: false,
+          })
+        }
+        if (!newValue) {
+          store.dispatch('updateProductDiscount', false)
+        }
       },
     })
 
-    const productDiscountProcentage: WritableComputedRef<
+    const productDiscountpercentage: WritableComputedRef<
       string | undefined
     > = computed({
       get() {
-        if (store.getters.getProductDiscount.procentage)
-          return store.getters.getProductDiscount.procentage.toString()
+        if (store.getters.getProductDiscount.percentage)
+          return store.getters.getProductDiscount.percentage.toString()
         else return undefined
       },
       set(newValue): void {
         store.dispatch('updateProductDiscount', {
-          procentage: Number(newValue),
+          percentage: Number(newValue),
         })
       },
     })
@@ -89,24 +102,24 @@ export default defineComponent({
         })
       },
     })
-    const enableDisableEndsAt = (): void => {
-      const check = Boolean(productDiscountEndsAt.value)
-      if (check) {
+    const changeEndsAtExist = (): void => {
+      const existStatus = Boolean(productDiscountEndsAt.value)
+      if (existStatus) {
         store.dispatch('updateProductDiscount', {
           endsAt: false,
         })
       }
-      if (!check) {
+      if (!existStatus) {
         store.dispatch('updateProductDiscount', {
           endsAt: new Date(),
         })
       }
     }
     return {
-      productDiscountStatus,
-      productDiscountProcentage,
+      productDiscountExist,
+      productDiscountpercentage,
       productDiscountEndsAt,
-      enableDisableEndsAt,
+      changeEndsAtExist,
     }
   },
 })
