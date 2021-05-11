@@ -49,16 +49,16 @@ import {
   watch,
 } from 'vue'
 
-import { useFetch } from '@/api/fetch-api/useFetch'
+import { reactiveFetcher } from '@/api/fetch'
 import ImageContainer from '@/components/ImageContainer.vue'
 import { cartItemToCache } from '@/helpers/cacheFunctions'
-import { ProductCartItem, ProductType } from '@/types/product'
+import { Product, ProductCartItem } from '@/types/product'
 
 export default defineComponent({
   name: 'Product',
   props: {
     data: {
-      type: Object as PropType<ProductType>,
+      type: Object as PropType<Product>,
     },
   },
   components: {
@@ -71,28 +71,31 @@ export default defineComponent({
   },
   setup(props) {
     const isInCart = ref(false)
-    const { data: cartData } = useFetch<ProductCartItem[]>('CO', '/cart-cache')
+    const { data: cartData } = reactiveFetcher<ProductCartItem[]>(
+      'CO',
+      '/cart-cache',
+    )
 
     watch(cartData, () => {
-      if (cartData.value)
-        isInCart.value = cartData.value.some((p) => p.id === props.data!.id)
+      // if (cartData.value)
+      // isInCart.value = cartData.value.some((p) => p.id === props.data!.id)
     })
 
     const addToCart = (): void => {
-      isInCart.value = true
-      if (!props.data) return
-      const { id, name, imgUrl, price } = props.data
-      if (!(id && name && imgUrl && price)) return
-
-      const product: ProductCartItem = {
-        id,
-        name,
-        imgUrl,
-        price,
-        value: 1,
-        checked: true,
-      }
-      cartItemToCache<ProductCartItem>('/cart-cache', product)
+      // isInCart.value = true
+      // if (!props.data) return
+      // const { id, name, imgUrl, price } = props.data
+      // if (!(id && name && imgUrl && price)) return
+      //
+      // const product: ProductCartItem = {
+      //   id,
+      //   name,
+      //   imgUrl,
+      //   price,
+      //   value: 1,
+      //   checked: true,
+      // }
+      // cartItemToCache<ProductCartItem>('/cart-cache', product)
     }
     return { addToCart, isInCart }
   },

@@ -1,0 +1,33 @@
+{
+  "filters": {
+    "newer": {
+      "name": "New first",
+      "condition": {
+        "createdAt": "ASC"
+      }
+    },
+    "older": {
+      "name": "Old first",
+      "condition": {
+        "createdAt": "DESC"
+      }
+    },
+    "cheaper": {
+      "name": "Cheapest first",
+      "condition": {
+        "productData.price": "ASC"
+      }
+    },
+    "expensive": {
+      "name": "Expensive first",
+      "condition": {
+        "productData.price": "DESC"
+      }
+    },
+    "popular": {
+      "name": "Popular first",
+      "condition": {
+        "price": "DESC"
+      }
+    }
+}}

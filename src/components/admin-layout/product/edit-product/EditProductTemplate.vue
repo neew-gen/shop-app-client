@@ -6,7 +6,7 @@
         class="d-flex justify-content-between align-items-center"
       >
         <div>Category:</div>
-<!--        <CategoryDropdown />-->
+        <!--        <CategoryDropdown />-->
       </MDBCol>
 
       <MDBCol col="12">
@@ -60,7 +60,7 @@ import { defineComponent, onUnmounted } from 'vue'
 import { useToast } from 'vue-toastification'
 import { number, object, string } from 'yup'
 
-import { awaitUseFetch } from '@/api/fetch-api/useFetch'
+import { awaitFetcher } from '@/api/fetch'
 import { graphqlFetchBy, graphqlUpdate } from '@/api/graphql-api/GraphqlApi'
 import { GET_PRODUCT_BY_ID } from '@/api/graphql-api/queries/productQueries'
 // import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
@@ -68,7 +68,7 @@ import ErrorField from '@/components/ErrorField.vue'
 import ImageContainer from '@/components/ImageContainer.vue'
 import ImageUploader from '@/components/ImageUploader/ImageUploader.vue'
 import { useStore } from '@/store'
-import { ProductType, ProductUpdateInput } from '@/types/product'
+import { Product, ProductUpdateInput } from '@/types/product'
 
 export default defineComponent({
   name: 'EditProductTemplate',
@@ -140,19 +140,19 @@ export default defineComponent({
       // store.dispatch('updateCategoryDropdown', undefined)
     })
 
-    const res = await awaitUseFetch<ProductType>(
-      'SWR',
+    const res = await awaitFetcher<Product>(
+      'NF',
       `/edit-product-${props.id}`,
       () => graphqlFetchBy(GET_PRODUCT_BY_ID, { id: props.id! }),
     )
     // TODO need to improve this
-    const { name, imgUrl, price, description, categoryId } = res!
-    values.name = meta.value.initialValues.name = name
-    values.imgUrl = meta.value.initialValues.imgUrl = imgUrl
-    // TODO price's meta dirty does not work
-    values.price = meta.value.initialValues.price = price
-    values.description = meta.value.initialValues.description = description
-    values.categoryId = meta.value.initialValues.categoryId = categoryId
+    // const { name, imgUrl, price, description, categoryId } = res!
+    // values.name = meta.value.initialValues.name = name
+    // values.imgUrl = meta.value.initialValues.imgUrl = imgUrl
+    // // TODO price's meta dirty does not work
+    // values.price = meta.value.initialValues.price = price
+    // values.description = meta.value.initialValues.description = description
+    // values.categoryId = meta.value.initialValues.categoryId = categoryId
     // store.dispatch('updateCategoryDropdown', categoryId)
 
     return {

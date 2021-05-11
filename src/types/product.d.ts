@@ -1,31 +1,30 @@
-export type ProductType = {
+// product type
+export type Product = {
+  _id: string
+  createdAt: Date
   categoryId: string
-  description: string
-  id: string
-  imgUrl: string
-  name: string
-  price: number
+  count: number
+  show: boolean
+  productData: ProductData
 }
-
 export type ProductData = {
   name: string
   price: number
   images: ProductImagesItem[]
   description: string
-  discount: false | ProductDiscount
+  discount: null | ProductDiscount
 }
-
 export type ProductImagesItem = {
   id: string
   imgUrl: string
 }
-
 export type ProductDiscount = {
   percentage: number
-  endsAt: false | Date
+  endsAt: null | Date
 }
 
-export type ProductCreateInput = {
+// product create input
+export type CreateProductInput = {
   categoryId?: string
   count: number
   show: boolean
@@ -33,7 +32,22 @@ export type ProductCreateInput = {
 }
 export type ProductDiscountInput = {
   percentage?: number
-  endsAt?: false | Date
+  endsAt?: null | Date
+}
+
+// product list item
+export type ProductListItem = {
+  _id: string
+  productData: ProductListItemData
+}
+export type ProductListItemData = {
+  name: string
+  price: number
+  images: ProductImagesItem[]
+  discount: null | ProductListDiscount
+}
+export type ProductListDiscount = {
+  percentage: number
 }
 
 export type ProductUpdateInput = {

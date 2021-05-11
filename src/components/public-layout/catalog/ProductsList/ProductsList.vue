@@ -4,7 +4,7 @@
       <ProductsListItem
         v-for="(item, index) in data"
         :key="index"
-        :product="item"
+        :data="item"
       />
     </MDBRow>
   </MDBContainer>
@@ -15,15 +15,16 @@ import { MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent, PropType } from 'vue'
 
 import ProductsListItem from '@/components/public-layout/catalog/ProductsList/ProductsListItem.vue'
-import { ProductType } from '@/types/product'
+import { ProductListItem } from '@/types/product'
 
 export default defineComponent({
   name: 'ProductsList',
   props: {
     data: {
-      type: Array as PropType<ProductType[]>,
+      type: Array as PropType<ProductListItem[]>,
     },
   },
+
   components: {
     ProductsListItem,
     MDBContainer,

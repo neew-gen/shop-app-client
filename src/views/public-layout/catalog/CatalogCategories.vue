@@ -8,7 +8,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { useFetch } from '@/api/fetch-api/useFetch'
+import { reactiveFetcher } from '@/api/fetch'
 import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
 import { GET_CATEGORIES_CATALOG_LIST } from '@/api/graphql-api/queries/categoryQueries'
 import CategoriesList from '@/components/public-layout/catalog/CategoriesList/CategoriesList.vue'
@@ -22,7 +22,7 @@ export default defineComponent({
     CategoriesList,
   },
   setup() {
-    const { data, loading } = useFetch<CategoryType[]>(
+    const { data, loading } = reactiveFetcher<CategoryType[]>(
       'SWR',
       '/catalog-categories',
       () => graphqlFetch(GET_CATEGORIES_CATALOG_LIST),

@@ -27,7 +27,7 @@
 import { MDBCol, MDBContainer, MDBListGroup, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent, onUnmounted } from 'vue'
 
-import { awaitUseFetch, useFetch } from '@/api/fetch-api/useFetch'
+import { reactiveFetcher, awaitFetcher } from '@/api/fetch'
 import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
 import { GET_CATEGORIES_EDITLIST } from '@/api/graphql-api/queries/categoryQueries'
 import EditCategoriesItem from '@/components/admin-layout/category/edit-categories/EditCategoriesItem.vue'
@@ -46,16 +46,16 @@ export default defineComponent({
     Spinner,
   },
   setup() {
-    const { data, loading } = useFetch<ProductEditItem[]>(
-      'SWR',
+    const { data, loading } = reactiveFetcher<ProductEditItem[]>(
+      'NF',
       '/categories-edit-list',
       () => graphqlFetch(GET_CATEGORIES_EDITLIST),
     )
 
     async function dataLoader(): Promise<void> {
       loading.value = true
-      data.value = await awaitUseFetch<ProductEditItem[]>(
-        'SWR',
+      data.value = await awaitFetcher<ProductEditItem[]>(
+        'NF',
         '/categories-edit-list',
         () => graphqlFetch(GET_CATEGORIES_EDITLIST),
       )

@@ -116,10 +116,17 @@ export default defineComponent({
     const endEdit = (): void => {
       const { canvas } = cropper.value.getResult()
       canvas.toBlob(function (blob: Blob) {
-        store.dispatch('updateProductImage', {
-          id: editingImage.id,
-          imgUrl: URL.createObjectURL(blob)
-        })
+        // TODO fix blob
+        const reader = new window.FileReader()
+        reader.readAsDataURL(blob)
+        reader.onloadend = function (): void {
+          const base64data = reader.result
+          if (typeof base64data !== 'string') return
+          store.dispatch('updateProductImage', {
+            id: editingImage.id,
+            imgUrl: base64data,
+          })
+        }
       })
       changeModalMode(false)
     }
@@ -128,7 +135,18 @@ export default defineComponent({
       const target = e.target as HTMLInputElement
       const fileList = target.files
       if (!fileList) return
-      store.dispatch('addProductImage', URL.createObjectURL(fileList[0]))
+      // TODO fix blob
+      const reader = new window.FileReader()
+      reader.readAsDataURL(fileList[0])
+      reader.onloadend = function (): void {
+        const base64data = reader.result
+        if (typeof base64data !== 'string') return
+        store.dispatch('addProductImage', base64data)
+        fileInput.value.type = 'text'
+        fileInput.value.type = 'file'
+      }
+
+      // store.dispatch('addProductImage', URL.createObjectURL(fileList[0]))
       // the way to clear the fileInput. The method from linus borg
       fileInput.value.type = 'text'
       fileInput.value.type = 'file'

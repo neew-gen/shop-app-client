@@ -20,7 +20,7 @@ import {
 
 export function graphqlFetch(
   query: DocumentNode,
-): Promise<ApolloQueryResult<unknown>> {
+): Promise<ApolloQueryResult<any>> {
   return apollo.query({
     query,
   })
@@ -28,11 +28,11 @@ export function graphqlFetch(
 
 export function graphqlFetchBy(
   query: DocumentNode,
-  variable?: { [key: string]: string },
-): Promise<ApolloQueryResult<unknown>> {
+  variables: { [key: string]: string },
+): Promise<ApolloQueryResult<any>> {
   return apollo.query({
     query,
-    variables: { ...variable },
+    variables,
   })
 }
 
@@ -40,10 +40,9 @@ export function graphqlCreate<Input>(key: string, input: Input): void {
   const date = new Date().valueOf().toString()
   switch (key) {
     case 'product': {
-      const id = 'p' + date
       apollo.mutate({
         mutation: CREATE_PRODUCT,
-        variables: { product: { id, ...input } },
+        variables: { createProduct: input },
       })
       break
     }
@@ -127,39 +126,3 @@ export async function graphqlDelete(key: string, id: string): Promise<void> {
     }
   }
 }
-
-// export class GraphqlApi extends Mixin(ProductApi, CategoryApi, SwipeApi) {
-// static async fetchAll<T>(query: DocumentNode): Promise<T[]> {
-//   const res = await apollo.query({
-//     query: query
-//   })
-//   // We get an object with a field that contains data. We need to extract it
-//   const toValues: Array<T[]> = Object.values(res.data)
-//   if (toValues.length > 1) console.error('We got more than 1 value')
-//   return toValues[0]
-// }
-// static fetchAll(query: DocumentNode): Promise<ApolloQueryResult<unknown>> {
-//   return apollo.query({
-//     query,
-//   })
-// }
-// static fetchBy(
-//   query: DocumentNode,
-//   variable?: { [key: string]: string },
-// ): Promise<ApolloQueryResult<unknown>> {
-//   return apollo.query({
-//     query,
-//     variables: { ...variable },
-//   })
-// }
-// static async fetchById<T>(query: DocumentNode, id: string): Promise<T> {
-//   const res = await apollo.query({
-//     query: query,
-//     variables: { id },
-//   })
-//   // We get an object with a field that contains data. We need to extract it
-//   const toValues: T[] = Object.values(res.data)
-//   if (toValues.length > 1) console.error('We got more than 1 value')
-//   return toValues[0]
-// }
-// }

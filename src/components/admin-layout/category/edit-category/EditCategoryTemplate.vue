@@ -75,7 +75,7 @@ import { defineComponent, ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import { boolean, object, string } from 'yup'
 
-import { awaitUseFetch } from '@/api/fetch-api/useFetch'
+import { awaitFetcher } from '@/api/fetch'
 import { graphqlFetchBy, graphqlUpdate } from '@/api/graphql-api/GraphqlApi'
 import { GET_CATEGORY_BY_ID } from '@/api/graphql-api/queries/categoryQueries'
 import ErrorField from '@/components/ErrorField.vue'
@@ -134,8 +134,8 @@ export default defineComponent({
       reset()
       toast.success('Category has been edited!')
     }
-    const res = await awaitUseFetch<CategoryType>(
-      'SWR',
+    const res = await awaitFetcher<CategoryType>(
+      'NF',
       `/edit-category-${props.id}`,
       () => graphqlFetchBy(GET_CATEGORY_BY_ID, { id: props.id! }),
     )

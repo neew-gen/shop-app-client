@@ -39,7 +39,7 @@ import {
 } from 'mdb-vue-ui-kit'
 import { computed, ComputedRef, defineComponent, onUnmounted, ref } from 'vue'
 
-import { useFetch } from '@/api/fetch-api/useFetch'
+import { useFetch } from '@/api/fetch/useFetch'
 import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
 import { GET_CATEGORIES_DROPDOWN } from '@/api/graphql-api/queries/categoryQueries'
 import { useStore } from '@/store'

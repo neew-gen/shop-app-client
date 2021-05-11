@@ -1,7 +1,7 @@
 import { GetterTree } from 'vuex'
 
 import {
-  ProductCreateInput,
+  CreateProductInput,
   ProductDiscount,
   ProductImagesItem,
 } from '@/types/product'
@@ -16,7 +16,7 @@ export type ProductInputGetters = {
   getProductImages(state: State): ProductImagesItem[]
   getProductDescription(state: State): string
   getProductDiscount(state: State): ProductDiscount
-  getProductInput(state: State): ProductCreateInput
+  getProductInput(state: State): CreateProductInput
 }
 
 export const productInputGetters: GetterTree<State, State> &

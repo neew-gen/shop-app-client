@@ -22,7 +22,7 @@ export const catalogChildren: Array<RouteRecordRaw> = [
         name: 'CatalogProducts',
         component: (): unknown =>
           import(
-            /* webpackChunkName: "catalog-products" */ '@/views/public-layout/catalog/CatalogProducts.vue'
+            /* webpackChunkName: "catalog-products" */ '@/views/public-layout/catalog/catalog-products.vue'
           ),
         props: true,
       },

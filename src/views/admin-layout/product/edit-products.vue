@@ -30,7 +30,7 @@
 import { MDBCol, MDBContainer, MDBListGroup, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent, onUnmounted } from 'vue'
 
-import { awaitUseFetch, useFetch } from '@/api/fetch-api/useFetch'
+import { awaitFetcher, reactiveFetcher } from '@/api/fetch'
 import { graphqlFetch, graphqlFetchBy } from '@/api/graphql-api/GraphqlApi'
 import {
   GET_PRODUCTS_EDITLIST,
@@ -57,8 +57,8 @@ export default defineComponent({
   setup() {
     const store = useStore()
 
-    const { data, loading } = useFetch<ProductEditItem[]>(
-      'SWR',
+    const { data, loading } = reactiveFetcher<ProductEditItem[]>(
+      'NF',
       '/products-edit-list',
       () => graphqlFetch(GET_PRODUCTS_EDITLIST),
     )
@@ -66,16 +66,16 @@ export default defineComponent({
     async function dataLoader(categoryId: string): Promise<void> {
       loading.value = true
       if (!categoryId) {
-        data.value = await awaitUseFetch<ProductEditItem[]>(
-          'SWR',
+        data.value = await awaitFetcher<ProductEditItem[]>(
+          'NF',
           '/products-edit-list',
           () => graphqlFetch(GET_PRODUCTS_EDITLIST),
         )
         loading.value = false
         return
       }
-      data.value = await awaitUseFetch<ProductEditItem[]>(
-        'SWR',
+      data.value = await awaitFetcher<ProductEditItem[]>(
+        'NF',
         `/products-edit-list-${categoryId}`,
         () =>
           graphqlFetchBy(GET_PRODUCTS_EDITLIST_BY_CATEGORY_ID, {

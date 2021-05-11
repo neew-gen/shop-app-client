@@ -6,6 +6,7 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client'
 
+// I disabled the cache because it works rather unpredictably
 const defaultOptions: DefaultOptions = {
   watchQuery: {
     fetchPolicy: 'no-cache',

@@ -1,7 +1,6 @@
-import { watch } from 'vue'
 import { GetterTree, MutationTree } from 'vuex'
 
-import { awaitUseFetch, useFetch } from '@/api/fetch-api/useFetch'
+import { awaitFetcher } from '@/api/fetch'
 import {
   deleteCacheSelected,
   updateCacheAllChecked,
@@ -27,7 +26,7 @@ export type ActionsPayload = {
 
 export const actions: Actions<ActionsPayload> = {
   async fetchCartList({ commit }) {
-    const res = await awaitUseFetch<ProductCartItem[]>('CO', '/cart-cache')
+    const res = await awaitFetcher<ProductCartItem[]>('CO', '/cart-cache')
     if (res) commit('fetchCartList', res)
   },
   updateCartItem({ commit }, { id, propName, propValue }) {

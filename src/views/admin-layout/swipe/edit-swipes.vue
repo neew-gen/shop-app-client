@@ -28,7 +28,7 @@
 import { MDBCol, MDBContainer, MDBIcon, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent, onUnmounted } from 'vue'
 
-import { awaitUseFetch, useFetch } from '@/api/fetch-api/useFetch'
+import { reactiveFetcher, awaitFetcher } from '@/api/fetch'
 import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
 import { GET_SWIPES } from '@/api/graphql-api/queries/swipeQueries'
 import DraggableList from '@/components/admin-layout/swipe/edit-swipes/DraggableList.vue'
@@ -47,13 +47,13 @@ export default defineComponent({
     Spinner,
   },
   setup() {
-    const { data, loading } = useFetch<SwipeType[]>('NF', '/edit-swipes', () =>
+    const { data, loading } = reactiveFetcher<SwipeType[]>('NF', '/edit-swipes', () =>
       graphqlFetch(GET_SWIPES),
     )
 
     async function dataLoader(): Promise<void> {
       loading.value = true
-      data.value = await awaitUseFetch<SwipeType[]>('NF', '/edit-swipes', () =>
+      data.value = await awaitFetcher<SwipeType[]>('NF', '/edit-swipes', () =>
         graphqlFetch(GET_SWIPES),
       )
       loading.value = false

@@ -1,14 +1,14 @@
 import { DocumentNode } from '@apollo/client'
 import { isEqual } from 'lodash'
 
-import { axiosExtractor } from '@/api/fetch-api/extractors/axiosExtractror'
-import { defaultExtractor } from '@/api/fetch-api/extractors/defaultExtractor'
-import { ApolloFetcher, AxiosFetcher, DataExtractor } from '@/types/fetch'
+import { axiosExtractor } from '@/api/fetch/extractors/axiosExtractror'
+import { defaultExtractor } from '@/api/fetch/extractors/defaultExtractor'
+import { ApolloRequestor, AxiosRequestor, DataExtractor } from '@/types/fetch'
 
-export class FetchApi<Data> {
+export class Fetch<Data> {
   constructor(
     protected key: string,
-    protected fetcher?: ApolloFetcher | AxiosFetcher,
+    protected requestor?: ApolloRequestor | AxiosRequestor,
   ) {}
 
   protected async cacheExist(): Promise<boolean> {
@@ -21,8 +21,8 @@ export class FetchApi<Data> {
   protected async fetchFromNetwork(
     extractor?: string,
   ): Promise<Data | undefined> {
-    if (this.fetcher) {
-      const res = await this.fetcher()
+    if (this.requestor) {
+      const res = await this.requestor()
       if (res) {
         switch (extractor) {
           case 'axios': {

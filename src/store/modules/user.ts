@@ -1,6 +1,6 @@
 import { GetterTree, MutationTree } from 'vuex'
 
-import { awaitUseFetch, useFetch } from '@/api/fetch-api/useFetch'
+import { awaitFetcher } from '@/api/fetch'
 import { getUser } from '@/api/jwt-api/requests'
 import {
   deleteCacheSelected,
@@ -28,8 +28,8 @@ export type ActionsPayload = {
 
 export const actions: Actions<ActionsPayload> = {
   async fetchUserData({ commit }) {
-    const res = await awaitUseFetch<UserData>(
-      'SWR',
+    const res = await awaitFetcher<UserData>(
+      'NF',
       '/user-data',
       () => getUser(),
       'axios',

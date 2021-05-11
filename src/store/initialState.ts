@@ -19,7 +19,7 @@ export const initialState = {
         price: 0,
         images: [],
         description: '',
-        discount: false
+        discount: null,
       },
     },
   },

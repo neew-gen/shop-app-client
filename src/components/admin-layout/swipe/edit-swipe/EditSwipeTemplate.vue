@@ -47,7 +47,7 @@ import { defineComponent } from 'vue'
 import { useToast } from 'vue-toastification'
 import { object, string } from 'yup'
 
-import { awaitUseFetch } from '@/api/fetch-api/useFetch'
+import { awaitFetcher } from '@/api/fetch'
 import { graphqlFetchBy, graphqlUpdate } from '@/api/graphql-api/GraphqlApi'
 import { GET_SWIPE_BY_ID } from '@/api/graphql-api/queries/swipeQueries'
 import ErrorField from '@/components/ErrorField.vue'
@@ -104,8 +104,8 @@ export default defineComponent({
       toast.success('Swipe has been edited!')
     }
 
-    const res = await awaitUseFetch<SwipeType>(
-      'SWR',
+    const res = await awaitFetcher<SwipeType>(
+      'NF',
       `/edit-swipe-${props.id}`,
       () => graphqlFetchBy(GET_SWIPE_BY_ID, { id: props.id! }),
     )

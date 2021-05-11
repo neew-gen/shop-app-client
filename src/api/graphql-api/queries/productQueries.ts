@@ -13,6 +13,29 @@ export const GET_PRODUCT_BY_ID = gql(`
       }`)
 // --------------------------------- Admin Layout --------------------------------- //
 
+export const CREATE_PRODUCT = gql(`
+ mutation CreateProduct($createProduct: CreateProductInput!) {
+   createProduct(createProduct: $createProduct) {
+     categoryId
+     count
+     show
+     productData {
+       name
+       price
+       images {
+         id 
+         imgUrl
+       }
+       description
+       discount {
+         percentage
+         endsAt
+       }
+     }
+   }
+ }
+ `)
+
 export const GET_PRODUCTS_EDITLIST = gql(`
   query Products {
     products {
@@ -32,19 +55,6 @@ export const GET_PRODUCTS_EDITLIST_BY_CATEGORY_ID = gql(`
           categoryId
         }
       }`)
-
-export const CREATE_PRODUCT = gql(`
- mutation CreateProduct($product: ProductInput!) {
-   createProduct(product: $product) {
-     id
-     name
-     imgUrl
-     price
-     description
-     categoryId
-   }
- }
- `)
 
 export const UPDATE_PRODUCT = gql(`
       mutation UpdateProduct($product: UpdateProductInput!, $id: String!) {
@@ -69,13 +79,17 @@ export const DELETE_PRODUCT = gql(`
         }
       }`)
 // --------------------------------- Public Layout -------------------------------- //
-
-export const GET_PRODUCTS_CATALOG_LIST_BY_CATEGORY_ID = gql(`
-      query ProductsByCategoryId($categoryId: String!) {
-        productsByCategoryId(categoryId: $categoryId) {
-          id
-          name
-          imgUrl
-          price
+export const GET_PRODUCTS_CATALOG_LIST = gql(`
+      query ProductsByCategoryId($categoryId: String!, $sortBy: String!, $sortParam: String!) {
+        productsByCategoryId(categoryId: $categoryId, sortBy: $sortBy, sortParam: $sortParam) {
+          _id
+          productData {
+            name
+            images {
+              id 
+              imgUrl
+            }
+            price
+          }
         }
       }`)

@@ -1,42 +1,45 @@
 <template>
   <MDBCol class="d-flex flex-column" col="6">
-    <div
-      class="item-wrapper"
-      v-mdb-ripple="{ duration: 1000 }"
-      @click="pushToProduct(product.id)"
-    >
+    <!--    v-mdb-ripple="{ duration: 1000 }"-->
+    <div class="item-wrapper" @click="pushToProduct(data._id)">
       <div>
         <ImageContainer
-          :img-url="product.imgUrl"
+          :img-url="data.productData.images[0].imgUrl"
           name="product.name"
           height="150px"
           width="100%"
         />
       </div>
       <div class="price-row">
-        <div class="price-row__price">{{ product.price }}&ensp;dol.</div>
+        <div class="price-row__price">
+          {{ data.productData.price }}&ensp;dol.
+        </div>
         <MDBIcon icon="heart" size="lg" iconStyle="far" />
       </div>
       <div class="name-row">
-        {{ product.name }}
+        {{ data.productData.name }}
       </div>
     </div>
   </MDBCol>
 </template>
 
 <script lang="ts">
-import { MDBCol, MDBIcon, mdbRipple } from 'mdb-vue-ui-kit'
+import {
+  MDBCol,
+  MDBIcon,
+  // mdbRipple
+} from 'mdb-vue-ui-kit'
 import { defineComponent, PropType } from 'vue'
 
 import ImageContainer from '@/components/ImageContainer.vue'
 import router from '@/router'
-import { ProductType } from '@/types/product'
+import { Product, ProductListItem } from '@/types/product'
 
 export default defineComponent({
   name: 'ProductsListItem',
   props: {
-    product: {
-      type: Object as PropType<ProductType>,
+    data: {
+      type: Object as PropType<ProductListItem>,
       required: true,
     },
   },
@@ -45,17 +48,21 @@ export default defineComponent({
     MDBCol,
     MDBIcon,
   },
-  directives: {
-    mdbRipple,
-  },
-  setup() {
+  // directives: {
+  //   mdbRipple,
+  // },
+  setup(props) {
     const pushToProduct = (id: string): void => {
-      setTimeout(() => {
-        router.push({
-          name: 'CatalogProduct',
-          params: { id },
-        })
-      }, 100)
+      router.push({
+        name: 'CatalogProduct',
+        params: { id },
+      })
+      // setTimeout(() => {
+      //   router.push({
+      //     name: 'CatalogProduct',
+      //     params: { id },
+      //   })
+      // }, 100)
     }
     return { pushToProduct }
   },

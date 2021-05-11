@@ -66,7 +66,7 @@ export default defineComponent({
         if (newValue) {
           store.dispatch('updateProductDiscount', {
             percentage: 0,
-            endsAt: false,
+            endsAt: null,
           })
         }
         if (!newValue) {
@@ -90,11 +90,11 @@ export default defineComponent({
       },
     })
 
-    const productDiscountEndsAt: WritableComputedRef<Date | false> = computed({
+    const productDiscountEndsAt: WritableComputedRef<null | Date> = computed({
       get() {
         if (store.getters.getProductDiscount.endsAt)
           return store.getters.getProductDiscount.endsAt
-        else return false
+        else return null
       },
       set(newValue): void {
         store.dispatch('updateProductDiscount', {
@@ -106,7 +106,7 @@ export default defineComponent({
       const existStatus = Boolean(productDiscountEndsAt.value)
       if (existStatus) {
         store.dispatch('updateProductDiscount', {
-          endsAt: false,
+          endsAt: null,
         })
       }
       if (!existStatus) {

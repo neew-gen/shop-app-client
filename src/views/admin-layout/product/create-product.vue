@@ -43,7 +43,7 @@ import ProductNameInput from '@/components/admin-layout/product/inputs/ProductNa
 import ProductPriceInput from '@/components/admin-layout/product/inputs/ProductPriceInput.vue'
 import ProductShowInput from '@/components/admin-layout/product/inputs/ProductShowInput.vue'
 import { useStore } from '@/store'
-import { ProductCreateInput } from '@/types/product'
+import { CreateProductInput } from '@/types/product'
 
 export default defineComponent({
   name: 'create-product',
@@ -69,7 +69,7 @@ export default defineComponent({
     const updateModal = (newValue: boolean): void => {
       modal.value = newValue
     }
-    const productInput: ComputedRef<ProductCreateInput> = computed(() => {
+    const productInput: ComputedRef<CreateProductInput> = computed(() => {
       return store.getters.getProductInput
     })
     // const unwatch = watch(productInput.value, (value) => {
@@ -118,13 +118,7 @@ export default defineComponent({
       // console.log(errors.value)
       // const { name, imgUrl, price, description, categoryId } = values
       // if (!(name && imgUrl && price && description)) return
-      // graphqlCreate<ProductCreateInput>('product', {
-      //   name,
-      //   imgUrl,
-      //   price,
-      //   description,
-      //   categoryId,
-      // })
+      graphqlCreate<CreateProductInput>('product', productInput.value)
       // reset()
       // store.dispatch('updateCategoryDropdown', undefined)
       toast.success('Product has been created!')

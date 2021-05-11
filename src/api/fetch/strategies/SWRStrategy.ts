@@ -1,18 +1,18 @@
 // A realizing of "Stale-While-Revalidate" strategy
 import { Ref } from 'vue'
 
-import { FetchApi } from '@/api/fetch-api/FetchApi'
-import { ApolloFetcher, AxiosFetcher } from '@/types/fetch'
+import { Fetch } from '@/api/fetch/Fetch'
+import { ApolloRequestor, AxiosRequestor } from '@/types/fetch'
 
-export class SWRStrategy<Data> extends FetchApi<Data> {
+export class SWRStrategy<Data> extends Fetch<Data> {
   constructor(
     key: string,
-    fetcher: ApolloFetcher | AxiosFetcher,
+    requestor: ApolloRequestor | AxiosRequestor,
     private data: Ref<Data | undefined>,
     private loading: Ref<boolean>,
     private extractor?: string,
   ) {
-    super(key, fetcher)
+    super(key, requestor)
   }
   public async useSWR(): Promise<void> {
     const exist = await this.cacheExist()

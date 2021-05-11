@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { useFetch } from '@/api/fetch-api/useFetch'
+import { reactiveFetcher } from '@/api/fetch'
 import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
 import { GET_SWIPES } from '@/api/graphql-api/queries/swipeQueries'
 import HomeSwiper from '@/components/public-layout/home/HomeContent/HomeSwiper/HomeSwiper.vue'
@@ -24,11 +24,9 @@ export default defineComponent({
     HomeSwiperSkeleton,
   },
   setup() {
-    const { data: swiperData, loading: swiperLoading } = useFetch<SwipeType[]>(
-      'SWR',
-      '/home-content-swiper',
-      () => graphqlFetch(GET_SWIPES),
-    )
+    const { data: swiperData, loading: swiperLoading } = reactiveFetcher<
+      SwipeType[]
+    >('NF', '/home-content-swiper', () => graphqlFetch(GET_SWIPES))
     return { swiperData, swiperLoading }
   },
 })

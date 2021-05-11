@@ -43,7 +43,7 @@ import {
 } from 'mdb-vue-ui-kit'
 import { computed, ComputedRef, defineComponent, ref } from 'vue'
 
-import { useFetch } from '@/api/fetch-api/useFetch'
+import { reactiveFetcher } from '@/api/fetch'
 import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
 import { GET_CATEGORIES_DROPDOWN } from '@/api/graphql-api/queries/categoryQueries'
 import { useStore } from '@/store'
@@ -72,7 +72,7 @@ export default defineComponent({
       showDropdown.value = false
     }
 
-    const { data, loading } = useFetch<CategoryDropdownType[]>(
+    const { data, loading } = reactiveFetcher<CategoryDropdownType[]>(
       'SWR',
       '/category-dropdown',
       () => graphqlFetch(GET_CATEGORIES_DROPDOWN),
