@@ -1,11 +1,7 @@
 <template>
   <MDBContainer>
     <MDBRow>
-      <ProductsListItem
-        v-for="(item, index) in data"
-        :key="index"
-        :data="item"
-      />
+      <ProductsListItem v-for="item in data" :key="item._id" :data="item" />
     </MDBRow>
   </MDBContainer>
 </template>

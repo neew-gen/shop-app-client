@@ -58,7 +58,7 @@ export const mutations: MutationTree<State> & Mutations<MutationPayload> = {
   },
   updateCartItem({ cart }, { id, propName, propValue }) {
     const itemForUpdate = cart.cartList.filter(
-      (i: ProductCartItem) => i.id === id,
+      (i: ProductCartItem) => i._id === id,
     )[0]
     itemForUpdate[propName] = propValue
   },

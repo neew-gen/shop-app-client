@@ -4,6 +4,10 @@
       <HomeSwiper v-if="!swiperLoading" :data="swiperData" />
       <HomeSwiperSkeleton v-if="swiperLoading" />
     </div>
+    <div class="sale-block">
+      <HomeSale />
+    </div>
+    <div>new</div>
   </div>
 </template>
 
@@ -13,6 +17,7 @@ import { defineComponent } from 'vue'
 import { reactiveFetcher } from '@/api/fetch'
 import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
 import { GET_SWIPES } from '@/api/graphql-api/queries/swipeQueries'
+import HomeSale from '@/components/public-layout/home/HomeContent/HomeSale/HomeSale.vue'
 import HomeSwiper from '@/components/public-layout/home/HomeContent/HomeSwiper/HomeSwiper.vue'
 import HomeSwiperSkeleton from '@/components/public-layout/home/HomeContent/HomeSwiper/HomeSwiperSkeleton.vue'
 import { SwipeType } from '@/types/swipe'
@@ -20,6 +25,7 @@ import { SwipeType } from '@/types/swipe'
 export default defineComponent({
   name: 'HomeContent',
   components: {
+    HomeSale,
     HomeSwiper,
     HomeSwiperSkeleton,
   },
@@ -32,15 +38,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss">
-//.fade-enter-active {
-//  transition: opacity $catalog-fade-duration linear;
-//}
-//.fade-leave-active {
-//  transition: opacity $catalog-fade-duration linear;
-//}
-//.fade-enter,
-//.fade-leave-to {
-//  opacity: 0;
-//}
-</style>
+<style scoped lang="scss"></style>

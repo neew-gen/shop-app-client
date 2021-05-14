@@ -18,7 +18,7 @@ export async function cartItemToCache<Input>(
 }
 
 export async function updateCartItemCache(
-  id: string,
+  _id: string,
   propName: string,
   propValue: string | number,
 ): Promise<void> {
@@ -27,7 +27,7 @@ export async function updateCartItemCache(
   if (cacheMatched) {
     const fromJson = await cacheMatched.json()
     const itemForUpdate = fromJson.filter(
-      (i: ProductCartItem) => i.id === id,
+      (i: ProductCartItem) => i._id === _id,
     )[0]
     itemForUpdate[propName] = propValue
     const toJson = JSON.stringify(fromJson)
@@ -52,7 +52,7 @@ export async function deleteCacheSelected(): Promise<void> {
   const cacheMatched = await window.caches.match('/cart-cache')
   if (cacheMatched) {
     const fromJson = await cacheMatched.json()
-    const updatedCache = fromJson.filter((i: ProductCartItem) => !i.checked)
+    const updatedCache = fromJson.filter((item: ProductCartItem) => !item.checked)
     const toJson = JSON.stringify(updatedCache)
     await cacheOpened.put('/cart-cache', new Response(toJson))
   }

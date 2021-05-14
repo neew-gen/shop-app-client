@@ -1,11 +1,13 @@
 <template>
-  <div>
+  <MDBContainer>
     <HomeNavbar />
-    <MDBContainer fluid>
-      <HomeContent v-if="!fullSizeSearch" />
-      <HomeSearchContent v-if="fullSizeSearch" />
-    </MDBContainer>
-  </div>
+    <HomeContent v-if="!fullSizeSearch" />
+    <HomeSearchContent v-if="fullSizeSearch" />
+    <!--    <MDBContainer fluid>-->
+    <!--      <HomeContent v-if="!fullSizeSearch" />-->
+    <!--      <HomeSearchContent v-if="fullSizeSearch" />-->
+    <!--    </MDBContainer>-->
+  </MDBContainer>
 </template>
 
 <script lang="ts">

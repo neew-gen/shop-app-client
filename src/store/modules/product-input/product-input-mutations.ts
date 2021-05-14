@@ -14,7 +14,7 @@ export type ProductInputMutationsPayload = {
   updateProductImage: ProductImagesItem
   deleteProductImage: string
   updateProductDescription: string
-  updateProductDiscount: false | ProductDiscountInput
+  updateProductDiscount: null | ProductDiscountInput
 }
 
 export const productInputMutations: MutationTree<State> &

@@ -3,15 +3,13 @@
     class="d-flex align-items-center border-0"
     @click="routerPush"
   >
-    <div class="item-image">
-      <ImageContainer
-        height="60px"
-        width="90px"
-        :img-url="imgUrl"
-        :name="name"
+    <div class="image">
+      <div
+        class="background-image"
+        :style="`background-image: url(${imgUrl});`"
       />
     </div>
-    <div class="item-name">{{ name }}</div>
+    <div class="name">{{ name }}</div>
   </MDBListGroupItem>
 </template>
 
@@ -19,7 +17,6 @@
 import { MDBListGroupItem } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
 
-import ImageContainer from '@/components/ImageContainer.vue'
 import router from '@/router'
 
 export default defineComponent({
@@ -38,14 +35,13 @@ export default defineComponent({
     },
   },
   components: {
-    ImageContainer,
     MDBListGroupItem,
   },
   setup(props) {
     const routerPush = (): void => {
       if (!props.categoryId) return
       router.push({
-        name: 'CatalogProducts',
+        name: 'catalog-products',
         params: { categoryId: props.categoryId },
       })
     }
@@ -55,7 +51,21 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.item-name {
+.image {
+  height: 60px;
+  width: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.background-image {
+  height: 100%;
+  width: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.name {
   margin-left: 20px;
   font-weight: 500;
 }

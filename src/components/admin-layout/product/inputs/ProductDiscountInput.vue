@@ -70,7 +70,7 @@ export default defineComponent({
           })
         }
         if (!newValue) {
-          store.dispatch('updateProductDiscount', false)
+          store.dispatch('updateProductDiscount', null)
         }
       },
     })

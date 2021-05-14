@@ -1,26 +1,27 @@
 <template>
-  <MDBListGroup>
-    <CartListItem v-for="(item, index) in data" :key="index" :data="item" />
+  <MDBListGroup v-if="cartData">
+    <CartListItem v-for="item in cartData" :key="item._id" :data="item" />
   </MDBListGroup>
 </template>
 
 <script lang="ts">
 import { MDBListGroup } from 'mdb-vue-ui-kit'
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 
+import CartApi from '@/api/cart/CartApi'
 import CartListItem from '@/components/public-layout/cart/CartList/CartItem/CartItem.vue'
-import { ProductCartItem } from '@/types/product'
 
 export default defineComponent({
   name: 'CartList',
-  props: {
-    data: {
-      type: Array as PropType<ProductCartItem[]>,
-    },
-  },
   components: {
     CartListItem,
     MDBListGroup,
+  },
+  setup() {
+    const cartData = CartApi.getCartData()
+    return {
+      cartData,
+    }
   },
 })
 </script>

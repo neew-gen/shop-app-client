@@ -6,7 +6,7 @@ export const cartChildren: Array<RouteRecordRaw> = [
     name: 'Cart',
     component: (): unknown =>
       import(
-        /* webpackChunkName: "shopping-cart" */ '@/views/public-layout/cart/Cart.vue'
+        /* webpackChunkName: "shopping-cart" */ '@/views/public-layout/cart/cart.vue'
       ),
   },
 ]

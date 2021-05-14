@@ -3,15 +3,16 @@
   <MDBContainer>
     <MDBRow>
       <MDBCol class="cart-check-all-container">
-        <CartCheckAll :data="data" :have-checked="haveChecked" />
+        <CartCheckAll />
       </MDBCol>
       <MDBCol col="12">
-        <CartList :data="data" />
-        <div class="d-flex justify-content-center" v-if="data.length === 0">
+        {{ isEmptyCart }}
+        <CartList v-if="!isEmptyCart" />
+        <div class="d-flex justify-content-center" v-if="isEmptyCart">
           <div>Cart is empty.</div>
         </div>
       </MDBCol>
-      <MDBCol col="12" v-if="haveChecked">
+      <MDBCol col="12" v-if="isHaveCheckedInCart">
         <CartTotal />
       </MDBCol>
     </MDBRow>
@@ -20,14 +21,13 @@
 
 <script lang="ts">
 import { MDBCol, MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
-import { computed, ComputedRef, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 
+import CartApi from '@/api/cart/CartApi'
 import CartCheckAll from '@/components/public-layout/cart/CartCheckAll/CartCheckAll.vue'
 import CartList from '@/components/public-layout/cart/CartList/CartList.vue'
 import CartTotal from '@/components/public-layout/cart/CartTotal/CartTotal.vue'
 import CartBreadcrumb from '@/components/public-layout/PublicBreadcrumbs/CartBreadcrumb.vue'
-import { store } from '@/store'
-import { ProductCartItem } from '@/types/product'
 
 export default defineComponent({
   name: 'Cart',
@@ -41,16 +41,11 @@ export default defineComponent({
     MDBCol,
   },
   setup() {
-    store.dispatch('fetchCartList')
-    const data: ComputedRef<ProductCartItem[]> = computed(() => {
-      return store.getters.getCartList
-    })
-    const haveChecked: ComputedRef<boolean> = computed(() => {
-      return data.value.some((p) => p.checked)
-    })
+    const isEmptyCart = CartApi.getIsEmptyCart()
+    const isHaveCheckedInCart = CartApi.getIsHaveCheckedInCart()
     return {
-      data,
-      haveChecked,
+      isEmptyCart,
+      isHaveCheckedInCart,
     }
   },
 })

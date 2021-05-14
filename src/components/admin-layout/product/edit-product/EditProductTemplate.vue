@@ -15,7 +15,7 @@
       </MDBCol>
 
       <MDBCol col="12">
-        <ImageUploader />
+<!--        <ImageUploader />-->
         <!--        <MDBInput label="Image Url" v-model="values.imgUrl" />-->
         <!--        <ErrorField>{{ errors.imgUrl }}</ErrorField>-->
       </MDBCol>
@@ -65,7 +65,7 @@ import { graphqlFetchBy, graphqlUpdate } from '@/api/graphql-api/GraphqlApi'
 import { GET_PRODUCT_BY_ID } from '@/api/graphql-api/queries/productQueries'
 // import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
 import ErrorField from '@/components/ErrorField.vue'
-import ImageContainer from '@/components/ImageContainer.vue'
+// import ImageContainer from '@/components/ImageContainer.vue'
 import ImageUploader from '@/components/ImageUploader/ImageUploader.vue'
 import { useStore } from '@/store'
 import { Product, ProductUpdateInput } from '@/types/product'
@@ -79,7 +79,7 @@ export default defineComponent({
     },
   },
   components: {
-    ImageUploader,
+    // ImageUploader,
     ErrorField,
     // CategoryDropdown,
     MDBInput,

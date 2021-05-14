@@ -22,6 +22,7 @@
     "graphql": "^15.5.0",
     "lodash": "^4.17.21",
     "mdb-vue-ui-kit": "^1.0.0-beta2",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "register-service-worker": "^1.7.1",
     "skeleton-screen-css": "^1.0.1",

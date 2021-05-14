@@ -39,6 +39,7 @@ export default defineComponent({
   setup(props) {
     const data: Ref<ProductListItem[] | undefined> = ref([])
     const loading: Ref<boolean> = ref(true)
+
     const updateFilter = async (e: any): Promise<void> => {
       loading.value = true
       const conditionKey = Object.keys(e.condition)[0]

@@ -4,7 +4,6 @@ export type Product = {
   createdAt: Date
   categoryId: string
   count: number
-  show: boolean
   productData: ProductData
 }
 export type ProductData = {
@@ -44,10 +43,19 @@ export type ProductListItemData = {
   name: string
   price: number
   images: ProductImagesItem[]
-  discount: null | ProductListDiscount
+  discount: null | ProductDiscountPercentage
 }
-export type ProductListDiscount = {
+
+export type ProductDiscountPercentage= {
   percentage: number
+}
+
+export type ProductCartItem = {
+  _id: string
+  value: number
+  checked: boolean
+  price: number
+  discount: null | ProductDiscountPercentage
 }
 
 export type ProductUpdateInput = {
@@ -56,15 +64,6 @@ export type ProductUpdateInput = {
   price?: number
   description?: string
   categoryId?: string
-}
-
-export type ProductCartItem = {
-  id: string
-  name: string
-  imgUrl: string
-  price: number
-  value: number
-  checked: boolean
 }
 
 export type ProductEditItem = {

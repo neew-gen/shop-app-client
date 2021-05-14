@@ -4,34 +4,34 @@ export const catalogChildren: Array<RouteRecordRaw> = [
   {
     path: '/catalog',
     name: 'Catalog',
-    component: (): unknown =>
+    component: (): any =>
       import(
-        /* webpackChunkName: "catalog" */ '@/views/public-layout/catalog/Catalog.vue'
+        /* webpackChunkName: "catalog" */ '@/views/public-layout/catalog/catalog.vue'
       ),
     children: [
       {
         path: '',
-        name: 'CatalogCategories',
-        component: (): unknown =>
+        name: 'catalog-categories',
+        component: (): any =>
           import(
-            /* webpackChunkName: "catalog-categories" */ '@/views/public-layout/catalog/CatalogCategories.vue'
+            /* webpackChunkName: "catalog-categories" */ '@/views/public-layout/catalog/catalog-categories.vue'
           ),
       },
       {
         path: '/catalog/:categoryId',
-        name: 'CatalogProducts',
-        component: (): unknown =>
+        name: 'catalog-products',
+        component: (): any =>
           import(
             /* webpackChunkName: "catalog-products" */ '@/views/public-layout/catalog/catalog-products.vue'
           ),
         props: true,
       },
       {
-        path: '/catalog/:categoryId/:id',
-        name: 'CatalogProduct',
-        component: (): unknown =>
+        path: '/catalog/:categoryId/:_id',
+        name: 'catalog-product',
+        component: (): any =>
           import(
-            /* webpackChunkName: "catalog-product" */ '@/views/public-layout/catalog/CatalogProduct.vue'
+            /* webpackChunkName: "catalog-product" */ '@/views/public-layout/catalog/catalog-product.vue'
           ),
         props: true,
       },

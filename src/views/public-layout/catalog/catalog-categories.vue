@@ -16,7 +16,7 @@ import CategoriesListSkeleton from '@/components/public-layout/catalog/Categorie
 import { CategoryType } from '@/types/category'
 
 export default defineComponent({
-  name: 'CatalogCategories',
+  name: 'catalog-categories',
   components: {
     CategoriesListSkeleton,
     CategoriesList,

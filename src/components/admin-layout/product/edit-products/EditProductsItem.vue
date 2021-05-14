@@ -2,7 +2,7 @@
   <MDBListGroupItem>
     <div class="edit-item">
       <div class="edit-item__image">
-        <ImageContainer
+        <ProductImage
           height="140px"
           width="140px"
           :name="data.name"
@@ -30,14 +30,14 @@ import { defineComponent } from 'vue'
 import { useToast } from 'vue-toastification'
 
 import { graphqlDelete } from '@/api/graphql-api/GraphqlApi'
-import ImageContainer from '@/components/ImageContainer.vue'
+import ProductImage from '@/components/public-layout/catalog/Product/ProductImage.vue'
 import { eventBus } from '@/helpers/EventBus'
 import { textSlicer } from '@/helpers/slicer'
 import { ProductEditItem } from '@/types/product'
 
 export default defineComponent({
   name: 'EditProductsItem',
-  components: { ImageContainer, MDBBtn, MDBListGroupItem },
+  components: { ProductImage, MDBBtn, MDBListGroupItem },
   props: {
     data: {
       type: Object as () => ProductEditItem,

@@ -2,17 +2,25 @@
   <MDBCol class="d-flex flex-column" col="6">
     <!--    v-mdb-ripple="{ duration: 1000 }"-->
     <div class="item-wrapper" @click="pushToProduct(data._id)">
-      <div>
-        <ImageContainer
-          :img-url="data.productData.images[0].imgUrl"
-          name="product.name"
+      <div class="image-wrapper">
+        <div v-if="data.productData.discount" class="percentage">
+          -{{ data.productData.discount.percentage }}%
+        </div>
+        <ProductImage
+          :images="[data.productData.images[0]]"
           height="150px"
           width="100%"
         />
       </div>
       <div class="price-row">
-        <div class="price-row__price">
-          {{ data.productData.price }}&ensp;dol.
+        <div v-if="!data.productData.discount" class="price-row__price">
+          {{ data.productData.price.toFixed(2) }}&ensp;dol.
+        </div>
+        <div v-if="data.productData.discount" class="price-row__price sale">
+          <div class="sale__old-price">
+            {{ data.productData.price.toFixed(2) }}
+          </div>
+          <div class="sale__new-price">{{ discountPrice }}&ensp;dol.</div>
         </div>
         <MDBIcon icon="heart" size="lg" iconStyle="far" />
       </div>
@@ -29,11 +37,11 @@ import {
   MDBIcon,
   // mdbRipple
 } from 'mdb-vue-ui-kit'
-import { defineComponent, PropType } from 'vue'
+import { computed, ComputedRef, defineComponent, PropType } from 'vue'
 
-import ImageContainer from '@/components/ImageContainer.vue'
+import ProductImage from '@/components/public-layout/catalog/Product/ProductImage.vue'
 import router from '@/router'
-import { Product, ProductListItem } from '@/types/product'
+import { ProductListItem } from '@/types/product'
 
 export default defineComponent({
   name: 'ProductsListItem',
@@ -44,7 +52,7 @@ export default defineComponent({
     },
   },
   components: {
-    ImageContainer,
+    ProductImage,
     MDBCol,
     MDBIcon,
   },
@@ -52,10 +60,10 @@ export default defineComponent({
   //   mdbRipple,
   // },
   setup(props) {
-    const pushToProduct = (id: string): void => {
+    const pushToProduct = (_id: string): void => {
       router.push({
-        name: 'CatalogProduct',
-        params: { id },
+        name: 'catalog-product',
+        params: { _id },
       })
       // setTimeout(() => {
       //   router.push({
@@ -64,7 +72,13 @@ export default defineComponent({
       //   })
       // }, 100)
     }
-    return { pushToProduct }
+    const discountPrice: ComputedRef<string | undefined> = computed(() => {
+      const { price, discount } = props.data.productData
+      if (!discount) return
+      const discountValue = (price / 100) * discount.percentage
+      return (price - discountValue).toFixed(2)
+    })
+    return { pushToProduct, discountPrice }
   },
 })
 </script>
@@ -73,6 +87,22 @@ export default defineComponent({
 .item-wrapper {
   margin: 3px;
 }
+
+.image-wrapper {
+  position: relative;
+}
+.percentage {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: #f93154;
+  color: #ffffff;
+  padding: 0 3px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 3px;
+}
+
 .price-row {
   padding: 5px;
   display: flex;
@@ -83,6 +113,22 @@ export default defineComponent({
     font-weight: 600;
   }
 }
+
+.sale {
+  display: flex;
+  align-items: center;
+  &__old-price {
+    color: #4f4f4f;
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-decoration: line-through;
+  }
+  &__new-price {
+    padding-left: 2px;
+  }
+}
+
+
 .name-row {
   padding: 5px;
   height: 61px;
