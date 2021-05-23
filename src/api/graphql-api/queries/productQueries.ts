@@ -25,7 +25,7 @@ export const CREATE_PRODUCT = gql(`
  mutation CreateProduct($createProduct: CreateProductInput!) {
    createProduct(createProduct: $createProduct) {
      categoryId
-     count
+     amount
      show
      productData {
        name
@@ -116,6 +116,24 @@ export const GET_PRODUCTS_ORDER_BY = gql(`
               imgUrl
             }
             price
+          }
+        }
+      }`)
+
+export const GET_PRODUCTS_CART_LIST = gql(`
+      query ProductsForCart($ids: [String!]!) {
+        productsForCart(ids: $ids) {
+          _id
+          productData {
+            name
+            images {
+              id 
+              imgUrl
+            }
+            price
+            discount {
+              percentage
+            }
           }
         }
       }`)

@@ -1,7 +1,10 @@
 <template>
   <div class="cart-check-all">
-    {{ isEmptyCart }}
-    <MDBCheckbox v-model="isAllChecked" :disabled="isEmptyCart" />
+    <MDBCheckbox
+      :modelValue="isAllChecked"
+      @change="changeCheckAll"
+      :disabled="isEmptyCart"
+    />
     <MDBBtn
       color="danger"
       @click="deleteSelected"
@@ -39,11 +42,20 @@ export default defineComponent({
     //     store.dispatch('updateAllChecked', newValue)
     //   },
     // })
+    const changeCheckAll = (): void => {
+      CartApi.setAllChecked()
+    }
     const deleteSelected = (): void => {
       CartApi.deleteSelectedCartItems()
     }
     // return { isAllChecked, deleteSelected }
-    return { isEmptyCart, isHaveCheckedInCart, isAllChecked, deleteSelected }
+    return {
+      isEmptyCart,
+      isHaveCheckedInCart,
+      isAllChecked,
+      changeCheckAll,
+      deleteSelected,
+    }
   },
 })
 </script>

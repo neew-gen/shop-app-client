@@ -1,12 +1,13 @@
+import { isEqual, sumBy } from 'lodash'
 import { computed, ComputedRef, Ref, ref } from 'vue'
 
+import { awaitFetcher } from '@/api/fetch'
+import { graphqlFetchBy } from '@/api/graphql-api/GraphqlApi'
+import { GET_PRODUCTS_CART_LIST } from '@/api/graphql-api/queries/productQueries'
 import { ProductCartItem } from '@/types/product'
 
 class CartApi {
-  cartData: Ref<ProductCartItem[] | null> = ref([])
-  // isEmpty: Ref<boolean> = ref(true)
-  isHaveChecked: Ref<boolean> = ref(false)
-  isAllChecked: Ref<boolean> = ref(false)
+  private cartData: Ref<ProductCartItem[] | null> = ref([])
 
   public getCartData(): Ref<ProductCartItem[] | null> {
     const cartDataJson = localStorage.getItem('cart')
@@ -19,17 +20,11 @@ class CartApi {
   }
 
   public getIsEmptyCart(): ComputedRef<boolean> {
+    this.getCartData()
     return computed(() => {
       if (!this.cartData.value) return false
       return !(this.cartData.value.length > 0)
     })
-    // const currentCartData = this.getCartData()
-    // if (!currentCartData.value) {
-    //   this.isEmpty.value = true
-    //   return this.isEmpty
-    // }
-    // this.isEmpty.value = !(currentCartData.value.length > 0)
-    // return this.isEmpty
   }
 
   public getIsHaveCheckedInCart(): ComputedRef<boolean> {
@@ -37,14 +32,6 @@ class CartApi {
       if (!this.cartData.value) return false
       return this.cartData.value.some((cartItem) => cartItem.checked)
     })
-    // if (!this.cartData.value) {
-    //   this.isHaveChecked.value = false
-    //   return this.isHaveChecked
-    // }
-    // this.isHaveChecked.value = this.cartData.value.some(
-    //   (cartItem) => cartItem.checked,
-    // )
-    // return this.isHaveChecked
   }
 
   public getIsAllChecked(): ComputedRef<boolean> {
@@ -53,14 +40,26 @@ class CartApi {
       if (!this.cartData.value.length) return false
       return !this.cartData.value.some((cartItem) => !cartItem.checked)
     })
-    // if (!this.cartData.value) {
-    //   this.isAllChecked.value = false
-    //   return this.isAllChecked
-    // }
-    // this.isAllChecked.value = !this.cartData.value.some(
-    //   (cartItem) => !cartItem.checked,
-    // )
-    // return this.isAllChecked
+  }
+
+  public getProductIsInCart(_id: string): ComputedRef<boolean> {
+    return computed(() => {
+      if (!this.cartData.value) return false
+      return this.cartData.value.some((cartItem) => cartItem._id === _id)
+    })
+  }
+
+  public getTotalPrice(): ComputedRef<number> {
+    return computed(() => {
+      if (!this.cartData.value) return 0
+      return sumBy(this.cartData.value, (cartItem) => {
+        if (!cartItem.checked) return 0
+        const { discount, price } = cartItem.productData
+        if (!discount) return price * cartItem.amount
+        const discountValue = (price / 100) * discount.percentage
+        return (price - discountValue) * cartItem.amount
+      })
+    })
   }
 
   public addItemToCart(item: ProductCartItem): void {
@@ -94,7 +93,7 @@ class CartApi {
     localStorage.setItem('cart', JSON.stringify(cartDataForUpdate))
   }
 
-  deleteSelectedCartItems(): void {
+  public deleteSelectedCartItems(): void {
     const cartDataJson = localStorage.getItem('cart')
     if (!cartDataJson) return
     const cartDataForDelete = JSON.parse(cartDataJson)
@@ -105,9 +104,34 @@ class CartApi {
     localStorage.setItem('cart', JSON.stringify(cartDataAfterDelete))
   }
 
+  public setAllChecked(): void {
+    const currentCheckedStatus = this.getIsAllChecked().value
+    const cartDataJson = localStorage.getItem('cart')
+    if (!cartDataJson) return
+    const cartDataForMutation: ProductCartItem[] = JSON.parse(cartDataJson)
+    for (const item of cartDataForMutation) {
+      item.checked = !currentCheckedStatus
+    }
+    this.refreshCart(cartDataForMutation)
+    localStorage.setItem('cart', JSON.stringify(cartDataForMutation))
+  }
+  public async updateCartProductsData(): Promise<void> {
+    // const currentData = this.getCartData().value
+    // if (!currentData) return
+    // const cartProductsIds = currentData.map((cartItem) => cartItem._id)
+    // const fetchedData = await awaitFetcher('NF', 'cart-cache', () =>
+    //   graphqlFetchBy(GET_PRODUCTS_CART_LIST, { ids: [...cartProductsIds] }),
+    // )
+    // for (const dataItem of currentData) {
+    //   let isDataEqual = true
+    //   for (const prop in dataItem) {
+    //
+    //   }
+    // }
+  }
+
   private refreshCart(newCartData: ProductCartItem[]): void {
     this.cartData.value = newCartData
-    // this.getIsAllChecked(newCartData)
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="cart-total-fake" />
   <div class="cart-total">
-    <div class="cart-total__price">Total: {{ total }}&ensp;dol.</div>
+    <div class="cart-total__price">Total: {{ total.toFixed(2) }}&ensp;dol.</div>
     <div>
       <MDBBtn color="success">Purchase</MDBBtn>
     </div>
@@ -10,9 +10,9 @@
 
 <script lang="ts">
 import { MDBBtn } from 'mdb-vue-ui-kit'
-import { computed, ComputedRef, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 
-import { store } from '@/store'
+import CartApi from '@/api/cart/CartApi'
 
 export default defineComponent({
   name: 'CartTotal',
@@ -20,9 +20,7 @@ export default defineComponent({
     MDBBtn,
   },
   setup() {
-    const total: ComputedRef<number> = computed(() => {
-      return store.getters.getTotal
-    })
+    const total = CartApi.getTotalPrice()
     return { total }
   },
 })

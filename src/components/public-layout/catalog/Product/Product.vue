@@ -19,15 +19,25 @@
         </div>
       </MDBCol>
       <MDBCol class="price-row">
-        <div v-if="!data.productData.discount" class="price-row__price">
-          {{ data.productData.price.toFixed(2) }}&ensp;dol.
-        </div>
-        <div v-if="data.productData.discount" class="price-row__price sale">
-          <div class="sale__old-price">
-            {{ data.productData.price.toFixed(2) }}
-          </div>
-          <div class="sale__new-price">{{ discountPrice }}&ensp;dol.</div>
-        </div>
+        <ProductPrice
+          :price="data.productData.price"
+          :discount-percentage="
+            data.productData.discount
+              ? data.productData.discount.percentage
+              : undefined
+          "
+          price-font-size="1.2rem"
+          discount-font-size="1.4rem"
+        />
+        <!--        <div v-if="!data.productData.discount" class="price-row__price">-->
+        <!--          {{ data.productData.price.toFixed(2) }}&ensp;dol.-->
+        <!--        </div>-->
+        <!--        <div v-if="data.productData.discount" class="price-row__price sale">-->
+        <!--          <div class="sale__old-price">-->
+        <!--            {{ data.productData.price.toFixed(2) }}-->
+        <!--          </div>-->
+        <!--          <div class="sale__new-price">{{ discountPrice }}&ensp;dol.</div>-->
+        <!--        </div>-->
         <div class="price-row__controls">
           <MDBBtn color="light">
             <MDBIcon icon="heart" size="lg" iconStyle="far" />
@@ -62,6 +72,7 @@ import { computed, ComputedRef, defineComponent, PropType, ref } from 'vue'
 
 import CartApi from '@/api/cart/CartApi'
 import ProductImage from '@/components/public-layout/catalog/Product/ProductImage.vue'
+import ProductPrice from '@/components/public-layout/catalog/Product/ProductPrice.vue'
 import { Product, ProductCartItem } from '@/types/product'
 
 export default defineComponent({
@@ -73,6 +84,7 @@ export default defineComponent({
     },
   },
   components: {
+    ProductPrice,
     ProductImage,
     MDBContainer,
     MDBRow,
@@ -82,14 +94,7 @@ export default defineComponent({
   },
   setup(props) {
     const nowMoment = ref(moment())
-    const isInCart = ref(false)
-
-    const discountPrice: ComputedRef<string | undefined> = computed(() => {
-      const { price, discount } = props.data.productData
-      if (!discount) return
-      const discountValue = (price / 100) * discount.percentage
-      return (price - discountValue).toFixed(2)
-    })
+    const isInCart = CartApi.getProductIsInCart(props.data._id)
 
     const discountWillEnd: ComputedRef<string | undefined> = computed(() => {
       if (!props.data.productData.discount) return
@@ -99,38 +104,31 @@ export default defineComponent({
       return `Ends ${endMoment.from(nowMoment.value)}`
     })
 
-    // const { data: cartData } = reactiveFetcher<ProductCartItem[]>(
-    //   'CO',
-    //   '/cart-cache',
-    // )
-    // const isInCartUnwatch = watch(cartData, () => {
-    //   if (cartData.value)
-    //     isInCart.value = cartData.value.some((p) => p._id === props.data._id)
-    // })
-
     const addToCart = (): void => {
-      isInCart.value = true
       const { _id } = props.data
-      const { price, discount } = props.data.productData
+      const { price, discount, name, images } = props.data.productData
       const discountToCart = (): null | { percentage: number } => {
         if (!discount) return null
         return { percentage: discount.percentage }
       }
       const itemToCart: ProductCartItem = {
         _id,
-        value: 1,
+        amount: 1,
         checked: true,
-        price,
-        discount: discountToCart(),
+        productData: {
+          name,
+          images,
+          price,
+          discount: discountToCart(),
+        },
       }
       CartApi.addItemToCart(itemToCart)
-      // cartItemToCache<ProductCartItem>('/cart-cache', itemToCart)
     }
-
-    // onUnmounted(() => {
-    //   isInCartUnwatch()
-    // })
-    return { discountPrice, discountWillEnd, addToCart, isInCart }
+    return {
+      discountWillEnd,
+      addToCart,
+      isInCart,
+    }
   },
 })
 </script>

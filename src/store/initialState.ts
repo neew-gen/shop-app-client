@@ -12,7 +12,7 @@ export const initialState = {
   inputs: {
     productInput: {
       categoryId: '',
-      count: 0,
+      amount: 0,
       show: true,
       productData: {
         name: '',

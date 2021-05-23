@@ -4,12 +4,12 @@
       class="p-2"
       color="light"
       size="sm"
-      :disabled="value < 2"
+      :disabled="amount < 2"
       @click="decreaseValue"
     >
       <MDBIcon icon="minus" iconStyle="fas" size="sm" />
     </MDBBtn>
-    <div class="value">{{ value }}</div>
+    <div class="value">{{ amount }}</div>
     <MDBBtn class="p-2" color="light" size="sm" @click="increaseValue">
       <MDBIcon icon="plus" iconStyle="fas" size="sm" />
     </MDBBtn>
@@ -20,16 +20,16 @@
 import { MDBBtn, MDBIcon } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
 
-import { store } from '@/store'
+import CartApi from '@/api/cart/CartApi'
 
 export default defineComponent({
-  name: 'CartItemValue',
+  name: 'CartItemAmount',
   props: {
-    id: {
+    _id: {
       type: String,
       required: true,
     },
-    value: {
+    amount: {
       type: Number,
       required: true,
     },
@@ -40,18 +40,20 @@ export default defineComponent({
   },
   setup(props) {
     const decreaseValue = (): void => {
-      store.dispatch('updateCartItem', {
-        id: props.id,
-        propName: 'value',
-        propValue: props.value - 1,
-      })
+      CartApi.updateCartItem(props._id, { amount: props.amount - 1 })
+      // store.dispatch('updateCartItem', {
+      //   id: props.id,
+      //   propName: 'value',
+      //   propValue: props.value - 1,
+      // })
     }
     const increaseValue = (): void => {
-      store.dispatch('updateCartItem', {
-        id: props.id,
-        propName: 'value',
-        propValue: props.value + 1,
-      })
+      CartApi.updateCartItem(props._id, { amount: props.amount + 1 })
+      // store.dispatch('updateCartItem', {
+      //   id: props.id,
+      //   propName: 'value',
+      //   propValue: props.value + 1,
+      // })
     }
     return { decreaseValue, increaseValue }
   },

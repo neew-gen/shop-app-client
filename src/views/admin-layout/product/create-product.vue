@@ -35,7 +35,7 @@ import { array, number, object, string } from 'yup'
 
 import { graphqlCreate } from '@/api/graphql-api/GraphqlApi'
 import ProductCategoryInput from '@/components/admin-layout/product/inputs/ProductCategoryInput.vue'
-import ProductCountInput from '@/components/admin-layout/product/inputs/ProductCountInput.vue'
+import ProductCountInput from '@/components/admin-layout/product/inputs/ProductAmountInput.vue'
 import ProductDescriptionInput from '@/components/admin-layout/product/inputs/ProductDescriptionInput.vue'
 import ProductDiscountInput from '@/components/admin-layout/product/inputs/ProductDiscountInput.vue'
 import ProductImagesInput from '@/components/admin-layout/product/inputs/ProductImagesInput.vue'

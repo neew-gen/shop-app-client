@@ -1,26 +1,34 @@
 <template>
   <MDBListGroupItem class="cart-item-container" v-if="data">
-    {{ data }}
     <div class="cart-item">
       <div class="cart-item__check">
         <MDBCheckbox v-model="checked" />
-        <!--      </div>-->
-        <!--      <div class="cart-item__image">-->
-        <!--        <ProductImage-->
-        <!--          height="60px"-->
-        <!--          width="90px"-->
-        <!--          :img-url="data.imgUrl"-->
-        <!--          :name="data.name"-->
-        <!--        />-->
-        <!--      </div>-->
-        <!--      <div class="cart-item__name">-->
-        <!--        <div class="name-text">{{ data.name.slice(0, 25) }}</div>-->
-        <!--      </div>-->
-        <!--      <div class="cart-item__price">-->
-        <!--        <div class="price-text">{{ data.price }}&ensp;dol.</div>-->
-        <!--      </div>-->
-        <!--      <div class="cart-item__value">-->
-        <!--        <CartItemValue :id="data.id" :value="data.value" />-->
+      </div>
+      <div class="cart-item__image">
+        <ProductImage
+          height="60px"
+          width="90px"
+          :name="data.productData.name"
+          :images="[data.productData.images[0]]"
+        />
+      </div>
+      <div class="cart-item__name">
+        <div class="name-text">{{ data.productData.name }}</div>
+      </div>
+      <div class="cart-item__price">
+        <ProductPrice
+          :price="data.productData.price"
+          :discount-percentage="
+            data.productData.discount
+              ? data.productData.discount.percentage
+              : undefined
+          "
+          price-font-size="0.9rem"
+          discount-font-size="1.1rem"
+        />
+      </div>
+      <div class="cart-item__value">
+        <CartItemAmount :_id="data._id" :amount="data.amount" />
       </div>
     </div>
   </MDBListGroupItem>
@@ -31,9 +39,9 @@ import { MDBCheckbox, MDBListGroupItem } from 'mdb-vue-ui-kit'
 import { computed, defineComponent, PropType, WritableComputedRef } from 'vue'
 
 import CartApi from '@/api/cart/CartApi'
-import CartItemValue from '@/components/public-layout/cart/CartList/CartItem/CartItemValue.vue'
+import CartItemAmount from '@/components/public-layout/cart/CartList/CartItem/CartItemAmount.vue'
 import ProductImage from '@/components/public-layout/catalog/Product/ProductImage.vue'
-import { store } from '@/store'
+import ProductPrice from '@/components/public-layout/catalog/Product/ProductPrice.vue'
 import { ProductCartItem } from '@/types/product'
 
 export default defineComponent({
@@ -44,8 +52,9 @@ export default defineComponent({
     },
   },
   components: {
-    // CartItemValue,
-    // ProductImage,
+    ProductPrice,
+    CartItemAmount,
+    ProductImage,
     MDBListGroupItem,
     MDBCheckbox,
   },
@@ -58,11 +67,6 @@ export default defineComponent({
       set(newValue: boolean): void {
         if (!props.data) return
         CartApi.updateCartItem(props.data._id, { checked: newValue })
-        // store.dispatch('updateCartItem', {
-        //   id: props.data._id,
-        //   propName: 'checked',
-        //   propValue: newValue,
-        // })
       },
     })
     return { checked }
@@ -83,7 +87,7 @@ export default defineComponent({
   align-items: center;
   grid-template-areas:
     'check image . value'
-    'check name name price';
+    'check name price price';
   &__check {
     grid-area: check;
   }
@@ -96,6 +100,7 @@ export default defineComponent({
   }
   &__price {
     grid-area: price;
+    justify-self: end;
   }
   &__value {
     grid-area: value;

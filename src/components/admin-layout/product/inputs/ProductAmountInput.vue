@@ -1,6 +1,6 @@
 <template>
   <MDBCol col="12">
-    <MDBInput label="Product Count" type="number" v-model="productCount" />
+    <MDBInput label="Product Amount" type="number" v-model="productAmount" />
     <ErrorField v-if="error">{{ error }}</ErrorField>
   </MDBCol>
 </template>
@@ -13,7 +13,7 @@ import ErrorField from '@/components/ErrorField.vue'
 import { useStore } from '@/store'
 
 export default defineComponent({
-  name: 'ProductCountInput',
+  name: 'ProductAmountInput',
   props: {
     error: {
       type: String,
@@ -27,15 +27,15 @@ export default defineComponent({
   setup() {
     const store = useStore()
     // productCount is a number, but i need to convert it to string bcs field works better that way
-    const productCount: WritableComputedRef<string> = computed({
+    const productAmount: WritableComputedRef<string> = computed({
       get(): string {
-        return store.getters.getProductCount.toString()
+        return store.getters.getProductAmount.toString()
       },
       set(newValue: string): void {
-        store.dispatch('updateProductCount', Number(newValue))
+        store.dispatch('updateProductAmount', Number(newValue))
       },
     })
-    return { productCount }
+    return { productAmount }
   },
 })
 </script>

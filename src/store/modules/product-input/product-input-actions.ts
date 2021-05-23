@@ -5,7 +5,7 @@ import { Actions } from '@/types/store/actions'
 
 export type ProductInputActions = {
   updateProductCategoryId: [string, void]
-  updateProductCount: [number, void]
+  updateProductAmount: [number, void]
   updateProductShow: [boolean, void]
   updateProductName: [string, void]
   updateProductPrice: [number, void]
@@ -20,8 +20,8 @@ export const productInputActions: Actions<ProductInputActions> = {
   updateProductCategoryId({ commit }, newCategoryId) {
     commit('updateProductCategoryId', newCategoryId)
   },
-  updateProductCount({ commit }, newCount) {
-    commit('updateProductCount', newCount)
+  updateProductAmount({ commit }, newAmount) {
+    commit('updateProductAmount', newAmount)
   },
   updateProductShow({ commit }, newShow) {
     commit('updateProductShow', newShow)

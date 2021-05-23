@@ -19,6 +19,7 @@ export default defineComponent({
   },
   setup() {
     const cartData = CartApi.getCartData()
+    CartApi.updateCartProductsData()
     return {
       cartData,
     }

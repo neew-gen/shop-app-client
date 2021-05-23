@@ -9,7 +9,7 @@ import { State } from '@/types/store/state'
 
 export type ProductInputGetters = {
   getProductCategoryId(state: State): string
-  getProductCount(state: State): number
+  getProductAmount(state: State): number
   getProductShow(state: State): boolean
   getProductName(state: State): string
   getProductPrice(state: State): number
@@ -24,8 +24,8 @@ export const productInputGetters: GetterTree<State, State> &
   getProductCategoryId: ({ inputs }) => {
     return inputs.productInput.categoryId
   },
-  getProductCount: ({ inputs }) => {
-    return inputs.productInput.count
+  getProductAmount: ({ inputs }) => {
+    return inputs.productInput.amount
   },
   getProductShow: ({ inputs }) => {
     return inputs.productInput.show

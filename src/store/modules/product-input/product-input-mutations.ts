@@ -6,7 +6,7 @@ import { State } from '@/types/store/state'
 
 export type ProductInputMutationsPayload = {
   updateProductCategoryId: string
-  updateProductCount: number
+  updateProductAmount: number
   updateProductShow: boolean
   updateProductName: string
   updateProductPrice: number
@@ -22,8 +22,8 @@ export const productInputMutations: MutationTree<State> &
   updateProductCategoryId({ inputs }, newCategoryId) {
     inputs.productInput.categoryId = newCategoryId
   },
-  updateProductCount({ inputs }, newCount) {
-    inputs.productInput.count = newCount
+  updateProductAmount({ inputs }, newAmount) {
+    inputs.productInput.amount = newAmount
   },
   updateProductShow({ inputs }, newShow) {
     inputs.productInput.show = newShow

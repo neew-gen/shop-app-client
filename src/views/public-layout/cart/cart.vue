@@ -6,7 +6,6 @@
         <CartCheckAll />
       </MDBCol>
       <MDBCol col="12">
-        {{ isEmptyCart }}
         <CartList v-if="!isEmptyCart" />
         <div class="d-flex justify-content-center" v-if="isEmptyCart">
           <div>Cart is empty.</div>

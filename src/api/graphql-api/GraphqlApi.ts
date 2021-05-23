@@ -28,7 +28,7 @@ export function graphqlFetch(
 
 export function graphqlFetchBy(
   query: DocumentNode,
-  variables: { [key: string]: string },
+  variables: { [key: string]: string | string[] },
 ): Promise<ApolloQueryResult<any>> {
   return apollo.query({
     query,
