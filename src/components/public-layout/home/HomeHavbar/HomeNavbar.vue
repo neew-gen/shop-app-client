@@ -1,10 +1,13 @@
 <template>
   <MDBNavbar class="flex-nowrap" light bg="light" position="sticky" container>
     <HomeNavbarBrand v-if="!fullSizeSearch" />
-    <MDBBtn v-else size="sm" color="light" @click="setSizeSearch(false)">
+    <MDBBtn v-else size="sm" color="light" @click="pushRouter('home-main')">
       <MDBIcon icon="chevron-left" iconStyle="fas" />
     </MDBBtn>
-    <HomeNavbarSearch @click="setSizeSearch(true)" :fullSize="fullSizeSearch" />
+    <HomeNavbarSearch
+      @click="pushRouter('home-search')"
+      :fullSize="fullSizeSearch"
+    />
   </MDBNavbar>
 </template>
 
@@ -14,7 +17,7 @@ import { computed, ComputedRef, defineComponent } from 'vue'
 
 import HomeNavbarBrand from '@/components/public-layout/home/HomeHavbar/HomeNavbarBrand.vue'
 import HomeNavbarSearch from '@/components/public-layout/home/HomeHavbar/HomeNavbarSearch.vue'
-import { useStore } from '@/store'
+import router from '@/router'
 
 export default defineComponent({
   name: 'HomeNavbar',
@@ -26,16 +29,14 @@ export default defineComponent({
     MDBIcon,
   },
   setup() {
-    const store = useStore()
-
     const fullSizeSearch: ComputedRef<boolean> = computed(() => {
-      return store.getters.getFullSizeSearch
+      return router.currentRoute.value.name === 'home-search'
     })
 
-    const setSizeSearch = (newValue: boolean): void => {
-      store.dispatch('updateFullSizeSearch', newValue)
+    const pushRouter = (pathName: string): void => {
+      router.push({ name: pathName })
     }
-    return { fullSizeSearch, setSizeSearch }
+    return { fullSizeSearch, pushRouter }
   },
 })
 </script>

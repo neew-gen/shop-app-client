@@ -55,7 +55,7 @@ import { useToast } from 'vue-toastification'
 
 import { graphqlDelete } from '@/services/GraphqlService/GraphqlService'
 import BottomModal from '@/components/BottomModal.vue'
-import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
+import Swipe from '@/components/public-layout/home/HomeSwiper/Swipe.vue'
 import { eventBus } from '@/helpers/EventBus'
 import { textSlicer } from '@/services/TextSlicerService/TextSlicerService'
 import { SwipeType } from '@/types/swipe'

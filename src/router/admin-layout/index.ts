@@ -1,8 +1,8 @@
 import { RouteRecordRaw } from 'vue-router'
 
-import { categoryChildren } from '@/router/admin-layout/children/category'
-import { productChildren } from '@/router/admin-layout/children/product'
-import { swipeChildren } from '@/router/admin-layout/children/swipe'
+import { categoryRoute } from '@/router/admin-layout/routes/category-route'
+import { productRoute } from '@/router/admin-layout/routes/product-route'
+import { swipeRoute } from '@/router/admin-layout/routes/swipe-route'
 
 export const adminLayoutRoutes: Array<RouteRecordRaw> = [
   {
@@ -19,9 +19,9 @@ export const adminLayoutRoutes: Array<RouteRecordRaw> = [
             /* webpackChunkName: "admin-panel-home" */ '@/views/admin-layout/admin-home.vue'
           ),
       },
-      ...productChildren,
-      ...categoryChildren,
-      ...swipeChildren,
+      ...productRoute,
+      ...categoryRoute,
+      ...swipeRoute,
     ],
   },
 ]

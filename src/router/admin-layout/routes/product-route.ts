@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 
-export const productChildren: Array<RouteRecordRaw> = [
+export const productRoute: Array<RouteRecordRaw> = [
   {
     path: '/admin-panel/create-product',
     name: 'create-product',

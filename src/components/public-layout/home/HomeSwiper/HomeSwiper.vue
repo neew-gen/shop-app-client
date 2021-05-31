@@ -25,7 +25,7 @@ SwiperCore.use([Pagination])
 import 'swiper/swiper.scss'
 import 'swiper/components/pagination/pagination.scss'
 
-import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
+import Swipe from '@/components/public-layout/home/HomeSwiper/Swipe.vue'
 
 export default defineComponent({
   name: 'HomeSwiper',

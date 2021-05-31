@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 
-export const profileChildren: Array<RouteRecordRaw> = [
+export const profileRoute: Array<RouteRecordRaw> = [
   {
     path: '/profile',
     name: 'profile',

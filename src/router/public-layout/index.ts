@@ -1,25 +1,16 @@
 import { RouteRecordRaw } from 'vue-router'
 
 import PublicLayout from '@/layouts/PublicLayout.vue'
-import { cartChildren } from '@/router/public-layout/children/cart'
-import { catalogChildren } from '@/router/public-layout/children/catalog'
-import { profileChildren } from '@/router/public-layout/children/profile'
-import Home from '@/views/public-layout/home/Home.vue'
+import { cartRoute } from '@/router/public-layout/routes/cart-route'
+import { catalogRoute } from '@/router/public-layout/routes/catalog-route'
+import { homeRoute } from '@/router/public-layout/routes/home-route'
+import { profileRoute } from '@/router/public-layout/routes/profile-route'
 
 export const publicLayoutRoutes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'PublicLayout',
     component: PublicLayout,
-    children: [
-      {
-        path: '',
-        name: 'Home',
-        component: Home,
-      },
-      ...catalogChildren,
-      ...cartChildren,
-      ...profileChildren,
-    ],
+    children: [...homeRoute, ...catalogRoute, ...cartRoute, ...profileRoute],
   },
 ]

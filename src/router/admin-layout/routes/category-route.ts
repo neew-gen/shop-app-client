@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 
-export const categoryChildren: Array<RouteRecordRaw> = [
+export const categoryRoute: Array<RouteRecordRaw> = [
   {
     path: '/admin-panel/create-category',
     name: 'create-category',

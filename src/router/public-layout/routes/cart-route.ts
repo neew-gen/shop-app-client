@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 
-export const cartChildren: Array<RouteRecordRaw> = [
+export const cartRoute: Array<RouteRecordRaw> = [
   {
     path: '/shopping-cart',
     name: 'Cart',

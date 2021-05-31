@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 
-export const swipeChildren: Array<RouteRecordRaw> = [
+export const swipeRoute: Array<RouteRecordRaw> = [
   {
     path: '/admin-panel/create-swipe',
     name: 'create-swipe',
