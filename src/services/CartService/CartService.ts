@@ -1,12 +1,9 @@
-import { isEqual, sumBy } from 'lodash'
+import { sumBy } from 'lodash'
 import { computed, ComputedRef, Ref, ref } from 'vue'
 
-import { awaitFetcher } from '@/api/fetch'
-import { graphqlFetchBy } from '@/api/graphql-api/GraphqlApi'
-import { GET_PRODUCTS_CART_LIST } from '@/api/graphql-api/queries/productQueries'
 import { ProductCartItem } from '@/types/product'
 
-class CartApi {
+class CartService {
   private cartData: Ref<ProductCartItem[] | null> = ref([])
 
   public getCartData(): Ref<ProductCartItem[] | null> {
@@ -135,4 +132,4 @@ class CartApi {
   }
 }
 
-export default new CartApi()
+export default new CartService()

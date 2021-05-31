@@ -70,7 +70,7 @@ import { MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow } from 'mdb-vue-ui-kit'
 import moment from 'moment'
 import { computed, ComputedRef, defineComponent, PropType, ref } from 'vue'
 
-import CartApi from '@/api/cart/CartApi'
+import CartService from '@/services/CartService/CartService'
 import ProductImage from '@/components/public-layout/catalog/Product/ProductImage.vue'
 import ProductPrice from '@/components/public-layout/catalog/Product/ProductPrice.vue'
 import { Product, ProductCartItem } from '@/types/product'
@@ -94,7 +94,7 @@ export default defineComponent({
   },
   setup(props) {
     const nowMoment = ref(moment())
-    const isInCart = CartApi.getProductIsInCart(props.data._id)
+    const isInCart = CartService.getProductIsInCart(props.data._id)
 
     const discountWillEnd: ComputedRef<string | undefined> = computed(() => {
       if (!props.data.productData.discount) return
@@ -122,7 +122,7 @@ export default defineComponent({
           discount: discountToCart(),
         },
       }
-      CartApi.addItemToCart(itemToCart)
+      CartService.addItemToCart(itemToCart)
     }
     return {
       discountWillEnd,

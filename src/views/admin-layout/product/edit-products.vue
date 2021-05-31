@@ -30,16 +30,19 @@
 import { MDBCol, MDBContainer, MDBListGroup, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent, onUnmounted } from 'vue'
 
-import { awaitFetcher, reactiveFetcher } from '@/api/fetch'
-import { graphqlFetch, graphqlFetchBy } from '@/api/graphql-api/GraphqlApi'
+import { graphqlFetch, graphqlFetchBy } from '@/services/GraphqlService/GraphqlService'
 import {
   GET_PRODUCTS_EDITLIST,
   GET_PRODUCTS_EDITLIST_BY_CATEGORY_ID,
-} from '@/api/graphql-api/queries/productQueries'
+} from '@/services/GraphqlService/queries/productQueries'
 import EditProductsFilter from '@/components/admin-layout/product/edit-products/EditProductsFilter.vue'
 import EditProductsItem from '@/components/admin-layout/product/edit-products/EditProductsItem.vue'
 import Spinner from '@/components/Spinner.vue'
 import { eventBus } from '@/helpers/EventBus'
+import {
+  awaitFetcher,
+  reactiveFetcher,
+} from '@/services/FetchService/FetchService'
 import { useStore } from '@/store'
 import { ProductEditItem } from '@/types/product'
 

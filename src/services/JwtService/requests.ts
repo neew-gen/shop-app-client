@@ -6,7 +6,7 @@ import {
   setAuthTokens,
 } from 'axios-jwt'
 
-import { jwtAxiosInstance } from '@/api/jwt-api/api'
+import { jwtAxiosInstance } from '@/services/JwtService/JwtService'
 import { LoginInput } from '@/types/jwt-api/login-input'
 import { RegisterInput } from '@/types/jwt-api/register-input'
 

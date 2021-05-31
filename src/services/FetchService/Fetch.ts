@@ -1,8 +1,8 @@
 import { DocumentNode } from '@apollo/client'
 import { isEqual } from 'lodash'
 
-import { axiosExtractor } from '@/api/fetch/extractors/axiosExtractror'
-import { defaultExtractor } from '@/api/fetch/extractors/defaultExtractor'
+import { axiosExtractor } from '@/services/FetchService/extractors/axiosExtractror'
+import { defaultExtractor } from '@/services/FetchService/extractors/defaultExtractor'
 import { ApolloRequestor, AxiosRequestor, DataExtractor } from '@/types/fetch'
 
 export class Fetch<Data> {

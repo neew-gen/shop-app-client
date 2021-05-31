@@ -1,22 +1,22 @@
 import { ApolloQueryResult, DocumentNode } from '@apollo/client'
 
-import { apollo } from '@/api/graphql-api/apollo'
+import { apollo } from '@/services/GraphqlService/apollo'
 import {
   CREATE_CATEGORY,
   DELETE_CATEGORY,
   UPDATE_CATEGORY,
-} from '@/api/graphql-api/queries/categoryQueries'
+} from '@/services/GraphqlService/queries/categoryQueries'
 import {
   CREATE_PRODUCT,
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
-} from '@/api/graphql-api/queries/productQueries'
+} from '@/services/GraphqlService/queries/productQueries'
 import {
   CREATE_SWIPE,
   DELETE_SWIPE,
   UPDATE_INDEX,
   UPDATE_SWIPE,
-} from '@/api/graphql-api/queries/swipeQueries'
+} from '@/services/GraphqlService/queries/swipeQueries'
 
 export function graphqlFetch(
   query: DocumentNode,

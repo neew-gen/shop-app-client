@@ -1,8 +1,8 @@
 import { Ref, ref } from 'vue'
 
-import { COStrategy } from '@/api/fetch/strategies/COStrategy'
-import { NFStrategy } from '@/api/fetch/strategies/NFStrategy'
-import { SWRStrategy } from '@/api/fetch/strategies/SWRStrategy'
+import { COStrategy } from '@/services/FetchService/strategies/COStrategy'
+import { NFStrategy } from '@/services/FetchService/strategies/NFStrategy'
+import { SWRStrategy } from '@/services/FetchService/strategies/SWRStrategy'
 import { ApolloRequestor, AxiosRequestor } from '@/types/fetch'
 
 export function reactiveFetcher<Data>(

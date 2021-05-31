@@ -47,11 +47,11 @@ import { defineComponent } from 'vue'
 import { useToast } from 'vue-toastification'
 import { object, string } from 'yup'
 
-import { awaitFetcher } from '@/api/fetch'
-import { graphqlFetchBy, graphqlUpdate } from '@/api/graphql-api/GraphqlApi'
-import { GET_SWIPE_BY_ID } from '@/api/graphql-api/queries/swipeQueries'
+import { graphqlFetchBy, graphqlUpdate } from '@/services/GraphqlService/GraphqlService'
+import { GET_SWIPE_BY_ID } from '@/services/GraphqlService/queries/swipeQueries'
 import ErrorField from '@/components/ErrorField.vue'
 import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
+import { awaitFetcher } from '@/services/FetchService/FetchService'
 import { SwipeType, UpdateSwipeInput } from '@/types/swipe'
 
 export default defineComponent({

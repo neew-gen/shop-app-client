@@ -33,7 +33,7 @@ import {
 import { useToast } from 'vue-toastification'
 import { array, number, object, string } from 'yup'
 
-import { graphqlCreate } from '@/api/graphql-api/GraphqlApi'
+import { graphqlCreate } from '@/services/GraphqlService/GraphqlService'
 import ProductCategoryInput from '@/components/admin-layout/product/inputs/ProductCategoryInput.vue'
 import ProductCountInput from '@/components/admin-layout/product/inputs/ProductAmountInput.vue'
 import ProductDescriptionInput from '@/components/admin-layout/product/inputs/ProductDescriptionInput.vue'

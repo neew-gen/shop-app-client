@@ -38,7 +38,7 @@
 import { MDBCheckbox, MDBListGroupItem } from 'mdb-vue-ui-kit'
 import { computed, defineComponent, PropType, WritableComputedRef } from 'vue'
 
-import CartApi from '@/api/cart/CartApi'
+import CartService from '@/services/CartService/CartService'
 import CartItemAmount from '@/components/public-layout/cart/CartList/CartItem/CartItemAmount.vue'
 import ProductImage from '@/components/public-layout/catalog/Product/ProductImage.vue'
 import ProductPrice from '@/components/public-layout/catalog/Product/ProductPrice.vue'
@@ -66,7 +66,7 @@ export default defineComponent({
       },
       set(newValue: boolean): void {
         if (!props.data) return
-        CartApi.updateCartItem(props.data._id, { checked: newValue })
+        CartService.updateCartItem(props.data._id, { checked: newValue })
       },
     })
     return { checked }

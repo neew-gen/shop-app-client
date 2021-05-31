@@ -86,7 +86,7 @@ import { defineComponent, ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import { object, ref as yupRef, string } from 'yup'
 
-import { register } from '@/api/jwt-api/requests'
+import { register } from '@/services/JwtService/requests'
 import ErrorField from '@/components/ErrorField.vue'
 import router from '@/router'
 

@@ -12,7 +12,7 @@
 import { MDBBtn } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
 
-import CartApi from '@/api/cart/CartApi'
+import CartService from '@/services/CartService/CartService'
 
 export default defineComponent({
   name: 'CartTotal',
@@ -20,7 +20,7 @@ export default defineComponent({
     MDBBtn,
   },
   setup() {
-    const total = CartApi.getTotalPrice()
+    const total = CartService.getTotalPrice()
     return { total }
   },
 })

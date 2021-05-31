@@ -8,8 +8,8 @@
 import { MDBListGroup } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
 
-import CartApi from '@/api/cart/CartApi'
 import CartListItem from '@/components/public-layout/cart/CartList/CartItem/CartItem.vue'
+import CartService from '@/services/CartService/CartService'
 
 export default defineComponent({
   name: 'CartList',
@@ -18,8 +18,8 @@ export default defineComponent({
     MDBListGroup,
   },
   setup() {
-    const cartData = CartApi.getCartData()
-    CartApi.updateCartProductsData()
+    const cartData = CartService.getCartData()
+    CartService.updateCartProductsData()
     return {
       cartData,
     }

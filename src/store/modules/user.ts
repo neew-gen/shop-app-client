@@ -1,13 +1,7 @@
 import { GetterTree, MutationTree } from 'vuex'
 
-import { awaitFetcher } from '@/api/fetch'
-import { getUser } from '@/api/jwt-api/requests'
-import {
-  deleteCacheSelected,
-  updateCacheAllChecked,
-  updateCartItemCache,
-} from '@/helpers/cacheFunctions'
-import { ProductCartItem } from '@/types/product'
+import { awaitFetcher } from '@/services/FetchService/FetchService'
+import { getUser } from '@/services/JwtService/requests'
 import { Actions } from '@/types/store/actions'
 import { Mutations } from '@/types/store/mutations'
 import { State } from '@/types/store/state'

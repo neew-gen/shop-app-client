@@ -1,7 +1,7 @@
 // A realizing of "Network-First" strategy
 import { Ref } from 'vue'
 
-import { Fetch } from '@/api/fetch/Fetch'
+import { Fetch } from '@/services/FetchService/Fetch'
 import { ApolloRequestor, AxiosRequestor } from '@/types/fetch'
 
 export class NFStrategy<Data> extends Fetch<Data> {

@@ -13,12 +13,12 @@ import { lowerCase } from 'lodash'
 import { MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent, Ref, ref } from 'vue'
 
-import { awaitFetcher } from '@/api/fetch'
-import { graphqlFetchBy } from '@/api/graphql-api/GraphqlApi'
-import { GET_PRODUCTS_CATALOG_LIST } from '@/api/graphql-api/queries/productQueries'
 import ProductsFilterMenu from '@/components/public-layout/catalog/ProductsList/ProductsFilterMenu/ProductsFilterMenu.vue'
 import ProductsList from '@/components/public-layout/catalog/ProductsList/ProductsList.vue'
 import ProductsListSkeleton from '@/components/public-layout/catalog/ProductsList/ProductsListSkeleton.vue'
+import { awaitFetcher } from '@/services/FetchService/FetchService'
+import { graphqlFetchBy } from '@/services/GraphqlService/GraphqlService'
+import { GET_PRODUCTS_CATALOG_LIST } from '@/services/GraphqlService/queries/productQueries'
 import { ProductListItem } from '@/types/product'
 
 export default defineComponent({

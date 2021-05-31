@@ -43,9 +43,9 @@ import {
 } from 'mdb-vue-ui-kit'
 import { computed, ComputedRef, defineComponent, ref } from 'vue'
 
-import { reactiveFetcher } from '@/api/fetch'
-import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
-import { GET_CATEGORIES_DROPDOWN } from '@/api/graphql-api/queries/categoryQueries'
+import { reactiveFetcher } from '@/services/FetchService/FetchService'
+import { graphqlFetch } from '@/services/GraphqlService/GraphqlService'
+import { GET_CATEGORIES_DROPDOWN } from '@/services/GraphqlService/queries/categoryQueries'
 import { useStore } from '@/store'
 import { CategoryDropdownType } from '@/types/category'
 

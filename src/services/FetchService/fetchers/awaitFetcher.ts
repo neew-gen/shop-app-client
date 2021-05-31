@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 
-import { COStrategy } from '@/api/fetch/strategies/COStrategy'
-import { NFStrategy } from '@/api/fetch/strategies/NFStrategy'
+import { COStrategy } from '@/services/FetchService/strategies/COStrategy'
+import { NFStrategy } from '@/services/FetchService/strategies/NFStrategy'
 import { ApolloRequestor, AxiosRequestor } from '@/types/fetch'
 
 export async function awaitFetcher<Data>(

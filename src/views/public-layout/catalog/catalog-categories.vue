@@ -8,11 +8,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { reactiveFetcher } from '@/api/fetch'
-import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
-import { GET_CATEGORIES_CATALOG_LIST } from '@/api/graphql-api/queries/categoryQueries'
+import { graphqlFetch } from '@/services/GraphqlService/GraphqlService'
+import { GET_CATEGORIES_CATALOG_LIST } from '@/services/GraphqlService/queries/categoryQueries'
 import CategoriesList from '@/components/public-layout/catalog/CategoriesList/CategoriesList.vue'
 import CategoriesListSkeleton from '@/components/public-layout/catalog/CategoriesList/CategoriesListSkeleton.vue'
+import { reactiveFetcher } from '@/services/FetchService/FetchService'
 import { CategoryType } from '@/types/category'
 
 export default defineComponent({

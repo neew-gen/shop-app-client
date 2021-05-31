@@ -32,8 +32,8 @@ import {
 import { defineComponent, onUnmounted, reactive, Ref, ref } from 'vue'
 
 // import { useFetch } from '@/api/fetch/useFetch'
-import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
-import { GET_CATEGORIES_DROPDOWN } from '@/api/graphql-api/queries/categoryQueries'
+import { graphqlFetch } from '@/services/GraphqlService/GraphqlService'
+import { GET_CATEGORIES_DROPDOWN } from '@/services/GraphqlService/queries/categoryQueries'
 import { CategoryDropdownType } from '@/types/category'
 import { ProductDiscountInput } from '@/types/product'
 

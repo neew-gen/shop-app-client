@@ -14,9 +14,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { reactiveFetcher } from '@/api/fetch'
-import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
-import { GET_SWIPES } from '@/api/graphql-api/queries/swipeQueries'
+import { reactiveFetcher } from '@/services/FetchService/FetchService'
+import { graphqlFetch } from '@/services/GraphqlService/GraphqlService'
+import { GET_SWIPES } from '@/services/GraphqlService/queries/swipeQueries'
 import HomeSale from '@/components/public-layout/home/HomeContent/HomeSale/HomeSale.vue'
 import HomeSwiper from '@/components/public-layout/home/HomeContent/HomeSwiper/HomeSwiper.vue'
 import HomeSwiperSkeleton from '@/components/public-layout/home/HomeContent/HomeSwiper/HomeSwiperSkeleton.vue'

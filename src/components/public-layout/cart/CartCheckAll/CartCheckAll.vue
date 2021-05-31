@@ -18,10 +18,9 @@
 
 <script lang="ts">
 import { MDBBtn, MDBCheckbox } from 'mdb-vue-ui-kit'
-import { defineComponent, WritableComputedRef } from 'vue'
+import { defineComponent } from 'vue'
 
-import CartApi from '@/api/cart/CartApi'
-import { store } from '@/store'
+import CartService from '@/services/CartService/CartService'
 
 export default defineComponent({
   name: 'CartCheckAll',
@@ -30,9 +29,9 @@ export default defineComponent({
     MDBBtn,
   },
   setup() {
-    const isEmptyCart = CartApi.getIsEmptyCart()
-    const isHaveCheckedInCart = CartApi.getIsHaveCheckedInCart()
-    const isAllChecked = CartApi.getIsAllChecked()
+    const isEmptyCart = CartService.getIsEmptyCart()
+    const isHaveCheckedInCart = CartService.getIsHaveCheckedInCart()
+    const isAllChecked = CartService.getIsAllChecked()
     // const isAllChecked: WritableComputedRef<boolean> = computed({
     //   get(): boolean {
     //     if (props.data.length === 0) return false
@@ -43,10 +42,10 @@ export default defineComponent({
     //   },
     // })
     const changeCheckAll = (): void => {
-      CartApi.setAllChecked()
+      CartService.setAllChecked()
     }
     const deleteSelected = (): void => {
-      CartApi.deleteSelectedCartItems()
+      CartService.deleteSelectedCartItems()
     }
     // return { isAllChecked, deleteSelected }
     return {

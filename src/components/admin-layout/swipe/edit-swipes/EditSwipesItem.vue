@@ -53,11 +53,11 @@ import { MDBBtn, MDBIcon, MDBListGroupItem } from 'mdb-vue-ui-kit'
 import { defineComponent, PropType, ref } from 'vue'
 import { useToast } from 'vue-toastification'
 
-import { graphqlDelete } from '@/api/graphql-api/GraphqlApi'
+import { graphqlDelete } from '@/services/GraphqlService/GraphqlService'
 import BottomModal from '@/components/BottomModal.vue'
 import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
 import { eventBus } from '@/helpers/EventBus'
-import { textSlicer } from '@/helpers/slicer'
+import { textSlicer } from '@/services/TextSlicerService/TextSlicerService'
 import { SwipeType } from '@/types/swipe'
 
 export default defineComponent({

@@ -27,12 +27,15 @@
 import { MDBCol, MDBContainer, MDBListGroup, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent, onUnmounted } from 'vue'
 
-import { reactiveFetcher, awaitFetcher } from '@/api/fetch'
-import { graphqlFetch } from '@/api/graphql-api/GraphqlApi'
-import { GET_CATEGORIES_EDITLIST } from '@/api/graphql-api/queries/categoryQueries'
+import { graphqlFetch } from '@/services/GraphqlService/GraphqlService'
+import { GET_CATEGORIES_EDITLIST } from '@/services/GraphqlService/queries/categoryQueries'
 import EditCategoriesItem from '@/components/admin-layout/category/edit-categories/EditCategoriesItem.vue'
 import Spinner from '@/components/Spinner.vue'
 import { eventBus } from '@/helpers/EventBus'
+import {
+  awaitFetcher,
+  reactiveFetcher,
+} from '@/services/FetchService/FetchService'
 import { ProductEditItem } from '@/types/product'
 
 export default defineComponent({

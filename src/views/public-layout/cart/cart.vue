@@ -22,11 +22,11 @@
 import { MDBCol, MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
 
-import CartApi from '@/api/cart/CartApi'
 import CartCheckAll from '@/components/public-layout/cart/CartCheckAll/CartCheckAll.vue'
 import CartList from '@/components/public-layout/cart/CartList/CartList.vue'
 import CartTotal from '@/components/public-layout/cart/CartTotal/CartTotal.vue'
 import CartBreadcrumb from '@/components/public-layout/PublicBreadcrumbs/CartBreadcrumb.vue'
+import CartService from '@/services/CartService/CartService'
 
 export default defineComponent({
   name: 'Cart',
@@ -40,8 +40,8 @@ export default defineComponent({
     MDBCol,
   },
   setup() {
-    const isEmptyCart = CartApi.getIsEmptyCart()
-    const isHaveCheckedInCart = CartApi.getIsHaveCheckedInCart()
+    const isEmptyCart = CartService.getIsEmptyCart()
+    const isHaveCheckedInCart = CartService.getIsHaveCheckedInCart()
     return {
       isEmptyCart,
       isHaveCheckedInCart,

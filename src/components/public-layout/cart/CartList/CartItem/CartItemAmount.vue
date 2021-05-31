@@ -20,7 +20,7 @@
 import { MDBBtn, MDBIcon } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
 
-import CartApi from '@/api/cart/CartApi'
+import CartService from '@/services/CartService/CartService'
 
 export default defineComponent({
   name: 'CartItemAmount',
@@ -40,7 +40,7 @@ export default defineComponent({
   },
   setup(props) {
     const decreaseValue = (): void => {
-      CartApi.updateCartItem(props._id, { amount: props.amount - 1 })
+      CartService.updateCartItem(props._id, { amount: props.amount - 1 })
       // store.dispatch('updateCartItem', {
       //   id: props.id,
       //   propName: 'value',
@@ -48,7 +48,7 @@ export default defineComponent({
       // })
     }
     const increaseValue = (): void => {
-      CartApi.updateCartItem(props._id, { amount: props.amount + 1 })
+      CartService.updateCartItem(props._id, { amount: props.amount + 1 })
       // store.dispatch('updateCartItem', {
       //   id: props.id,
       //   propName: 'value',

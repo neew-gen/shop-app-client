@@ -1,6 +1,5 @@
 import { createLogger, createStore } from 'vuex'
 
-import * as cartModule from '@/store/modules/cart'
 // product input start
 import {
   ProductInputActions,
@@ -30,19 +29,16 @@ export const store = createStore({
   state: initialState,
   actions: {
     ...variableModule.actions,
-    ...cartModule.actions,
     ...userModule.actions,
     ...productInputActions,
   },
   mutations: {
     ...variableModule.mutations,
-    ...cartModule.mutations,
     ...userModule.mutations,
     ...productInputMutations,
   },
   getters: {
     ...variableModule.getters,
-    ...cartModule.getters,
     ...userModule.getters,
     ...productInputGetters,
   },
@@ -54,16 +50,13 @@ export function useStore(): Store {
 }
 
 export type ActionsPayload = variableModule.ActionsPayload &
-  cartModule.ActionsPayload &
   userModule.ActionsPayload &
   ProductInputActions
 
 export type MutationsPayload = variableModule.MutationPayload &
-  cartModule.MutationPayload &
   userModule.MutationPayload &
   ProductInputMutationsPayload
 
 export type Getters = variableModule.Getters &
-  cartModule.Getters &
   userModule.Getters &
   ProductInputGetters

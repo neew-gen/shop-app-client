@@ -8,9 +8,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { reactiveFetcher } from '@/api/fetch'
-import { graphqlFetchBy } from '@/api/graphql-api/GraphqlApi'
-import { GET_PRODUCTS_ORDER_BY } from '@/api/graphql-api/queries/productQueries'
+import { graphqlFetchBy } from '@/services/GraphqlService/GraphqlService'
+import { GET_PRODUCTS_ORDER_BY } from '@/services/GraphqlService/queries/productQueries'
+import { reactiveFetcher } from '@/services/FetchService/FetchService'
 import { ProductListItem } from '@/types/product'
 
 export default defineComponent({

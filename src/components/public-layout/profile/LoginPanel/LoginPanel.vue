@@ -19,7 +19,7 @@ import { MDBBtn, MDBCol } from 'mdb-vue-ui-kit'
 import { computed, ComputedRef, defineComponent, ref } from 'vue'
 import { useToast } from 'vue-toastification'
 
-import { logout } from '@/api/jwt-api/requests'
+import { logout } from '@/services/JwtService/requests'
 import { useStore } from '@/store'
 
 export default defineComponent({

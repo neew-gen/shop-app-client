@@ -43,7 +43,7 @@ import { defineComponent } from 'vue'
 import { useToast } from 'vue-toastification'
 import { object, string } from 'yup'
 
-import { graphqlCreate } from '@/api/graphql-api/GraphqlApi'
+import { graphqlCreate } from '@/services/GraphqlService/GraphqlService'
 import ErrorField from '@/components/ErrorField.vue'
 import Swipe from '@/components/public-layout/home/HomeContent/HomeSwiper/Swipe.vue'
 import { SwipeData } from '@/types/swipe'

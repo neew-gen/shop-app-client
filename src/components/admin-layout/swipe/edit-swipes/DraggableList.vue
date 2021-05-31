@@ -22,7 +22,7 @@ import { defineComponent, onUnmounted, PropType, ref, watch } from 'vue'
 import { useToast } from 'vue-toastification'
 import draggable from 'vuedraggable'
 
-import { graphqlUpdate } from '@/api/graphql-api/GraphqlApi'
+import { graphqlUpdate } from '@/services/GraphqlService/GraphqlService'
 import EditSwipesItem from '@/components/admin-layout/swipe/edit-swipes/EditSwipesItem.vue'
 import { SwipeType, UpdateIndexInput } from '@/types/swipe'
 

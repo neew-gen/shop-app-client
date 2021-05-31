@@ -15,7 +15,7 @@
       </MDBCol>
 
       <MDBCol col="12">
-<!--        <ImageUploader />-->
+        <!--        <ImageUploader />-->
         <!--        <MDBInput label="Image Url" v-model="values.imgUrl" />-->
         <!--        <ErrorField>{{ errors.imgUrl }}</ErrorField>-->
       </MDBCol>
@@ -60,13 +60,13 @@ import { defineComponent, onUnmounted } from 'vue'
 import { useToast } from 'vue-toastification'
 import { number, object, string } from 'yup'
 
-import { awaitFetcher } from '@/api/fetch'
-import { graphqlFetchBy, graphqlUpdate } from '@/api/graphql-api/GraphqlApi'
-import { GET_PRODUCT_BY_ID } from '@/api/graphql-api/queries/productQueries'
+import { graphqlFetchBy, graphqlUpdate } from '@/services/GraphqlService/GraphqlService'
+import { GET_PRODUCT_BY_ID } from '@/services/GraphqlService/queries/productQueries'
 // import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
 import ErrorField from '@/components/ErrorField.vue'
 // import ImageContainer from '@/components/ImageContainer.vue'
 import ImageUploader from '@/components/ImageUploader/ImageUploader.vue'
+import { awaitFetcher } from '@/services/FetchService/FetchService'
 import { useStore } from '@/store'
 import { Product, ProductUpdateInput } from '@/types/product'
 
