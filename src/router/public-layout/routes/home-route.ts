@@ -25,6 +25,15 @@ export const homeRoute: Array<RouteRecordRaw> = [
             /* webpackChunkName: "catalog-categories" */ '@/views/public-layout/home/home-search.vue'
           ),
       },
+      {
+        path: '/:sortParameter',
+        name: 'home-products',
+        component: (): any =>
+          import(
+            /* webpackChunkName: "catalog-categories" */ '@/views/public-layout/home/home-products.vue'
+          ),
+        props: true,
+      },
     ],
   },
 ]

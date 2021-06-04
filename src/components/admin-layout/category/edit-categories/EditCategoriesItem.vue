@@ -33,7 +33,7 @@ import { defineComponent } from 'vue'
 import { useToast } from 'vue-toastification'
 
 import { graphqlDelete } from '@/services/GraphqlService/GraphqlService'
-import ProductImage from '@/components/public-layout/catalog/Product/ProductImage.vue'
+import ProductImage from '@/components/public-layout/Product/ProductImage.vue'
 import { eventBus } from '@/helpers/EventBus'
 import { textSlicer } from '@/services/TextSlicerService/TextSlicerService'
 import { CategoryEditItem } from '@/types/category'

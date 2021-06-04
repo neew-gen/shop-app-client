@@ -39,7 +39,7 @@ import {
 } from 'mdb-vue-ui-kit'
 import { computed, ComputedRef, defineComponent, PropType } from 'vue'
 
-import ProductImage from '@/components/public-layout/catalog/Product/ProductImage.vue'
+import ProductImage from '@/components/public-layout/Product/ProductImage.vue'
 import router from '@/router'
 import { ProductListItem } from '@/types/product'
 

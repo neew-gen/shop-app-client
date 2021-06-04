@@ -1,12 +1,12 @@
 <template>
   <MDBContainer>
-    <router-view />
+    <MDBRow><router-view /></MDBRow>
     <Footer />
   </MDBContainer>
 </template>
 
 <script lang="ts">
-import { MDBContainer } from 'mdb-vue-ui-kit'
+import { MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
 
 import Footer from '@/components/public-layout/Footer/PublicFooter.vue'
@@ -16,12 +16,13 @@ export default defineComponent({
   components: {
     Footer,
     MDBContainer,
+    MDBRow,
   },
 })
 </script>
 
 <style scoped lang="scss">
-.public-wrapper {
-  min-height: 100%;
-}
+//.public-wrapper {
+//  min-height: 100%;
+//}
 </style>

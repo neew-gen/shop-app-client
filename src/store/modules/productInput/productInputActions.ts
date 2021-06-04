@@ -1,5 +1,9 @@
 import { v4 as uuidv4 } from 'uuid'
 
+import {
+  deleteFromLocalArrayItem,
+  pushToLocalArrayItem,
+} from '@/services/LocalStorageService/LocalStorageService'
 import { ProductDiscountInput, ProductImagesItem } from '@/types/product'
 import { Actions } from '@/types/store/actions'
 
@@ -9,11 +13,12 @@ export type ProductInputActions = {
   updateProductShow: [boolean, void]
   updateProductName: [string, void]
   updateProductPrice: [number, void]
-  addProductImage: [string, void]
+  addProductImage: [ProductImagesItem, void]
   updateProductImage: [ProductImagesItem, void]
   deleteProductImage: [string, void]
   updateProductDescription: [string, void]
   updateProductDiscount: [null | ProductDiscountInput, void]
+  updateProductInputShow: [{ inputName: string; newStatus: boolean }, void]
 }
 
 export const productInputActions: Actions<ProductInputActions> = {
@@ -32,21 +37,31 @@ export const productInputActions: Actions<ProductInputActions> = {
   updateProductPrice({ commit }, newPrice) {
     commit('updateProductPrice', newPrice)
   },
-  addProductImage({ commit }, imgUrl) {
-    const id = uuidv4()
-    const payload = { id, imgUrl }
-    commit('addProductImage', payload)
+  addProductImage({ commit }, newImage) {
+    const newImagesValue = pushToLocalArrayItem<ProductImagesItem>(
+      'productImages',
+      newImage,
+    )
+    commit('addProductImage', newImagesValue)
   },
   updateProductImage({ commit }, imagesItem) {
     commit('updateProductImage', imagesItem)
   },
   deleteProductImage({ commit }, id) {
-    commit('deleteProductImage', id)
+    const newImagesValue = deleteFromLocalArrayItem<ProductImagesItem>(
+      'productImages',
+      id,
+    )
+    if (!newImagesValue) return
+    commit('deleteProductImage', newImagesValue)
   },
   updateProductDescription({ commit }, newDescription) {
     commit('updateProductDescription', newDescription)
   },
   updateProductDiscount({ commit }, discount) {
     commit('updateProductDiscount', discount)
+  },
+  updateProductInputShow({ commit }, showPayload) {
+    commit('updateProductInputShow', showPayload)
   },
 }

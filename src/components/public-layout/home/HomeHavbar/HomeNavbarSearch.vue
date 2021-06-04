@@ -1,12 +1,20 @@
 <template>
   <div class="search-input-wrapper flex-fill">
-    <MDBInput class="search-input" label="" />
+    <MDBInput
+      v-model="searchInput"
+      class="search-input"
+      label=""
+      @input="startSearch"
+    />
   </div>
 </template>
 
 <script lang="ts">
+import { debounce } from 'lodash'
 import { MDBInput } from 'mdb-vue-ui-kit'
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'HomeNavbarSearch',
@@ -18,6 +26,14 @@ export default defineComponent({
   },
   components: {
     MDBInput,
+  },
+  setup() {
+    const searchInput = ref('')
+    const store = useStore()
+    const startSearch = debounce(() => {
+      store.dispatch('startSearch', searchInput.value)
+    }, 1000)
+    return { searchInput, startSearch }
   },
 })
 </script>

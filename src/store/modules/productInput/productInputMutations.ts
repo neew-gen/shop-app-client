@@ -10,11 +10,12 @@ export type ProductInputMutationsPayload = {
   updateProductShow: boolean
   updateProductName: string
   updateProductPrice: number
-  addProductImage: ProductImagesItem
+  addProductImage: ProductImagesItem[]
   updateProductImage: ProductImagesItem
-  deleteProductImage: string
+  deleteProductImage: ProductImagesItem[]
   updateProductDescription: string
   updateProductDiscount: null | ProductDiscountInput
+  updateProductInputShow: { inputName: string; newStatus: boolean }
 }
 
 export const productInputMutations: MutationTree<State> &
@@ -34,8 +35,8 @@ export const productInputMutations: MutationTree<State> &
   updateProductPrice({ inputs }, newPrice) {
     inputs.productInput.productData.price = newPrice
   },
-  addProductImage({ inputs }, newImagesItem) {
-    inputs.productInput.productData.images.push(newImagesItem)
+  addProductImage({ inputs }, newImages) {
+    inputs.productInput.productData.images = newImages
   },
   updateProductImage({ inputs }, imagesItem) {
     const updatingImage = inputs.productInput.productData.images.filter(
@@ -43,10 +44,8 @@ export const productInputMutations: MutationTree<State> &
     )[0]
     updatingImage.imgUrl = imagesItem.imgUrl
   },
-  deleteProductImage({ inputs }, deletingId) {
-    inputs.productInput.productData.images = inputs.productInput.productData.images.filter(
-      (i: ProductImagesItem) => i.id !== deletingId,
-    )
+  deleteProductImage({ inputs }, newImages) {
+    inputs.productInput.productData.images = newImages
   },
   updateProductDescription({ inputs }, newDescription) {
     inputs.productInput.productData.description = newDescription
@@ -63,5 +62,9 @@ export const productInputMutations: MutationTree<State> &
     for (prop in discount) {
       inputs.productInput.productData.discount[prop] = discount[prop]
     }
+  },
+  updateProductInputShow({ inputs }, showPayload) {
+    const { inputName, newStatus } = showPayload
+    inputs.productInput.show[inputName] = newStatus
   },
 }

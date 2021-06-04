@@ -45,6 +45,16 @@ export type ProductListItemData = {
   images: ProductImagesItem[]
   discount: null | ProductDiscountPercentage
 }
+// product search result
+export type ProductSearchItem = {
+  _id: string
+  productData: ProductSearchItemData
+}
+export type ProductSearchItemData = {
+  name: string
+  description: string
+  images: ProductImagesItem[]
+}
 
 export type ProductDiscountPercentage = {
   percentage: number

@@ -40,8 +40,8 @@ import { computed, defineComponent, PropType, WritableComputedRef } from 'vue'
 
 import CartService from '@/services/CartService/CartService'
 import CartItemAmount from '@/components/public-layout/cart/CartList/CartItem/CartItemAmount.vue'
-import ProductImage from '@/components/public-layout/catalog/Product/ProductImage.vue'
-import ProductPrice from '@/components/public-layout/catalog/Product/ProductPrice.vue'
+import ProductImage from '@/components/public-layout/Product/ProductImage.vue'
+import ProductPrice from '@/components/public-layout/Product/ProductPrice.vue'
 import { ProductCartItem } from '@/types/product'
 
 export default defineComponent({

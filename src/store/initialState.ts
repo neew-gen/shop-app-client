@@ -23,4 +23,5 @@ export const initialState = {
       },
     },
   },
+  search: { searchResult: [], searchLoading: false },
 }

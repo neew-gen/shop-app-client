@@ -1,7 +1,17 @@
 <template>
-  <MDBNavbar class="flex-nowrap" light bg="light" position="sticky" container>
-    <HomeNavbarBrand v-if="!fullSizeSearch" />
-    <MDBBtn v-else size="sm" color="light" @click="pushRouter('home-main')">
+  <MDBNavbar
+    class="d-flex flex-nowrap justify-content-between"
+    light
+    bg="light"
+    position="sticky"
+  >
+    <HomeNavbarBrand v-if="!showBackButton" />
+    <MDBBtn
+      v-if="showBackButton"
+      size="sm"
+      color="light"
+      @click="pushRouter('home-main')"
+    >
       <MDBIcon icon="chevron-left" iconStyle="fas" />
     </MDBBtn>
     <HomeNavbarSearch
@@ -33,10 +43,17 @@ export default defineComponent({
       return router.currentRoute.value.name === 'home-search'
     })
 
+    const showBackButton: ComputedRef<boolean> = computed(() => {
+      return (
+        router.currentRoute.value.name === 'home-search' ||
+        router.currentRoute.value.name !== 'home-main'
+      )
+    })
+
     const pushRouter = (pathName: string): void => {
       router.push({ name: pathName })
     }
-    return { fullSizeSearch, pushRouter }
+    return { fullSizeSearch, showBackButton, pushRouter }
   },
 })
 </script>

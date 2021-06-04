@@ -1,64 +1,40 @@
 <template>
-  <MDBCol col="12">
-    <div class="d-flex justify-content-between py-1">
-      <div>Images: {{ productImages.length }}</div>
-      <div
-        class="show-images-btn btn btn-default btn-sm"
-        :class="showImagesMode ? 'btn-dark' : 'btn-default'"
-        @click="changeShowImagesMode(!showImagesMode)"
-      >
-        {{ showImagesMode ? 'Hide' : 'Show' }}&nbsp;the Images Menu
-      </div>
-    </div>
-    <div v-if="showImagesMode">
-      <div v-for="item in productImages" :key="item.id">
-        <div class="img-container">
-          <img :src="item.imgUrl" alt="" />
-        </div>
-        <div class="d-flex justify-content-between p-2 border-bottom">
-          <MDBBtn color="light" @click="startEdit(item.id, item.imgUrl)">
-            Crop
-          </MDBBtn>
-          <div>
-            <MDBBtn color="dark" @click="deleteImage(item.id)">Delete</MDBBtn>
-          </div>
-        </div>
-      </div>
+  <div>Product Images</div>
+  <LoadedImagesList />
+  <UploadingImage @modal="(e) => changeModalMode(e)" />
+  <!--  <MDBCol col="12">-->
+  <!--    <div class="d-flex justify-content-between py-1">-->
+  <!--      <div>Images: {{ productImages.length }}</div>-->
+  <!--      <div-->
+  <!--        class="show-images-btn btn btn-default btn-sm"-->
+  <!--        :class="showImagesMode ? 'btn-dark' : 'btn-default'"-->
+  <!--        @click="changeShowImagesMode(!showImagesMode)"-->
+  <!--      >-->
+  <!--        {{ showImagesMode ? 'Hide' : 'Show' }}&nbsp;the Images Menu-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--    -->
+  <!--  </MDBCol>-->
 
-      <div class="d-flex justify-content-end align-items-center">
-        <label class="browse btn btn-light my-2">
-          Add image...
-          <input
-            ref="fileInput"
-            class="sr-only"
-            type="file"
-            accept="image/*"
-            @change="addImage"
-          />
-        </label>
-      </div>
-    </div>
-  </MDBCol>
-
-  <BottomModal :show="modalMode" :changeModal="changeModalMode">
-    <template v-slot:modal-header>
-      <div>Edit image</div>
-      <MDBBtn size="sm" color="dark" @click="changeModalMode(false)">
-        Close
-      </MDBBtn>
-    </template>
-    <template v-slot:modal-body>
-      <cropper
-        class="cropper"
-        :src="editingImage.imgUrl"
-        :auto-zoom="true"
-        ref="cropper"
-      />
-    </template>
-    <template v-slot:modal-footer>
-      <MDBBtn class="m-1" color="dark" @click="endEdit">Save</MDBBtn>
-    </template>
-  </BottomModal>
+  <!--  <BottomModal :show="modalMode" :changeModal="changeModalMode">-->
+  <!--    <template v-slot:modal-header>-->
+  <!--      <div>Edit image</div>-->
+  <!--      <MDBBtn size="sm" color="dark" @click="changeModalMode(false)">-->
+  <!--        Close-->
+  <!--      </MDBBtn>-->
+  <!--    </template>-->
+  <!--    <template v-slot:modal-body>-->
+  <!--      <cropper-->
+  <!--        class="cropper"-->
+  <!--        :src="editingImage.imgUrl"-->
+  <!--        :auto-zoom="true"-->
+  <!--        ref="cropper"-->
+  <!--      />-->
+  <!--    </template>-->
+  <!--    <template v-slot:modal-footer>-->
+  <!--      <MDBBtn class="m-1" color="dark" @click="endEdit">Save</MDBBtn>-->
+  <!--    </template>-->
+  <!--  </BottomModal>-->
 </template>
 
 <script lang="ts">
@@ -66,6 +42,8 @@ import { MDBBtn, MDBCol } from 'mdb-vue-ui-kit'
 import { computed, ComputedRef, defineComponent, reactive, ref } from 'vue'
 import { Cropper } from 'vue-advanced-cropper'
 
+import LoadedImagesList from '@/components/admin-layout/product/ProductInputs/ProductImagesInput/LoadedImagesList.vue'
+import UploadingImage from '@/components/admin-layout/product/ProductInputs/ProductImagesInput/UploadingImage.vue'
 import BottomModal from '@/components/BottomModal.vue'
 import { useStore } from '@/store'
 import { ProductImagesItem } from '@/types/product'
@@ -73,10 +51,12 @@ import { ProductImagesItem } from '@/types/product'
 export default defineComponent({
   name: 'ProductImagesInput',
   components: {
-    Cropper,
-    BottomModal,
-    MDBBtn,
-    MDBCol,
+    LoadedImagesList,
+    UploadingImage,
+    // Cropper,
+    // BottomModal,
+    // MDBBtn,
+    // MDBCol,
   },
   props: {
     error: {
@@ -116,19 +96,27 @@ export default defineComponent({
     const endEdit = (): void => {
       const { canvas } = cropper.value.getResult()
       canvas.toBlob(function (blob: Blob) {
-        // TODO fix blob
-        const reader = new window.FileReader()
-        reader.readAsDataURL(blob)
-        reader.onloadend = function (): void {
-          const base64data = reader.result
-          if (typeof base64data !== 'string') return
-          store.dispatch('updateProductImage', {
-            id: editingImage.id,
-            imgUrl: base64data,
-          })
-        }
+        store.dispatch('updateProductImage', {
+          id: editingImage.id,
+          imgUrl: URL.createObjectURL(blob),
+        })
       })
       changeModalMode(false)
+      // const { canvas } = cropper.value.getResult()
+      // canvas.toBlob(function (blob: Blob) {
+      //   // TODO fix blob
+      //   const reader = new window.FileReader()
+      //   reader.readAsDataURL(blob)
+      //   reader.onloadend = function (): void {
+      //     const base64data = reader.result
+      //     if (typeof base64data !== 'string') return
+      //     store.dispatch('updateProductImage', {
+      //       id: editingImage.id,
+      //       imgUrl: base64data,
+      //     })
+      //   }
+      // })
+      // changeModalMode(false)
     }
 
     const addImage = (e: Event): void => {
@@ -141,7 +129,7 @@ export default defineComponent({
       reader.onloadend = function (): void {
         const base64data = reader.result
         if (typeof base64data !== 'string') return
-        store.dispatch('addProductImage', base64data)
+        // store.dispatch('addProductImage', base64data)
         fileInput.value.type = 'text'
         fileInput.value.type = 'file'
       }

@@ -1,5 +1,6 @@
 import { GetterTree } from 'vuex'
 
+import { getLocalItem } from '@/services/LocalStorageService/LocalStorageService'
 import {
   CreateProductInput,
   ProductDiscount,
@@ -17,6 +18,7 @@ export type ProductInputGetters = {
   getProductDescription(state: State): string
   getProductDiscount(state: State): ProductDiscount
   getProductInput(state: State): CreateProductInput
+  getProductInputShow(state: State): (inputName: string) => boolean
 }
 
 export const productInputGetters: GetterTree<State, State> &
@@ -37,6 +39,9 @@ export const productInputGetters: GetterTree<State, State> &
     return inputs.productInput.productData.price
   },
   getProductImages: ({ inputs }) => {
+    if (inputs.productInput.productData.images.length === 0) {
+      return getLocalItem('productImages')
+    }
     return inputs.productInput.productData.images
   },
   getProductDescription: ({ inputs }) => {
@@ -47,5 +52,8 @@ export const productInputGetters: GetterTree<State, State> &
   },
   getProductInput: ({ inputs }) => {
     return inputs.productInput
+  },
+  getProductInputShow: ({ inputs }) => (inputName): boolean => {
+    return inputs.productInput.show[inputName]
   },
 }

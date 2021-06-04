@@ -1,18 +1,14 @@
 <template>
-  <div class="swiper-block">
-    <HomeSwiper v-if="!swiperLoading" :data="swiperData" />
-    <HomeSwiperSkeleton v-if="swiperLoading" />
-  </div>
-  <div class="sale-block">
-    <HomeSale />
-  </div>
-  <div>new</div>
+  <HomeSwiper v-if="!swiperLoading" :data="swiperData" />
+  <HomeSwiperSkeleton v-if="swiperLoading" />
+
+  <HomeMenu />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import HomeSale from '@/components/public-layout/home/HomeSale/HomeSale.vue'
+import HomeMenu from '@/components/public-layout/home/HomeMenu/HomeMenu.vue'
 import HomeSwiper from '@/components/public-layout/home/HomeSwiper/HomeSwiper.vue'
 import HomeSwiperSkeleton from '@/components/public-layout/home/HomeSwiper/HomeSwiperSkeleton.vue'
 import { reactiveFetcher } from '@/services/FetchService/FetchService'
@@ -23,7 +19,7 @@ import { SwipeType } from '@/types/swipe'
 export default defineComponent({
   name: 'home-main',
   components: {
-    HomeSale,
+    HomeMenu,
     HomeSwiper,
     HomeSwiperSkeleton,
   },

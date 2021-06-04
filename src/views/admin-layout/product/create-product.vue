@@ -1,7 +1,7 @@
 <template>
   <MDBContainer :style="{ position: modal ? 'fixed' : 'relative' }">
-    <MDBRow tag="form" class="g-3" @submit.prevent="onSubmit">
-      <ProductNameInput class="mt-4" />
+    <MDBRow tag="form" class="g-3">
+      <ProductNameInput />
       <ProductCategoryInput />
       <ProductImagesInput @modal="updateModal" />
       <ProductDescriptionInput />
@@ -13,14 +13,20 @@
       <MDBCol col="12" class="d-flex justify-content-end mb-2">
         <MDBBtn color="light" type="submit"> Add Product </MDBBtn>
       </MDBCol>
-      <div>Данные о товаре, которые потом будут отправлены на сервак</div>
-      {{ productInput }}
+      <!--      <div>Данные о товаре, которые потом будут отправлены на сервак</div>-->
+      <!--      {{ productInput }}-->
     </MDBRow>
   </MDBContainer>
 </template>
 
 <script lang="ts">
-import { MDBBtn, MDBCol, MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
+import {
+  MDBBtn,
+  MDBCol,
+  MDBContainer,
+  MDBListGroup,
+  MDBRow,
+} from 'mdb-vue-ui-kit'
 import { useField, useForm } from 'vee-validate'
 import {
   computed,
@@ -33,15 +39,15 @@ import {
 import { useToast } from 'vue-toastification'
 import { array, number, object, string } from 'yup'
 
+import ProductCountInput from '@/components/admin-layout/product/ProductInputs/ProductAmountInput.vue'
+import ProductCategoryInput from '@/components/admin-layout/product/ProductInputs/ProductCategoryInput.vue'
+import ProductDescriptionInput from '@/components/admin-layout/product/ProductInputs/ProductDescriptionInput.vue'
+import ProductDiscountInput from '@/components/admin-layout/product/ProductInputs/ProductDiscountInput.vue'
+import ProductImagesInput from '@/components/admin-layout/product/ProductInputs/ProductImagesInput/ProductImagesInput.vue'
+import ProductNameInput from '@/components/admin-layout/product/ProductInputs/ProductNameInput.vue'
+import ProductPriceInput from '@/components/admin-layout/product/ProductInputs/ProductPriceInput.vue'
+import ProductShowInput from '@/components/admin-layout/product/ProductInputs/ProductShowInput.vue'
 import { graphqlCreate } from '@/services/GraphqlService/GraphqlService'
-import ProductCategoryInput from '@/components/admin-layout/product/inputs/ProductCategoryInput.vue'
-import ProductCountInput from '@/components/admin-layout/product/inputs/ProductAmountInput.vue'
-import ProductDescriptionInput from '@/components/admin-layout/product/inputs/ProductDescriptionInput.vue'
-import ProductDiscountInput from '@/components/admin-layout/product/inputs/ProductDiscountInput.vue'
-import ProductImagesInput from '@/components/admin-layout/product/inputs/ProductImagesInput.vue'
-import ProductNameInput from '@/components/admin-layout/product/inputs/ProductNameInput.vue'
-import ProductPriceInput from '@/components/admin-layout/product/inputs/ProductPriceInput.vue'
-import ProductShowInput from '@/components/admin-layout/product/inputs/ProductShowInput.vue'
 import { useStore } from '@/store'
 import { CreateProductInput } from '@/types/product'
 
@@ -60,18 +66,19 @@ export default defineComponent({
     MDBRow,
     MDBContainer,
     MDBCol,
+    // MDBCol,
   },
   setup() {
-    const toast = useToast()
-    const store = useStore()
-
+    // const toast = useToast()
+    // const store = useStore()
+    //
     const modal = ref(false)
     const updateModal = (newValue: boolean): void => {
       modal.value = newValue
     }
-    const productInput: ComputedRef<CreateProductInput> = computed(() => {
-      return store.getters.getProductInput
-    })
+    // const productInput: ComputedRef<CreateProductInput> = computed(() => {
+    //   return store.getters.getProductInput
+    // })
     // const unwatch = watch(productInput.value, (value) => {
     //   values.name = value.productData.name
     //   values.images = value.productData.images
@@ -114,28 +121,28 @@ export default defineComponent({
     //   meta.value.valid = false
     // }
 
-    const onSubmit = (e: any): void => {
-      // console.log(errors.value)
-      // const { name, imgUrl, price, description, categoryId } = values
-      // if (!(name && imgUrl && price && description)) return
-      graphqlCreate<CreateProductInput>('product', productInput.value)
-      // reset()
-      // store.dispatch('updateCategoryDropdown', undefined)
-      toast.success('Product has been created!')
-    }
-
-    // onUnmounted(() => {
-    //   unwatch()
+    // const onSubmit = (e: any): void => {
+    //   // console.log(errors.value)
+    //   // const { name, imgUrl, price, description, categoryId } = values
+    //   // if (!(name && imgUrl && price && description)) return
+    //   graphqlCreate<CreateProductInput>('product', productInput.value)
+    //   // reset()
     //   // store.dispatch('updateCategoryDropdown', undefined)
-    // })
-
+    //   toast.success('Product has been created!')
+    // }
+    //
+    // // onUnmounted(() => {
+    // //   unwatch()
+    // //   // store.dispatch('updateCategoryDropdown', undefined)
+    // // })
+    //
     return {
       modal,
       updateModal,
-      // values,
-      // errors,
-      productInput,
-      onSubmit,
+      // // values,
+      // // errors,
+      // productInput,
+      // onSubmit,
     }
   },
 })

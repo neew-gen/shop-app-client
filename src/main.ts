@@ -4,6 +4,7 @@ import 'skeleton-screen-css' // https://www.npmjs.com/package/skeleton-screen-cs
 import 'vue-toastification/dist/index.css'
 import 'vue-advanced-cropper/dist/style.css'
 
+import firebase from 'firebase/app'
 import { createApp, ref } from 'vue'
 import Toast, { PluginOptions } from 'vue-toastification' // https://github.com/Maronato/vue-toastification/tree/next
 

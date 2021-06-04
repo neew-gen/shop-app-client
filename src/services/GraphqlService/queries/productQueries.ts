@@ -116,6 +116,23 @@ export const GET_PRODUCTS_ORDER_BY = gql(`
               imgUrl
             }
             price
+            discount {
+              percentage
+            }
+          }
+        }
+      }`)
+
+export const GET_PRODUCTS_BY_SEARCH = gql(`
+      query ProductsBySearch($searchString: String!) {
+        productsBySearch(searchString: $searchString) {
+          _id
+          productData {
+            name
+            images {
+              id 
+              imgUrl
+            }
           }
         }
       }`)

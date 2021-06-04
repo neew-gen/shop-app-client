@@ -1,10 +1,6 @@
 <template>
   <transition name="fade">
-    <div
-      class="modal-background"
-      v-if="show"
-      @click="changeModal(false)"
-    />
+    <div class="modal-background" v-if="show" @click="changeModal(false)" />
   </transition>
   <transition name="enter-bottom">
     <div class="modal-window" v-if="show">

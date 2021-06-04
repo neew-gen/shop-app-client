@@ -4,16 +4,30 @@ import { createLogger, createStore } from 'vuex'
 import {
   ProductInputActions,
   productInputActions,
-} from '@/store/modules/product-input/product-input-actions'
+} from '@/store/modules/productInput/productInputActions'
 import {
   ProductInputGetters,
   productInputGetters,
-} from '@/store/modules/product-input/product-input-getters'
+} from '@/store/modules/productInput/productInputGetters'
 import {
   productInputMutations,
   ProductInputMutationsPayload,
-} from '@/store/modules/product-input/product-input-mutations'
+} from '@/store/modules/productInput/productInputMutations'
 // product input end
+// search start
+import {
+  SearchActions,
+  searchActions,
+} from '@/store/modules/search/search-actions'
+import {
+  SearchGetters,
+  searchGetters,
+} from '@/store/modules/search/search-getters'
+import {
+  SearchMutations,
+  searchMutations,
+} from '@/store/modules/search/search-mutations'
+// search end
 import * as userModule from '@/store/modules/user'
 import * as variableModule from '@/store/modules/variables'
 import { Store } from '@/types/store'
@@ -31,16 +45,19 @@ export const store = createStore({
     ...variableModule.actions,
     ...userModule.actions,
     ...productInputActions,
+    ...searchActions,
   },
   mutations: {
     ...variableModule.mutations,
     ...userModule.mutations,
     ...productInputMutations,
+    ...searchMutations,
   },
   getters: {
     ...variableModule.getters,
     ...userModule.getters,
     ...productInputGetters,
+    ...searchGetters,
   },
   plugins,
 })
@@ -51,12 +68,15 @@ export function useStore(): Store {
 
 export type ActionsPayload = variableModule.ActionsPayload &
   userModule.ActionsPayload &
-  ProductInputActions
+  ProductInputActions &
+  SearchActions
 
 export type MutationsPayload = variableModule.MutationPayload &
   userModule.MutationPayload &
-  ProductInputMutationsPayload
+  ProductInputMutationsPayload &
+  SearchMutations
 
 export type Getters = variableModule.Getters &
   userModule.Getters &
-  ProductInputGetters
+  ProductInputGetters &
+  SearchGetters

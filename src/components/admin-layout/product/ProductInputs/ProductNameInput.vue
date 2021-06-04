@@ -20,12 +20,13 @@ export default defineComponent({
     },
   },
   components: {
-    ErrorField,
     MDBCol,
+    ErrorField,
     MDBInput,
   },
   setup() {
     const store = useStore()
+
     const productName: WritableComputedRef<string> = computed({
       get(): string {
         return store.getters.getProductName
@@ -40,6 +41,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+.name {
+  display: flex;
+  align-items: center;
+  caret-color: transparent;
+}
 .invalid-feedback {
   height: 10px;
   width: 100%;

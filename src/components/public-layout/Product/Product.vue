@@ -70,9 +70,9 @@ import { MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow } from 'mdb-vue-ui-kit'
 import moment from 'moment'
 import { computed, ComputedRef, defineComponent, PropType, ref } from 'vue'
 
+import ProductImage from '@/components/public-layout/Product/ProductImage.vue'
+import ProductPrice from '@/components/public-layout/Product/ProductPrice.vue'
 import CartService from '@/services/CartService/CartService'
-import ProductImage from '@/components/public-layout/catalog/Product/ProductImage.vue'
-import ProductPrice from '@/components/public-layout/catalog/Product/ProductPrice.vue'
 import { Product, ProductCartItem } from '@/types/product'
 
 export default defineComponent({

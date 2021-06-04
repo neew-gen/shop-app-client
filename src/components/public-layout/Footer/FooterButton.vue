@@ -5,7 +5,7 @@
     class="router-link flex-fill"
     :to="path"
     :exact="path === '/'"
-    :active-class="activeClass(path)"
+    :active-class="activeClass"
   >
     <MDBIcon :icon="icon" iconStyle="fas" size="lg" />
   </router-link>
@@ -13,7 +13,9 @@
 
 <script lang="ts">
 import { MDBIcon } from 'mdb-vue-ui-kit'
-import { defineComponent } from 'vue'
+import { computed, ComputedRef, defineComponent } from 'vue'
+
+import router from '@/router'
 
 export default defineComponent({
   name: 'FooterButton',
@@ -31,10 +33,10 @@ export default defineComponent({
     MDBIcon,
   },
   setup() {
-    const activeClass = (path: string): string => {
-      if (path === '/') return 'router-link-active'
+    const activeClass: ComputedRef<string> = computed(() => {
+      if (router.currentRoute.value.name === '/') return 'router-link-active'
       return 'router-link-active-custom'
-    }
+    })
     return {
       activeClass,
     }
