@@ -43,9 +43,9 @@ import { defineComponent } from 'vue'
 import { useToast } from 'vue-toastification'
 import { object, string } from 'yup'
 
-import { graphqlCreate } from '@/services/GraphqlService/GraphqlService'
 import ErrorField from '@/components/ErrorField.vue'
 import Swipe from '@/components/public-layout/home/HomeSwiper/Swipe.vue'
+import { graphqlCreate } from '@/services/GraphqlService/GraphqlService'
 import { SwipeData } from '@/types/swipe'
 
 export default defineComponent({
@@ -85,7 +85,7 @@ export default defineComponent({
       const { title, imgUrl, text } = values
       if (!(title && imgUrl && text)) return
 
-      graphqlCreate<SwipeData>('swipe', { title, imgUrl, text })
+      // graphqlCreate<SwipeData>('swipe', { title, imgUrl, text })
 
       reset()
       toast.success('Swipe has been created!')

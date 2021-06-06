@@ -36,33 +36,39 @@ export function graphqlFetchBy(
   })
 }
 
-export function graphqlCreate<Input>(key: string, input: Input): void {
-  const date = new Date().valueOf().toString()
-  switch (key) {
-    case 'product': {
-      apollo.mutate({
-        mutation: CREATE_PRODUCT,
-        variables: { createProduct: input },
-      })
-      break
-    }
-    case 'category': {
-      const id = 'c' + date
-      apollo.mutate({
-        mutation: CREATE_CATEGORY,
-        variables: { category: { id, ...input } },
-      })
-      break
-    }
-    case 'swipe': {
-      const id = 's' + date
-      apollo.mutate({
-        mutation: CREATE_SWIPE,
-        variables: { createSwipeInput: { id, swipeData: input } },
-      })
-      break
-    }
-  }
+export function graphqlCreate<Variables>(
+  query: DocumentNode,
+  variables: Variables,
+): Promise<any> {
+  return apollo.mutate({
+    mutation: query,
+    variables: variables,
+  })
+  // switch (key) {
+  //   case 'product': {
+  //     apollo.mutate({
+  //       mutation: CREATE_PRODUCT,
+  //       variables: { createProduct: input },
+  //     })
+  //     break
+  //   }
+  //   case 'category': {
+  //     const id = 'c' + date
+  //     apollo.mutate({
+  //       mutation: CREATE_CATEGORY,
+  //       variables: { category: { id, ...input } },
+  //     })
+  //     break
+  //   }
+  //   case 'swipe': {
+  //     const id = 's' + date
+  //     apollo.mutate({
+  //       mutation: CREATE_SWIPE,
+  //       variables: { createSwipeInput: { id, swipeData: input } },
+  //     })
+  //     break
+  //   }
+  // }
 }
 export async function graphqlUpdate<Input>(
   key: string,

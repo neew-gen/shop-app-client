@@ -1,29 +1,29 @@
 <template>
   <MDBListGroupItem>
-    <div class="edit-item">
-      <div class="edit-item__image">
-        <ProductImage
-          height="140px"
-          width="140px"
-          :name="data.name"
-          :img-url="data.imgUrl"
-        />
-      </div>
+    <!--    <div class="edit-item">-->
+    <!--      <div class="edit-item__image">-->
+    <!--        <ProductImage-->
+    <!--          height="140px"-->
+    <!--          width="140px"-->
+    <!--          :name="data.name"-->
+    <!--          :images="[data.imgUrl]"-->
+    <!--        />-->
+    <!--      </div>-->
 
-      <div class="edit-item__id">ID: {{ data.id }}</div>
+    <!--      <div class="edit-item__id">ID: {{ data.id }}</div>-->
 
-      <div class="edit-item__name">Name: {{ textSlicer(data.name, 20) }}</div>
+    <!--      <div class="edit-item__name">Name: {{ textSlicer(data.name, 20) }}</div>-->
 
-      <div class="edit-item__controls">
-        <MDBBtn color="dark" @click="removeItem">Delete</MDBBtn>
-        <router-link
-          class="btn btn-light"
-          :to="{ name: 'edit-category', params: { id: data.id } }"
-        >
-          Edit
-        </router-link>
-      </div>
-    </div>
+    <!--      <div class="edit-item__controls">-->
+    <!--        <MDBBtn color="dark" @click="removeItem">Delete</MDBBtn>-->
+    <!--        <router-link-->
+    <!--          class="btn btn-light"-->
+    <!--          :to="{ name: 'edit-category', params: { id: data.id } }"-->
+    <!--        >-->
+    <!--          Edit-->
+    <!--        </router-link>-->
+    <!--      </div>-->
+    <!--    </div>-->
   </MDBListGroupItem>
 </template>
 
@@ -32,29 +32,32 @@ import { MDBBtn, MDBListGroupItem } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
 import { useToast } from 'vue-toastification'
 
-import { graphqlDelete } from '@/services/GraphqlService/GraphqlService'
 import ProductImage from '@/components/public-layout/Product/ProductImage.vue'
 import { eventBus } from '@/helpers/EventBus'
+import { graphqlDelete } from '@/services/GraphqlService/GraphqlService'
 import { textSlicer } from '@/services/TextSlicerService/TextSlicerService'
 import { CategoryEditItem } from '@/types/category'
 
 export default defineComponent({
   name: 'EditCategoriesItem',
-  components: { ProductImage, MDBBtn, MDBListGroupItem },
+  components: {
+    // ProductImage, MDBBtn,
+    MDBListGroupItem,
+  },
   props: {
     data: {
       type: Object as () => CategoryEditItem,
     },
   },
   setup(props) {
-    const toast = useToast()
-    const removeItem = (): void => {
-      if (!props.data) return
-      graphqlDelete('category', props.data.id)
-      toast.error('Category has been deleted!')
-      eventBus.publish('edit-categories-update', undefined)
-    }
-    return { textSlicer, removeItem }
+    // const toast = useToast()
+    // const removeItem = (): void => {
+    //   if (!props.data) return
+    //   graphqlDelete('category', props.data.id)
+    //   toast.error('Category has been deleted!')
+    //   eventBus.publish('edit-categories-update', undefined)
+    // }
+    // return { textSlicer, removeItem }
   },
 })
 </script>

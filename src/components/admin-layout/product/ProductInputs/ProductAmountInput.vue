@@ -29,10 +29,11 @@ export default defineComponent({
     // productCount is a number, but i need to convert it to string bcs field works better that way
     const productAmount: WritableComputedRef<string> = computed({
       get(): string {
-        return store.getters.getProductAmount.toString()
+        if (!store.getters.getCreateProductAmount) return ''
+        return store.getters.getCreateProductAmount.toString()
       },
       set(newValue: string): void {
-        store.dispatch('updateProductAmount', Number(newValue))
+        store.dispatch('updateCreateProductAmount', Number(newValue))
       },
     })
     return { productAmount }

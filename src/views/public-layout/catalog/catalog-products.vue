@@ -1,16 +1,11 @@
 <template>
-  <MDBContainer>
-    <MDBRow>
-      <ProductsFilterMenu @updateFilter="updateFilter" />
-      <ProductsList v-if="!loading" :data="data" />
-      <ProductsListSkeleton v-if="loading" />
-    </MDBRow>
-  </MDBContainer>
+  <ProductsFilterMenu @updateFilter="updateFilter" />
+  <ProductsList v-if="!loading" :data="data" />
+  <ProductsListSkeleton v-if="loading" />
 </template>
 
 <script lang="ts">
 import { lowerCase } from 'lodash'
-import { MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent, Ref, ref } from 'vue'
 
 import ProductsFilterMenu from '@/components/public-layout/catalog/ProductsFilterMenu/ProductsFilterMenu.vue'
@@ -30,8 +25,6 @@ export default defineComponent({
     },
   },
   components: {
-    MDBContainer,
-    MDBRow,
     ProductsList,
     ProductsListSkeleton,
     ProductsFilterMenu,

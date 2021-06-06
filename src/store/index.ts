@@ -2,17 +2,17 @@ import { createLogger, createStore } from 'vuex'
 
 // product input start
 import {
-  ProductInputActions,
-  productInputActions,
-} from '@/store/modules/productInput/productInputActions'
+  CreateProductInputActions,
+  createProductInputActions,
+} from '@/store/modules/createProductInput/createProductInputActions'
 import {
-  ProductInputGetters,
-  productInputGetters,
-} from '@/store/modules/productInput/productInputGetters'
+  CreateProductInputGetters,
+  createProductInputGetters,
+} from '@/store/modules/createProductInput/createProductInputGetters'
 import {
-  productInputMutations,
-  ProductInputMutationsPayload,
-} from '@/store/modules/productInput/productInputMutations'
+  createProductInputMutations,
+  CreateProductInputMutations,
+} from '@/store/modules/createProductInput/createProductInputMutations'
 // product input end
 // search start
 import {
@@ -44,19 +44,19 @@ export const store = createStore({
   actions: {
     ...variableModule.actions,
     ...userModule.actions,
-    ...productInputActions,
+    ...createProductInputActions,
     ...searchActions,
   },
   mutations: {
     ...variableModule.mutations,
     ...userModule.mutations,
-    ...productInputMutations,
+    ...createProductInputMutations,
     ...searchMutations,
   },
   getters: {
     ...variableModule.getters,
     ...userModule.getters,
-    ...productInputGetters,
+    ...createProductInputGetters,
     ...searchGetters,
   },
   plugins,
@@ -68,15 +68,15 @@ export function useStore(): Store {
 
 export type ActionsPayload = variableModule.ActionsPayload &
   userModule.ActionsPayload &
-  ProductInputActions &
+  CreateProductInputActions &
   SearchActions
 
 export type MutationsPayload = variableModule.MutationPayload &
   userModule.MutationPayload &
-  ProductInputMutationsPayload &
+  CreateProductInputMutations &
   SearchMutations
 
 export type Getters = variableModule.Getters &
   userModule.Getters &
-  ProductInputGetters &
+  CreateProductInputGetters &
   SearchGetters

@@ -28,8 +28,11 @@ export async function uploadProductImage(
   return { id: uuid, imgUrl }
 }
 
-export async function deleteProductImage(id: string): Promise<void> {
-  const fileName = 'product-images/' + id
-  const fileRef = ref(storage, fileName)
-  return deleteObject(fileRef)
+export async function deleteProductImages(ids: string[]): Promise<any[]> {
+  const deletePromises = ids.map((id) => {
+    const fileName = 'product-images/' + id
+    const fileRef = ref(storage, fileName)
+    return deleteObject(fileRef)
+  })
+  return Promise.all(deletePromises)
 }

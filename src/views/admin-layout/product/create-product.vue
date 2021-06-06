@@ -1,6 +1,6 @@
 <template>
   <MDBContainer :style="{ position: modal ? 'fixed' : 'relative' }">
-    <MDBRow tag="form" class="g-3">
+    <MDBRow class="g-3">
       <ProductNameInput />
       <ProductCategoryInput />
       <ProductImagesInput @modal="updateModal" />
@@ -10,35 +10,16 @@
       <ProductDiscountInput />
       <ProductShowInput />
 
-      <MDBCol col="12" class="d-flex justify-content-end mb-2">
-        <MDBBtn color="light" type="submit"> Add Product </MDBBtn>
-      </MDBCol>
-      <!--      <div>Данные о товаре, которые потом будут отправлены на сервак</div>-->
-      <!--      {{ productInput }}-->
+      <CreateProductSubmitButton />
     </MDBRow>
   </MDBContainer>
 </template>
 
 <script lang="ts">
-import {
-  MDBBtn,
-  MDBCol,
-  MDBContainer,
-  MDBListGroup,
-  MDBRow,
-} from 'mdb-vue-ui-kit'
-import { useField, useForm } from 'vee-validate'
-import {
-  computed,
-  ComputedRef,
-  defineComponent,
-  onUnmounted,
-  ref,
-  watch,
-} from 'vue'
-import { useToast } from 'vue-toastification'
-import { array, number, object, string } from 'yup'
+import { MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
+import { defineComponent, ref } from 'vue'
 
+import CreateProductSubmitButton from '@/components/admin-layout/product/create-product/CreateProductAddBlock.vue'
 import ProductCountInput from '@/components/admin-layout/product/ProductInputs/ProductAmountInput.vue'
 import ProductCategoryInput from '@/components/admin-layout/product/ProductInputs/ProductCategoryInput.vue'
 import ProductDescriptionInput from '@/components/admin-layout/product/ProductInputs/ProductDescriptionInput.vue'
@@ -47,13 +28,11 @@ import ProductImagesInput from '@/components/admin-layout/product/ProductInputs/
 import ProductNameInput from '@/components/admin-layout/product/ProductInputs/ProductNameInput.vue'
 import ProductPriceInput from '@/components/admin-layout/product/ProductInputs/ProductPriceInput.vue'
 import ProductShowInput from '@/components/admin-layout/product/ProductInputs/ProductShowInput.vue'
-import { graphqlCreate } from '@/services/GraphqlService/GraphqlService'
-import { useStore } from '@/store'
-import { CreateProductInput } from '@/types/product'
 
 export default defineComponent({
   name: 'create-product',
   components: {
+    CreateProductSubmitButton,
     ProductDiscountInput,
     ProductDescriptionInput,
     ProductImagesInput,
@@ -62,16 +41,10 @@ export default defineComponent({
     ProductCategoryInput,
     ProductShowInput,
     ProductCountInput,
-    MDBBtn,
     MDBRow,
     MDBContainer,
-    MDBCol,
-    // MDBCol,
   },
   setup() {
-    // const toast = useToast()
-    // const store = useStore()
-    //
     const modal = ref(false)
     const updateModal = (newValue: boolean): void => {
       modal.value = newValue
@@ -139,17 +112,9 @@ export default defineComponent({
     return {
       modal,
       updateModal,
-      // // values,
-      // // errors,
-      // productInput,
-      // onSubmit,
     }
   },
 })
 </script>
 
-<style scoped lang="scss">
-.update-btn {
-  width: 176px;
-}
-</style>
+<style scoped lang="scss"></style>

@@ -64,11 +64,11 @@ export default defineComponent({
     const showDropdown = ref(false)
 
     const categoryId: ComputedRef<string | undefined> = computed(() => {
-      return store.getters.getProductCategoryId
+      return store.getters.getCreateProductCategoryId
     })
 
     const setDropdown = (categoryId: string): void => {
-      store.dispatch('updateProductCategoryId', categoryId)
+      store.dispatch('updateCreateProductCategoryId', categoryId)
       showDropdown.value = false
     }
 

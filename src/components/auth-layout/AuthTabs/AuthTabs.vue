@@ -1,6 +1,6 @@
 <template>
   <MDBContainer>
-    <MDBRow>
+    <MDBRow v-if="isPublicAuth">
       <MDBCol class="border-right" col="6">
         <router-link
           class="router-link flex-fill"
@@ -14,12 +14,19 @@
         </router-link>
       </MDBCol>
     </MDBRow>
+    <MDBRow v-if="!isPublicAuth">
+      <MDBCol col="12">
+        <div class="router-link flex-fill">Please log in as administrator</div>
+      </MDBCol>
+    </MDBRow>
   </MDBContainer>
 </template>
 
 <script lang="ts">
 import { MDBCol, MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
-import { defineComponent } from 'vue'
+import { computed, ComputedRef, defineComponent } from 'vue'
+
+import router from '@/router'
 
 export default defineComponent({
   name: 'AuthTabs',
@@ -27,6 +34,12 @@ export default defineComponent({
     MDBContainer,
     MDBRow,
     MDBCol,
+  },
+  setup() {
+    const isPublicAuth: ComputedRef<boolean> = computed(() => {
+      return router.currentRoute.value.name !== 'admin-login'
+    })
+    return { isPublicAuth }
   },
 })
 </script>

@@ -27,7 +27,7 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const productImages: ComputedRef<ProductImagesItem[]> = computed(() => {
-      return store.getters.getProductImages
+      return store.getters.getCreateProductImages
     })
     return { productImages }
   },

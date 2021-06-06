@@ -5,6 +5,8 @@ import {
   TokenRefreshRequest,
 } from 'axios-jwt'
 
+import { getUser } from '@/services/JwtService/requests'
+
 let uri = ''
 if (process.env.NODE_ENV === 'development') {
   uri = 'http://localhost:3000/api'
@@ -28,6 +30,11 @@ const requestRefresh: TokenRefreshRequest = async (
   //  refreshToken: response.data.refresh_token
   //}
   return response.data.access_token
+}
+
+const getUserRole = async (): Promise<string[]> => {
+  const user = await getUser()
+  return user.roles
 }
 
 applyAuthTokenInterceptor(jwtAxiosInstance, { requestRefresh })

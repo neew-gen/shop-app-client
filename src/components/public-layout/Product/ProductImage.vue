@@ -1,7 +1,10 @@
 <template>
   <div class="image-container" :style="`height: ${height}; width: ${width};`">
+    <div v-if="!imagesExist">
+      <MDBIcon icon="file-image" iconStyle="far" size="lg" />
+    </div>
     <swiper
-      v-if="images.length > 1"
+      v-if="imagesExist && images.length > 1"
       :slides-per-view="1"
       :space-between="20"
       :pagination="{
@@ -17,7 +20,7 @@
       </swiper-slide>
     </swiper>
     <div
-      v-if="images.length <= 1"
+      v-if="imagesExist && images.length <= 1"
       class="background-image"
       :style="`background-image: url(${images[0].imgUrl}`"
     />
@@ -25,13 +28,15 @@
 </template>
 
 <script lang="ts">
+import { MDBIcon } from 'mdb-vue-ui-kit'
 import SwiperCore, { Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { defineComponent, PropType } from 'vue'
-
+import { computed, ComputedRef, defineComponent, PropType } from 'vue'
 SwiperCore.use([Pagination])
 import 'swiper/swiper.scss'
 import 'swiper/components/pagination/pagination.scss'
+
+import axios from 'axios'
 
 import { ProductImagesItem } from '@/types/product'
 
@@ -52,8 +57,15 @@ export default defineComponent({
     },
   },
   components: {
+    MDBIcon,
     Swiper,
     SwiperSlide,
+  },
+  setup(props) {
+    const imagesExist: ComputedRef<boolean> = computed(() => {
+      return Boolean(props.images[0])
+    })
+    return { imagesExist }
   },
 })
 </script>
@@ -70,6 +82,7 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgba(0, 0, 0, 0.125);
   &__img {
     max-width: 100%;
     max-height: 100%;

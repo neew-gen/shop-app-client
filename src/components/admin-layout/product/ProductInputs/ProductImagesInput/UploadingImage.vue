@@ -79,7 +79,7 @@ export default defineComponent({
     const saveToFirebase = (): void => {
       if (!editingImage.value) return
       uploadProductImage(editingImage.value).then((res) => {
-        store.dispatch('addProductImage', res)
+        store.dispatch('addCreateProductImage', res)
         editingImage.value = null
         toast.success('Succesful upload!')
       })

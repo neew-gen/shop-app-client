@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <CatalogBreadcrumb />
-    <router-view />
-  </div>
+  <CatalogBreadcrumb />
+  <router-view />
 </template>
 
 <script lang="ts">

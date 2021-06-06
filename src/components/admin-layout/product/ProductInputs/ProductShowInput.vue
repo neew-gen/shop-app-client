@@ -65,10 +65,10 @@ export default defineComponent({
     // )
     const productShow: WritableComputedRef<boolean> = computed({
       get(): boolean {
-        return store.getters.getProductShow
+        return store.getters.getCreateProductShow
       },
       set(newValue: boolean): void {
-        store.dispatch('updateProductShow', newValue)
+        store.dispatch('updateCreateProductShow', newValue)
       },
     })
 

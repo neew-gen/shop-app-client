@@ -1,15 +1,10 @@
 <template>
-  <MDBContainer>
-    <MDBRow>
-      <LoginPanel />
-    </MDBRow>
-    <MDBRow>
-      <MDBCol col="12">likes</MDBCol>
-    </MDBRow>
-    <MDBRow>
-      <MDBCol col="12">history</MDBCol>
-    </MDBRow>
-  </MDBContainer>
+  <LoginPanel />
+  <MDBCol col="12">likes</MDBCol>
+  <MDBCol col="12">history</MDBCol>
+  <MDBCol col="12">
+    <router-link to="/admin-panel">Link to admin-panel</router-link>
+  </MDBCol>
 </template>
 
 <script lang="ts">
@@ -22,8 +17,6 @@ export default defineComponent({
   name: 'profile',
   components: {
     LoginPanel,
-    MDBContainer,
-    MDBRow,
     MDBCol,
   },
   setup() {

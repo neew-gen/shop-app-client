@@ -32,10 +32,10 @@ export default defineComponent({
     const store = useStore()
     const productDescription: WritableComputedRef<string> = computed({
       get(): string {
-        return store.getters.getProductDescription
+        return store.getters.getCreateProductDescription
       },
       set(newValue: string): void {
-        store.dispatch('updateProductDescription', newValue)
+        store.dispatch('updateCreateProductDescription', newValue)
       },
     })
     return { productDescription }

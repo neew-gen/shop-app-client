@@ -10,6 +10,9 @@ export const adminLayoutRoutes: Array<RouteRecordRaw> = [
     name: 'AdminLayout',
     component: (): any =>
       import(/* webpackChunkName: "admin-panel" */ '@/layouts/AdminLayout.vue'),
+    meta: {
+      requiresAdminAuth: true,
+    },
     children: [
       {
         path: '',

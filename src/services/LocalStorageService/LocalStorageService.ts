@@ -41,3 +41,9 @@ export function deleteFromLocalArrayItem<Data extends MayHaveId>(
   localStorage.setItem(key, JSON.stringify(updatedData))
   return updatedData
 }
+
+export function removeLocalItems(keys: string[]): void {
+  for (const key of keys) {
+    localStorage.removeItem(key)
+  }
+}

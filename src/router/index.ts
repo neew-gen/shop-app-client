@@ -1,9 +1,10 @@
-// import { isLoggedIn } from 'axios-jwt'
+import { isLoggedIn } from 'axios-jwt'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 import { adminLayoutRoutes } from '@/router/admin-layout'
 import { authLayoutRoutes } from '@/router/auth-layout'
 import { publicLayoutRoutes } from '@/router/public-layout'
+import { getLocalItem } from '@/services/LocalStorageService/LocalStorageService'
 
 const routes: Array<RouteRecordRaw> = [
   ...publicLayoutRoutes,
@@ -16,12 +17,18 @@ const router = createRouter({
   routes,
 })
 
-// router.beforeEach((to, from, next) => {
-//   const requiresAuth = to.matched.some((route) => route.meta.requiresAuth)
-//   if (!requiresAuth) return next()
-//   if (isLoggedIn()) return next()
-//   sessionStorage.setItem('redirectPathAfterAuth', to.path)
-//   next('/auth')
-// })
+router.beforeEach((to, from, next) => {
+  const requiresAdminAuth = to.matched.some(
+    (route) => route.meta.requiresAdminAuth,
+  )
+  if (!requiresAdminAuth) return next()
+  const userRoles = getLocalItem<string[]>('userRoles')
+  console.log(userRoles)
+  if (!userRoles) return next('/auth/admin-login')
+  const isAdmin = userRoles.includes('admin')
+  if (!isAdmin) return next('/auth/admin-login')
+  if (isLoggedIn() && isAdmin) return next()
+  // sessionStorage.setItem('redirectPathAfterAuth', to.path)
+})
 
 export default router

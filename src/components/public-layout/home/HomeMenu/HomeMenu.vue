@@ -1,18 +1,20 @@
 <template>
-  <MDBListGroup flush class="py-2">
-    <HomeMenuItem
-      item-text="Sale"
-      icon-name="percent"
-      animation-name="red-spark"
-      sort-parameter="sale-products"
-    />
-    <HomeMenuItem
-      item-text="New"
-      icon-name="fire"
-      animation-name="blue-opacity"
-      sort-parameter="new-products"
-    />
-  </MDBListGroup>
+  <div class="py-2">
+    <MDBListGroup flush>
+      <HomeMenuItem
+        item-text="Sale"
+        icon-name="percent"
+        animation-name="red-spark"
+        sort-parameter="sale-products"
+      />
+      <HomeMenuItem
+        item-text="New"
+        icon-name="fire"
+        animation-name="blue-opacity"
+        sort-parameter="new-products"
+      />
+    </MDBListGroup>
+  </div>
 </template>
 
 <script lang="ts">

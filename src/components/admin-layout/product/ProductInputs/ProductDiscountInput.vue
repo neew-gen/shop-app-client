@@ -60,17 +60,17 @@ export default defineComponent({
 
     const productDiscountExist: WritableComputedRef<boolean> = computed({
       get() {
-        return Boolean(store.getters.getProductDiscount)
+        return Boolean(store.getters.getCreateProductDiscount)
       },
       set(newValue): void {
         if (newValue) {
-          store.dispatch('updateProductDiscount', {
+          store.dispatch('updateCreateProductDiscount', {
             percentage: 0,
             endsAt: null,
           })
         }
         if (!newValue) {
-          store.dispatch('updateProductDiscount', null)
+          store.dispatch('updateCreateProductDiscount', null)
         }
       },
     })
@@ -79,12 +79,12 @@ export default defineComponent({
       string | undefined
     > = computed({
       get() {
-        if (store.getters.getProductDiscount.percentage)
-          return store.getters.getProductDiscount.percentage.toString()
+        if (store.getters.getCreateProductDiscount.percentage)
+          return store.getters.getCreateProductDiscount.percentage.toString()
         else return undefined
       },
       set(newValue): void {
-        store.dispatch('updateProductDiscount', {
+        store.dispatch('updateCreateProductDiscount', {
           percentage: Number(newValue),
         })
       },
@@ -92,12 +92,12 @@ export default defineComponent({
 
     const productDiscountEndsAt: WritableComputedRef<null | Date> = computed({
       get() {
-        if (store.getters.getProductDiscount.endsAt)
-          return store.getters.getProductDiscount.endsAt
+        if (store.getters.getCreateProductDiscount.endsAt)
+          return store.getters.getCreateProductDiscount.endsAt
         else return null
       },
       set(newValue): void {
-        store.dispatch('updateProductDiscount', {
+        store.dispatch('updateCreateProductDiscount', {
           endsAt: newValue,
         })
       },
@@ -105,12 +105,12 @@ export default defineComponent({
     const changeEndsAtExist = (): void => {
       const existStatus = Boolean(productDiscountEndsAt.value)
       if (existStatus) {
-        store.dispatch('updateProductDiscount', {
+        store.dispatch('updateCreateProductDiscount', {
           endsAt: null,
         })
       }
       if (!existStatus) {
-        store.dispatch('updateProductDiscount', {
+        store.dispatch('updateCreateProductDiscount', {
           endsAt: new Date(),
         })
       }

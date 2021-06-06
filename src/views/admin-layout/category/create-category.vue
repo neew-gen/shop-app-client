@@ -71,10 +71,10 @@ import { defineComponent, ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import { boolean, object, string } from 'yup'
 
-import { graphqlCreate } from '@/services/GraphqlService/GraphqlService'
 import ErrorField from '@/components/ErrorField.vue'
 import CategoriesListItem from '@/components/public-layout/catalog/CategoriesList/CategoriesListItem.vue'
-import { CategoryCreateInput } from '@/types/category'
+// import { graphqlCreate } from '@/services/GraphqlService/GraphqlService'
+// import { CategoryCreateInput } from '@/types/category'
 
 export default defineComponent({
   name: 'create-category',
@@ -122,11 +122,11 @@ export default defineComponent({
       const { name, imgUrl, isPublic } = values
       if (!(name && imgUrl && isPublic)) return
 
-      graphqlCreate<CategoryCreateInput>('category', {
-        name,
-        imgUrl,
-        isPublic,
-      })
+      // graphqlCreate<CategoryCreateInput>('category', {
+      //   name,
+      //   imgUrl,
+      //   isPublic,
+      // })
 
       reset()
       toast.success('Category has been created!')

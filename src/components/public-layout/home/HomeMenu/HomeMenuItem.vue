@@ -55,13 +55,13 @@ export default defineComponent({
 <style scoped lang="scss">
 .menu-logo {
   font-size: 1.3rem;
+  padding: 1rem 0;
 }
 .home-menu-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.6rem;
-  padding: 1.6rem 1rem;
+  font-size: 1.1rem;
 }
 .red-spark {
   animation: red-spark 6s infinite;

@@ -7,11 +7,21 @@ import {
 } from 'axios-jwt'
 
 import { jwtAxiosInstance } from '@/services/JwtService/JwtService'
+import {
+  removeLocalItems,
+  setLocalItem,
+} from '@/services/LocalStorageService/LocalStorageService'
 import { LoginInput } from '@/types/jwt-api/login-input'
 import { RegisterInput } from '@/types/jwt-api/register-input'
 
 export const getUser = (): Promise<any> => {
   return jwtAxiosInstance.get('/auth/user')
+}
+
+export const setUserRole = (): Promise<any> => {
+  return jwtAxiosInstance.get('/auth/user').then((res) => {
+    setLocalItem('userRoles', res.data.roles)
+  })
 }
 
 export const login = async (loginInput: LoginInput): Promise<void | string> => {
@@ -22,6 +32,28 @@ export const login = async (loginInput: LoginInput): Promise<void | string> => {
         accessToken: response.data.access_token,
         refreshToken: response.data.refresh_token,
       })
+      await setUserRole()
+      return 'Logged.'
+    }
+  } catch (e) {
+    return e.response.data.message
+  }
+}
+
+export const adminLogin = async (
+  loginInput: LoginInput,
+): Promise<void | string> => {
+  try {
+    const response = await jwtAxiosInstance.post(
+      '/auth/admin-login',
+      loginInput,
+    )
+    if (response) {
+      setAuthTokens({
+        accessToken: response.data.access_token,
+        refreshToken: response.data.refresh_token,
+      })
+      await setUserRole()
       return 'Logged.'
     }
   } catch (e) {
@@ -55,6 +87,7 @@ export const logout = async (): Promise<boolean> => {
     })
     if (response.status !== 201) return false
     clearAuthTokens()
+    removeLocalItems(['userRoles'])
     return true
   } catch (e) {
     console.log(e)

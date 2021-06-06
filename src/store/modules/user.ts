@@ -5,7 +5,7 @@ import { getUser } from '@/services/JwtService/requests'
 import { Actions } from '@/types/store/actions'
 import { Mutations } from '@/types/store/mutations'
 import { State } from '@/types/store/state'
-import { UserData } from '@/types/user-data'
+import { UserData } from '@/types/user'
 
 /*
    ---------------------- Actions -------------------------------

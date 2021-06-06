@@ -52,10 +52,10 @@ import { object, string } from 'yup'
 
 import ErrorField from '@/components/ErrorField.vue'
 import router from '@/router'
-import { login } from '@/services/JwtService/requests'
+import { adminLogin, login } from '@/services/JwtService/requests'
 
 export default defineComponent({
-  name: 'login',
+  name: 'admin-login',
   components: {
     ErrorField,
     MDBInput,
@@ -84,31 +84,30 @@ export default defineComponent({
       showPassword.value = !showPassword.value
     }
 
-    const onSubmit = async (): Promise<void> => {
+    const onSubmit = (): void => {
       const { email, password } = values
       if (!(email && password)) return
       // TODO need to bcrypt this
-      const res = await login({
+      adminLogin({
         username: email,
         password: password,
+      }).then((res) => {
+        if (res === 'The login is invalid.') {
+          setFieldError('email', 'Email is incorrect.')
+          toast.error('Email is incorrect.')
+        }
+        if (res === 'The password is invalid.') {
+          setFieldError('password', 'Password is incorrect.')
+          toast.error('Password is incorrect.')
+        }
+        if (res === 'You do not have access.') {
+          toast.error('You do not have access.')
+        }
+        if (res === 'Logged.') {
+          router.push({ path: '/admin-panel' })
+          toast.success('Successful login!')
+        }
       })
-      if (res === 'The login is invalid.') {
-        setFieldError('email', 'Email is incorrect.')
-        toast.error('Email is incorrect.')
-      }
-      if (res === 'The password is invalid.') {
-        setFieldError('password', 'Password is incorrect.')
-        toast.error('Password is incorrect.')
-      }
-      if (res === 'You do not have access.') {
-        toast.error('You do not have access.')
-      }
-      if (res === 'Logged.') {
-        await router.push(
-          sessionStorage.getItem('redirectPathAfterAuth') || '/profile',
-        )
-        toast.success('Successful login!')
-      }
     }
 
     return {

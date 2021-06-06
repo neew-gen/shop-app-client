@@ -86,3 +86,7 @@ export type ProductEditItem = {
   name: string
   categoryId: string
 }
+
+export type CreateProductGraphqlVariable = {
+  createProduct: CreateProductInput
+}

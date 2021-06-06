@@ -16,7 +16,7 @@ import { MDBBtn, MDBListGroupItem } from 'mdb-vue-ui-kit'
 import { defineComponent, PropType } from 'vue'
 import { useToast } from 'vue-toastification'
 
-import { deleteProductImage } from '@/services/Firebase/ImageStorageService'
+import { deleteProductImages } from '@/services/Firebase/ImageStorageService'
 import { useStore } from '@/store'
 import { ProductImagesItem } from '@/types/product'
 
@@ -36,8 +36,8 @@ export default defineComponent({
     const toast = useToast()
     const store = useStore()
     const deleteImage = (): void => {
-      deleteProductImage(props.data.id).then(() => {
-        store.dispatch('deleteProductImage', props.data.id)
+      deleteProductImages([props.data.id]).then(() => {
+        store.dispatch('deleteCreateProductImage', props.data.id)
         toast.success('Succesful delete!')
       })
     }

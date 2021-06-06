@@ -24,6 +24,14 @@ export const authLayoutRoutes: Array<RouteRecordRaw> = [
             /* webpackChunkName: "registration" */ '@/views/auth-layout/registration/registration.vue'
           ),
       },
+      {
+        path: '/auth/admin-login',
+        name: 'admin-login',
+        component: (): any =>
+          import(
+            /* webpackChunkName: "login" */ '@/views/auth-layout/admin-login/admin-login.vue'
+          ),
+      },
     ],
   },
 ]

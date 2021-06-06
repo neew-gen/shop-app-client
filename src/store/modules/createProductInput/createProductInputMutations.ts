@@ -4,7 +4,7 @@ import { ProductDiscountInput, ProductImagesItem } from '@/types/product'
 import { Mutations } from '@/types/store/mutations'
 import { State } from '@/types/store/state'
 
-export type ProductInputMutationsPayload = {
+export type CreateProductInputMutations = {
   updateProductCategoryId: string
   updateProductAmount: number
   updateProductShow: boolean
@@ -18,8 +18,8 @@ export type ProductInputMutationsPayload = {
   updateProductInputShow: { inputName: string; newStatus: boolean }
 }
 
-export const productInputMutations: MutationTree<State> &
-  Mutations<ProductInputMutationsPayload> = {
+export const createProductInputMutations: MutationTree<State> &
+  Mutations<CreateProductInputMutations> = {
   updateProductCategoryId({ inputs }, newCategoryId) {
     inputs.productInput.categoryId = newCategoryId
   },

@@ -22,7 +22,7 @@
           </div>
           <div class="sale__new-price">{{ discountPrice }}&ensp;dol.</div>
         </div>
-        <MDBIcon icon="heart" size="lg" iconStyle="far" />
+        <MDBIcon class="sale__like" icon="heart" size="lg" iconStyle="far" />
       </div>
       <div class="name-row">
         {{ data.productData.name }}
@@ -98,7 +98,7 @@ export default defineComponent({
   background: #f93154;
   color: #ffffff;
   padding: 0 3px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 500;
   border-radius: 3px;
 }
@@ -108,9 +108,13 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   &__price {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 600;
+  }
+  &__like {
+    justify-self: end;
   }
 }
 
@@ -128,11 +132,20 @@ export default defineComponent({
   }
 }
 
-
 .name-row {
   padding: 5px;
   height: 61px;
   font-size: 0.9rem;
   line-height: 1.2;
+}
+@media (min-width: 540px) {
+  .percentage {
+    font-size: 0.8rem;
+  }
+  .price-row {
+    &__price {
+      font-size: 1.1rem;
+    }
+  }
 }
 </style>
