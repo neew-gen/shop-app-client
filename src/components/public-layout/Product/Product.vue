@@ -7,7 +7,7 @@
             <div class="discount__item">
               -{{ data.productData.discount.percentage }}%
             </div>
-            <div v-if="data.productData.discount" class="discount__item">
+            <div v-if="data.productData.discount.endsAt" class="discount__item">
               {{ discountWillEnd }}
             </div>
           </div>
