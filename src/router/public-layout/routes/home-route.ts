@@ -6,7 +6,7 @@ export const homeRoute: Array<RouteRecordRaw> = [
     name: 'home',
     component: (): any =>
       import(
-        /* webpackChunkName: "catalog" */ '@/views/public-layout/home/home.vue'
+        /* webpackChunkName: "home" */ '@/views/public-layout/home/home.vue'
       ),
     children: [
       {
@@ -14,7 +14,7 @@ export const homeRoute: Array<RouteRecordRaw> = [
         name: 'home-main',
         component: (): any =>
           import(
-            /* webpackChunkName: "catalog-categories" */ '@/views/public-layout/home/home-main.vue'
+            /* webpackChunkName: "home-main" */ '@/views/public-layout/home/home-main.vue'
           ),
       },
       {
@@ -22,7 +22,7 @@ export const homeRoute: Array<RouteRecordRaw> = [
         name: 'home-search',
         component: (): any =>
           import(
-            /* webpackChunkName: "catalog-categories" */ '@/views/public-layout/home/home-search.vue'
+            /* webpackChunkName: "home-search" */ '@/views/public-layout/home/home-search.vue'
           ),
       },
       {
@@ -30,7 +30,16 @@ export const homeRoute: Array<RouteRecordRaw> = [
         name: 'home-products',
         component: (): any =>
           import(
-            /* webpackChunkName: "catalog-categories" */ '@/views/public-layout/home/home-products.vue'
+            /* webpackChunkName: "home-products" */ '@/views/public-layout/home/home-products.vue'
+          ),
+        props: true,
+      },
+      {
+        path: '/:sortParameter/:_id',
+        name: 'home-product',
+        component: (): any =>
+          import(
+            /* webpackChunkName: "home-product" */ '@/views/public-layout/home/home-product.vue'
           ),
         props: true,
       },

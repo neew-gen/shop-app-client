@@ -1,5 +1,5 @@
 <template>
-  <ProductsList v-if="!loading" :data="data" />
+  <ProductsList v-if="!loading" :data="data" router-mode="home-products" />
   <ProductsListSkeleton v-if="loading" />
 </template>
 
@@ -15,7 +15,10 @@ import { ProductListItem } from '@/types/product'
 
 export default defineComponent({
   name: 'home-products',
-  components: { ProductsList, ProductsListSkeleton },
+  components: {
+    ProductsList,
+    ProductsListSkeleton,
+  },
   props: {
     sortParameter: {
       type: String,
@@ -24,7 +27,7 @@ export default defineComponent({
   },
   setup(props) {
     const orderBy: ComputedRef<string> = computed(() => {
-      if (props.sortParameter === 'sale-products') return 'discount.percentage'
+      if (props.sortParameter === 'sale-products') return 'productData.discount.percentage'
       if (props.sortParameter === 'new-products') return 'createdAt'
       return ''
     })
@@ -33,7 +36,7 @@ export default defineComponent({
       `/home-products-sale`,
       () =>
         graphqlFetchBy(GET_PRODUCTS_ORDER_BY, {
-          orderBy: String(orderBy),
+          orderBy: orderBy.value,
           orderParam: 'ASC',
         }),
     )

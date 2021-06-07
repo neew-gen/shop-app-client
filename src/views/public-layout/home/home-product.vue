@@ -26,7 +26,7 @@ export default defineComponent({
   setup(props) {
     const { data, loading } = reactiveFetcher<Product>(
       'SWR',
-      `/catalog-product-${props._id}`,
+      `/home-product-${props._id}`,
       () => graphqlFetchBy(GET_PRODUCT_BY_ID, { _id: props._id }),
     )
     return { data, loading }

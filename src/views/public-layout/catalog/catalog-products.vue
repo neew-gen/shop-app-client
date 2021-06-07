@@ -1,6 +1,6 @@
 <template>
   <ProductsFilterMenu @updateFilter="updateFilter" />
-  <ProductsList v-if="!loading" :data="data" />
+  <ProductsList v-if="!loading" :data="data" router-mode="catalog-products" />
   <ProductsListSkeleton v-if="loading" />
 </template>
 

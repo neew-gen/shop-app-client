@@ -52,7 +52,7 @@ export const createProductInputMutations: MutationTree<State> &
   },
   updateProductDiscount({ inputs }, discount) {
     if (!discount) {
-      inputs.productInput.productData.discount = false
+      inputs.productInput.productData.discount = null
       return
     }
     if (!inputs.productInput.productData.discount) {

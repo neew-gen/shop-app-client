@@ -29,7 +29,7 @@ export const authLayoutRoutes: Array<RouteRecordRaw> = [
         name: 'admin-login',
         component: (): any =>
           import(
-            /* webpackChunkName: "login" */ '@/views/auth-layout/admin-login/admin-login.vue'
+            /* webpackChunkName: "admin-login" */ '@/views/auth-layout/admin-login/admin-login.vue'
           ),
       },
     ],

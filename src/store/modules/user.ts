@@ -5,7 +5,7 @@ import { getUser } from '@/services/JwtService/requests'
 import { Actions } from '@/types/store/actions'
 import { Mutations } from '@/types/store/mutations'
 import { State } from '@/types/store/state'
-import { UserData } from '@/types/user'
+import { User, UserData } from '@/types/user'
 
 /*
    ---------------------- Actions -------------------------------
@@ -22,13 +22,13 @@ export type ActionsPayload = {
 
 export const actions: Actions<ActionsPayload> = {
   async fetchUserData({ commit }) {
-    const res = await awaitFetcher<UserData>(
+    const res = await awaitFetcher<User>(
       'NF',
       '/user-data',
       () => getUser(),
       'axios',
     )
-    if (res) commit('fetchUserData', res)
+    if (res) commit('fetchUserData', res.data)
   },
   // updateCartItem({ commit }, { id, propName, propValue }) {
   //   commit('updateCartItem', { id, propName, propValue })

@@ -1,9 +1,13 @@
 <template>
-  <ProductsListItem v-for="item in data" :key="item._id" :data="item" />
+  <ProductsListItem
+    v-for="item in data"
+    :key="item._id"
+    :data="item"
+    :router-mode="routerMode"
+  />
 </template>
 
 <script lang="ts">
-import { MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent, PropType } from 'vue'
 
 import ProductsListItem from '@/components/public-layout/ProductsList/ProductsListItem.vue'
@@ -14,13 +18,15 @@ export default defineComponent({
   props: {
     data: {
       type: Array as PropType<ProductListItem[]>,
+      required: true,
+    },
+    routerMode: {
+      type: String,
+      required: true,
     },
   },
-
   components: {
     ProductsListItem,
-    // MDBContainer,
-    // MDBRow,
   },
 })
 </script>

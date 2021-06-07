@@ -58,8 +58,9 @@ export default defineComponent({
   setup() {
     const store = useStore()
 
-    const productDiscountExist: WritableComputedRef<boolean> = computed({
+    const productDiscountExist: WritableComputedRef<any> = computed({
       get() {
+        if (store.getters.getCreateProductDiscount === null) return null
         return Boolean(store.getters.getCreateProductDiscount)
       },
       set(newValue): void {

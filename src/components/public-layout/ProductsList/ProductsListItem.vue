@@ -50,6 +50,10 @@ export default defineComponent({
       type: Object as PropType<ProductListItem>,
       required: true,
     },
+    routerMode: {
+      type: String,
+      required: true,
+    },
   },
   components: {
     ProductImage,
@@ -61,10 +65,20 @@ export default defineComponent({
   // },
   setup(props) {
     const pushToProduct = (_id: string): void => {
-      router.push({
-        name: 'catalog-product',
-        params: { _id },
-      })
+      let routerParams = {}
+      if (props.routerMode === 'catalog-products') {
+        routerParams = {
+          name: 'catalog-product',
+          params: { _id },
+        }
+      }
+      if (props.routerMode === 'home-products') {
+        routerParams = {
+          name: 'home-product',
+          params: { _id },
+        }
+      }
+      router.push(routerParams)
       // setTimeout(() => {
       //   router.push({
       //     name: 'CatalogProduct',

@@ -23,7 +23,6 @@ router.beforeEach((to, from, next) => {
   )
   if (!requiresAdminAuth) return next()
   const userRoles = getLocalItem<string[]>('userRoles')
-  console.log(userRoles)
   if (!userRoles) return next('/auth/admin-login')
   const isAdmin = userRoles.includes('admin')
   if (!isAdmin) return next('/auth/admin-login')

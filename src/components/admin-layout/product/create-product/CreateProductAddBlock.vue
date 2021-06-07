@@ -29,7 +29,7 @@ export default defineComponent({
       graphqlCreate<CreateProductGraphqlVariable>(CREATE_PRODUCT, {
         createProduct: productInput,
       }).then(() => {
-        clearFields()
+        store.dispatch('clearCreateProduct', undefined)
       })
     }
 

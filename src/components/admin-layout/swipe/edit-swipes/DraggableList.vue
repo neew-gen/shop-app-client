@@ -22,8 +22,8 @@ import { defineComponent, onUnmounted, PropType, ref, watch } from 'vue'
 import { useToast } from 'vue-toastification'
 import draggable from 'vuedraggable'
 
-import { graphqlUpdate } from '@/services/GraphqlService/GraphqlService'
 import EditSwipesItem from '@/components/admin-layout/swipe/edit-swipes/EditSwipesItem.vue'
+import { graphqlUpdate } from '@/services/GraphqlService/GraphqlService'
 import { SwipeType, UpdateIndexInput } from '@/types/swipe'
 
 export default defineComponent({

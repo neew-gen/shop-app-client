@@ -1,16 +1,25 @@
 <template>
   <div class="brand">
-    <h1 class="brand__title">Shop App</h1>
+    <h1 class="brand__title" @click="goHome">Shop App</h1>
   </div>
 </template>
 
 <script lang="ts">
-import { MDBIcon } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
+
+import router from '@/router'
 
 export default defineComponent({
   name: 'HomeNavbarBrand',
   components: {},
+  setup() {
+    const goHome = (): void => {
+      router.push('/')
+    }
+    return {
+      goHome,
+    }
+  },
 })
 </script>
 
