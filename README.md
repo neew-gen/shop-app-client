@@ -15,3 +15,21 @@ Features:
 - I use Swiper.js to display multiple images in the slider on the homepage, and in the product cards. Path: src/components/public-layout/home/HomeSwiper.
 - There is an admin page that allows you to add, delete and edit products, categories, and slider pictures (swipes). It is protected by a guard, which works based on the received user roles. 
 - The admin page in the swipe editor uses the drug and drop library "vuedraggable"
+
+.env file variables:
+
+VUE_APP_API_KEY
+
+VUE_APP_AUTH_DOMAIN
+
+VUE_APP_DATABASE_URL
+
+VUE_APP_PROJECT_ID
+
+VUE_APP_STORAGE_BUCKET
+
+VUE_APP_MESSAGING_SENDER_ID
+
+VUE_APP_APP_ID
+
+VUE_APP_MEASUREMENT_ID
