@@ -9,7 +9,7 @@
 import { MDBCol, MDBInput } from 'mdb-vue-ui-kit'
 import { computed, defineComponent, WritableComputedRef } from 'vue'
 
-import ErrorField from '@/components/ErrorField.vue'
+import ErrorField from '@/components/shared/InputWithErrorField/ErrorField.vue'
 import { useStore } from '@/store'
 
 export default defineComponent({

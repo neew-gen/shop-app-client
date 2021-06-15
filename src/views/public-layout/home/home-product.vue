@@ -12,8 +12,8 @@ import ProductComponent from '@/components/public-layout/Product/Product.vue'
 import ProductSkeleton from '@/components/public-layout/Product/ProductSkeleton.vue'
 import { reactiveFetcher } from '@/services/FetchService/FetchService'
 import { graphqlFetchBy } from '@/services/GraphqlService/GraphqlService'
-import { GET_PRODUCT_BY_ID } from '@/services/GraphqlService/queries/productQueries'
 import { Product } from '@/types/product'
+import { GET_PRODUCT_BY_ID } from '@/services/GraphqlService/queries/product/public/productPublicQueriesGet'
 export default defineComponent({
   name: 'CatalogProduct',
   props: {

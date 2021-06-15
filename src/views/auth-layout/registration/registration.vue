@@ -87,7 +87,7 @@ import { useToast } from 'vue-toastification'
 import { object, ref as yupRef, string } from 'yup'
 
 import { register } from '@/services/JwtService/requests'
-import ErrorField from '@/components/ErrorField.vue'
+import ErrorField from '@/components/shared/InputWithErrorField/ErrorField.vue'
 import router from '@/router'
 
 export default defineComponent({

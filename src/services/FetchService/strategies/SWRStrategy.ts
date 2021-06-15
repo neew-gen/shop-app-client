@@ -28,12 +28,12 @@ export class SWRStrategy<Data> extends Fetch<Data> {
           await this.updateCache(fetchedData)
         }
       }
-      return
+    } else {
+      this.data.value = await this.fetchFromCache()
+      this.loading.value = false
+      const fetchedData = await this.fetchFromNetwork(this.extractor)
+      this.data.value = fetchedData
+      await this.updateCache(fetchedData)
     }
-    this.data.value = await this.fetchFromCache()
-    this.loading.value = false
-    const fetchedData = await this.fetchFromNetwork(this.extractor)
-    this.data.value = fetchedData
-    await this.updateCache(fetchedData)
   }
 }

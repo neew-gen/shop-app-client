@@ -2,20 +2,28 @@
   <MDBListGroupItem>
     <div class="edit-item">
       <div class="edit-item__image">
+        <div
+          class="edit-item__image__placeholder"
+          v-if="!data.productData.images[0]"
+        >
+          <div>No photo.</div>
+        </div>
         <ProductImage
+          v-if="data.productData.images[0]"
+          :images="[data.productData.images[0]]"
           height="140px"
           width="140px"
-          :name="data.name"
-          :img-url="data.imgUrl"
         />
       </div>
-      <div class="edit-item__id">ID: {{ data.id }}</div>
-      <div class="edit-item__name">Name: {{ textSlicer(data.name, 20) }}</div>
+      <div class="edit-item__id">ID: {{ data._id }}</div>
+      <div class="edit-item__name">
+        Name: {{ textSlicer(data.productData.name, 20) }}
+      </div>
       <div class="edit-item__controls">
         <MDBBtn color="dark" @click="removeItem">Delete</MDBBtn>
         <router-link
           class="btn btn-light"
-          :to="{ name: 'edit-product', params: { id: data.id } }"
+          :to="{ name: 'edit-product', params: { _id: data._id } }"
         >
           Edit
         </router-link>
@@ -29,27 +37,37 @@ import { MDBBtn, MDBListGroupItem } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
 import { useToast } from 'vue-toastification'
 
-import { graphqlDelete } from '@/services/GraphqlService/GraphqlService'
 import ProductImage from '@/components/public-layout/Product/ProductImage.vue'
-import { eventBus } from '@/helpers/EventBus'
+import { graphqlMutate } from '@/services/GraphqlService/GraphqlService'
+import { DELETE_PRODUCT } from '@/services/GraphqlService/queries/product/admin/productAdminQueriesEdit'
 import { textSlicer } from '@/services/TextSlicerService/TextSlicerService'
 import { ProductEditItem } from '@/types/product'
 
 export default defineComponent({
   name: 'EditProductsItem',
-  components: { ProductImage, MDBBtn, MDBListGroupItem },
+  components: {
+    ProductImage,
+    MDBBtn,
+    MDBListGroupItem,
+  },
   props: {
     data: {
       type: Object as () => ProductEditItem,
     },
   },
-  setup(props) {
+  emits: ['deleteProduct'],
+  setup(props, { emit }) {
     const toast = useToast()
     const removeItem = (): void => {
       if (!props.data) return
-      graphqlDelete('product', props.data.id)
-      toast.error('Product has been deleted!')
-      eventBus.publish('edit-products-update', undefined)
+      graphqlMutate(DELETE_PRODUCT, { _id: props.data._id })
+        .then(() => {
+          emit('deleteProduct')
+          toast.success('Product has been deleted!')
+        })
+        .catch(() => {
+          toast.error('Sorry, it did not delete :(')
+        })
     }
     return { textSlicer, removeItem }
   },
@@ -70,6 +88,13 @@ export default defineComponent({
     'image controls';
   &__image {
     grid-area: image;
+    &__placeholder {
+      height: 140px;
+      width: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
   &__id {
     grid-area: id;

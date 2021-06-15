@@ -61,14 +61,14 @@ import { useToast } from 'vue-toastification'
 import { number, object, string } from 'yup'
 
 import { graphqlFetchBy, graphqlUpdate } from '@/services/GraphqlService/GraphqlService'
-import { GET_PRODUCT_BY_ID } from '@/services/GraphqlService/queries/productQueries'
 // import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
-import ErrorField from '@/components/ErrorField.vue'
+import ErrorField from '@/components/shared/InputWithErrorField/ErrorField.vue'
 // import ImageContainer from '@/components/ImageContainer.vue'
 import ImageUploader from '@/components/ImageUploader/ImageUploader.vue'
 import { awaitFetcher } from '@/services/FetchService/FetchService'
 import { useStore } from '@/store'
 import { Product, ProductUpdateInput } from '@/types/product'
+import { GET_PRODUCT_BY_ID } from '@/services/GraphqlService/queries/product/public/productPublicQueriesGet'
 
 export default defineComponent({
   name: 'EditProductTemplate',

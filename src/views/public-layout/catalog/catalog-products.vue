@@ -13,8 +13,8 @@ import ProductsList from '@/components/public-layout/ProductsList/ProductsList.v
 import ProductsListSkeleton from '@/components/public-layout/ProductsList/ProductsListSkeleton.vue'
 import { awaitFetcher } from '@/services/FetchService/FetchService'
 import { graphqlFetchBy } from '@/services/GraphqlService/GraphqlService'
-import { GET_PRODUCTS_CATALOG_LIST } from '@/services/GraphqlService/queries/productQueries'
 import { ProductListItem } from '@/types/product'
+import { GET_PRODUCTS_CATALOG_LIST } from '@/services/GraphqlService/queries/product/public/productPublicQueriesGet'
 
 export default defineComponent({
   name: 'catalog-products',

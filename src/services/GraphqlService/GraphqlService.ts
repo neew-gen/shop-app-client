@@ -7,10 +7,9 @@ import {
   UPDATE_CATEGORY,
 } from '@/services/GraphqlService/queries/categoryQueries'
 import {
-  CREATE_PRODUCT,
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
-} from '@/services/GraphqlService/queries/productQueries'
+} from '@/services/GraphqlService/queries/product/admin/productAdminQueriesEdit'
 import {
   CREATE_SWIPE,
   DELETE_SWIPE,
@@ -36,12 +35,12 @@ export function graphqlFetchBy(
   })
 }
 
-export function graphqlCreate<Variables>(
-  query: DocumentNode,
+export function graphqlMutate<Variables>(
+  mutation: DocumentNode,
   variables: Variables,
 ): Promise<any> {
   return apollo.mutate({
-    mutation: query,
+    mutation,
     variables: variables,
   })
   // switch (key) {

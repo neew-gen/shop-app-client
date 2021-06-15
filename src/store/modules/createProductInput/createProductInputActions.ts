@@ -24,34 +24,34 @@ export type CreateProductInputActions = {
 export const createProductInputActions: Actions<CreateProductInputActions> = {
   updateCreateProductCategoryId({ commit }, newCategoryId) {
     setLocalItem('createCategoryId', newCategoryId)
-    commit('updateProductCategoryId', newCategoryId)
+    commit('updateCreateProductCategoryId', newCategoryId)
   },
   updateCreateProductAmount({ commit }, newAmount) {
     setLocalItem('createProductAmount', newAmount)
-    commit('updateProductAmount', newAmount)
+    commit('updateCreateProductAmount', newAmount)
   },
   updateCreateProductShow({ commit }, newShow) {
     setLocalItem('createProductShow', newShow)
-    commit('updateProductShow', newShow)
+    commit('updateCreateProductShow', newShow)
   },
   updateCreateProductName({ commit }, newName) {
     setLocalItem('createProductName', newName)
-    commit('updateProductName', newName)
+    commit('updateCreateProductName', newName)
   },
   updateCreateProductPrice({ commit }, newPrice) {
     setLocalItem('createProductPrice', newPrice)
-    commit('updateProductPrice', newPrice)
+    commit('updateCreateProductPrice', newPrice)
   },
   addCreateProductImage({ commit }, newImage) {
     const newImagesValue = pushToLocalArrayItem<ProductImagesItem>(
       'createProductImages',
       newImage,
     )
-    commit('addProductImage', newImagesValue)
+    commit('addCreateProductImage', newImagesValue)
   },
   updateCreateProductImage({ commit }, imagesItem) {
     setLocalItem('createProductImage', imagesItem)
-    commit('updateProductImage', imagesItem)
+    commit('updateCreateProductImage', imagesItem)
   },
   deleteCreateProductImage({ commit }, id) {
     const newImagesValue = deleteFromLocalArrayItem<ProductImagesItem>(
@@ -59,15 +59,15 @@ export const createProductInputActions: Actions<CreateProductInputActions> = {
       id,
     )
     if (!newImagesValue) return
-    commit('deleteProductImage', newImagesValue)
+    commit('deleteCreateProductImage', newImagesValue)
   },
   updateCreateProductDescription({ commit }, newDescription) {
     setLocalItem('createProductDescription', newDescription)
-    commit('updateProductDescription', newDescription)
+    commit('updateCreateProductDescription', newDescription)
   },
   updateCreateProductDiscount({ commit }, discount) {
     setLocalItem('createProductDiscount', discount)
-    commit('updateProductDiscount', discount)
+    commit('updateCreateProductDiscount', discount)
   },
   clearCreateProduct({ commit }) {
     removeLocalItems([
@@ -81,13 +81,13 @@ export const createProductInputActions: Actions<CreateProductInputActions> = {
       'createProductDescription',
       'createProductDiscount',
     ])
-    commit('updateProductCategoryId', '')
-    commit('updateProductAmount', 0)
-    commit('updateProductShow', true)
-    commit('updateProductName', '')
-    commit('updateProductPrice', 0)
-    commit('addProductImage', [])
-    commit('updateProductDescription', '')
-    commit('updateProductDiscount', null)
+    commit('updateCreateProductCategoryId', '')
+    commit('updateCreateProductAmount', 0)
+    commit('updateCreateProductShow', true)
+    commit('updateCreateProductName', '')
+    commit('updateCreateProductPrice', 0)
+    commit('addCreateProductImage', [])
+    commit('updateCreateProductDescription', '')
+    commit('updateCreateProductDiscount', null)
   },
 }

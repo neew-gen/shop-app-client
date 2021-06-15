@@ -43,9 +43,8 @@ import { defineComponent } from 'vue'
 import { useToast } from 'vue-toastification'
 import { object, string } from 'yup'
 
-import ErrorField from '@/components/ErrorField.vue'
+import ErrorField from '@/components/shared/InputWithErrorField/ErrorField.vue'
 import Swipe from '@/components/public-layout/home/HomeSwiper/Swipe.vue'
-import { graphqlCreate } from '@/services/GraphqlService/GraphqlService'
 import { SwipeData } from '@/types/swipe'
 
 export default defineComponent({

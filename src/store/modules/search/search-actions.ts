@@ -1,8 +1,8 @@
 import { awaitFetcher } from '@/services/FetchService/FetchService'
 import { graphqlFetchBy } from '@/services/GraphqlService/GraphqlService'
-import { GET_PRODUCTS_BY_SEARCH } from '@/services/GraphqlService/queries/productQueries'
 import { ProductSearchItem } from '@/types/product'
 import { Actions } from '@/types/store/actions'
+import { GET_PRODUCTS_BY_SEARCH } from '@/services/GraphqlService/queries/product/public/productPublicQueriesGet'
 
 export type SearchActions = {
   startSearch: [string, void]

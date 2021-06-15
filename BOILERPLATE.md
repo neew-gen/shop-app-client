@@ -9,3 +9,8 @@ in child:
     emit('modal', newValue)
 }
 ``` 
+
+# disable cursor on div
+``` 
+caret-color: transparent;
+``` 

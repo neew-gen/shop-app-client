@@ -18,7 +18,7 @@ export const productRoute: Array<RouteRecordRaw> = [
       ),
   },
   {
-    path: '/admin-panel/edit-products/:id',
+    path: '/admin-panel/edit-products/:_id',
     name: 'edit-product',
     component: (): any =>
       import(

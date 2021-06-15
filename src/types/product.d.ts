@@ -81,12 +81,21 @@ export type ProductUpdateInput = {
 }
 
 export type ProductEditItem = {
-  id: string
-  imgUrl: string
-  name: string
+  _id: string
   categoryId: string
+  productData: {
+    name: string
+    images: ProductImagesItem
+  }
 }
 
 export type CreateProductGraphqlVariable = {
   createProduct: CreateProductInput
+}
+// order object for filter
+export type ProductOrder = {
+  name: string
+  condition: {
+    [key: string]: string
+  }
 }

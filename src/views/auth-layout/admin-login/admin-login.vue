@@ -50,7 +50,7 @@ import { defineComponent, ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import { object, string } from 'yup'
 
-import ErrorField from '@/components/ErrorField.vue'
+import ErrorField from '@/components/shared/InputWithErrorField/ErrorField.vue'
 import router from '@/router'
 import { adminLogin, login } from '@/services/JwtService/requests'
 

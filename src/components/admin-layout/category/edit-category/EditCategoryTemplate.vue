@@ -78,7 +78,7 @@ import { boolean, object, string } from 'yup'
 import { awaitFetcher } from '@/services/FetchService/FetchService'
 import { graphqlFetchBy, graphqlUpdate } from '@/services/GraphqlService/GraphqlService'
 import { GET_CATEGORY_BY_ID } from '@/services/GraphqlService/queries/categoryQueries'
-import ErrorField from '@/components/ErrorField.vue'
+import ErrorField from '@/components/shared/InputWithErrorField/ErrorField.vue'
 import CategoriesListItem from '@/components/public-layout/catalog/CategoriesList/CategoriesListItem.vue'
 import { CategoryType, CategoryUpdateInput } from '@/types/category'
 

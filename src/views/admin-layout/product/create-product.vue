@@ -1,7 +1,7 @@
 <template>
   <MDBContainer :style="{ position: modal ? 'fixed' : 'relative' }">
     <MDBRow class="g-3">
-      <ProductNameInput />
+      <CreateProductNameInput />
       <ProductCategoryInput />
       <ProductImagesInput @modal="updateModal" />
       <ProductDescriptionInput />
@@ -20,24 +20,24 @@ import { MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent, ref } from 'vue'
 
 import CreateProductSubmitButton from '@/components/admin-layout/product/create-product/CreateProductAddBlock.vue'
-import ProductCountInput from '@/components/admin-layout/product/ProductInputs/ProductAmountInput.vue'
-import ProductCategoryInput from '@/components/admin-layout/product/ProductInputs/ProductCategoryInput.vue'
+import CreateProductNameInput from '@/components/admin-layout/product/create-product/CreateProductNameInput.vue'
+import ProductCountInput from '@/components/admin-layout/product/create-product/CreateProductAmountInput.vue'
+import ProductCategoryInput from '@/components/admin-layout/product/create-product/CreateProductCategoryInput.vue'
 import ProductDescriptionInput from '@/components/admin-layout/product/ProductInputs/ProductDescriptionInput.vue'
 import ProductDiscountInput from '@/components/admin-layout/product/ProductInputs/ProductDiscountInput.vue'
 import ProductImagesInput from '@/components/admin-layout/product/ProductInputs/ProductImagesInput/ProductImagesInput.vue'
-import ProductNameInput from '@/components/admin-layout/product/ProductInputs/ProductNameInput.vue'
 import ProductPriceInput from '@/components/admin-layout/product/ProductInputs/ProductPriceInput.vue'
 import ProductShowInput from '@/components/admin-layout/product/ProductInputs/ProductShowInput.vue'
 
 export default defineComponent({
   name: 'create-product',
   components: {
+    CreateProductNameInput,
     CreateProductSubmitButton,
     ProductDiscountInput,
     ProductDescriptionInput,
     ProductImagesInput,
     ProductPriceInput,
-    ProductNameInput,
     ProductCategoryInput,
     ProductShowInput,
     ProductCountInput,

@@ -10,7 +10,7 @@ export const initialState = {
     userData: {},
   },
   inputs: {
-    productInput: {
+    createProductInput: {
       categoryId: '',
       amount: 0,
       show: true,
@@ -22,6 +22,19 @@ export const initialState = {
         discount: null,
       },
     },
+    editProductInput: {
+      categoryId: '',
+      amount: 0,
+      show: true,
+      productData: {
+        name: '',
+        price: 0,
+        images: [],
+        description: '',
+        discount: null,
+      },
+    },
+    editProductInputDefault: {},
   },
   search: { searchResult: [], searchLoading: false },
 }

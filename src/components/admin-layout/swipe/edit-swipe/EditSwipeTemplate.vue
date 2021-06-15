@@ -49,7 +49,7 @@ import { object, string } from 'yup'
 
 import { graphqlFetchBy, graphqlUpdate } from '@/services/GraphqlService/GraphqlService'
 import { GET_SWIPE_BY_ID } from '@/services/GraphqlService/queries/swipeQueries'
-import ErrorField from '@/components/ErrorField.vue'
+import ErrorField from '@/components/shared/InputWithErrorField/ErrorField.vue'
 import Swipe from '@/components/public-layout/home/HomeSwiper/Swipe.vue'
 import { awaitFetcher } from '@/services/FetchService/FetchService'
 import { SwipeType, UpdateSwipeInput } from '@/types/swipe'

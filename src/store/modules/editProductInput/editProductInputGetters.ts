@@ -23,28 +23,22 @@ export type CreateProductInputGetters = {
 export const createProductInputGetters: GetterTree<State, State> &
   CreateProductInputGetters = {
   getCreateProductCategoryId: ({ inputs }) => {
-    if (!inputs.createProductInput.categoryId) {
-      inputs.createProductInput.categoryId = getLocalItem('createCategoryId')
-    }
-    return inputs.createProductInput.categoryId
+    if (inputs.createProductInput.categoryId)
+      return inputs.createProductInput.categoryId
+    return getLocalItem('createCategoryId')
   },
   getCreateProductAmount: ({ inputs }) => {
-    if (!inputs.createProductInput.amount) {
-      inputs.createProductInput.amount = getLocalItem('createProductAmount')
-    }
-    return inputs.createProductInput.amount
+    if (inputs.createProductInput.amount) return inputs.createProductInput.amount
+    return getLocalItem('createProductAmount')
   },
   getCreateProductShow: ({ inputs }) => {
     if (inputs.createProductInput.show) return inputs.createProductInput.show
     return getLocalItem('createProductShow')
   },
   getCreateProductName: ({ inputs }) => {
-    if (!inputs.createProductInput.productData.name) {
-      inputs.createProductInput.productData.name = getLocalItem(
-        'createProductName',
-      )
-    }
-    return inputs.createProductInput.productData.name
+    if (inputs.createProductInput.productData.name)
+      return inputs.createProductInput.productData.name
+    return getLocalItem('createProductName')
   },
   getCreateProductPrice: ({ inputs }) => {
     if (inputs.createProductInput.productData.price)

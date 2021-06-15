@@ -10,8 +10,8 @@ import { MDBBtn, MDBCol } from 'mdb-vue-ui-kit'
 import { defineComponent } from 'vue'
 
 import { deleteProductImages } from '@/services/Firebase/ImageStorageService'
-import { graphqlCreate } from '@/services/GraphqlService/GraphqlService'
-import { CREATE_PRODUCT } from '@/services/GraphqlService/queries/productQueries'
+import { graphqlMutate } from '@/services/GraphqlService/GraphqlService'
+import { CREATE_PRODUCT } from '@/services/GraphqlService/queries/product/admin/productAdminQueriesEdit'
 import { useStore } from '@/store'
 import { CreateProductGraphqlVariable } from '@/types/product'
 
@@ -26,7 +26,7 @@ export default defineComponent({
 
     const addProduct = (): void => {
       const productInput = store.getters.getCreateProductInput
-      graphqlCreate<CreateProductGraphqlVariable>(CREATE_PRODUCT, {
+      graphqlMutate<CreateProductGraphqlVariable>(CREATE_PRODUCT, {
         createProduct: productInput,
       }).then(() => {
         store.dispatch('clearCreateProduct', undefined)

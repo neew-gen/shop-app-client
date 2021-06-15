@@ -1,12 +1,15 @@
 <template>
-  <Suspense>
-    <template #default>
-      <EditProductTemplate :id="id" />
-    </template>
-    <template #fallback>
-      <Spinner />
-    </template>
-  </Suspense>
+  <div>
+    {{ _id }}
+  </div>
+  <!--  <Suspense>-->
+  <!--    <template #default>-->
+  <!--      <EditProductTemplate :id="id" />-->
+  <!--    </template>-->
+  <!--    <template #fallback>-->
+  <!--      <Spinner />-->
+  <!--    </template>-->
+  <!--  </Suspense>-->
 </template>
 
 <script lang="ts">
@@ -18,11 +21,11 @@ import Spinner from '@/components/Spinner.vue'
 export default defineComponent({
   name: 'edit-product',
   components: {
-    Spinner,
-    EditProductTemplate,
+    // Spinner,
+    // EditProductTemplate,
   },
   props: {
-    id: {
+    _id: {
       type: String,
       required: true,
     },
