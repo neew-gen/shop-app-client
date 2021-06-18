@@ -104,9 +104,19 @@ export default defineComponent({
       if (!currentCategory) return 'No category'
       return currentCategory.name
     })
-    onMounted(() => {
-      emit('updateCategoryDropdown', categoryId.value)
+    watch(props, () => {
+      if (props.defaultCategoryId) {
+        categoryId.value = props.defaultCategoryId
+      }
     })
+    // onMounted(() => {
+    //   console.log(props.defaultCategoryId)
+    //   if (props.defaultCategoryId) {
+    //     categoryId.value = props.defaultCategoryId
+    //     console.log(categoryId.value)
+    //   }
+    //   // emit('updateCategoryDropdown', categoryId.value)
+    // })
     return {
       showDropdown,
       setDropdown,

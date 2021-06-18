@@ -47,7 +47,7 @@ import {
 import { useStore } from '@/store'
 
 export default defineComponent({
-  name: 'ProductDiscountInput',
+  name: 'CreateProductDiscountInput',
   components: {
     MDBCol,
     MDBSwitch,

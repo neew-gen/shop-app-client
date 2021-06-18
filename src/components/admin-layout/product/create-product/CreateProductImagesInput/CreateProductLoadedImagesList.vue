@@ -1,7 +1,7 @@
 <template>
   <div v-if="productImages && productImages.length !== 0">
     <MDBListGroup>
-      <LoadedImagesListItem
+      <CreateProductLoadedImagesListItem
         v-for="item in productImages"
         :data="item"
         :key="item.id"
@@ -14,14 +14,14 @@
 import { MDBListGroup } from 'mdb-vue-ui-kit'
 import { computed, ComputedRef, defineComponent } from 'vue'
 
-import LoadedImagesListItem from '@/components/admin-layout/product/ProductInputs/ProductImagesInput/LoadedImagesListItem.vue'
+import CreateProductLoadedImagesListItem from '@/components/admin-layout/product/create-product/CreateProductImagesInput/CreateProductLoadedImagesListItem.vue'
 import { useStore } from '@/store'
 import { ProductImagesItem } from '@/types/product'
 
 export default defineComponent({
-  name: 'LoadedImagesList',
+  name: 'CreateProductLoadedImagesList',
   components: {
-    LoadedImagesListItem,
+    CreateProductLoadedImagesListItem,
     MDBListGroup,
   },
   setup() {

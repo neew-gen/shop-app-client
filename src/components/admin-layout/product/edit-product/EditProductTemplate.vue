@@ -62,7 +62,7 @@ import { number, object, string } from 'yup'
 
 import { graphqlFetchBy, graphqlUpdate } from '@/services/GraphqlService/GraphqlService'
 // import CategoryDropdown from '@/components/CategoryDropdown/CategoryDropdown.vue'
-import ErrorField from '@/components/shared/InputWithErrorField/ErrorField.vue'
+import ErrorField from '@/components/shared/ErrorField.vue'
 // import ImageContainer from '@/components/ImageContainer.vue'
 import ImageUploader from '@/components/ImageUploader/ImageUploader.vue'
 import { awaitFetcher } from '@/services/FetchService/FetchService'

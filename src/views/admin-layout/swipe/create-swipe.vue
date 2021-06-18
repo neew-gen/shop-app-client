@@ -43,7 +43,7 @@ import { defineComponent } from 'vue'
 import { useToast } from 'vue-toastification'
 import { object, string } from 'yup'
 
-import ErrorField from '@/components/shared/InputWithErrorField/ErrorField.vue'
+import ErrorField from '@/components/shared/ErrorField.vue'
 import Swipe from '@/components/public-layout/home/HomeSwiper/Swipe.vue'
 import { SwipeData } from '@/types/swipe'
 

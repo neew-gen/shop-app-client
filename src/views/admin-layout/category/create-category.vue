@@ -71,7 +71,7 @@ import { defineComponent, ref } from 'vue'
 import { useToast } from 'vue-toastification'
 import { boolean, object, string } from 'yup'
 
-import ErrorField from '@/components/shared/InputWithErrorField/ErrorField.vue'
+import ErrorField from '@/components/shared/ErrorField.vue'
 import CategoriesListItem from '@/components/public-layout/catalog/CategoriesList/CategoriesListItem.vue'
 // import { graphqlCreate } from '@/services/GraphqlService/GraphqlService'
 // import { CategoryCreateInput } from '@/types/category'

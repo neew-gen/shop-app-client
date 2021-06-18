@@ -14,20 +14,11 @@
 import { MDBCol, MDBInput } from 'mdb-vue-ui-kit'
 import { computed, defineComponent, WritableComputedRef } from 'vue'
 
-import ErrorField from '@/components/shared/InputWithErrorField/ErrorField.vue'
+import ErrorField from '@/components/shared/ErrorField.vue'
 
 export default defineComponent({
   name: 'InputWithErrorField',
   props: ['inputValue', 'inputLabel', 'error', 'type'],
-  // props: {
-  //   inputValue: {
-  //     type: String,
-  //     required: true,
-  //   },
-  //   error: {
-  //     type: String,
-  //   },
-  // },
   components: {
     MDBCol,
     ErrorField,
@@ -48,10 +39,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss">
-.name {
-  display: flex;
-  align-items: center;
-  caret-color: transparent;
-}
-</style>
+<style scoped lang="scss"></style>

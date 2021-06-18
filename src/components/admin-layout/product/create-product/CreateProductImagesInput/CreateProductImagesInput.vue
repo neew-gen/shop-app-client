@@ -1,19 +1,19 @@
 <template>
   <div>Product Images</div>
-  <LoadedImagesList />
+  <CreateProductLoadedImagesList />
   <UploadingImage @modal="(e) => changeModalMode(e)" />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
-import LoadedImagesList from '@/components/admin-layout/product/ProductInputs/ProductImagesInput/LoadedImagesList.vue'
-import UploadingImage from '@/components/admin-layout/product/ProductInputs/ProductImagesInput/UploadingImage.vue'
+import CreateProductLoadedImagesList from '@/components/admin-layout/product/create-product/CreateProductImagesInput/CreateProductLoadedImagesList.vue'
+import UploadingImage from '@/components/admin-layout/product/create-product/CreateProductImagesInput/UploadingImage.vue'
 
 export default defineComponent({
-  name: 'ProductImagesInput',
+  name: 'CreateProductImagesInput',
   components: {
-    LoadedImagesList,
+    CreateProductLoadedImagesList,
     UploadingImage,
   },
   props: {

@@ -21,7 +21,7 @@ import { useStore } from '@/store'
 import { ProductImagesItem } from '@/types/product'
 
 export default defineComponent({
-  name: 'LoadedImagesListItem',
+  name: 'CreateProductLoadedImagesListItem',
   components: {
     MDBListGroupItem,
     MDBBtn,

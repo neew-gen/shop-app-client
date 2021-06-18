@@ -1,48 +1,43 @@
 <template>
-  <MDBContainer :style="{ position: modal ? 'fixed' : 'relative' }">
-    <MDBRow class="g-3">
-      <CreateProductNameInput />
-      <ProductCategoryInput />
-      <ProductImagesInput @modal="updateModal" />
-      <ProductDescriptionInput />
-      <ProductPriceInput />
-      <ProductCountInput />
-      <ProductDiscountInput />
-      <ProductShowInput />
+  <div class="d-grid gap-3">
+    <CreateProductNameInput />
+    <CreateProductCategoryInput />
+    <CreateProductImagesInput @modal="updateModal" />
+    <CreateProductDescriptionInput />
+    <CreateProductPriceInput />
+    <CreateProductAmountInput />
+    <CreateProductDiscountInput />
+    <CreateProductShowInput />
 
-      <CreateProductSubmitButton />
-    </MDBRow>
-  </MDBContainer>
+    <CreateProductSubmitButton />
+  </div>
 </template>
 
 <script lang="ts">
-import { MDBContainer, MDBRow } from 'mdb-vue-ui-kit'
 import { defineComponent, ref } from 'vue'
 
 import CreateProductSubmitButton from '@/components/admin-layout/product/create-product/CreateProductAddBlock.vue'
+import CreateProductAmountInput from '@/components/admin-layout/product/create-product/CreateProductAmountInput.vue'
+import CreateProductCategoryInput from '@/components/admin-layout/product/create-product/CreateProductCategoryInput.vue'
+import CreateProductDescriptionInput from '@/components/admin-layout/product/create-product/CreateProductDescriptionInput.vue'
+import CreateProductDiscountInput from '@/components/admin-layout/product/create-product/CreateProductDiscountInput.vue'
+import CreateProductImagesInput from '@/components/admin-layout/product/create-product/CreateProductImagesInput/CreateProductImagesInput.vue'
 import CreateProductNameInput from '@/components/admin-layout/product/create-product/CreateProductNameInput.vue'
-import ProductCountInput from '@/components/admin-layout/product/create-product/CreateProductAmountInput.vue'
-import ProductCategoryInput from '@/components/admin-layout/product/create-product/CreateProductCategoryInput.vue'
-import ProductDescriptionInput from '@/components/admin-layout/product/ProductInputs/ProductDescriptionInput.vue'
-import ProductDiscountInput from '@/components/admin-layout/product/ProductInputs/ProductDiscountInput.vue'
-import ProductImagesInput from '@/components/admin-layout/product/ProductInputs/ProductImagesInput/ProductImagesInput.vue'
-import ProductPriceInput from '@/components/admin-layout/product/ProductInputs/ProductPriceInput.vue'
-import ProductShowInput from '@/components/admin-layout/product/ProductInputs/ProductShowInput.vue'
+import CreateProductPriceInput from '@/components/admin-layout/product/create-product/CreateProductPriceInput.vue'
+import CreateProductShowInput from '@/components/admin-layout/product/create-product/CreateProductShowInput.vue'
 
 export default defineComponent({
   name: 'create-product',
   components: {
+    CreateProductDescriptionInput,
     CreateProductNameInput,
     CreateProductSubmitButton,
-    ProductDiscountInput,
-    ProductDescriptionInput,
-    ProductImagesInput,
-    ProductPriceInput,
-    ProductCategoryInput,
-    ProductShowInput,
-    ProductCountInput,
-    MDBRow,
-    MDBContainer,
+    CreateProductImagesInput,
+    CreateProductPriceInput,
+    CreateProductCategoryInput,
+    CreateProductShowInput,
+    CreateProductAmountInput,
+    CreateProductDiscountInput,
   },
   setup() {
     const modal = ref(false)

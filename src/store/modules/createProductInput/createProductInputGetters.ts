@@ -57,9 +57,12 @@ export const createProductInputGetters: GetterTree<State, State> &
     return getLocalItem('createProductImages')
   },
   getCreateProductDescription: ({ inputs }) => {
-    if (inputs.createProductInput.productData.description)
-      return inputs.createProductInput.productData.description
-    return getLocalItem('createProductDescription')
+    if (!inputs.createProductInput.productData.description) {
+      inputs.createProductInput.productData.description = getLocalItem(
+        'createProductDescription',
+      )
+    }
+    return inputs.createProductInput.productData.description
   },
   getCreateProductDiscount: ({ inputs }) => {
     if (inputs.createProductInput.productData.discount)

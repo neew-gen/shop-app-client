@@ -38,7 +38,7 @@ import { defineComponent, Ref, ref } from 'vue'
 import { Cropper } from 'vue-advanced-cropper'
 import { useToast } from 'vue-toastification'
 
-import AddImageBlock from '@/components/admin-layout/product/ProductInputs/ProductImagesInput/AddImageBlock.vue'
+import AddImageBlock from '@/components/admin-layout/product/create-product/CreateProductImagesInput/AddImageBlock.vue'
 import BottomModal from '@/components/BottomModal.vue'
 import { uploadProductImage } from '@/services/Firebase/ImageStorageService'
 import { useStore } from '@/store'

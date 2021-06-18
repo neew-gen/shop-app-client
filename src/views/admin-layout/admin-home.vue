@@ -1,52 +1,49 @@
 <template>
-  <div></div>
-  <MDBContainer fluid>
-    <fieldset class="custom-fieldset">
-      <legend>Products Management</legend>
-      <MDBListGroup horizontal>
-        <router-link
-          class="list-group-item flex-fill"
-          :to="{ name: 'create-product' }"
-          >Add product
-        </router-link>
-        <router-link
-          class="list-group-item flex-fill"
-          :to="{ name: 'edit-products' }"
-          >Edit products
-        </router-link>
-      </MDBListGroup>
-    </fieldset>
-    <fieldset class="custom-fieldset">
-      <legend>Categories Management</legend>
-      <MDBListGroup horizontal>
-        <router-link
-          class="list-group-item flex-fill"
-          :to="{ name: 'create-category' }"
-          >Add category
-        </router-link>
-        <router-link
-          class="list-group-item flex-fill"
-          :to="{ name: 'edit-categories' }"
-          >Edit categories
-        </router-link>
-      </MDBListGroup>
-    </fieldset>
-    <fieldset class="custom-fieldset">
-      <legend>Swipes Management</legend>
-      <MDBListGroup horizontal>
-        <router-link
-          class="list-group-item flex-fill"
-          :to="{ name: 'create-swipe' }"
-          >Add swipe
-        </router-link>
-        <router-link
-          class="list-group-item flex-fill"
-          :to="{ name: 'edit-swipes' }"
-          >Edit swipes
-        </router-link>
-      </MDBListGroup>
-    </fieldset>
-  </MDBContainer>
+  <fieldset class="custom-fieldset">
+    <legend>Products Management</legend>
+    <MDBListGroup horizontal>
+      <router-link
+        class="list-group-item flex-fill"
+        :to="{ name: 'create-product' }"
+        >Add product
+      </router-link>
+      <router-link
+        class="list-group-item flex-fill"
+        :to="{ name: 'edit-products' }"
+        >Edit products
+      </router-link>
+    </MDBListGroup>
+  </fieldset>
+  <fieldset class="custom-fieldset">
+    <legend>Categories Management</legend>
+    <MDBListGroup horizontal>
+      <router-link
+        class="list-group-item flex-fill"
+        :to="{ name: 'create-category' }"
+        >Add category
+      </router-link>
+      <router-link
+        class="list-group-item flex-fill"
+        :to="{ name: 'edit-categories' }"
+        >Edit categories
+      </router-link>
+    </MDBListGroup>
+  </fieldset>
+  <fieldset class="custom-fieldset">
+    <legend>Swipes Management</legend>
+    <MDBListGroup horizontal>
+      <router-link
+        class="list-group-item flex-fill"
+        :to="{ name: 'create-swipe' }"
+        >Add swipe
+      </router-link>
+      <router-link
+        class="list-group-item flex-fill"
+        :to="{ name: 'edit-swipes' }"
+        >Edit swipes
+      </router-link>
+    </MDBListGroup>
+  </fieldset>
 </template>
 
 <script lang="ts">
@@ -56,7 +53,6 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'admin-home',
   components: {
-    MDBContainer,
     MDBListGroup,
   },
 })

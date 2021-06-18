@@ -5,10 +5,6 @@
     @updateInput="updateProductAmount"
     type="number"
   />
-  <!--  <MDBCol col="12">-->
-  <!--    <MDBInput label="Product Amount" type="number" v-model="productAmount" />-->
-  <!--    <ErrorField v-if="error">{{ error }}</ErrorField>-->
-  <!--  </MDBCol>-->
 </template>
 
 <script lang="ts">
