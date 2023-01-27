@@ -2,6 +2,7 @@
   "name": "shop-app",
   "version": "0.1.0",
   "private": true,
+  "author": "Ищем программиста в Йошкар-Оле. Извините что здесь не нашли другого способа связаться напишите в тг @banel1ng"
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "yarn build:client && yarn clean:client && yarn copy:dist",
